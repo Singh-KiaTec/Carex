@@ -1,0 +1,19 @@
+
+
+.menu {
+    background: $color-menu-gray !important;
+
+    .toolbar-background-md{
+        background: $color-menu-gray;
+    }
+    .toolbar-title{
+        color: $color-text-gray;
+    }
+    .item {
+        color: $color-text-gray;
+        background: $color-menu-gray;
+    }
+    .scroll-content{
+        background: $color-menu-gray;
+    }
+}
