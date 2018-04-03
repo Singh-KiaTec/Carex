@@ -3,7 +3,7 @@
     <button ion-button menuToggle>
       <ion-icon name="menu"></ion-icon>
     </button>
-    <ion-title text-center>
+    <ion-title margin-left>
       <img [width]="180" [height]="40" src="assets/imgs/unitlogos/{{pagedata.logo}}" /> 
         <!-- {{pagedata.organisation}} -->
       </ion-title>
@@ -13,7 +13,7 @@
 <ion-content  class="homepage">
   <div (swipe)="swipeEvent($event)" >
   <div>
-      <img text-center [width]="500" [height]="250" src="assets/imgs/{{pagedata.bg_image}}" />
+      <img [width]="500" [height]="250" src="assets/imgs/{{pagedata.bg_image}}" />
   </div>
   <!-- <p>
     If you get lost, the <a href="http://ionicframework.com/docs/v2">docs</a> will show you the way.
@@ -36,10 +36,6 @@
                      <p>{{item[1]}}</p>
                      </div>
            </ion-col>
-          
-            
-
-
                 </ng-template>  
 
               </ion-row>
