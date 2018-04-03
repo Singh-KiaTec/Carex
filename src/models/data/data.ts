@@ -746,15 +746,15 @@ export const data ={
     "2": {
       "organisation": "KIApro Kolding",
       "logo": "CareX_hvid_gronlogo-66.png",
-      "bg_image": null,
-      "main_color": null,
+      "bg_image": "kolding.jpg",
+      "main_color": "#334c55",
       "buttons": [
         [
           "1",
           "Pensionsordning",
           "16",
           "wlc_pensionsordning.php",
-          "fa  fa-3x",
+          "fa fa-line-chart fa-3x",
           "187",
           "187",
           "8",
@@ -1489,9 +1489,9 @@ export const data ={
     },
     "3": {
       "organisation": "KIApro Aalborg",
-      "logo": "AalborgKommune-01.png",
-      "bg_image": null,
-      "main_color": null,
+      "logo": "Aalborg.jpg",
+      "bg_image": "Aalborg.jpg",
+      "main_color": "#676767",
       "buttons": [
         [
           "1",

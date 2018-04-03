@@ -1,6 +1,7 @@
 import { Component,ViewChild } from '@angular/core';
 import {NavParams ,NavController,Content,Navbar } from 'ionic-angular';
 import { data} from '../../models/data/data'; 
+import {DetailsPage} from  '../../pages/details/details.page';
 
 
 
@@ -29,20 +30,12 @@ public pagemenuButtons;
     console.log("in navdarta")
     this.pagedata = this.homedata[1];
     this.pagemenuButtons =  this.pagedata.buttons;
-    console.log(this.pagedata);
   }else{
     this.pagedata = this.navdata;
     this.pagemenuButtons =  this.pagedata.buttons;
     this.currentpageIndex = this.currentpageIndex? this.currentpageIndex : 1;
     console.log("in pagedata")
-
-    console.log(this.pagedata);
     this.logourl = 'assets/imgs/unitlogos/'+this.pagedata.logo;
-   }
-   console.log(this.pagemenuButtons);
-   for(var i =0; i<this.pagemenuButtons.length;i++){
-
-    console.log(this.pagemenuButtons[i]);
    }
   }
   ionViewWillEnter(): void{
@@ -55,8 +48,6 @@ public pagemenuButtons;
 //     this.content.setElementStyle("background-color",this.pagedata.main_color);
 //     this.navbar.setElementStyle("background-color",this.pagedata.main_color);
 // }
-
-
 
 swipeEvent(e) {
 
@@ -91,4 +82,14 @@ swipeEvent(e) {
     console.log("in swipe forward");
 }
 }
+
+ detailsPage(slctdItem,pagedata){
+console.log(slctdItem);
+console.log(pagedata);
+  this.navCtrl.push(DetailsPage,{'selectedItem':slctdItem,'selectedPage':pagedata});
+
+  // this.selectedMenuItem = this.navParam.get('selectedItem');
+  // this.selectedPage = this.navParam.get('selectedPage')
+ }
+
 }

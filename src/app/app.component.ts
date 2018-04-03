@@ -41,10 +41,10 @@ export class MyApp {
       console.log('notificationOpenedCallback: ' + JSON.stringify(jsonData));
     };
 
-    window["plugins"].OneSignal
-      .startInit("86c266d2-3554-4095-97c5-6efc0ac1e91a", "599014675139")
-      .handleNotificationOpened(notificationOpenedCallback)
-      .endInit();
+    // window["plugins"].OneSignal
+    //   .startInit("86c266d2-3554-4095-97c5-6efc0ac1e91a", "599014675139")
+    //   .handleNotificationOpened(notificationOpenedCallback)
+    //   .endInit();
     });
   }
 

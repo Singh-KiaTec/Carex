@@ -13,6 +13,16 @@
         <button menuClose ion-item *ngFor="let p of pages" (click)="openPage(p)">
           {{p.title}}
         </button>
+        <button menuClose ion-item (click)="openProfile()">
+            Profile
+          </button>
+          <button menuClose ion-item  (click)="openNotifications()">
+            Notifications
+            </button>
+            <button menuClose ion-item  (click)="openSettings()">
+               Settings
+              </button>
+
       </ion-list>
     </ion-content>
   

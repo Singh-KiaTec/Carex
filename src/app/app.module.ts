@@ -9,37 +9,55 @@ import { IonicApp, IonicErrorHandler, IonicModule } from 'ionic-angular';
 import { MyApp } from './app.component';
 import { HomePage } from '../pages/home/home.page';
 import { ListPage } from '../pages/list/list';
-import {MenuPage} from '../pages/menu/menu.page';
+import { MenuPage } from '../pages/menu/menu.page';
+import { DetailsPage } from '../pages/details/details.page';
+import { SettingsPage } from '../pages/settings/settings.page';
+import { ProfilePage } from '../pages/profile/profile.page';
+import { NotificationsPage } from '../pages/notifications/notifications.page';
+
 
 
 //COMPONENTS
-import{MenuComponent} from '../components/menu/menu';
+import { MenuComponent } from '../components/menu/menu';
 
 
 
 //MODELS
-import { data } from '../models/data/data'; 
-import { homepagedata } from '../models/data/homepagedata'; 
+import { data } from '../models/data/data';
+import { homepagedata } from '../models/data/homepagedata';
 
 
 //PROVIDERS
-import {BaseRestService} from '../providers/restservice/base.rest.service';
+import { BaseRestService } from '../providers/restservice/base.rest.service';
 
 
 
 //IONIC
 import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
+import { SettingsComponent } from '../components/settings/settings';
+import { ProfileComponent } from '../components/profile/profile';
+import { NotificationsComponent } from '../components/notifications/notifications';
+import { DetailsComponent } from '../components/details/details';
 
-const pagesDeclaration =[
-MenuPage,
-MyApp,
-HomePage,
-ListPage
+
+const pagesDeclaration = [
+  MenuPage,
+  MyApp,
+  HomePage,
+  ListPage,
+  DetailsPage,
+  NotificationsPage,
+  SettingsPage,
+  ProfilePage
 ];
 
 const componentDeclaration = [
-  MenuComponent
+  MenuComponent,
+  DetailsComponent,
+  SettingsComponent,
+  ProfileComponent,
+  NotificationsComponent
 
 ];
 
@@ -57,13 +75,17 @@ const componentDeclaration = [
     MyApp,
     HomePage,
     ListPage,
-    MenuPage
+    MenuPage,
+    NotificationsPage,
+    SettingsPage,
+    ProfilePage,
+    DetailsPage
   ],
   providers: [
     StatusBar,
     SplashScreen,
     BaseRestService,
-    {provide: ErrorHandler, useClass: IonicErrorHandler}
+    { provide: ErrorHandler, useClass: IonicErrorHandler }
   ]
 })
-export class AppModule {}
+export class AppModule { }

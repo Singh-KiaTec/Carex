@@ -2,6 +2,9 @@ import { Component, ViewChild} from '@angular/core';
 import { Nav,NavController } from 'ionic-angular';
 import {data} from '../../models/data/data';
 import { HomePage } from '../../pages/home/home.page';
+import { SettingsPage } from '../../pages/settings/settings.page';
+import { ProfilePage } from '../../pages/profile/profile.page';
+import { NotificationsPage } from '../../pages/notifications/notifications.page';
 
 @Component({
     selector: 'menu-viewer',
@@ -44,6 +47,15 @@ export class MenuComponent {
     let itemIndex = page.index;
     console.log(page);
     this.nav.setRoot(page.component,{'pageData':item,'itemIndex':itemIndex});
+  }
+  openProfile(){
+    this.nav.push(ProfilePage,{});
+  }
+  openNotifications(){
+    this.nav.push(NotificationsPage,{});
+  }
+  openSettings(){
+    this.nav.push(SettingsPage,{});
   }
 
 
