@@ -48,8 +48,8 @@
         <icon height="40" src="resources/ios/icon/Icon-App-40x40@1x.png" width="40" />
         <icon height="80" src="resources/ios/icon/Icon-App-40x40@2x.png" width="80" />
         <icon height="120" src="resources/ios/icon/Icon-App-40x40@3x.png" width="120" />
-        <icon height="50" src="resources/ios/icon/Icon-App-50x50@1x.png" width="50" />
-        <icon height="100" src="resources/ios/icon/Icon-App-50x50@2x.png" width="100" />
+        <icon height="50" src="resources/ios/icon/Icon-Small-50x50@1x.png" width="50" />
+        <icon height="100" src="resources/ios/icon/Icon-Small-50x50@2x.png" width="100" />
         <icon height="60" src="resources/ios/icon/Icon-App-60x60@1x.png" width="60" />
         <icon height="120" src="resources/ios/icon/Icon-App-60x60@2x.png" width="120" />
         <icon height="180" src="resources/ios/icon/Icon-App-60x60@3x.png" width="180" />
