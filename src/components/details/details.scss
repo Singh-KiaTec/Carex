@@ -1,0 +1,28 @@
+
+
+@import '../../assets/sass/variables';
+.details {
+    background: $color-menu-gray !important;
+
+    .toolbar-background-md{
+        background: $color-menu-gray;
+    }
+    .toolbar-title{
+        color: $color-white;
+    }
+    .item {
+        color: $color-text-gray;
+        background: $color-menu-gray;
+    }
+    .scroll-content{
+        background: $color-menu-gray;
+    }
+    .toolbar,.bar-button-default-md{
+        color: $color-text-gray !important;
+
+    }
+    .back-button {
+        color: $color-white !important;
+    }
+
+}
