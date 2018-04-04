@@ -7,7 +7,6 @@ import { NavParams,Navbar } from 'ionic-angular';
 })
 export class DetailsComponent {
   private selectedMenuItem;
-  private pagetitle;
   private selectedPage;
   @ViewChild(Navbar) navbar: Navbar;
 private tabs;
@@ -17,7 +16,7 @@ private tabstoDisplay:any =[];
 
     this.selectedMenuItem = this.navParam.get('selectedItem');
     this.selectedPage = this.navParam.get('selectedPage')
-    this.pagetitle = this.selectedMenuItem[1];
+    //this.pagetitle = this.selectedMenuItem[1];
     this.tabs = this.selectedMenuItem[8];
     for (let item in this.tabs) {
       let currentitem: any = this.tabs[item];

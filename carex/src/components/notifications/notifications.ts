@@ -1,5 +1,4 @@
 import { Component } from '@angular/core';
-import { NavController } from 'ionic-angular';
 import { NotificationsPage } from '../../pages/notifications/notifications.page';
 
 @Component({
@@ -10,7 +9,6 @@ export class NotificationsComponent {
     rootPage: any = NotificationsPage;
 
     constructor(
-        private navCtrl: NavController
     ) { }
 
     ngOnInit() {

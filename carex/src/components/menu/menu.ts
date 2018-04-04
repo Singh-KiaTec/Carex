@@ -1,5 +1,5 @@
 import { Component, ViewChild} from '@angular/core';
-import { Nav,NavController } from 'ionic-angular';
+import { Nav } from 'ionic-angular';
 import {data} from '../../models/data/data';
 import { HomePage } from '../../pages/home/home.page';
 import { SettingsPage } from '../../pages/settings/settings.page';

@@ -23,8 +23,8 @@ import { MenuComponent } from '../components/menu/menu';
 
 
 //MODELS
-import { data } from '../models/data/data';
-import { homepagedata } from '../models/data/homepagedata';
+// import { data } from '../models/data/data';
+// import { homepagedata } from '../models/data/homepagedata';
 
 
 //PROVIDERS

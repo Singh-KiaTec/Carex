@@ -4,10 +4,7 @@ import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
 
 import { HomePage } from '../pages/home/home.page';
-import { ListPage } from '../pages/list/list';
-import {data} from '../../src/models/data/data'
-import { Title } from '@angular/platform-browser/src/browser/title';
-import {MenuPage} from '../pages/menu/menu.page';
+import {data} from '../../src/models/data/data';
  
 @Component({
   templateUrl: 'app.html'
@@ -41,10 +38,10 @@ export class MyApp {
       console.log('notificationOpenedCallback: ' + JSON.stringify(jsonData));
     };
 
-    // window["plugins"].OneSignal
-    //   .startInit("86c266d2-3554-4095-97c5-6efc0ac1e91a", "599014675139")
-    //   .handleNotificationOpened(notificationOpenedCallback)
-    //   .endInit();
+    window["plugins"].OneSignal
+      .startInit("86c266d2-3554-4095-97c5-6efc0ac1e91a", "599014675139")
+      .handleNotificationOpened(notificationOpenedCallback)
+      .endInit();
     });
   }
 
