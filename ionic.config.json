@@ -1,6 +1,6 @@
 {
   "name": "carex",
-  "app_id": "",
+  "app_id": "13e37496",
   "type": "ionic-angular",
   "integrations": {
     "cordova": {}
