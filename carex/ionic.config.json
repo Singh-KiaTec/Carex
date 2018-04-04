@@ -1,0 +1,17 @@
+{
+  "name": "carex",
+  "app_id": "13e37496",
+  "type": "ionic-angular",
+  "integrations": {
+    "cordova": {}
+  },
+  "gulpStartupTasks": [
+    "sass",
+    "watch"
+  ],
+  "watchPatterns": [
+    "www/**/*",
+    "!www/lib/**/*",
+    "!www/**/*.map"
+  ]
+}

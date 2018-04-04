@@ -1,0 +1,7 @@
+#Tue Apr 03 15:14:25 CEST 2018
+base.0=/Users/kiatec/Documents/Carex_App/carex/platforms/android/app/build/intermediates/transforms/dexMerger/debug/19
+renamed.1=classes2.dex
+renamed.0=classes.dex
+file.1=/Users/kiatec/Documents/Carex_App/carex/platforms/android/app/build/intermediates/transforms/dexMerger/debug/19/classes2.dex
+base.1=/Users/kiatec/Documents/Carex_App/carex/platforms/android/app/build/intermediates/transforms/dexMerger/debug/19
+file.0=/Users/kiatec/Documents/Carex_App/carex/platforms/android/app/build/intermediates/transforms/dexMerger/debug/19/classes.dex
