@@ -1,0 +1,35 @@
+
+
+$font-stack:    Helvetica, sans-serif;
+//Fontawesome
+$fa-font-path: $font-path;
+
+//@import "font-awesome";'
+@import '../node_modules/font-awesome/scss/font-awesome';
+
+
+// theme
+$primary-color-theme: #0d3348; // #007bff;// #21318C;
+$color-white: #FFF;
+$color-highlight-green: #76B832;
+$color-menu-gray:#1a1a1a;
+$color-text-gray: #DDDDE0;
+
+
+
+$color-dark-black: #000;
+$color-light-blue:	#87CEFA;
+
+
+
+
+$color-lightgray: #e9ecef;
+$full-height: 100%;
+$full-width: 100%;
+$background-gray: #e9ecef;
+$shadow-color: rgba(0, 0, 0, .1);
+$background-dark-gray:#353434;
+$minimum-priority: 50;
+$chat-green-color:#5BC236;
+$fa-font-path:  "../fonts" !default; // this is for font awesome
+$color-lightgray-background: #f8f9fa;
