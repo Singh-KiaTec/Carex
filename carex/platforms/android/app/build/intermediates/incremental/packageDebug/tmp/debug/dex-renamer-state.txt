@@ -1,7 +1,7 @@
-#Tue Apr 03 17:11:13 CEST 2018
-base.0=/Users/kiatec/Documents/Carex_App/carex/platforms/android/app/build/intermediates/transforms/dexMerger/debug/46
-path.1=classes.dex
+#Thu Apr 05 09:24:21 CEST 2018
+base.0=/Users/kiatec/Documents/Carex_Test/carex/platforms/android/app/build/intermediates/transforms/dexMerger/debug/0
+path.1=classes2.dex
 renamed.1=classes2.dex
 path.0=classes.dex
 renamed.0=classes.dex
-base.1=/Users/kiatec/Documents/Carex_App/carex/platforms/android/app/build/intermediates/transforms/dexMerger/debug/47
+base.1=/Users/kiatec/Documents/Carex_Test/carex/platforms/android/app/build/intermediates/transforms/dexMerger/debug/0

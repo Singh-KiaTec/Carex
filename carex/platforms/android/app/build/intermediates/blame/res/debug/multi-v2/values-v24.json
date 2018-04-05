@@ -1,10 +1,10 @@
 {
     "logs": [
         {
-            "outputFile": "/Users/kiatec/Documents/Carex_App/carex/platforms/android/app/build/intermediates/incremental/mergeDebugResources/merged.dir/values-v24/values-v24.xml",
+            "outputFile": "/Users/kiatec/Documents/Carex_Test/carex/platforms/android/app/build/intermediates/incremental/mergeDebugResources/merged.dir/values-v24/values-v24.xml",
             "map": [
                 {
-                    "source": "/Users/kiatec/.gradle/caches/transforms-1/files-1.1/support-media-compat-26.1.0.aar/0080d210b4630e1754303eb698af6981/res/values-v24/values-v24.xml",
+                    "source": "/Users/kiatec/.gradle/caches/transforms-1/files-1.1/support-media-compat-26.1.0.aar/50d9ad6f3dab3b890d7781957cff8de8/res/values-v24/values-v24.xml",
                     "from": {
                         "startLines": "2,3,4,5",
                         "startColumns": "4,4,4,4",

@@ -1,10 +1,10 @@
 {
     "logs": [
         {
-            "outputFile": "/Users/kiatec/Documents/Carex_App/carex/platforms/android/app/build/intermediates/incremental/mergeDebugResources/merged.dir/values-v21/values-v21.xml",
+            "outputFile": "/Users/kiatec/Documents/Carex_Test/carex/platforms/android/app/build/intermediates/incremental/mergeDebugResources/merged.dir/values-v21/values-v21.xml",
             "map": [
                 {
-                    "source": "/Users/kiatec/.gradle/caches/transforms-1/files-1.1/support-media-compat-26.1.0.aar/0080d210b4630e1754303eb698af6981/res/values-v21/values-v21.xml",
+                    "source": "/Users/kiatec/.gradle/caches/transforms-1/files-1.1/support-media-compat-26.1.0.aar/50d9ad6f3dab3b890d7781957cff8de8/res/values-v21/values-v21.xml",
                     "from": {
                         "startLines": "2,5,8,11",
                         "startColumns": "4,4,4,4",
@@ -23,7 +23,7 @@
                     }
                 },
                 {
-                    "source": "/Users/kiatec/.gradle/caches/transforms-1/files-1.1/support-compat-26.1.0.aar/8f3a6b4ab626046b35324f07e60d4f21/res/values-v21/values-v21.xml",
+                    "source": "/Users/kiatec/.gradle/caches/transforms-1/files-1.1/support-compat-26.1.0.aar/fe767e0ca353cc06c41d52afd4d0b43f/res/values-v21/values-v21.xml",
                     "from": {
                         "startLines": "2,3,4,5,6,7,8,9,10,13",
                         "startColumns": "4,4,4,4,4,4,4,4,4,4",

@@ -1,44 +1,10 @@
 {
     "logs": [
         {
-            "outputFile": "/Users/kiatec/Documents/Carex_App/carex/platforms/android/app/build/intermediates/incremental/mergeDebugResources/merged.dir/values-pt-rPT/values-pt-rPT.xml",
+            "outputFile": "/Users/kiatec/Documents/Carex_Test/carex/platforms/android/app/build/intermediates/incremental/mergeDebugResources/merged.dir/values-pt-rPT/values-pt-rPT.xml",
             "map": [
                 {
-                    "source": "/Users/kiatec/.gradle/caches/transforms-1/files-1.1/play-services-gcm-11.8.0.aar/2b2227584f0b67308ddcc5f0d54f6ce9/res/values-pt-rPT/values.xml",
-                    "from": {
-                        "startLines": "4",
-                        "startColumns": "0",
-                        "startOffsets": "232",
-                        "endColumns": "99",
-                        "endOffsets": "331"
-                    },
-                    "to": {
-                        "startLines": "21",
-                        "startColumns": "4",
-                        "startOffsets": "3035",
-                        "endColumns": "103",
-                        "endOffsets": "3134"
-                    }
-                },
-                {
-                    "source": "/Users/kiatec/.gradle/caches/transforms-1/files-1.1/play-services-base-11.8.0.aar/a82bcc6440b0d18baba9732aa3273175/res/values-pt-rPT/values.xml",
-                    "from": {
-                        "startLines": "4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20",
-                        "startColumns": "0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0",
-                        "startOffsets": "285,388,583,709,815,1042,1168,1316,1450,1697,1803,2004,2133,2351,2555,2649,2744",
-                        "endColumns": "102,194,125,105,226,125,147,133,246,105,200,128,217,203,93,94,111",
-                        "endOffsets": "387,582,708,814,1041,1167,1315,1449,1696,1802,2003,2132,2350,2554,2648,2743,2855"
-                    },
-                    "to": {
-                        "startLines": "2,3,4,5,6,7,8,9,11,12,13,14,15,16,17,18,19",
-                        "startColumns": "4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4",
-                        "startOffsets": "105,212,407,537,647,874,1004,1156,1498,1745,1855,2056,2189,2407,2615,2713,2812",
-                        "endColumns": "106,194,129,109,226,129,151,137,246,109,200,132,217,207,97,98,115",
-                        "endOffsets": "207,402,532,642,869,999,1151,1289,1740,1850,2051,2184,2402,2610,2708,2807,2923"
-                    }
-                },
-                {
-                    "source": "/Users/kiatec/.gradle/caches/transforms-1/files-1.1/support-compat-26.1.0.aar/8f3a6b4ab626046b35324f07e60d4f21/res/values-pt-rPT/values-pt-rPT.xml",
+                    "source": "/Users/kiatec/.gradle/caches/transforms-1/files-1.1/support-compat-26.1.0.aar/fe767e0ca353cc06c41d52afd4d0b43f/res/values-pt-rPT/values-pt-rPT.xml",
                     "from": {
                         "startLines": "2",
                         "startColumns": "4",
@@ -55,7 +21,41 @@
                     }
                 },
                 {
-                    "source": "/Users/kiatec/.gradle/caches/transforms-1/files-1.1/firebase-messaging-11.8.0.aar/64b5e8d7b28e6df04f6ce53058cd9083/res/values-pt-rPT/values.xml",
+                    "source": "/Users/kiatec/.gradle/caches/transforms-1/files-1.1/play-services-basement-11.8.0.aar/5a183e0378d4b64b0fb03977c8ceafc2/res/values-pt-rPT/values.xml",
+                    "from": {
+                        "startLines": "4",
+                        "startColumns": "0",
+                        "startOffsets": "287",
+                        "endColumns": "203",
+                        "endOffsets": "490"
+                    },
+                    "to": {
+                        "startLines": "10",
+                        "startColumns": "4",
+                        "startOffsets": "1294",
+                        "endColumns": "203",
+                        "endOffsets": "1493"
+                    }
+                },
+                {
+                    "source": "/Users/kiatec/.gradle/caches/transforms-1/files-1.1/play-services-base-11.8.0.aar/c2a6e920fb218794ab8e05eea0378d19/res/values-pt-rPT/values.xml",
+                    "from": {
+                        "startLines": "4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20",
+                        "startColumns": "0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0",
+                        "startOffsets": "285,388,583,709,815,1042,1168,1316,1450,1697,1803,2004,2133,2351,2555,2649,2744",
+                        "endColumns": "102,194,125,105,226,125,147,133,246,105,200,128,217,203,93,94,111",
+                        "endOffsets": "387,582,708,814,1041,1167,1315,1449,1696,1802,2003,2132,2350,2554,2648,2743,2855"
+                    },
+                    "to": {
+                        "startLines": "2,3,4,5,6,7,8,9,11,12,13,14,15,16,17,18,19",
+                        "startColumns": "4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4",
+                        "startOffsets": "105,212,407,537,647,874,1004,1156,1498,1745,1855,2056,2189,2407,2615,2713,2812",
+                        "endColumns": "106,194,129,109,226,129,151,137,246,109,200,132,217,207,97,98,115",
+                        "endOffsets": "207,402,532,642,869,999,1151,1289,1740,1850,2051,2184,2402,2610,2708,2807,2923"
+                    }
+                },
+                {
+                    "source": "/Users/kiatec/.gradle/caches/transforms-1/files-1.1/firebase-messaging-11.8.0.aar/16c6a804c04208cb6de5b1191511fee0/res/values-pt-rPT/values.xml",
                     "from": {
                         "startLines": "4",
                         "startColumns": "0",
@@ -72,20 +72,20 @@
                     }
                 },
                 {
-                    "source": "/Users/kiatec/.gradle/caches/transforms-1/files-1.1/play-services-basement-11.8.0.aar/9a638ffc9408c56311d17c37cd46bb04/res/values-pt-rPT/values.xml",
+                    "source": "/Users/kiatec/.gradle/caches/transforms-1/files-1.1/play-services-gcm-11.8.0.aar/0550648d3474a8f8505080400aba8745/res/values-pt-rPT/values.xml",
                     "from": {
                         "startLines": "4",
                         "startColumns": "0",
-                        "startOffsets": "287",
-                        "endColumns": "203",
-                        "endOffsets": "490"
+                        "startOffsets": "232",
+                        "endColumns": "99",
+                        "endOffsets": "331"
                     },
                     "to": {
-                        "startLines": "10",
+                        "startLines": "21",
                         "startColumns": "4",
-                        "startOffsets": "1294",
-                        "endColumns": "203",
-                        "endOffsets": "1493"
+                        "startOffsets": "3035",
+                        "endColumns": "103",
+                        "endOffsets": "3134"
                     }
                 }
             ]

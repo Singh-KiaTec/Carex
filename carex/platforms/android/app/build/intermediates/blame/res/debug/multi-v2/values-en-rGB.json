@@ -1,44 +1,10 @@
 {
     "logs": [
         {
-            "outputFile": "/Users/kiatec/Documents/Carex_App/carex/platforms/android/app/build/intermediates/incremental/mergeDebugResources/merged.dir/values-en-rGB/values-en-rGB.xml",
+            "outputFile": "/Users/kiatec/Documents/Carex_Test/carex/platforms/android/app/build/intermediates/incremental/mergeDebugResources/merged.dir/values-en-rGB/values-en-rGB.xml",
             "map": [
                 {
-                    "source": "/Users/kiatec/.gradle/caches/transforms-1/files-1.1/firebase-messaging-11.8.0.aar/64b5e8d7b28e6df04f6ce53058cd9083/res/values-en-rGB/values.xml",
-                    "from": {
-                        "startLines": "4",
-                        "startColumns": "0",
-                        "startOffsets": "245",
-                        "endColumns": "107",
-                        "endOffsets": "352"
-                    },
-                    "to": {
-                        "startLines": "20",
-                        "startColumns": "4",
-                        "startOffsets": "2753",
-                        "endColumns": "111",
-                        "endOffsets": "2860"
-                    }
-                },
-                {
-                    "source": "/Users/kiatec/.gradle/caches/transforms-1/files-1.1/play-services-basement-11.8.0.aar/9a638ffc9408c56311d17c37cd46bb04/res/values-en-rGB/values.xml",
-                    "from": {
-                        "startLines": "4",
-                        "startColumns": "0",
-                        "startOffsets": "287",
-                        "endColumns": "196",
-                        "endOffsets": "483"
-                    },
-                    "to": {
-                        "startLines": "10",
-                        "startColumns": "4",
-                        "startOffsets": "1245",
-                        "endColumns": "196",
-                        "endOffsets": "1437"
-                    }
-                },
-                {
-                    "source": "/Users/kiatec/.gradle/caches/transforms-1/files-1.1/support-compat-26.1.0.aar/8f3a6b4ab626046b35324f07e60d4f21/res/values-en-rGB/values-en-rGB.xml",
+                    "source": "/Users/kiatec/.gradle/caches/transforms-1/files-1.1/support-compat-26.1.0.aar/fe767e0ca353cc06c41d52afd4d0b43f/res/values-en-rGB/values-en-rGB.xml",
                     "from": {
                         "startLines": "2",
                         "startColumns": "4",
@@ -55,7 +21,7 @@
                     }
                 },
                 {
-                    "source": "/Users/kiatec/.gradle/caches/transforms-1/files-1.1/play-services-gcm-11.8.0.aar/2b2227584f0b67308ddcc5f0d54f6ce9/res/values-en-rGB/values.xml",
+                    "source": "/Users/kiatec/.gradle/caches/transforms-1/files-1.1/play-services-gcm-11.8.0.aar/0550648d3474a8f8505080400aba8745/res/values-en-rGB/values.xml",
                     "from": {
                         "startLines": "4",
                         "startColumns": "0",
@@ -72,7 +38,24 @@
                     }
                 },
                 {
-                    "source": "/Users/kiatec/.gradle/caches/transforms-1/files-1.1/play-services-base-11.8.0.aar/a82bcc6440b0d18baba9732aa3273175/res/values-en-rGB/values.xml",
+                    "source": "/Users/kiatec/.gradle/caches/transforms-1/files-1.1/firebase-messaging-11.8.0.aar/16c6a804c04208cb6de5b1191511fee0/res/values-en-rGB/values.xml",
+                    "from": {
+                        "startLines": "4",
+                        "startColumns": "0",
+                        "startOffsets": "245",
+                        "endColumns": "107",
+                        "endOffsets": "352"
+                    },
+                    "to": {
+                        "startLines": "20",
+                        "startColumns": "4",
+                        "startOffsets": "2753",
+                        "endColumns": "111",
+                        "endOffsets": "2860"
+                    }
+                },
+                {
+                    "source": "/Users/kiatec/.gradle/caches/transforms-1/files-1.1/play-services-base-11.8.0.aar/c2a6e920fb218794ab8e05eea0378d19/res/values-en-rGB/values.xml",
                     "from": {
                         "startLines": "4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20",
                         "startColumns": "0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0",
@@ -86,6 +69,23 @@
                         "startOffsets": "105,212,396,523,632,842,967,1113,1442,1660,1767,1950,2077,2282,2460,2553,2645",
                         "endColumns": "106,183,126,108,209,124,145,131,217,106,182,126,204,177,92,91,107",
                         "endOffsets": "207,391,518,627,837,962,1108,1240,1655,1762,1945,2072,2277,2455,2548,2640,2748"
+                    }
+                },
+                {
+                    "source": "/Users/kiatec/.gradle/caches/transforms-1/files-1.1/play-services-basement-11.8.0.aar/5a183e0378d4b64b0fb03977c8ceafc2/res/values-en-rGB/values.xml",
+                    "from": {
+                        "startLines": "4",
+                        "startColumns": "0",
+                        "startOffsets": "287",
+                        "endColumns": "196",
+                        "endOffsets": "483"
+                    },
+                    "to": {
+                        "startLines": "10",
+                        "startColumns": "4",
+                        "startOffsets": "1245",
+                        "endColumns": "196",
+                        "endOffsets": "1437"
                     }
                 }
             ]
