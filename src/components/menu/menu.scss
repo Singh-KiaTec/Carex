@@ -17,4 +17,9 @@
     .scroll-content{
         background: $color-lightgray-background;
     }
+    &__heading{
+        background: $primary-color-theme !important;
+        color: $color-white !important;
+    }
+
 }

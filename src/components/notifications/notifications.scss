@@ -1,15 +1,21 @@
-@import  '../../assets/sass/variables';
-
-
-.notifications{
-
-    .toolbar,.bar-button-default-md{
-        color: $color-text-gray !important;
-
+@import '../../assets/sass/variables';
+.notifications {
+    .toolbar,
+    .toolbar-title,
+    .bar-button-default-md {
+        color: $color-white !important;
+        background-color: $primary-color-theme;
     }
     .back-button {
-        color: $color-text-gray !important;
+        color: $color-white !important;
+        background-color: $primary-color-theme;
     }
 
-
+    .input-wrapper ion-label {
+                text-overflow: unset;
+                white-space: normal;
+            }
 }
+
+// $primary-color-theme: #0d3348; // #007bff;// #21318C;
+// $color-white: #FFF;

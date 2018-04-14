@@ -1,7 +1,9 @@
 //DEFAULT
 import { BrowserModule } from '@angular/platform-browser';
-import { ErrorHandler, NgModule } from '@angular/core';
-import { IonicApp, IonicErrorHandler, IonicModule } from 'ionic-angular';
+import { ErrorHandler, NgModule  } from '@angular/core';
+import { IonicApp, IonicErrorHandler, IonicModule ,NavController} from 'ionic-angular';
+import { IonicStorageModule } from '@ionic/storage';
+import { OneSignal } from '@ionic-native/onesignal';
 
 
 
@@ -29,6 +31,8 @@ import { homepagedata } from '../models/data/homepagedata';
 
 //PROVIDERS
 import { BaseRestService } from '../providers/restservice/base.rest.service';
+import { StorageService } from '../providers/storageservice/storageservice';
+
 
 
 
@@ -39,6 +43,8 @@ import { SettingsComponent } from '../components/settings/settings';
 import { ProfileComponent } from '../components/profile/profile';
 import { NotificationsComponent } from '../components/notifications/notifications';
 import { DetailsComponent } from '../components/details/details';
+import { HomeComponent } from '../components/home/home';
+
 
 
 const pagesDeclaration = [
@@ -57,6 +63,7 @@ const componentDeclaration = [
   DetailsComponent,
   SettingsComponent,
   ProfileComponent,
+  HomeComponent,
   NotificationsComponent
 
 ];
@@ -69,6 +76,10 @@ const componentDeclaration = [
   imports: [
     BrowserModule,
     IonicModule.forRoot(MyApp),
+    IonicStorageModule.forRoot({
+      name: 'carexDB',
+         driverOrder: ['indexeddb', 'sqlite', 'websql']
+    })
   ],
   bootstrap: [IonicApp],
   entryComponents: [
@@ -80,12 +91,15 @@ const componentDeclaration = [
     SettingsPage,
     ProfilePage,
     DetailsPage
+    
   ],
   providers: [
     StatusBar,
     SplashScreen,
     BaseRestService,
-    { provide: ErrorHandler, useClass: IonicErrorHandler }
+    StorageService,
+    OneSignal,
+    { provide: ErrorHandler,   useClass: IonicErrorHandler }
   ]
 })
 export class AppModule { }

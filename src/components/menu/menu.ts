@@ -52,7 +52,7 @@ export class MenuComponent {
     this.nav.push(ProfilePage,{});
   }
   openNotifications(){
-    this.nav.push(NotificationsPage,{});
+    this.nav.push(NotificationsPage,{'resultData':''});
   }
   openSettings(){
     this.nav.push(SettingsPage,{});
