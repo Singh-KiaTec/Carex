@@ -1,43 +1,70 @@
-
 <ion-header class="details">
-    <ion-navbar>
-      <button ion-button menuToggle>
-        <ion-icon name="menu"></ion-icon>
-      </button>
-      <ion-title text-center>
-          <!-- <img [width]="200" [height]="50" src="assets/imgs/unitlogos/{{pagedata.logo}}" /> -->
-          <!-- {{pagedata.organisation}} -->
-           {{pagetitle}}
-   
-          <div>
-            <!-- <img  class="logo" [width]="" [height]="45" src="assets/imgs/unitlogos/CareX_hvid_gronlogo-66.png" /> -->
-        </div>
-        </ion-title>
-    </ion-navbar>
-  </ion-header>
-  <ion-content class="detailspage"> 
-      <ion-grid>
-          <!-- <ion-row>
+  <ion-navbar>
+    <button ion-button menuToggle>
+      <ion-icon name="menu"></ion-icon>
+    </button>
+    <ion-title text-center>
+      <!-- <img [width]="200" [height]="50" src="assets/imgs/unitlogos/{{pagedata.logo}}" /> -->
+      <!-- {{pagedata.organisation}} -->
+      {{pagetitle}}
+      <div>
+        <!-- <img  class="logo" [width]="" [height]="45" src="assets/imgs/unitlogos/CareX_hvid_gronlogo-66.png" /> -->
+      </div>
+    </ion-title>
+  </ion-navbar>
+</ion-header>
+
+<ion-content class="details">
+  <div class="detailspage" (swipe)="switchTab($event)">
+    <ion-grid>
+
+      <!-- <ion-row>
             <ion-col col-12>This column will take 12 columns</ion-col>
           </ion-row> -->
-          <!-- {{pagedata.organisation}}  -->
-    
-          <ion-row *ngIf="tabstoDisplay">
-            <ng-template ngFor let-item [ngForOf]="tabstoDisplay" let-i="index" [ngForTrackBy]="trackByFn">
-    
-    
-              <ion-col padding text-center>
-                <!-- <div class="fa {{item[4]}} fa-3x" text-center></div> -->
-                <p id="{{i}}">{{item}}</p>
-              </ion-col>
-            </ng-template>
-    
-          </ion-row>
-          <div *ngIf="!tabs">
+      <!-- {{pagedata.organisation}}  -->
 
-            no data...
-          </div>
-        </ion-grid>
-    </ion-content>
+      <ion-row *ngIf="tabstoDisplay">
+        <div class="detailscontainer">
+          <ng-template ngFor let-item [ngForOf]="tabstoDisplay" let-i="index" [ngForTrackBy]="trackByFn">
 
-    <!-- <ion-nav [root]="rootPage" #content swipeBackEnabled="false"></ion-nav> -->
+
+
+            <!-- <div class="fa {{item[4]}} fa-3x" text-center></div> -->
+            <!-- <p id="{{i}}">{{item}}</p> -->
+            <button id="{{i}}"  #navbuttons (click)="switchonTab(i)" ion-button>{{item}}</button>
+            <!-- <button id="{{i}}" *ngIf="i!=0" [style.background]='secondaryColor' (click)="switchonTab(i, $event)" ion-button>{{item}}</button> -->
+
+          </ng-template>
+        </div>
+
+
+        <div class="details__content" *ngIf="tabsContent">
+          <ng-template ngFor let-content [ngForOf]="tabsContent" let-c="index" [ngForTrackBy]="trackByFn">
+
+
+            <div padding id="c" *ngIf="c==0" [ngClass]="(selectedContainer==0)? 'details__show': 'details__hide' ">
+
+              <div [innerHtml]="content">
+              </div>
+
+            </div>
+            <div padding id="c" *ngIf="c!=0" [ngClass]="(selectedContainer==c)? 'details__show': 'details__hide' ">
+
+              <div [innerHtml]="content">
+              </div>
+
+            </div>
+          </ng-template>
+        </div>
+
+      </ion-row>
+      <div *ngIf="!tabs">
+
+        no data...
+      </div>
+
+    </ion-grid>
+  </div>
+</ion-content>
+
+<!-- <ion-nav [root]="rootPage" #content swipeBackEnabled="false"></ion-nav> -->

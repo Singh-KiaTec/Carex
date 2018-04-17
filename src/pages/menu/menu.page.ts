@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { NavController } from 'ionic-angular';
 
 
 @Component({
@@ -6,6 +7,7 @@ import { Component } from '@angular/core';
 })
 export class MenuPage {
     constructor(
+        private navCtrl: NavController
     ) { }
 
     ngOnInit() {

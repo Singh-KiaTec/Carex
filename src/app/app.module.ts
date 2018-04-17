@@ -1,9 +1,9 @@
 //DEFAULT
 import { BrowserModule } from '@angular/platform-browser';
-import { ErrorHandler, NgModule } from '@angular/core';
-import { IonicApp, IonicErrorHandler, IonicModule } from 'ionic-angular';
-import { Pro } from '@ionic/pro';
-import { Injectable, Injector } from '@angular/core';
+import { ErrorHandler, NgModule  } from '@angular/core';
+import { IonicApp, IonicErrorHandler, IonicModule ,NavController} from 'ionic-angular';
+import { IonicStorageModule } from '@ionic/storage';
+import { OneSignal } from '@ionic-native/onesignal';
 
 
 
@@ -25,12 +25,14 @@ import { MenuComponent } from '../components/menu/menu';
 
 
 //MODELS
-// import { data } from '../models/data/data';
-// import { homepagedata } from '../models/data/homepagedata';
+import { data } from '../models/data/data';
+import { homepagedata } from '../models/data/homepagedata';
 
 
 //PROVIDERS
 import { BaseRestService } from '../providers/restservice/base.rest.service';
+import { StorageService } from '../providers/storageservice/storageservice';
+
 
 
 
@@ -41,40 +43,7 @@ import { SettingsComponent } from '../components/settings/settings';
 import { ProfileComponent } from '../components/profile/profile';
 import { NotificationsComponent } from '../components/notifications/notifications';
 import { DetailsComponent } from '../components/details/details';
-
-
-
-
-
-
-
-
-
-
-Pro.init('13e37496', {
-  appVersion: '0.0.1'
-})
-
-@Injectable()
-export class MyErrorHandler implements ErrorHandler {
-  ionicErrorHandler: IonicErrorHandler;
-
-  constructor(injector: Injector) {
-    try {
-      this.ionicErrorHandler = injector.get(IonicErrorHandler);
-    } catch(e) {
-      // Unable to get the IonicErrorHandler provider, ensure
-      // IonicErrorHandler has been added to the providers list below
-    }
-  }
-
-  handleError(err: any): void {
-    Pro.monitoring.handleNewError(err);
-    // Remove this if you want to disable Ionic's auto exception handling
-    // in development mode.
-    this.ionicErrorHandler && this.ionicErrorHandler.handleError(err);
-  }
-}
+import { HomeComponent } from '../components/home/home';
 
 
 
@@ -94,6 +63,7 @@ const componentDeclaration = [
   DetailsComponent,
   SettingsComponent,
   ProfileComponent,
+  HomeComponent,
   NotificationsComponent
 
 ];
@@ -106,6 +76,10 @@ const componentDeclaration = [
   imports: [
     BrowserModule,
     IonicModule.forRoot(MyApp),
+    IonicStorageModule.forRoot({
+      name: 'carexDB',
+         driverOrder: ['indexeddb', 'sqlite', 'websql']
+    })
   ],
   bootstrap: [IonicApp],
   entryComponents: [
@@ -117,14 +91,15 @@ const componentDeclaration = [
     SettingsPage,
     ProfilePage,
     DetailsPage
+    
   ],
-
   providers: [
     StatusBar,
     SplashScreen,
     BaseRestService,
-    IonicErrorHandler,
-    { provide: ErrorHandler, useClass: MyErrorHandler }
+    StorageService,
+    OneSignal,
+    { provide: ErrorHandler,   useClass: IonicErrorHandler }
   ]
 })
 export class AppModule { }

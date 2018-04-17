@@ -1,5 +1,5 @@
 import { Component, ViewChild} from '@angular/core';
-import { Nav } from 'ionic-angular';
+import { Nav,NavController } from 'ionic-angular';
 import {data} from '../../models/data/data';
 import { HomePage } from '../../pages/home/home.page';
 import { SettingsPage } from '../../pages/settings/settings.page';
@@ -52,7 +52,7 @@ export class MenuComponent {
     this.nav.push(ProfilePage,{});
   }
   openNotifications(){
-    this.nav.push(NotificationsPage,{});
+    this.nav.push(NotificationsPage,{'resultData':''});
   }
   openSettings(){
     this.nav.push(SettingsPage,{});

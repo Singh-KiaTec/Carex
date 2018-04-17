@@ -1,31 +1,53 @@
-
 <ion-header class="notifications">
-        <ion-navbar>
-          <button ion-button menuToggle>
-            <ion-icon name="menu"></ion-icon>
-          </button>
-          <ion-title text-center>
-              <!-- <img [width]="200" [height]="50" src="assets/imgs/unitlogos/{{pagedata.logo}}" /> -->
-              <!-- {{pagedata.organisation}} -->
-              Notifications
-              <div>
-                <!-- <img  class="logo" [width]="" [height]="45" src="assets/imgs/unitlogos/CareX_hvid_gronlogo-66.png" /> -->
-            </div>
-            </ion-title>
-        </ion-navbar>
-      </ion-header>
-      <ion-content class="homepage"> 
-        <ion-grid>
-               
-            <ion-row>
-                 <p>  In Notificaitons Now save all your notifications........ </p>
-      
-                    </ion-row>
-                  
-      
-          
-          </ion-grid>
-        </ion-content>
-  
-        <!-- <ion-nav [root]="rootPage" #content swipeBackEnabled="false"></ion-nav> -->
-    
+  <ion-navbar>
+    <button ion-button menuToggle>
+      <ion-icon name="menu"></ion-icon>
+    </button>
+    <ion-title text-center>
+      <!-- <img [width]="200" [height]="50" src="assets/imgs/unitlogos/{{pagedata.logo}}" /> -->
+      <!-- {{pagedata.organisation}} -->
+      Notifications
+      <div>
+        <!-- <img  class="logo" [width]="" [height]="45" src="assets/imgs/unitlogos/CareX_hvid_gronlogo-66.png" /> -->
+      </div>
+    </ion-title>
+  </ion-navbar>
+</ion-header>
+<ion-content class="notifications">
+
+  <ion-list>
+    <div  *ngIf="allnotifications">
+      <ng-template ngFor let-item [ngForOf]="allnotifications" let-i="index" let first=first; [ngForTrackBy]="trackByFn">
+        <ion-item-sliding>
+          <!-- <ng-template ngFor let-item [ngForOf]="tabstoDisplay" let-i="index" let first=first; [ngForTrackBy]="trackByFn"> -->
+          <ion-item>
+            <ion-avatar item-start>
+              <img src="assets/icon/logo.png" />
+            </ion-avatar>
+            <h2>{{item.title}}</h2>
+            <p>{{item.body}}</p>
+          </ion-item>
+          <ion-item-options side="right">
+            <!-- <button ion-button color="primary">
+              <ion-icon name="archive"></ion-icon>
+              Archive
+            </button> -->
+            <button ion-button color="danger">
+              <ion-icon name="trash"></ion-icon>
+              Slet
+            </button>
+          </ion-item-options>
+
+
+          <!-- <ion-item-options side="right">
+                    <button ion-button color="primary">
+                      <ion-icon name="mail"></ion-icon>
+                      Email
+                    </button> -->
+        </ion-item-sliding>
+      </ng-template>
+    </div>
+  </ion-list>
+
+</ion-content>
+<!-- <ion-nav [root]="rootPage" #content swipeBackEnabled="false"></ion-nav> -->
