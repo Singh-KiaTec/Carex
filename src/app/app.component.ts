@@ -50,11 +50,11 @@ export class MyApp {
 
 
 
-      window["plugins"].OneSignal
-        .startInit("86c266d2-3554-4095-97c5-6efc0ac1e91a", "599014675139")
-        .handleNotificationOpened(this.notificationOpenedCallback.bind(this))
-        .handleNotificationReceived(this.notificationReceived.bind(this))
-        .endInit();
+      // window["plugins"].OneSignal
+      //   .startInit("86c266d2-3554-4095-97c5-6efc0ac1e91a", "599014675139")
+      //   .handleNotificationOpened(this.notificationOpenedCallback.bind(this))
+      //   .handleNotificationReceived(this.notificationReceived.bind(this))
+      //   .endInit();
 
 
       // this.oneSignal.handleNotificationReceived().subscribe((resultData) => {

@@ -1,25 +1,26 @@
-
-@import  '../../assets/sass/variables';
-
+@import '../../assets/sass/variables';
 .menu {
     background: $color-lightgray-background !important;
-
-    .toolbar-background-md{
+    .toolbar-background-md {
         background: $color-lightgray-background;
     }
-    .toolbar-title{
-        color: $color-dark-black;
+    .toolbar-title {
+        color: $color-white;
     }
     .item {
         color: $color-dark-black;
         background: $color-lightgray-background;
     }
-    .scroll-content{
+    .scroll-content {
         background: $color-lightgray-background;
     }
-    &__heading{
+    &__heading {
         background: $primary-color-theme !important;
         color: $color-white !important;
     }
-
+    .toolbar-background {
+        background: $primary-color-theme !important;
+        color: $color-white !important;
+        border-bottom: 1px solid $color-white;
+    }
 }

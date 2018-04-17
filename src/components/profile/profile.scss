@@ -1,14 +1,43 @@
-@import  '../../assets/sass/variables';
-
-
-.profile{
-
-    .toolbar,.bar-button-default-md{
-        color: $color-text-gray !important;
-
+@import '../../assets/sass/variables';
+.profile {
+    .toolbar,
+    .toolbar-title,
+    .bar-button-default-md {
+        color: $color-white !important;
+        background-color: $primary-color-theme;
     }
     .back-button {
-        color: $color-text-gray !important;
+        color: $color-white !important;
+        background-color: $primary-color-theme;
     }
-
+    ion-avatar {
+        background-color: $primary-color-theme;
+        width: 100%;
+        img {
+            border-radius: 100%;
+            width: 50%;
+        }
+    }
+    &__username {
+        float: right;
+        display: inline-block;
+        width: 50%;
+        top: 0;
+        margin-top: -7em;
+        position: relative;
+        color: $color-white;
+        margin-right: -1em;
+        font-weight: bold;
+    }
+    .item-icon {
+        color: $color-highlight-green;
+    }
+    .label {
+        color: $primary-color-theme;
+        font-weight: 500;
+    }
+    .logout {
+        background: $primary-color-theme;
+        width: 100%;
+    }
 }
