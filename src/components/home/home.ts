@@ -1,7 +1,8 @@
 import { Component,ViewChild } from '@angular/core';
 import {NavParams ,NavController,Content,Navbar } from 'ionic-angular';
-import { data} from '../../models/data/data'; 
+//import { data} from '../../models/data/data'; 
 import {DetailsPage} from  '../../pages/details/details.page';
+import { tryg} from '../../models/data/tryg'; 
 
 
 
@@ -12,7 +13,7 @@ import {DetailsPage} from  '../../pages/details/details.page';
 export class HomeComponent {
 
 public pagedata:any;
-public homedata=data;
+public homedata=tryg;
 public navdata:any;
 public logourl: string;
 public currentpageIndex;
@@ -59,37 +60,37 @@ ngAfterViewInit() {
     console.log("in home pge")
   }
 swipeEvent(e) {
+  console.log("in swipe");
 
-
-  if (e.direction == 4) {
-    this.currentpageIndex = +this.currentpageIndex-1;
-    if(this.currentpageIndex<=0){
-      this.currentpageIndex = 7;
-    }
+//   if (e.direction == 4) {
+//     this.currentpageIndex = +this.currentpageIndex-1;
+//     if(this.currentpageIndex<=0){
+//       this.currentpageIndex = 7;
+//     }
   
-    this.pagedata = this.homedata[this.currentpageIndex];
-    this.pagemenuButtons =  this.pagedata.buttons;
-    this.logourl = 'assets/imgs/unitlogos/'+this.pagedata.logo;
-    this.content.setElementStyle("background-color",this.pagedata.main_color);
-    this.navbar.setElementStyle("background-color",this.pagedata.main_color);
-   // this.navCtrl.setRoot('',{'pageData':this.pagedata});
-    console.log(this.pagemenuButtons);
-  }
+//     this.pagedata = this.homedata[this.currentpageIndex];
+//     this.pagemenuButtons =  this.pagedata.buttons;
+//     this.logourl = 'assets/imgs/unitlogos/'+this.pagedata.logo;
+//     this.content.setElementStyle("background-color",this.pagedata.main_color);
+//     this.navbar.setElementStyle("background-color",this.pagedata.main_color);
+//    // this.navCtrl.setRoot('',{'pageData':this.pagedata});
+//     console.log(this.pagemenuButtons);
+//   }
 
 
-  if (e.direction ==2) {
-      this.currentpageIndex = +this.currentpageIndex+1;
-    if(this.currentpageIndex ==7){
-      this.currentpageIndex = 1;
-    }
-    this.pagedata = this.homedata[this.currentpageIndex];
-    this.pagemenuButtons =  this.pagedata.buttons;
-    this.logourl = 'assets/imgs/unitlogos/'+this.pagedata.logo;
-    console.log(this.pagemenuButtons);
-    this.content.setElementStyle("background-color",this.pagedata.main_color);
-    this.navbar.setElementStyle("background-color",this.pagedata.main_color);
-    console.log("in swipe forward");
-}
+//   if (e.direction ==2) {
+//       this.currentpageIndex = +this.currentpageIndex+1;
+//     if(this.currentpageIndex ==7){
+//       this.currentpageIndex = 1;
+//     }
+//     this.pagedata = this.homedata[this.currentpageIndex];
+//     this.pagemenuButtons =  this.pagedata.buttons;
+//     this.logourl = 'assets/imgs/unitlogos/'+this.pagedata.logo;
+//     console.log(this.pagemenuButtons);
+//     this.content.setElementStyle("background-color",this.pagedata.main_color);
+//     this.navbar.setElementStyle("background-color",this.pagedata.main_color);
+//     console.log("in swipe forward");
+// }
 }
 
  detailsPage(slctdItem,pagedata){

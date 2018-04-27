@@ -1,10 +1,12 @@
 import { Component, ViewChild} from '@angular/core';
 import { Nav,NavController } from 'ionic-angular';
-import {data} from '../../models/data/data';
+//import {data} from '../../models/data/data';
 import { HomePage } from '../../pages/home/home.page';
 import { SettingsPage } from '../../pages/settings/settings.page';
 import { ProfilePage } from '../../pages/profile/profile.page';
 import { NotificationsPage } from '../../pages/notifications/notifications.page';
+import { WelcomePage } from '../../pages/welcome/welcome.page';
+import {tryg} from '../../models/data/tryg';
 
 @Component({
     selector: 'menu-viewer',
@@ -13,8 +15,8 @@ import { NotificationsPage } from '../../pages/notifications/notifications.page'
 export class MenuComponent {
     @ViewChild(Nav) nav: Nav;
 
-    menuList:any = data ;
-    rootPage: any = HomePage;
+    menuList:any = tryg ;
+    rootPage: any = WelcomePage;
 
     pages: Array<{title: string, component: any}>;
     constructor() {

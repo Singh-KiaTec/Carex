@@ -1,0 +1,47 @@
+<ion-header class="header">
+        <header-viewer></header-viewer>
+    </ion-header>
+<ion-content class="login">
+        <form [formGroup]="loginForm" (ngSubmit)="login()" >
+    <ion-list>
+          
+                            <ion-item>
+                             
+                                    <ion-label class="dark">UserId: </ion-label>
+                                      <ion-input  type="text" formControlName="userid"></ion-input>
+                                </ion-item>
+                                <ion-item>
+                                    <ion-label class="dark">Password: </ion-label>
+                                      <ion-input type="password" class="form-control" formControlName="password"></ion-input>
+                                </ion-item>
+      
+   
+    <!-- <form [formGroup]="todo" (ngSubmit)="logForm()">
+            <ion-item>
+              <ion-label>Todo</ion-label>
+              <ion-input type="text" formControlName="title"></ion-input>
+            </ion-item>
+            <ion-item>
+              <ion-label>Description</ion-label>
+              <ion-textarea formControlName="description"></ion-textarea>
+            </ion-item>
+            <button ion-button type="submit" [disabled]="!todo.valid">Submit</button>
+          </form>
+        -->
+    </ion-list>
+    <button ion-button type="submit" color="secondary" [disabled]="!loginForm.valid" class="login__login-button">Login</button>
+</form> 
+</ion-content>
+
+
+
+  <!-- <ion-item>
+          <ion-label color="dark">User Id</ion-label>
+            <ion-input item-end value=""></ion-input>
+        </ion-item>
+        <ion-item>
+           
+            <ion-label color="dark">Password </ion-label>
+            <ion-input item-right type="password" value=""></ion-input>
+        </ion-item> 
+-->

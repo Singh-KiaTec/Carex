@@ -1,0 +1,20 @@
+<ion-header class="header">
+    <header-viewer></header-viewer>
+</ion-header>
+
+
+      <ion-content class="termsconditions">
+          <h1 padding>Terms and Condition</h1>
+          <div padding>
+             <ng-template ngFor let-item [ngForOf]="paragraphs" let-i="index" [ngForTrackBy]="trackByFn">
+              <p text-justify>
+                  {{item}}
+              </p>
+          </ng-template>
+
+
+          <button ion-button  color="secondary" (click)="gotohomePage()" class="nemid__login-button">Continue</button>
+          </div>
+         
+      
+      </ion-content>

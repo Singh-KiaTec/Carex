@@ -1,40 +1,40 @@
 <div class="menu">
-<ion-menu [content]="content">
+  <ion-menu [content]="content">
     <ion-header class="menu__header">
       <ion-toolbar class="menu">
         <ion-title>
-            <div class="menu"></div>
-            Carex</ion-title>
+          <div class="menu"></div>
+          Carex</ion-title>
       </ion-toolbar>
     </ion-header>
-  
-    <ion-content >
-      <ion-list >
-          <ion-list-header  class="menu__heading">
-              Min Relationer
-            </ion-list-header>
+
+    <ion-content>
+      <ion-list>
+        <ion-list-header class="menu__heading">
+          Min Relationer
+        </ion-list-header>
         <button menuClose ion-item *ngFor="let p of pages" (click)="openPage(p)">
           {{p.title}}
         </button>
       </ion-list>
-      <ion-list >
-          <ion-list-header class="menu__heading">
-              Min Menu
-            </ion-list-header>
-      <button menuClose ion-item (click)="openProfile()">
+      <ion-list>
+        <ion-list-header class="menu__heading">
+          Min Menu
+        </ion-list-header>
+        <button menuClose ion-item (click)="openProfile()">
           Profile
         </button>
-        <button menuClose ion-item  (click)="openNotifications()">
+        <button menuClose ion-item (click)="openNotifications()">
           Notifications
-          </button>
-          <button menuClose ion-item  (click)="openSettings()">
-             Settings
-            </button>
+        </button>
+        <button menuClose ion-item (click)="openSettings()">
+          Settings
+        </button>
 
-    </ion-list>
+      </ion-list>
     </ion-content>
-  
+
   </ion-menu>
 </div>
-  <!-- Disable swipe-to-go-back because it's poor UX to combine STGB with side menus -->
- <ion-nav [root]="rootPage" #content swipeBackEnabled="false"></ion-nav> 
+<!-- Disable swipe-to-go-back because it's poor UX to combine STGB with side menus -->
+<ion-nav [root]="rootPage" #content swipeBackEnabled="false"></ion-nav>

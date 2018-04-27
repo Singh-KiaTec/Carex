@@ -1,15 +1,17 @@
 @import  '../../assets/sass/variables';
 
 .header {
+    background: $primary-color-theme !important;
 
     .toolbar-background, .toolbar-background-ios{
         background: inherit !important;
-  
+        height: 4em;
       }
       .bar-buttons{
           color: $color-white;
       }
-      .toolbar-title-md{
-        width: 80%;
+   .title{
+         //width: 80%;
+        margin-top: 0.2em;
     }
 }

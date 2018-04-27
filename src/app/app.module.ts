@@ -1,7 +1,7 @@
 //DEFAULT
 import { BrowserModule } from '@angular/platform-browser';
 import { ErrorHandler, NgModule  } from '@angular/core';
-import { IonicApp, IonicErrorHandler, IonicModule ,NavController} from 'ionic-angular';
+import { IonicApp, IonicErrorHandler, IonicModule ,NavController, ViewController} from 'ionic-angular';
 import { IonicStorageModule } from '@ionic/storage';
 import { OneSignal } from '@ionic-native/onesignal';
 
@@ -16,6 +16,11 @@ import { DetailsPage } from '../pages/details/details.page';
 import { SettingsPage } from '../pages/settings/settings.page';
 import { ProfilePage } from '../pages/profile/profile.page';
 import { NotificationsPage } from '../pages/notifications/notifications.page';
+import { LoginPage } from '../pages/login/login.page';
+import { WelcomePage } from '../pages/welcome/welcome.page';
+import { NemidPage } from '../pages/nemid/nemid.page';
+import { TermsconditionPage} from '../pages/termsconditions/termsconditions.page';
+
 
 
 
@@ -26,14 +31,12 @@ import { MenuComponent } from '../components/menu/menu';
 
 //MODELS
 import { data } from '../models/data/data';
-import { homepagedata } from '../models/data/homepagedata';
+
 
 
 //PROVIDERS
 import { BaseRestService } from '../providers/restservice/base.rest.service';
 import { StorageService } from '../providers/storageservice/storageservice';
-
-
 
 
 //IONIC
@@ -44,6 +47,11 @@ import { ProfileComponent } from '../components/profile/profile';
 import { NotificationsComponent } from '../components/notifications/notifications';
 import { DetailsComponent } from '../components/details/details';
 import { HomeComponent } from '../components/home/home';
+import { NemidComponent } from '../components/nemid/nemid';
+import { LoginComponent } from '../components/login/login';
+import { WelcomeComponent } from '../components/welcome/welcome';
+import { TermsconditionsComponent } from '../components/termsconditions/termsconditions';
+import { HeaderComponent } from '../components/header/header';
 
 
 
@@ -55,7 +63,11 @@ const pagesDeclaration = [
   DetailsPage,
   NotificationsPage,
   SettingsPage,
-  ProfilePage
+  ProfilePage,
+  LoginPage,
+  WelcomePage,
+  NemidPage,
+  TermsconditionPage
 ];
 
 const componentDeclaration = [
@@ -64,7 +76,13 @@ const componentDeclaration = [
   SettingsComponent,
   ProfileComponent,
   HomeComponent,
-  NotificationsComponent
+  NotificationsComponent,
+  LoginComponent,
+  WelcomeComponent,
+  NemidComponent,
+  TermsconditionsComponent,
+  HeaderComponent
+
 
 ];
 
@@ -90,7 +108,11 @@ const componentDeclaration = [
     NotificationsPage,
     SettingsPage,
     ProfilePage,
-    DetailsPage
+    DetailsPage,
+    LoginPage,
+    WelcomePage,
+    NemidPage,
+    TermsconditionPage
     
   ],
   providers: [
