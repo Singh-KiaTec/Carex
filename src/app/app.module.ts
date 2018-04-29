@@ -3,7 +3,7 @@ import { BrowserModule } from '@angular/platform-browser';
 import { ErrorHandler, NgModule  } from '@angular/core';
 import { IonicApp, IonicErrorHandler, IonicModule ,NavController, ViewController} from 'ionic-angular';
 import { IonicStorageModule } from '@ionic/storage';
-import { OneSignal } from '@ionic-native/onesignal';
+// import { OneSignal } from '@ionic-native/onesignal';
 
 
 
@@ -120,7 +120,7 @@ const componentDeclaration = [
     SplashScreen,
     BaseRestService,
     StorageService,
-    OneSignal,
+    // OneSignal,
     { provide: ErrorHandler,   useClass: IonicErrorHandler }
   ]
 })
