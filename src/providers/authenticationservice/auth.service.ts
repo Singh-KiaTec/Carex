@@ -8,6 +8,7 @@ export class AuthService {
     // URL to web api
     private navCtrl: Nav;
     private nav: any;
+    private environmentUrl;
 
     constructor(private app: App, private storageservice: StorageService) {
         //  this.navCtrl = app.getActiveNavs();
@@ -19,6 +20,12 @@ export class AuthService {
         console.log("in auth servicce");
     }
 
+    setEnvironment(environmentUrl) {
+        this.environmentUrl = environmentUrl;
+    }
+    getEnvironment() {
+        return this.environmentUrl;
 
+    }
 }
 

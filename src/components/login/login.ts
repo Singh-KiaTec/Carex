@@ -13,6 +13,8 @@ import { WindowRef } from '../../providers/windowservice/windowservice';
 import { User } from '../../models/user.model';
 import { BaseRestService } from '../../providers/restservice/base.rest.service';
 import{Environment} from '../../models/environment.model';
+import {AuthService} from '../../providers/authenticationservice/auth.service';
+import {DomSanitizer,SafeResourceUrl,} from '@angular/platform-browser';
 
 import $ from "jquery";
 
@@ -32,7 +34,9 @@ export class LoginComponent {
     private user:User;
     private environment;
     private envi:Environment;
-    constructor(private fb: FormBuilder, private navCtrl: NavController, private baserestService: BaseRestService, private cookieService: CookieService, private storageService: StorageService, private windowRef: WindowRef) {
+    private iframeUrl;
+    constructor(private fb: FormBuilder, private navCtrl: NavController, 
+        private auth:AuthService, public sanitizer:DomSanitizer,private baserestService: BaseRestService, private cookieService: CookieService, private storageService: StorageService, private windowRef: WindowRef) {
         this.loginForm = this.fb.group({
             userid: ['', Validators.required],
             password: ['', Validators.required],
@@ -80,11 +84,10 @@ export class LoginComponent {
         )
     }
     setenvi(){
-        
-        this.envi = this.environment;
-
-        console.log(this.envi);
-        console.log(this.environment);
+        this.auth.setEnvironment(this.environment.envi.environment)
+      //  this.iframeUrl =this.environment.envi.environment;
+        this.iframeUrl= this.sanitizer.bypassSecurityTrustResourceUrl(this.environment.envi.environment);
+console.log(this.iframeUrl);
         
     }
     // onLoadFunc(myIframe) {

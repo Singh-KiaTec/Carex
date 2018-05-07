@@ -7,6 +7,8 @@ import { IonicStorageModule } from '@ionic/storage';
  import { CookieService } from 'ngx-cookie-service';
  import { HttpModule } from '@angular/http';
  import { HttpClientModule, HttpClient } from '@angular/common/http';
+ import { Pipe, PipeTransform } from '@angular/core';
+import { DomSanitizer} from '@angular/platform-browser';
 
 
 
@@ -42,6 +44,9 @@ import { data } from '../models/data/data';
 import { BaseRestService } from '../providers/restservice/base.rest.service';
 import { StorageService } from '../providers/storageservice/storageservice';
 import { WindowRef } from '../providers/windowservice/windowservice';
+import { AuthService } from '../providers/authenticationservice/auth.service';
+import {SafePipe} from '../providers/directory/safepipe';
+
 
 
 //IONIC
@@ -89,8 +94,8 @@ const componentDeclaration = [
   NemidComponent,
   TermsconditionsComponent,
   HeaderComponent,
-  SearchDetailsComponent
-
+  SearchDetailsComponent,
+  SafePipe
 
 ];
 
@@ -135,6 +140,7 @@ const componentDeclaration = [
     HttpModule,
     HttpClientModule,
     WindowRef,
+    AuthService,
     OneSignal,
     { provide: ErrorHandler,   useClass: IonicErrorHandler }
   ]

@@ -94,8 +94,8 @@ export class BaseRestService {
     getsmartSearchData(){
         return this.http.get('http://udv-admin.carex.dk/config/jsondata/smartsearch.json', this.options).toPromise();
     }
-    logout(){
-        return this.http.get('https://udv-tryg.carex.dk/logout.php', this.options).toPromise();
+    logout(url){
+        return this.http.get(url+'/logout.php', this.options).toPromise();
     }
     getEnvironment(){
         return this.http.get('http://udv-admin.carex.dk/config/jsondata/envi.json', this.options).toPromise();

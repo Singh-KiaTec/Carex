@@ -25,8 +25,10 @@
 </iframe>
 </div> -->
 
-<div id="iframecontent">
-        <iframe #myIframe id="myIframe" class="login__iframe" sandbox="allow-cross-origin allow-scripts allow-forms" src="https://udv-tryg.carex.dk/">
+<!-- sandbox="allow-same-origin allow-scripts allow-popups allow-forms" -->
+
+<div  *ngIf="iframeUrl" id="iframecontent">
+        <iframe #myIframe id="myIframe" class="login__iframe" sandbox="allow-same-origin allow-scripts allow-forms" src="https://udv-tryg.carex.dk">
          
         </iframe>
         </div>
