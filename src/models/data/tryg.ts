@@ -2,9 +2,9 @@ export const tryg =
 {
   "1": {
     "organisation": "Tryg Forsikring",
-    "logo": "Tryg_Logo_Red_2D_RGB_13-1940-74.png",
+    "logo": "tryg_logo.png",
     "bg_image": "tryg-background.png",
-    "main_color": "#e41518",
+    "main_color": "#D00000",
     "buttons": [
       [
         "1",

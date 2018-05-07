@@ -13,5 +13,12 @@
     "www/**/*",
     "!www/lib/**/*",
     "!www/**/*.map"
+  ],
+  "proxies": [
+    {
+      "path": "/jsondata",
+      "proxyUrl": " http://udv-admin.carex.dk/config/jsondata"
+    }
   ]
 }
+

@@ -24,17 +24,20 @@
       <!-- {{pagedata.organisation}}  -->
 
       <ion-row *ngIf="tabstoDisplay">
-        <div class="detailscontainer">
+        <div class="details__container">
+          <!-- <ul> -->
           <ng-template ngFor let-item [ngForOf]="tabstoDisplay" let-i="index" [ngForTrackBy]="trackByFn">
 
-
-
+<!-- <li>{{item}}</li> -->
+      
             <!-- <div class="fa {{item[4]}} fa-3x" text-center></div> -->
             <!-- <p id="{{i}}">{{item}}</p> -->
-            <button id="{{i}}"  #navbuttons (click)="switchonTab(i)" ion-button>{{item}}</button>
+         
+             <button id="{{i}}"  #navbuttons (click)="switchonTab(i)" ion-button>{{item}}</button> 
             <!-- <button id="{{i}}" *ngIf="i!=0" [style.background]='secondaryColor' (click)="switchonTab(i, $event)" ion-button>{{item}}</button> -->
 
           </ng-template>
+        <!-- </ul> -->
         </div>
 
 
@@ -57,7 +60,75 @@
           </ng-template>
         </div>
 
+
+
+
+
+
       </ion-row>
+
+<div padding *ngIf="dropdownList">
+  <ion-list>
+      <ng-template ngFor let-dropdownitem [ngForOf]="dropdownList" let-c="index" [ngForTrackBy]="trackByFn">
+    <ion-item>
+        <ion-label floating>{{dropdownitem.label}}</ion-label>
+         <ion-select>
+          <ion-option   *ngFor="let option of dropdownitem.dropdownlist; let i = index;"  value="{{option}}">
+              {{option}}
+          </ion-option>
+        </ion-select> 
+        <ion-icon class="icon-dropdown"></ion-icon>
+      </ion-item>
+      
+      <!-- <ion-item>
+          <ion-label>Helbredskategorier</ion-label>
+          <ion-select>
+            <ion-option value="Smerteproblem i kroppens øvre del(nakke, skulder, albue, hånd, mfl.)">Smerteproblem i kroppens øvre del(nakke, skulder, albue, hånd, mfl.)  </ion-option>
+            <ion-option value="Smerteproblem i kroppens nedre del(lænderyg, hofte, knæ, ankel, mfl.)">Smerteproblem i kroppens nedre del(lænderyg, hofte, knæ, ankel, mfl.)</ion-option>
+          </ion-select>
+          <ion-icon class="icon-dropdown"></ion-icon>
+        </ion-item> -->
+      </ng-template>
+
+          <ng-template *ngIf="textfieldList" ngFor let-textfielditem [ngForOf]="textfieldList" let-c="index" [ngForTrackBy]="trackByFn">
+      <ion-item>
+          <ion-label floating>{{textfielditem.label}}</ion-label>
+          <ion-input type="text"></ion-input>
+        </ion-item>
+        </ng-template>
+      </ion-list>
+    
+</div>
+<button *ngIf="showsearchbutton" ion-button outline class="details__searchbutton" (click)="search()" >Søg   <ion-icon name="search"></ion-icon></button>
+
+<div padding *ngIf="showsearchList">
+    <ion-list class="details__searchlist">
+        <ion-item (click)="searchDetails(searcheditem)" *ngFor="let searcheditem of searchedList; let i= index">
+          <ion-thumbnail item-start>
+            <img src="assets/imgs/searchimages/{{searcheditem.image}}">
+          </ion-thumbnail>
+          <h2>{{searcheditem.heading}}</h2>
+          <p>{{searcheditem.teaser}}</p>
+          <button class="details__searchdetailview" ion-button clear item-end>View</button>
+        </ion-item>
+      </ion-list>
+
+
+</div>
+
+
+<!-- <ion-item class="item-input-padding size-16 select-css ion-select item-block item item-select" [class.item-ios]="currentPlatform == 'ios'"
+[class.item-md]="currentPlatform == 'android'">
+Helbredskategorier
+<select   *ngIf="searchData" class="ion-select size-16 select-bottom" name="estimate" >
+    <option value="Smerteproblem i kroppens øvre del(nakke, skulder, albue, hånd, mfl.)">Smerteproblem i kroppens øvre del(nakke, skulder, albue, hånd, mfl.)  </option>
+          <option value="Smerteproblem i kroppens nedre del(lænderyg, hofte, knæ, ankel, mfl.)">Smerteproblem i kroppens nedre del(lænderyg, hofte, knæ, ankel, mfl.)</option>
+</select>
+<ion-icon class="icon-dropdown"></ion-icon>
+</ion-item> -->
+
+
+
       <div *ngIf="!tabs">
 
         no data...

@@ -3,7 +3,10 @@ import { BrowserModule } from '@angular/platform-browser';
 import { ErrorHandler, NgModule  } from '@angular/core';
 import { IonicApp, IonicErrorHandler, IonicModule ,NavController, ViewController} from 'ionic-angular';
 import { IonicStorageModule } from '@ionic/storage';
-// import { OneSignal } from '@ionic-native/onesignal';
+ import { OneSignal } from '@ionic-native/onesignal';
+ import { CookieService } from 'ngx-cookie-service';
+ import { HttpModule } from '@angular/http';
+ import { HttpClientModule, HttpClient } from '@angular/common/http';
 
 
 
@@ -20,6 +23,7 @@ import { LoginPage } from '../pages/login/login.page';
 import { WelcomePage } from '../pages/welcome/welcome.page';
 import { NemidPage } from '../pages/nemid/nemid.page';
 import { TermsconditionPage} from '../pages/termsconditions/termsconditions.page';
+import {SearchDetailsPage } from '../pages/searchdetails/searchdetails.page';
 
 
 
@@ -37,6 +41,7 @@ import { data } from '../models/data/data';
 //PROVIDERS
 import { BaseRestService } from '../providers/restservice/base.rest.service';
 import { StorageService } from '../providers/storageservice/storageservice';
+import { WindowRef } from '../providers/windowservice/windowservice';
 
 
 //IONIC
@@ -52,6 +57,7 @@ import { LoginComponent } from '../components/login/login';
 import { WelcomeComponent } from '../components/welcome/welcome';
 import { TermsconditionsComponent } from '../components/termsconditions/termsconditions';
 import { HeaderComponent } from '../components/header/header';
+import {SearchDetailsComponent} from '../components/searchdetails/searchdetails';
 
 
 
@@ -67,6 +73,7 @@ const pagesDeclaration = [
   LoginPage,
   WelcomePage,
   NemidPage,
+  SearchDetailsPage,
   TermsconditionPage
 ];
 
@@ -81,7 +88,8 @@ const componentDeclaration = [
   WelcomeComponent,
   NemidComponent,
   TermsconditionsComponent,
-  HeaderComponent
+  HeaderComponent,
+  SearchDetailsComponent
 
 
 ];
@@ -93,6 +101,7 @@ const componentDeclaration = [
   ],
   imports: [
     BrowserModule,
+    HttpClientModule,
     IonicModule.forRoot(MyApp),
     IonicStorageModule.forRoot({
       name: 'carexDB',
@@ -112,6 +121,7 @@ const componentDeclaration = [
     LoginPage,
     WelcomePage,
     NemidPage,
+    SearchDetailsPage,
     TermsconditionPage
     
   ],
@@ -120,7 +130,12 @@ const componentDeclaration = [
     SplashScreen,
     BaseRestService,
     StorageService,
-    // OneSignal,
+    CookieService,
+    HttpClient,
+    HttpModule,
+    HttpClientModule,
+    WindowRef,
+    OneSignal,
     { provide: ErrorHandler,   useClass: IonicErrorHandler }
   ]
 })

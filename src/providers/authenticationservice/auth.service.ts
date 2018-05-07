@@ -16,8 +16,7 @@ export class AuthService {
 
     ngOnInit(): void {
         //Called after the constructor, initializing input properties, and the first call to ngOnChanges.
-
-console.log("in auth servicce");
+        console.log("in auth servicce");
     }
 
 

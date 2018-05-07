@@ -13,17 +13,15 @@ export class StorageService {
     constructor(public storage: Storage) {
 
     }
-    set(name, value) {
+    set(name, value):any {
         this.storage.set(name, value).then((val)=> {
         return val;
         });
 
     }
 
-    get(name) {
-        this.storage.get(name).then((val) => {
-            return val;
-        });
+    get(name) :Promise<boolean> {
+        return this.storage.ready().then(() => this.storage.get(name));
 
     }
     checknotification(storageName) {
@@ -61,6 +59,9 @@ export class StorageService {
         //     this.set(name, allnotifications);
         // }, 2000)
 
+    }
+    clear(){
+        this.storage.clear();
     }
 
 }

@@ -12,13 +12,16 @@
     .toolbar-title{
         color: $color-white;
     }
-    .item {
-        color: $color-text-gray;
-        background: $color-menu-gray;
-    }
+    // .item {
+    //     color:  $color-white;//$color-text-gray;
+    //     background: $primary-color-theme; //$color-menu-gray;
+    // }
     // .scroll-content{
     //     background: $color-menu-gray;
     // }
+    .item-inner{
+        border-bottom: 1px solid $primary-color-theme !important;
+    }
     .toolbar,.bar-button-default-md{
         color: $color-text-gray !important;
 
@@ -26,13 +29,19 @@
     .back-button {
         color: $color-white !important;
     }
-    .detailscontainer{
+    .input-has-focus{
+        border-bottom-color: none;
+    }
+    &__container{
      width: 100%;
+     display: flex;
+
 
      .button-default{
          font-size: 1.3rem;
-         max-width: 31%;
-         width: auto;
+        //  max-width: 31%;
+        //  width: auto;
+        flex-grow: 1;
 
 
          .button-inner{
@@ -47,6 +56,21 @@
     }
     &__show{
         display: block;
+    }
+    &__searchbutton{
+        color: $primary-color-theme;;
+        border-color:$primary-color-theme;
+    }
+
+    &__searchlist{
+         
+        .item{
+           background: $color-white;
+           color: $color-menu-gray;
+        }
+    }
+    &__searchdetailview{
+        color: $primary-color-theme;
     }
 
 }
