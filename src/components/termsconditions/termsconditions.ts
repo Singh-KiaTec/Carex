@@ -50,6 +50,7 @@ export class TermsconditionsComponent {
         this.nb = this.termsdata.terms.NB;
     }
     gotohomePage() {
+        this.storageService.set('terms',true);
         this.navCtrl.setRoot(HomePage);
     }
 }

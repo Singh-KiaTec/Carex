@@ -29,7 +29,7 @@ export class LoginComponent {
     private source: string = '';
     private userinfo;
     private termsread;
-    private user: User;
+    private user:User;
     private environment;
     private envi:Environment;
     constructor(private fb: FormBuilder, private navCtrl: NavController, private baserestService: BaseRestService, private cookieService: CookieService, private storageService: StorageService, private windowRef: WindowRef) {
@@ -41,8 +41,9 @@ export class LoginComponent {
 
     ngOnInit() {
         // Tracking
+
         console.log(this.iframe);
-        this.userinfo = this.cookieService.get('userdata');
+        //this.userinfo = this.cookieService.get('userdata');
         console.log("in login compinent");
         // this.storageService.get('terms').then(
         //     termsread => {
@@ -104,15 +105,16 @@ export class LoginComponent {
         console.log(data.data);
         if (data.data && !data.data.messageId) {
             let userdata = JSON.parse(data.data);
+            this.user = new User(userdata);
             if (userdata.id) {
                 console.log("gottt ssuer")
                 this.userinfo = data.data
                 console.log(this.userinfo);
-                this.user.id = this.userinfo.id;
-                this.user.email = this.userinfo.id;
-                this.user.username = this.userinfo.id;
-                this.user.status = this.userinfo.gyldighed;
-                this.user.group = this.userinfo.group;
+                this.user.id = userdata.id;
+                this.user.email = userdata.email;
+                this.user.username = userdata.username;
+                this.user.status = userdata.gyldighed;
+                this.user.group = userdata.group;
                 this.navCtrl.setRoot(TermsconditionPage);
             }
             // this.navCtrl.setRoot(TermsconditionPage);

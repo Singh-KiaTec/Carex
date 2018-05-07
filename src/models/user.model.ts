@@ -13,4 +13,11 @@ export class User {
     public status: string;
     public username: string;
     public group: string;
+    constructor(input){
+        this.id= input.id;
+        this.status= input.status;
+        this.username= input.username;
+        this.group= input.group;
+        this.email= input.email;
+    }
 }
