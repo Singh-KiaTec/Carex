@@ -17,51 +17,52 @@
 
   <ion-avatar item-start>
     <img src="assets/imgs/user2.png" />
-    <h4 class="profile__username" item-end> Mr. V. Singh  <ion-icon item-left name="create"></ion-icon> </h4>
+    <h4 class="profile__username" item-end> Mr/Mrs. {{user.username}}  <ion-icon item-left name="create"></ion-icon> </h4>
   </ion-avatar>
   <ion-list>
     <ion-item>
         <ion-icon item-left name="person"></ion-icon>
-      <ion-label color="primary">First Name</ion-label>
-      <ion-input disabled item-end value="Vishwanath"></ion-input>
+      <ion-label color="primary">Navn</ion-label>
+      <ion-input disabled item-end value="{{user.username}}"></ion-input>
     </ion-item>
-    <ion-item>
+    <!-- <ion-item>
         <ion-icon item-left name="person"></ion-icon>
       <ion-label color="primary">Last Name </ion-label>
-      <ion-input disabled item-right value="Singh"></ion-input>
-    </ion-item>
+      <ion-input disabled item-right value="{{user.username}}"></ion-input>
+    </ion-item> -->
     <ion-item>
         <ion-icon item-left name="locate"></ion-icon>
       <ion-label color="primary">Address</ion-label>
-      <ion-input item-right  value="Herlev 2600"></ion-input>
+      <ion-input item-right  disabled value="Herlev 2600"></ion-input>
     </ion-item>
     <ion-item>
         <ion-icon item-left name="calendar"></ion-icon>
       <ion-label color="primary">Date of Birth</ion-label>
-      <ion-input item-right value="19-09-1987"></ion-input>
+      <ion-input item-right disabled value="19-09-1987"></ion-input>
     </ion-item>
     <ion-item>
       <ion-icon item-left name="mail"></ion-icon>
       <ion-label color="primary">Email</ion-label>
-      <ion-input item-right  value="vsi@kiatec.dk"></ion-input>
+      <ion-input item-right disabled  value="{{user.email}}"></ion-input>
     </ion-item>
+    
     <ion-item>
         <ion-icon item-left name="call"></ion-icon>
       <ion-label color="primary">Mobile</ion-label>
-      <ion-input item-right value="455434433"></ion-input>
+      <ion-input item-right disabled value="455434039403"></ion-input>
     </ion-item>
     <ion-item>
         <ion-icon item-left name="map"></ion-icon>
       <ion-label color="primary">Country</ion-label>
-      <ion-input item-right value="Denmark"></ion-input>
+      <ion-input item-right disabled value="Denmark"></ion-input>
     </ion-item>
     <ion-item>
         <ion-icon item-left name="quote"></ion-icon>
       <ion-label color="primary">Language</ion-label>
-      <ion-input item-right value="Danish"></ion-input>
+      <ion-input item-right disabled value="Danish"></ion-input>
     </ion-item>
     <div padding>
-        <button ion-button class="logout">Logout</button>
+        <button (click)="logout()" ion-button class="logout">Logout</button>
     </div>
   </ion-list>
 

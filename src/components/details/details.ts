@@ -2,7 +2,9 @@ import { Component, ViewChild, ViewChildren } from '@angular/core';
 import { NavParams, Navbar } from 'ionic-angular';
 import { Button } from 'ionic-angular/components/button/button';
 import { NavController } from 'ionic-angular/navigation/nav-controller';
+import { BaseRestService } from '../../providers/restservice/base.rest.service';
 //import { ViewChildren } from '@angular/core/src/metadata/di';
+import {SearchDetailsPage} from '../../pages/searchdetails/searchdetails.page';
 
 @Component({
   selector: 'details-viewer',
@@ -15,68 +17,106 @@ export class DetailsComponent {
   private primaryColor;
   private currentTab;
   private secondaryColor;
-  private tabsContent = [];
+  private tabsContent:any =[];
   private selectedContainer = 0;
+  private searchData;
+  private dropdownList;
+  private searchedList;
+  private textfieldList;
+  private showsearchList=false;
   @ViewChild(Navbar) navbar: Navbar;
   @ViewChildren('navbuttons') navbuttons: Button;
   private tabs;
   private tabstoDisplay: any = [];
+  private showsearchbutton=false;
+  private tabsdata;
 
-  constructor(private navParam: NavParams, private navCtrl: NavController) {
+  constructor(private navParam: NavParams, private navCtrl: NavController, private baserestService: BaseRestService) {
 
     this.selectedMenuItem = this.navParam.get('selectedItem');
     this.selectedPage = this.navParam.get('selectedPage');
     this.primaryColor = this.selectedPage.main_color;
     this.pagetitle = this.selectedMenuItem[1];
     this.tabs = this.selectedMenuItem[8];
-    for (let item in this.tabs) {
-      let currentitem: any = this.tabs[item];
-      this.tabstoDisplay.push(currentitem.tab_name);
-      this.tabsContent.push(currentitem.text);
-
-    }
+ 
   }
 
   ngOnInit() {
-    // Tracking
-    console.log("in notify");
-    console.log(this.selectedMenuItem);
-    console.log(this.selectedPage);
-    console.log(this.tabs);
-    console.log(this.tabstoDisplay);
+    var tabsdata=[];
+    let currentitem: any;
+    for (let item in this.tabs) {
+       currentitem = this.tabs[item];
+      this.tabstoDisplay.push(currentitem.tab_name);
+      if(currentitem.text){
+ tabsdata.push(currentitem.text);
+      }
+     
+
+    }
+    this.tabsContent = tabsdata[0];
+    this.tabsdata = tabsdata;
+
     this.navbar.setElementStyle("background-color", this.primaryColor);
-
     this.secondaryColor = this.hex2rgb();
-    console.log(this.secondaryColor);
-    console.log(this.tabsContent);
-  }
-  ngAfterViewInit() {
-    if(this.navbuttons){
-      this.switchonTab(0);
+    // console.log(this.secondaryColor);
+    // console.log(this.tabsContent);
+    for(let i in this.tabsContent){
+console.log(this.tabsContent[i]);
     }
-    else{
-       setTimeout(() => {
-      this.switchonTab(0);
-    }, 10);
-    }
-   
 
+    if (this.tabstoDisplay[0] == "Smart søg") {
+      this.showsearchbutton= true;
+      this.baserestService.getsmartSearchData().then(
+        searchData => { this.searchData = searchData;
+          this.dropdownList = this.searchData.dropdowns;
+          this.searchedList = this.searchData.searchlist;
+          this.textfieldList = this.searchData.text;
+           },
+        error => console.log(error)
+
+      )
+    }
   }
+
+  ngAfterViewInit() {
+    if (this.navbuttons) {
+      console.log("in after view intiti");
+      this.switchonTab(0);
+    }
+    else {
+      console.log("in esle  after view intiti");
+      setTimeout(() => {
+        this.switchonTab(0);
+      }, 10);
+    }
+  }
+
+
+  setSearchData() {
+    console.log(this.searchData);
+    this.dropdownList = this.searchData.dropdowns;
+    this.searchedList = this.searchData.searchlist;
+    this.textfieldList = this.searchData.text;
+  }
+
 
   switchonTab(id) {
     this.selectedContainer = id;
+    this.tabsContent = this.tabsdata[id];
+    console.log(this.selectedContainer);
     let defaulttab: any = this.navbuttons;
-    if(defaulttab){
-        defaulttab.map((item, index) => {
-      if (index == id) {
-        defaulttab._results[index].setElementStyle("background-color", this.primaryColor);
-      }
-      else {
-        defaulttab._results[index].setElementStyle("background-color", this.secondaryColor);
-      }
-    });
+    if (defaulttab) {
+      defaulttab.map((item, index) => {
+        if (index == id) {
+          defaulttab._results[index].setElementStyle("background-color", this.primaryColor);
+          return;
+        }
+        else {
+          defaulttab._results[index].setElementStyle("background-color", this.secondaryColor);
+        }
+      });
     }
-  
+
   }
 
 
@@ -97,7 +137,7 @@ export class DetailsComponent {
     if (e.direction == 4) {
       this.selectedContainer = +this.selectedContainer - 1;
       if (this.selectedContainer < 0) {
-        this.selectedContainer = this.tabstoDisplay.length-1;
+        this.selectedContainer = this.tabstoDisplay.length - 1;
       }
       this.switchonTab(this.selectedContainer);
       console.log("backwaords");
@@ -113,5 +153,11 @@ export class DetailsComponent {
       console.log("in swipe forward");
     }
   }
-
+  search(){
+    this.showsearchList = true;
+  }
+  searchDetails(searchsltdItem){
+    console.log(searchsltdItem);
+    this.navCtrl.push(SearchDetailsPage, {'selectedItem':searchsltdItem})
+  }
 }

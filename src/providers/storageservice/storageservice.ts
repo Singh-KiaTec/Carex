@@ -6,24 +6,22 @@ import { Storage } from '@ionic/storage';
 @Injectable()
 export class StorageService {
     private notifiicationList = [{
-        'title': 'Carex',
+        'title': 'Tryg',
         'body': 'All your notificatiions'
     }];
 
     constructor(public storage: Storage) {
 
     }
-    set(name, value) {
+    set(name, value):any {
         this.storage.set(name, value).then((val)=> {
         return val;
         });
 
     }
 
-    get(name) {
-        this.storage.get(name).then((val) => {
-            return val;
-        });
+    get(name) :Promise<boolean> {
+        return this.storage.ready().then(() => this.storage.get(name));
 
     }
     checknotification(storageName) {
@@ -35,7 +33,7 @@ export class StorageService {
 }
     setnewNotification(storageName, value) {
         this.storage.set(storageName, value).then(()=> {
-         console.log("done all set local");   
+         console.log("done all set local");
             });
     }
 
@@ -61,6 +59,9 @@ export class StorageService {
         //     this.set(name, allnotifications);
         // }, 2000)
 
+    }
+    clear(){
+        this.storage.clear();
     }
 
 }

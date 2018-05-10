@@ -13,6 +13,7 @@ import { NavParams, NavController, Content, Navbar } from 'ionic-angular';
 import { OneSignal } from '@ionic-native/onesignal';
 import {StorageService} from '../providers/storageservice/storageservice';
 import {BaseRestService} from '../providers/restservice/base.rest.service';
+import { WelcomePage } from '../pages/welcome/welcome.page';
 
 @Component({
   templateUrl: 'app.html'

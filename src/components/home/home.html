@@ -1,4 +1,4 @@
-<ion-header>
+<!-- <ion-header>
         <ion-navbar>
           <button ion-button menuToggle>
             <ion-icon name="menu"></ion-icon>
@@ -6,15 +6,36 @@
           <ion-title margin-left>
             
             <img [width]="140" [height]="40" src="assets/imgs/unitlogos/{{pagedata.logo}}"/> 
-              <!-- {{pagedata.organisation}} -->
             </ion-title>
         </ion-navbar>
-      </ion-header>
-      
-      <ion-content  class="homepage">
+      </ion-header> -->
+
+      <ion-header class="home">
+      <ion-navbar>
+         <button ion-button menuToggle>
+                        <ion-icon name="menu"></ion-icon>
+                      </button>
+          <ion-title text-center>
+              <div *ngIf="pagedata">
+                  <!-- <img  class="logo" [width]="" [height]="45" src="assets/imgs/unitlogos/CareX_hvid_gronlogo-66.png" /> -->
+                  <img class="logo" [width]="" [height]="40" src="http://udv-admin.carex.dk/config/assets/imgs/unitlogos/logos/{{pagedata.logo}}" />
+              </div>
+          </ion-title>
+
+          <ion-buttons end>
+              <button ion-button icon-only (click)="gotoNotification()">
+                <ion-icon class="home__notifications" name="notifications"></ion-icon>
+              </button>
+            </ion-buttons>
+
+      </ion-navbar>
+    </ion-header>
+
+
+      <ion-content  class="home">
         <div (swipe)="swipeEvent($event)" >
-        <div>
-            <ion-img [width]="'100%'" [height]="'167'" src="assets/imgs/{{pagedata.bg_image}}" ></ion-img>
+        <div *ngIf="pagedata">
+            <img  class="home__bg-image"  src="http://udv-admin.carex.dk/config/assets/imgs/unitlogos/logos/{{pagedata.bg_image}}" />
         </div>
         <!-- <p>
           If you get lost, the <a href="http://ionicframework.com/docs/v2">docs</a> will show you the way.
@@ -27,12 +48,12 @@
             </ion-row> -->
          
                
-            <ion-row>
+            <ion-row *ngIf="pagemenuButtons">
                     <ng-template ngFor let-item [ngForOf]="pagemenuButtons" let-i="index" [ngForTrackBy]="trackByFn">
       
                       
-                        <ion-col class="homepage__item" col-6>
-                          <div class="homepage__item-container"  (click)="detailsPage(item,pagedata)">
+                        <ion-col class="home__item" col-6>
+                          <div class="home__item-container"  (click)="detailsPage(item,pagedata)">
                            <div class="fa {{item[4]}} fa-3x" text-center></div>
                            <p>{{item[1]}}</p>
                            </div>
@@ -40,9 +61,6 @@
                       </ng-template>  
       
                     </ion-row>
-                  
-      
-          
           </ion-grid>
           </div>
       </ion-content>

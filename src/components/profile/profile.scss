@@ -1,5 +1,7 @@
 @import '../../assets/sass/variables';
 .profile {
+    line-height: 1.5em;
+
     .toolbar,
     .toolbar-title,
     .bar-button-default-md {
@@ -16,6 +18,8 @@
         img {
             border-radius: 100%;
             width: 50%;
+            padding: .3em;
+            padding-right: 0;
         }
     }
     &__username {
