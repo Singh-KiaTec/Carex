@@ -1,6 +1,8 @@
 @import  '../../assets/sass/variables';
 
 .searchdetails {
+    line-height: 1.5em;
+    
     background: $primary-color-theme !important;
 
     .toolbar-background, .toolbar-background-ios{

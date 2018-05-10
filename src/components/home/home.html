@@ -10,7 +10,7 @@
         </ion-navbar>
       </ion-header> -->
 
-      <ion-header>
+      <ion-header class="home">
       <ion-navbar>
          <button ion-button menuToggle>
                         <ion-icon name="menu"></ion-icon>
@@ -21,6 +21,13 @@
                   <img class="logo" [width]="" [height]="40" src="http://udv-admin.carex.dk/config/assets/imgs/unitlogos/logos/{{pagedata.logo}}" />
               </div>
           </ion-title>
+
+          <ion-buttons end>
+              <button ion-button icon-only (click)="gotoNotification()">
+                <ion-icon class="home__notifications" name="notifications"></ion-icon>
+              </button>
+            </ion-buttons>
+
       </ion-navbar>
     </ion-header>
 

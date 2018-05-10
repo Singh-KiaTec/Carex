@@ -5,6 +5,7 @@ import { DetailsPage } from '../../pages/details/details.page';
 import { tryg } from '../../models/data/tryg';
 import { BaseRestService } from '../../providers/restservice/base.rest.service';
 import {pageData} from '../../models/pagedata';
+import { NotificationsPage } from '../../pages/notifications/notifications.page';
 
 
 
@@ -128,6 +129,9 @@ export class HomeComponent {
 
     // this.selectedMenuItem = this.navParam.get('selectedItem');
     // this.selectedPage = this.navParam.get('selectedPage')
+  }
+  gotoNotification(){
+    this.navCtrl.push(NotificationsPage,{}); 
   }
 
 }

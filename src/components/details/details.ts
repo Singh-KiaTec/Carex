@@ -17,7 +17,7 @@ export class DetailsComponent {
   private primaryColor;
   private currentTab;
   private secondaryColor;
-  private tabsContent = [];
+  private tabsContent:any =[];
   private selectedContainer = 0;
   private searchData;
   private dropdownList;
@@ -29,6 +29,7 @@ export class DetailsComponent {
   private tabs;
   private tabstoDisplay: any = [];
   private showsearchbutton=false;
+  private tabsdata;
 
   constructor(private navParam: NavParams, private navCtrl: NavController, private baserestService: BaseRestService) {
 
@@ -37,26 +38,31 @@ export class DetailsComponent {
     this.primaryColor = this.selectedPage.main_color;
     this.pagetitle = this.selectedMenuItem[1];
     this.tabs = this.selectedMenuItem[8];
-    for (let item in this.tabs) {
-      let currentitem: any = this.tabs[item];
-      this.tabstoDisplay.push(currentitem.tab_name);
-      this.tabsContent.push(currentitem.text);
-
-    }
+ 
   }
 
   ngOnInit() {
-    // Tracking
-    // console.log("in notify");
-    // console.log(this.selectedMenuItem);
-    // console.log(this.selectedPage);
-    // console.log(this.tabs);
-    // console.log(this.tabstoDisplay);
-    this.navbar.setElementStyle("background-color", this.primaryColor);
+    var tabsdata=[];
+    let currentitem: any;
+    for (let item in this.tabs) {
+       currentitem = this.tabs[item];
+      this.tabstoDisplay.push(currentitem.tab_name);
+      if(currentitem.text){
+ tabsdata.push(currentitem.text);
+      }
+     
 
+    }
+    this.tabsContent = tabsdata[0];
+    this.tabsdata = tabsdata;
+
+    this.navbar.setElementStyle("background-color", this.primaryColor);
     this.secondaryColor = this.hex2rgb();
     // console.log(this.secondaryColor);
     // console.log(this.tabsContent);
+    for(let i in this.tabsContent){
+console.log(this.tabsContent[i]);
+    }
 
     if (this.tabstoDisplay[0] == "Smart søg") {
       this.showsearchbutton= true;
@@ -74,9 +80,11 @@ export class DetailsComponent {
 
   ngAfterViewInit() {
     if (this.navbuttons) {
+      console.log("in after view intiti");
       this.switchonTab(0);
     }
     else {
+      console.log("in esle  after view intiti");
       setTimeout(() => {
         this.switchonTab(0);
       }, 10);
@@ -94,11 +102,14 @@ export class DetailsComponent {
 
   switchonTab(id) {
     this.selectedContainer = id;
+    this.tabsContent = this.tabsdata[id];
+    console.log(this.selectedContainer);
     let defaulttab: any = this.navbuttons;
     if (defaulttab) {
       defaulttab.map((item, index) => {
         if (index == id) {
           defaulttab._results[index].setElementStyle("background-color", this.primaryColor);
+          return;
         }
         else {
           defaulttab._results[index].setElementStyle("background-color", this.secondaryColor);

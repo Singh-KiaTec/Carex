@@ -5,6 +5,7 @@ import {WelcomePage} from '../../pages/welcome/welcome.page'
 import { NavController } from 'ionic-angular';
 import {StorageService} from '../../providers/storageservice/storageservice'
 import {AuthService} from '../../providers/authenticationservice/auth.service';
+import { User } from '../../models/user.model';
 
 @Component({
     selector:'profile-viewer',
@@ -14,14 +15,18 @@ export class ProfileComponent {
     rootPage: any = ProfilePage;
     private loggedout;
     private loggedUrl;
+    private user:User;
     
 
     constructor(private baserestService:BaseRestService, private navCtrl: NavController, private auth: AuthService,private storageService: StorageService) { }
 
     ngOnInit() {
         // Tracking
-  console.log("in profile");
+
+
   this.loggedUrl = this.auth.getEnvironment();
+  this.user = this.auth.getUserInfo();
+  console.log(this.user);
     }
     
     logout(){

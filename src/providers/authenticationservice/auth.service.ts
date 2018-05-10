@@ -9,6 +9,7 @@ export class AuthService {
     private navCtrl: Nav;
     private nav: any;
     private environmentUrl;
+    private user;
 
     constructor(private app: App, private storageservice: StorageService) {
         //  this.navCtrl = app.getActiveNavs();
@@ -25,6 +26,13 @@ export class AuthService {
     }
     getEnvironment() {
         return this.environmentUrl;
+
+    }
+    setUserinfo(user) {
+        this.user = user;
+    }
+    getUserInfo() {
+        return this.user;
 
     }
 }

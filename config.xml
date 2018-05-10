@@ -4,7 +4,8 @@
     <description>An awesome Ionic/Cordova app.</description>
     <author email="hi@ionicframework" href="http://ionicframework.com/">Ionic Framework Team</author>
     <content src="index.html" />
-    <access origin="*" />
+    <access origin="http://localhost:8080/*" />
+    <allow-navigation href="http://localhost:8080/*" />
     <allow-intent href="http://*/*" />
     <allow-intent href="https://*/*" />
     <allow-intent href="tel:*" />
@@ -88,6 +89,9 @@
     <plugin name="cordova-sqlite-storage" spec="^2.3.0" />
     <allow-navigation href="http://172.20.15.111:8100" />
     <plugin name="onesignal-cordova-plugin" spec="^2.3.3" />
+    <allow-navigation href="http://172.20.15.111:8101" />
+    <allow-navigation href="http://localhost:8080/*" />
+    <plugin name="cordova-plugin-advanced-http" spec="^1.11.1" />
     <engine name="ios" spec="4.5.4" />
     <engine name="android" spec="7.0.0" />
     <engine name="browser" spec="5.0.3" />

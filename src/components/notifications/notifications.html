@@ -19,7 +19,6 @@
     <div  *ngIf="allnotifications">
       <ng-template ngFor let-item [ngForOf]="allnotifications" let-i="index" let first=first; [ngForTrackBy]="trackByFn">
         <ion-item-sliding>
-          <!-- <ng-template ngFor let-item [ngForOf]="tabstoDisplay" let-i="index" let first=first; [ngForTrackBy]="trackByFn"> -->
           <ion-item>
             <ion-avatar item-start>
               <img src="assets/icon/logo.png" />

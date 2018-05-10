@@ -48,7 +48,10 @@ export class WelcomeComponent {
     }
     getWelcomeData() {
         this.baserestService.getWelcomeData().then(
-            welcomeData => { this.welcomedata = welcomeData; this.setData(); this.loading = false },
+            welcomeData => { this.welcomedata = welcomeData; 
+                console.log("in welcoe");
+                console.log(welcomeData)
+                this.setData(); this.loading = false },
             error => { console.log("error"); this.loading = false }
         );
 

@@ -3,6 +3,7 @@
 @import '../../assets/sass/variables';
 .details {
     // background: $color-menu-gray !important;
+    line-height: 1.5em;
     .detailspage{
         height: 100%;
     }
@@ -71,6 +72,10 @@
     }
     &__searchdetailview{
         color: $primary-color-theme;
+    }
+    &__item{
+        margin-top: 1.5em;
+        margin-bottom: 1.5em;
     }
 
 }

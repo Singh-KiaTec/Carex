@@ -6,6 +6,7 @@ import { SettingsPage } from '../../pages/settings/settings.page';
 import { ProfilePage } from '../../pages/profile/profile.page';
 import { NotificationsPage } from '../../pages/notifications/notifications.page';
 import { WelcomePage } from '../../pages/welcome/welcome.page';
+import { TermsconditionPage } from '../../pages/termsconditions/termsconditions.page';
 import {tryg} from '../../models/data/tryg';
 
 @Component({
@@ -59,6 +60,8 @@ export class MenuComponent {
   openSettings(){
     this.nav.push(SettingsPage,{});
   }
-
+  openTermsandCondition(){
+    this.nav.push(TermsconditionPage,{'menupage':true});
+  }
 
 }

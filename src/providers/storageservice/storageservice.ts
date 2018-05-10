@@ -33,7 +33,7 @@ export class StorageService {
 }
     setnewNotification(storageName, value) {
         this.storage.set(storageName, value).then(()=> {
-         console.log("done all set local");   
+         console.log("done all set local");
             });
     }
 

@@ -36,7 +36,7 @@ export class LoginComponent {
     private envi:Environment;
     private iframeUrl;
     constructor(private fb: FormBuilder, private navCtrl: NavController, 
-        private auth:AuthService, public sanitizer:DomSanitizer,private baserestService: BaseRestService, private cookieService: CookieService, private storageService: StorageService, private windowRef: WindowRef) {
+        private auth:AuthService,private sanitizer: DomSanitizer,private baserestService: BaseRestService, private cookieService: CookieService, private storageService: StorageService, private windowRef: WindowRef) {
         this.loginForm = this.fb.group({
             userid: ['', Validators.required],
             password: ['', Validators.required],
@@ -65,6 +65,7 @@ export class LoginComponent {
 
         console.log(this.windowRef.nativeWindow);
         window.addEventListener("message", (data) => {
+            console.log(data);
             this.receiveMessage(data);
         }, false)
         //   this.windowRef.nativeWindow.event.message(this.receiveMessage);
@@ -78,15 +79,17 @@ export class LoginComponent {
     }
     getEnvi() {
         this.baserestService.getEnvironment().then(
-            envi => {this.environment= envi; this.setenvi()},
+            envi => {
+                console.log(envi);
+                this.environment= envi; this.setenvi()},
             error=>console.error(error)
             
         )
     }
     setenvi(){
+       // this.iframeUrl =this.environment.envi.environment;
         this.auth.setEnvironment(this.environment.envi.environment)
-      //  this.iframeUrl =this.environment.envi.environment;
-        this.iframeUrl= this.sanitizer.bypassSecurityTrustResourceUrl(this.environment.envi.environment);
+       this.iframeUrl= this.sanitizer.bypassSecurityTrustResourceUrl(this.environment.envi.environment);
 console.log(this.iframeUrl);
         
     }
@@ -118,6 +121,7 @@ console.log(this.iframeUrl);
                 this.user.username = userdata.username;
                 this.user.status = userdata.gyldighed;
                 this.user.group = userdata.group;
+                this.auth.setUserinfo(this.user);
                 this.navCtrl.setRoot(TermsconditionPage);
             }
             // this.navCtrl.setRoot(TermsconditionPage);

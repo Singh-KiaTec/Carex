@@ -6,6 +6,7 @@ import { NotificationsPage } from '../../pages/notifications/notifications.page'
 import { LoginPage } from '../../pages/login/login.page';
 import { StorageService } from '../storageservice/storageservice';
 import { Http } from '@angular/http/src/http';
+import { HTTP } from '@ionic-native/http';
 import { Platform } from 'ionic-angular';
 
 
@@ -23,9 +24,10 @@ export class BaseRestService {
         //  this.navCtrl = app.getActiveNavs();
         this.headers = new Headers({
             'Content-Type': 'application/json',
-            'Access-Control-Allow-Origin': '*',
+            'Access-Control-Allow-Origin':  '*',
             'Access-Control-Allow-Methods': 'POST, GET, OPTIONS, PUT',
-            'Accept': 'application/json'
+            'Accept': 'application/json',
+            "Access-Control-Allow-Headers": "X-Requested-With"
         });
         if (platform.is('mobile')) {
             this.baseUrl = "http://udv-admin.carex.dk/config/";
@@ -85,7 +87,8 @@ export class BaseRestService {
     getTermsandconditionsData() {
        // this.getPlatform();
         console.log(this.baseUrl);
-        return this.http.get('http://udv-admin.carex.dk/config/jsondata/termsandconditions.json', this.options).toPromise();
+        return this.http.get('http://udv-admin.carex.dk/config/jsondata/termsandconditions.json', this.headers).toPromise();
+      //  return this.http.get('http://udv-admin.carex.dk/config/jsondata/termsandconditions.json', this.options).toPromise();
     }
     getCustomerData() {
         console.log(this.baseUrl);
