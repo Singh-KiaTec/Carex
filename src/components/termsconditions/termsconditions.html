@@ -1,0 +1,24 @@
+<ion-header class="termsconditions">
+    <header-viewer></header-viewer>
+</ion-header>
+
+
+<ion-content class="termsconditions">
+    <h1 padding>{{heading}}</h1>
+    <div padding>
+        <ng-template ngFor let-item [ngForOf]="paragraphs" let-i="index" [ngForTrackBy]="trackByFn">
+            <p text-left>
+                {{item}}
+            </p>
+        </ng-template>
+
+
+
+        <ng-container *ngIf="!ismenupage">
+            <button ion-button #login color="secondary" (click)="gotohomePage()" class="nemid__login-button">Fortsæt</button>
+        </ng-container>
+
+    </div>
+
+<div class="termsconditions__verison">Version: 0.0.1</div>
+</ion-content>

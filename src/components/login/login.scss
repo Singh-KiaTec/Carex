@@ -1,0 +1,19 @@
+@import '../../assets/sass/variables';
+.login {
+    line-height: 1.5em;
+    
+    &__login-button {
+        width: 100%;
+    }
+    &__iframe {
+        height: 50em;
+        width: 100%;
+        border: 0;
+
+        .col-md-7{
+            margin: 0 !important;
+            padding: 0  !important;
+        }
+    }
+
+}
