@@ -103,5 +103,9 @@ export class BaseRestService {
     getEnvironment(){
         return this.http.get('http://udv-admin.carex.dk/config/jsondata/envi.json', this.options).toPromise();
     }
+    getOtherRelations() { 
+         console.log(this.baseUrl);
+         return this.http.get('http://udv-admin.carex.dk/config/jsondata/otherrelations.json', this.headers).toPromise();
+     }
 }
 

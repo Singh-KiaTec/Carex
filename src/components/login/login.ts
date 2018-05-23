@@ -108,7 +108,7 @@ console.log(this.iframeUrl);
     // }
     receiveMessage(data) {
         console.log("in receive message")
-        console.log(data.data);
+       // console.log(data.data);
         if (data.data && !data.data.messageId) {
             let userdata = JSON.parse(data.data);
             this.user = new User(userdata);

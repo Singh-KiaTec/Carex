@@ -4,6 +4,7 @@ import { NavParams, NavController, Content, Navbar } from 'ionic-angular';
 import { DetailsPage } from '../../pages/details/details.page';
 import { tryg } from '../../models/data/tryg';
 import { BaseRestService } from '../../providers/restservice/base.rest.service';
+import { AuthService } from '../../providers/authenticationservice/auth.service';
 import {pageData} from '../../models/pagedata';
 import { NotificationsPage } from '../../pages/notifications/notifications.page';
 
@@ -26,17 +27,19 @@ export class HomeComponent {
   private loading;
   private pagedataModel;
   private ImgUrl;
+  private showButtons= true;
 
   @ViewChild(Content) content: Content;
   @ViewChild(Navbar) navbar: Navbar;
-  constructor(public navCtrl: NavController, public navParams: NavParams, private baserestService: BaseRestService) {
+  constructor(public navCtrl: NavController, public authService: AuthService, public navParams: NavParams, private baserestService: BaseRestService) {
     //    this.content.setElementStyle("background-color",this.pagedata.main_color);
     //    this.navbar.setElementStyle("background-color",this.pagedata.main_color);
 
   }
   ngOnInit(): void {
-    //this.navdata = this.navParams.get('pageData');
+    this.navdata = this.navParams.get('pageData');
     this.currentpageIndex = this.navParams.get('itemIndex');
+    
    
     if(!this.homedata){
         this.baserestService.getCustomerData().then(
@@ -68,6 +71,8 @@ export class HomeComponent {
 
 
   setData() {
+    this.authService.setHomedata(this.homedata[1]);
+    console.log("in home");
     //this.pagedata = this.navdata ? this.navdata : this.homedata[1];
     this.pagedata = this.homedata[1];
     //this.pagedata = this.homedata;
@@ -77,9 +82,10 @@ export class HomeComponent {
     // console.log(this.homedata[1]);
     this.currentpageIndex = this.currentpageIndex ? this.currentpageIndex : 1;
    // if (!this.navdata) {
-      console.log("in navdarta")
+      console.log(this.pagedata.show_buttons);
     //  this.pagedata = this.homedata[1];
       this.pagemenuButtons = this.pagedata.buttons;
+      this.showButtons = this.pagedata.show_buttons;
     // } if(this.navdata){
     //   this.pagedata = this.navdata;
     //   this.pagemenuButtons = this.pagedata.buttons;

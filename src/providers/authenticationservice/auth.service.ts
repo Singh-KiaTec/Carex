@@ -10,6 +10,7 @@ export class AuthService {
     private nav: any;
     private environmentUrl;
     private user;
+    private homedata;
 
     constructor(private app: App, private storageservice: StorageService) {
         //  this.navCtrl = app.getActiveNavs();
@@ -33,6 +34,13 @@ export class AuthService {
     }
     getUserInfo() {
         return this.user;
+
+    }
+    setHomedata(homedata) {
+        this.homedata = homedata;
+    }
+    getHomedata() {
+        return this.homedata;
 
     }
 }

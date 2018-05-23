@@ -7,6 +7,7 @@ import { ProfilePage } from '../../pages/profile/profile.page';
 import { NotificationsPage } from '../../pages/notifications/notifications.page';
 import { WelcomePage } from '../../pages/welcome/welcome.page';
 import { TermsconditionPage } from '../../pages/termsconditions/termsconditions.page';
+import { OtherRelationsPage } from '../../pages/otherrelations/otherrelations.page';
 import {tryg} from '../../models/data/tryg';
 
 @Component({
@@ -62,6 +63,9 @@ export class MenuComponent {
   }
   openTermsandCondition(){
     this.nav.push(TermsconditionPage,{'menupage':true});
+  }
+  gotoPage(){
+    this.nav.push(OtherRelationsPage,{});
   }
 
 }

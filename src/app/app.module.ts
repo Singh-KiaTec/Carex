@@ -26,6 +26,7 @@ import { WelcomePage } from '../pages/welcome/welcome.page';
 import { NemidPage } from '../pages/nemid/nemid.page';
 import { TermsconditionPage} from '../pages/termsconditions/termsconditions.page';
 import {SearchDetailsPage } from '../pages/searchdetails/searchdetails.page';
+import {OtherRelationsPage } from '../pages/otherrelations/otherrelations.page';
 
 
 
@@ -63,7 +64,7 @@ import { WelcomeComponent } from '../components/welcome/welcome';
 import { TermsconditionsComponent } from '../components/termsconditions/termsconditions';
 import { HeaderComponent } from '../components/header/header';
 import {SearchDetailsComponent} from '../components/searchdetails/searchdetails';
-
+import {OtherrelationsComponent} from '../components/otherrelations/otherrelations';
 
 
 const pagesDeclaration = [
@@ -79,7 +80,8 @@ const pagesDeclaration = [
   WelcomePage,
   NemidPage,
   SearchDetailsPage,
-  TermsconditionPage
+  TermsconditionPage,
+  OtherRelationsPage
 ];
 
 const componentDeclaration = [
@@ -95,7 +97,8 @@ const componentDeclaration = [
   TermsconditionsComponent,
   HeaderComponent,
   SearchDetailsComponent,
-  SafePipe
+  SafePipe,
+  OtherrelationsComponent
 
 ];
 
@@ -127,7 +130,8 @@ const componentDeclaration = [
     WelcomePage,
     NemidPage,
     SearchDetailsPage,
-    TermsconditionPage
+    TermsconditionPage,
+    OtherRelationsPage
     
   ],
   providers: [

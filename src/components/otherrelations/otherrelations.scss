@@ -1,0 +1,51 @@
+
+@import '../../assets/sass/variables';
+
+.otherrelations{
+    line-height: 1.5em;
+    .toolbar,
+    .toolbar-title,
+    .bar-button-default-md {
+        color: $color-white !important;
+        background-color: $primary-color-theme;
+    }
+    .back-button {
+        color: $color-white !important;
+        background-color: $primary-color-theme;
+    }
+    .item-icon {
+        color: $color-highlight-green;
+    }
+    .label {
+        color: $primary-color-theme;
+        font-weight: 500;
+    }
+    .toggle-ios.toggle-checked .toggle-icon {
+        background-color: $primary-color-theme;
+    }
+    .toggle-md.toggle-inner{
+        background-color: $primary-color-theme;
+    }
+    .toggle-md .toggle-icon{
+        background-color: rgba(51, 76, 85, 0.3);
+    }
+    .toggle-md.toggle-checked .toggle-inner{
+        background-color: $primary-color-theme;
+   }
+   &__verison{
+       text-align: center;
+       color: $color-menu-gray;
+       opacity: .5;
+
+   }
+&__store{
+    width: 41%;
+    float: left;
+    margin-top: 1em;
+    height: 3.5em;
+} 
+&__item{
+    margin-top: 1.5em;
+    margin-bottom: 1.5em;
+}  
+}

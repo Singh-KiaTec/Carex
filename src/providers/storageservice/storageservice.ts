@@ -6,7 +6,7 @@ import { Storage } from '@ionic/storage';
 @Injectable()
 export class StorageService {
     private notifiicationList = [{
-        'title': 'Carex',
+        'title': 'Tryg',
         'body': 'All your notificatiions'
     }];
 

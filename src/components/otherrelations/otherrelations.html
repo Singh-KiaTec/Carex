@@ -1,0 +1,19 @@
+<ion-header class="otherrelations">
+    <header-viewer></header-viewer>
+</ion-header>
+
+
+<ion-content class="otherrelations">
+    <h1 padding-left>{{heading}}</h1>
+    <div padding>
+        <ng-template ngFor let-item [ngForOf]="paragraphs" let-i="index" [ngForTrackBy]="trackByFn">
+            <div class="otherrelations__item" id="{{i}}" [innerHtml]="item">
+            </div>
+            <!-- <p text-left>
+                {{item}}
+            </p> -->
+        </ng-template>
+    <img class="otherrelations__store" src="http://udv-admin.carex.dk/config/assets/imgs/logos/ios_store.png"/>
+    <img class="otherrelations__store" float-right src="http://udv-admin.carex.dk/config/assets/imgs/logos/google_play.png"/>
+    </div>
+</ion-content>

@@ -61,6 +61,19 @@
                       </ng-template>  
       
                     </ion-row>
+                    <!-- <ion-row *ngIf="!showButtons">
+                      <ng-template ngFor let-item [ngForOf]="pagemenuButtons" let-i="index" [ngForTrackBy]="trackByFn">
+        
+                        
+                          <ion-col class="home__item" col-6>
+                            <div class="home__item-container"  (click)="detailsPage(item,pagedata)">
+                             <div class="fa {{item[4]}} fa-3x" text-center></div>
+                             <p>{{item[1]}}</p>
+                             </div>
+                   </ion-col>
+                        </ng-template>  
+        
+                      </ion-row> -->
           </ion-grid>
           </div>
       </ion-content>
