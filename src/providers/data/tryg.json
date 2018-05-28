@@ -1,10 +1,10 @@
-export const tryg =
 {
   "1": {
     "organisation": "Tryg Forsikring",
     "logo": "tryg_logo.png",
     "bg_image": "tryg-background.png",
     "main_color": "#DC0000",
+    "show_buttons": true,
     "buttons": [
       [
         "1",
@@ -105,10 +105,12 @@ export const tryg =
             "tab_id": "5",
             "tab_name": "APV / Sundhedsscreening",
             "sub_id": "4",
+            "starttest":"Start test",
+            "starttestLink": "https://app-vital.life-partners.com/#/cx/",
             "text": [
               "APV og sundhedsscreeningen løser virksomhedens lovpligtige opgave med at gennemføre arbejdspladsvurdering, og giver samtidig dig mulighed for at få et indblik i din sundhedstilstand, forebygge livsstilsgener og styrke din sundhed i arbejds- og privatliv.",
-              "Sundhedsscreeningen er anonym, kan kun åbnes af dig, og giver dig:", 
-              "<ul><li>Indblik i din egen sundhedstilstand og risikoområder</li> <li> Forslag til prioritering af mulige indsatsområder</li> <li> Kobling til relevante sundhedsfremmende indsatser </li> <li>  Individuel rådgivning og hjælp til at vælge og bruge relevante sundhedsfremmende ydelser </li> <li>  Inspiration og viden om sundhedsemner der er relevante, for netop din sundhedstilstand.</li>   <a href='https://app-vital.life-partners.com/#/cx/UUID'> Start test  </a>'"
+              "Sundhedsscreeningen er anonym, kan kun åbnes af dig, og giver dig:",
+              "<ul><li>Indblik i din egen sundhedstilstand og risikoområder</li> <li> Forslag til prioritering af mulige indsatsområder</li> <li> Kobling til relevante sundhedsfremmende indsatser </li> <li>  Individuel rådgivning og hjælp til at vælge og bruge relevante sundhedsfremmende ydelser </li> <li>  Inspiration og viden om sundhedsemner der er relevante, for netop din sundhedstilstand.</li> "
             ]
           }
         }

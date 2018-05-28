@@ -3,10 +3,10 @@
     <button ion-button menuToggle>
       <ion-icon name="menu"></ion-icon>
     </button>
-    <ion-title text-center>
+    <ion-title *ngIf="profileContent" text-center>
       <!-- <img [width]="200" [height]="50" src="assets/imgs/unitlogos/{{pagedata.logo}}" /> -->
       <!-- {{pagedata.organisation}} -->
-      Profile
+      {{profileContent.profile.heading}}
       <div>
         <!-- <img  class="logo" [width]="" [height]="45" src="assets/imgs/unitlogos/CareX_hvid_gronlogo-66.png" /> -->
       </div>
@@ -16,13 +16,15 @@
 <ion-content class="profile">
 
   <ion-avatar item-start>
-    <img src="assets/imgs/user2.png" />
-    <h4 class="profile__username" item-end> Mr/Mrs. {{user.username}}  <ion-icon item-left name="create"></ion-icon> </h4>
+    <img src="http://udv-admin.carex.dk/config/assets/imgs/user2.png" />
+    <h4 class="profile__username" item-end> {{user.username}} 
+       <!-- <ion-icon item-left name="create"></ion-icon> -->
+     </h4>
   </ion-avatar>
-  <ion-list>
+  <ion-list *ngIf="profileContent">
     <ion-item>
         <ion-icon item-left name="person"></ion-icon>
-      <ion-label color="primary">Navn</ion-label>
+      <ion-label color="primary">{{profileContent.profile.name}}</ion-label>
       <ion-input disabled item-end value="{{user.username}}"></ion-input>
     </ion-item>
     <!-- <ion-item>
@@ -30,39 +32,34 @@
       <ion-label color="primary">Last Name </ion-label>
       <ion-input disabled item-right value="{{user.username}}"></ion-input>
     </ion-item> -->
-    <ion-item>
+    <!-- <ion-item *ngIf="profileContent">
         <ion-icon item-left name="locate"></ion-icon>
-      <ion-label color="primary">Address</ion-label>
+      <ion-label color="primary">{{profileContent.profile.address}}</ion-label>
       <ion-input item-right  disabled value="Herlev 2600"></ion-input>
     </ion-item>
     <ion-item>
         <ion-icon item-left name="calendar"></ion-icon>
-      <ion-label color="primary">Date of Birth</ion-label>
-      <ion-input item-right disabled value="19-09-1987"></ion-input>
-    </ion-item>
-    <ion-item>
+      <ion-label color="primary">{{profileContent.profile.dateofbirth}}</ion-label>
+      <ion-input item-right disabled value={{profileContent.profile.notavailable}}></ion-input>
+    </ion-item> -->
+    <ion-item *ngIf="profileContent">
       <ion-icon item-left name="mail"></ion-icon>
-      <ion-label color="primary">Email</ion-label>
+      <ion-label color="primary">{{profileContent.profile.email}}</ion-label>
       <ion-input item-right disabled  value="{{user.email}}"></ion-input>
     </ion-item>
     
-    <ion-item>
+    <!-- <ion-item *ngIf="profileContent">
         <ion-icon item-left name="call"></ion-icon>
-      <ion-label color="primary">Mobile</ion-label>
-      <ion-input item-right disabled value="455434039403"></ion-input>
-    </ion-item>
-    <ion-item>
-        <ion-icon item-left name="map"></ion-icon>
-      <ion-label color="primary">Country</ion-label>
-      <ion-input item-right disabled value="Denmark"></ion-input>
-    </ion-item>
-    <ion-item>
+      <ion-label color="primary">{{profileContent.profile.mobile}}</ion-label>
+      <ion-input item-right disabled value={{profileContent.profile.notavailable}}></ion-input>
+    </ion-item> -->
+    <!-- <ion-item>
         <ion-icon item-left name="quote"></ion-icon>
       <ion-label color="primary">Language</ion-label>
       <ion-input item-right disabled value="Danish"></ion-input>
-    </ion-item>
-    <div padding>
-        <button (click)="logout()" ion-button class="logout">Logout</button>
+    </ion-item> -->
+    <div padding *ngIf="profileContent">
+        <button (click)="logout()" ion-button class="logout">{{profileContent.profile.logout}}</button>
     </div>
   </ion-list>
 

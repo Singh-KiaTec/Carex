@@ -65,6 +65,10 @@
                 </ng-template>
           </div>
           </ng-template>
+          <div *ngIf="externallink && starttestLabel">
+<a href="{{externallink}}">{{starttestLabel}}</a>
+
+          </div>
         </div>
       </ion-row>
 
@@ -100,19 +104,19 @@
         </ion-list>
 
       </div>
-      <button *ngIf="showsearchbutton" ion-button outline class="details__searchbutton" (click)="search()">Søg
-        <ion-icon name="search"></ion-icon>
+      <button *ngIf="showsearchbutton && searchlabel" ion-button outline class="details__searchbutton" (click)="search()">{{searchlabel}}
+       &nbsp; <ion-icon name="search"></ion-icon>
       </button>
 
       <div padding *ngIf="showsearchList">
         <ion-list class="details__searchlist">
           <ion-item (click)="searchDetails(searcheditem)" *ngFor="let searcheditem of searchedList; let i= index">
             <ion-thumbnail item-start>
-              <img src="assets/imgs/searchimages/{{searcheditem.image}}">
+              <img src="http://udv-admin.carex.dk/config/assets/imgs/searchimages/{{searcheditem.image}}">
             </ion-thumbnail>
             <h2>{{searcheditem.heading}}</h2>
             <p>{{searcheditem.teaser}}</p>
-            <button class="details__searchdetailview" ion-button clear item-end>View</button>
+            <button class="details__searchdetailview" ion-button clear item-end>{{view}}</button>
           </ion-item>
         </ion-list>
 

@@ -2,39 +2,39 @@
   <ion-menu [content]="content">
     <ion-header class="menu__header">
       <ion-toolbar class="menu">
-        <ion-title>
+        <ion-title *ngIf="menuItems">
           <div class="menu"></div>
-          Carex</ion-title>
+          {{menuItems.menu.appName}}</ion-title>
       </ion-toolbar>
     </ion-header>
 
     <ion-content>
-      <ion-list>
+      <ion-list  *ngIf="menuItems">
         <ion-list-header class="menu__heading">
-          Min Relationer
+          {{menuItems.menu.myrelation}}
         </ion-list-header>
         <button menuClose ion-item *ngFor="let p of pages" (click)="openPage(p)">
           {{p.title}}
         </button>
         <button menuClose ion-item  (click)="gotoPage()">
-          Andre Relationer
+          {{menuItems.menu.otherrelation}}
         </button>
       </ion-list>
-      <ion-list>
+      <ion-list *ngIf="menuItems">
         <ion-list-header class="menu__heading">
-          Min Menu
+            {{menuItems.menu.mymenu}}
         </ion-list-header>
         <button menuClose ion-item (click)="openProfile()">
-          Profil
+            {{menuItems.menu.profile}}
         </button>
         <button menuClose ion-item (click)="openNotifications()">
-          Notifikationer
+            {{menuItems.menu.notification}}
         </button>
-        <button menuClose ion-item (click)="openSettings()">
+        <!-- <button menuClose ion-item (click)="openSettings()">
           Indstillinger
-        </button>
+        </button> -->
         <button menuClose ion-item (click)="openTermsandCondition()">
-            Betingelser 
+            {{menuItems.menu.termsandContion}} 
           </button>
         
 

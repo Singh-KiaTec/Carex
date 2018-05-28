@@ -107,5 +107,14 @@ export class BaseRestService {
          console.log(this.baseUrl);
          return this.http.get('/jsondata/otherrelations.json', this.headers).toPromise();
      }
-}
-
+     getProfileContent(){
+        return this.http.get('/jsondata/profile.json', this.headers).toPromise(); 
+     
+    }
+    getMenuItems(){
+        return this.http.get('/jsondata/menu.json', this.headers).toPromise(); 
+     }
+     getSearchPage(){
+        return this.http.get('/jsondata/search.json', this.headers).toPromise(); 
+     }
+    }

@@ -1,0 +1,140 @@
+{
+  "view": "Vis",
+  "search": "Søg",
+  "dropdowns": [
+    {
+      "label": "Helbredskategorier",
+      "dropdownlist": [
+        "Smerteproblem i kroppens øvre del (nakke, skulder, albue, hånd, mfl.)  ",
+        "Smerteproblem i kroppens nedre del (lænderyg, hofte, knæ, ankel, mfl.)",
+        "Psykisk helbredsproblem (stress, angst, depression, mfl.)",
+        "Luftvejsproblemer (KOL, astma, mfl.)",
+        "Hjerte- eller kredsløbsproblemer",
+        "Neurologisk sygdom (eks. sklerose)",
+        "Underlivsproblem (symptomer ifm. graviditet, infektioner, mfl.)",
+        "Symptomer fra fordøjelsessystem (marve-, tarm, ernæringsproblemer, mfl.)",
+        "Symptomer fra en kræftsygdom",
+        "Andet helbredsproblem"
+      ]
+    },
+    {
+      "label": "Emner",
+      "dropdownlist": [
+        "Alkohol",
+        "Arbejdsforhold",
+        "Diabetes",
+        "Hjerte-karsygdomme",
+        "KOL",
+        "Kost",
+        "Mental sundhed",
+        "Motion",
+        "Osteporose",
+        "Rygning",
+        "Smerter og bevægeapparat",
+        "Sygdom",
+        "Søvn",
+        "Trivsel"
+      ]
+    }
+  ],
+  "text": [
+    {
+      "label": "Vælg ud fra fritekst søgeord (eks. stress, lænderyg, osv.) :"
+    }
+  ],
+  "searchlist": [
+    {
+      "heading": "Rygestopkursus",
+      "teaser": "Få hjælp til at holde et rygestop",
+      "image": "22001.jpg",
+      "bilag": "",
+      "helbredskategorier": [
+        "Luftvejsproblemer (KOL, astma, mfl.)",
+        "Hjerte- eller kredsløbsproblemer"
+      ],
+      "emner": [
+        "Rygning"
+      ],
+      "tags": [
+        "rygestop",
+        "rygning",
+        "stop rygning",
+        "rygestopkursus",
+        "ryge stop",
+        "KOL",
+        "livsstilssygdom",
+        "kol",
+        "hjerte-kar",
+        "hjerte",
+        "lunger",
+        "hoste",
+        "slim"
+      ],
+      "details": [
+        "Du har muligheden for at deltage på et rygestopkursus, hvor du kan få hjælp til at stoppe med at ryge, og holde dit rygestop. Du skal kontakte din HR repræsentant for at bestille det."
+      ]
+    },
+    {
+      "heading": "Folder om alkohol",
+      "teaser": "Læs mere om alkohol, og hvordan det påvirker dig.",
+      "image": "Brochure_alkohol.JPG",
+      "bilag": "Bilag E ALKOHOL_TRYG_A4.pdf",
+      "helbredskategorier": [
+        "Andet helbredsproblem"
+      ],
+      "emner": [
+        "Alkohol"
+      ],
+      "tags": [
+        ""
+      ],
+      "details": [
+        "Hent folder om alkohol på download linket."
+      ]
+    },
+    {
+      "heading": "Helbredsundersøgelse hos læge",
+      "teaser": "Få undersøgt din generelle helbredstilstand hos en læge",
+      "image": "Tryg-laege-03.jpg",
+      "bilag": "",
+      "helbredskategorier": [
+        "Smerteproblem i kroppens øvre del (nakke, skulder, albue, hånd, mfl.)  ",
+        "Smerteproblem i kroppens nedre del (lænderyg, hofte, knæ, ankel, mfl.)",
+        "Luftvejsproblemer (KOL, astma, mfl.)",
+        "Hjerte- eller kredsløbsproblemer",
+        "Neurologisk sygdom (eks. sklerose)",
+        "Underlivsproblem (symptomer ifm. graviditet, infektioner, mfl.)",
+        "Symptomer fra fordøjelsessystem (marve-, tarm, ernæringsproblemer, mfl.)",
+        "Symptomer fra en kræftsygdom",
+        "Andet helbredsproblem"
+      ],
+      "emner": [
+        "Alkohol",
+        "Diabetes",
+        "Diabetes",
+        "Hjerte-karsygdomme",
+        "KOL",
+        "Kost",
+        "Motion",
+        "Smerter og bevægeapparat"
+      ],
+      "tags": [
+        "helbredstjek",
+        "sundhedstjek",
+        "helbredsundersøgelse",
+        "helbredstest",
+        "sundhedsundersøgelse",
+        "målinger",
+        "læge",
+        "helbredstilstand",
+        "blodprøver",
+        "prøver",
+        "helbred",
+        "sundhed"
+      ],
+      "details": [
+        "Du har mulighed for at få en helbredsundersøgelse på ca. halvanden time hos en læge. Du får foretaget en række målinger, der giver dig overblik over din sundhedstilstand og vejledning til at forbedre den."
+      ]
+    }
+  ]
+}

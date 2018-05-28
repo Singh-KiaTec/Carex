@@ -22,6 +22,9 @@ export class ProfileComponent {
     private loggedout;
     private loggedUrl;
     private user:User;
+    private profileContent:any;
+    private loading:boolean;
+
     
 
     constructor(private baserestService:BaseRestService,
@@ -31,12 +34,27 @@ export class ProfileComponent {
 
     ngOnInit() {
         // Tracking
+        this.loggedUrl = this.auth.getEnvironment();
+        this.user = this.auth.getUserInfo();
+        console.log(this.user);
 
 
-  this.loggedUrl = this.auth.getEnvironment();
-  this.user = this.auth.getUserInfo();
-  console.log(this.user);
+        
+        this.baserestService.getProfileContent().then(
+            profileContent => { this.profileContent = profileContent; this.setData(); this.loading = false },
+            error => { this.loading = false }
+        );        
+
+ 
+
+  
     }
+
+    setData() {
+        console.log(this.profileContent);
+    }
+
+
     
     logout(){
        // this.storageService.clear();
