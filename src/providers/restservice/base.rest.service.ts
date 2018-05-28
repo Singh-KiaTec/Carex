@@ -82,30 +82,30 @@ export class BaseRestService {
     getWelcomeData() {
  
         //return this.http.get(this.baseUrl + 'jsondata/welcome.json', this.options).toPromise();
-        return this.http.get('http://udv-admin.carex.dk/config/jsondata/welcome.json', this.options).toPromise();
+        return this.http.get('/jsondata/welcome.json', this.options).toPromise();
     }
     getTermsandconditionsData() {
        // this.getPlatform();
         console.log(this.baseUrl);
-        return this.http.get('http://udv-admin.carex.dk/config/jsondata/termsandconditions.json', this.headers).toPromise();
+        return this.http.get('/jsondata/termsandconditions.json', this.headers).toPromise();
       //  return this.http.get('http://udv-admin.carex.dk/config/jsondata/termsandconditions.json', this.options).toPromise();
     }
     getCustomerData() {
         console.log(this.baseUrl);
-        return this.http.get('http://udv-admin.carex.dk/config/jsondata/tryg.json', this.options).toPromise();
+        return this.http.get('/jsondata/tryg.json', this.options).toPromise();
     }
     getsmartSearchData(){
-        return this.http.get('http://udv-admin.carex.dk/config/jsondata/smartsearch.json', this.options).toPromise();
+        return this.http.get('/jsondata/smartsearch.json', this.options).toPromise();
     }
     logout(url){
         return this.http.get(url+'/logout.php', this.options).toPromise();
     }
     getEnvironment(){
-        return this.http.get('http://udv-admin.carex.dk/config/jsondata/envi.json', this.options).toPromise();
+        return this.http.get('/jsondata/envi.json', this.options).toPromise();
     }
     getOtherRelations() { 
          console.log(this.baseUrl);
-         return this.http.get('http://udv-admin.carex.dk/config/jsondata/otherrelations.json', this.headers).toPromise();
+         return this.http.get('/jsondata/otherrelations.json', this.headers).toPromise();
      }
 }
 

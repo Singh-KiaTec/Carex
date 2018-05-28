@@ -6,6 +6,12 @@ import { NavController } from 'ionic-angular';
 import {StorageService} from '../../providers/storageservice/storageservice'
 import {AuthService} from '../../providers/authenticationservice/auth.service';
 import { User } from '../../models/user.model';
+import {WindowRef} from '../../providers/windowservice/windowservice';
+import {Cookie} from 'ng2-cookies';
+import {CookieService} from 'ngx-cookie-service';
+import { LoginPage } from '../../pages/login/login.page';
+
+declare var window:any;
 
 @Component({
     selector:'profile-viewer',
@@ -18,7 +24,10 @@ export class ProfileComponent {
     private user:User;
     
 
-    constructor(private baserestService:BaseRestService, private navCtrl: NavController, private auth: AuthService,private storageService: StorageService) { }
+    constructor(private baserestService:BaseRestService,
+        private navCtrl: NavController, 
+        private cookieService:CookieService,
+        private auth: AuthService,private storageService: StorageService) { }
 
     ngOnInit() {
         // Tracking
@@ -30,8 +39,11 @@ export class ProfileComponent {
     }
     
     logout(){
+       // this.storageService.clear();
+       //this.cookieService.delete('http://udv-admin.carex.dk');
         this.baserestService.logout(this.loggedUrl).then(
-           loggedout => {this.loggedout = loggedout;
+           loggedout => {
+               this.loggedout = loggedout;
             this.initializeApp()},
            error=>{console.error(error); this.initializeApp()}
             
@@ -39,7 +51,7 @@ export class ProfileComponent {
     }
     initializeApp(){
         this.storageService.clear();
-        this.navCtrl.setRoot(WelcomePage);
+        this.navCtrl.setRoot(LoginPage);
     }
 }
 

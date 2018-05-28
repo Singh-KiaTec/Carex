@@ -5,6 +5,7 @@ import { IonicApp, IonicErrorHandler, IonicModule ,NavController, ViewController
 import { IonicStorageModule } from '@ionic/storage';
  import { OneSignal } from '@ionic-native/onesignal';
  import { CookieService } from 'ngx-cookie-service';
+ import { Cookie } from 'ng2-cookies';
  import { HttpModule } from '@angular/http';
  import { HttpClientModule, HttpClient } from '@angular/common/http';
  import { Pipe, PipeTransform } from '@angular/core';
