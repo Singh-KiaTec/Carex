@@ -16,12 +16,20 @@
 
 <ion-content class="searchdetails">
     <div *ngIf="searchselectedItem">
-        <img class="searchdetails__bg-image" src="assets/imgs/searchimages/{{searchselectedItem.image}}" />
+        <img class="searchdetails__bg-image" src="http://udv-admin.carex.dk/config/assets/imgs/searchimages/{{searchselectedItem.image}}"
+        />
+        <div *ngIf="bilagName" class="searchdetails__download">
+                <a class="searchdetails__downloadlink" margin href={{bilagurl}} target="_blank" (click)="downloadPdf($event)">
+                    <ion-icon name="cloud-download"></ion-icon>
+                </a>
+            </div>
     </div>
     <div class="searchdetails__content" padding>
         <h3> {{heading}}</h3>
         <h5>{{teaser}}</h5>
-        
+
+
+
         <div *ngFor="let item  of detailsparagraphs">
             <div [innerHtml]="item">
             </div>

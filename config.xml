@@ -1,8 +1,8 @@
 <?xml version='1.0' encoding='utf-8'?>
 <widget id="com.carex.workplace" version="0.0.1" xmlns="http://www.w3.org/ns/widgets" xmlns:cdv="http://cordova.apache.org/ns/1.0">
-    <name>carex</name>
-    <description>An awesome Ionic/Cordova app.</description>
-    <author email="hi@ionicframework" href="http://ionicframework.com/">Ionic Framework Team</author>
+    <name>Tryg Sundhed</name>
+    <description>A complete overview of your health insurance.</description>
+    <author email="appsupport@kiatec.dk" href="https://kiatec.dk/">KIAtec Aps</author>
     <content src="index.html" />
     <access origin="http://localhost:8080/*" />
     <allow-navigation href="http://localhost:8080/*" />

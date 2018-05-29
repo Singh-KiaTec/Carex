@@ -4,8 +4,8 @@ import { Button } from 'ionic-angular/components/button/button';
 import { NavController } from 'ionic-angular/navigation/nav-controller';
 import { BaseRestService } from '../../providers/restservice/base.rest.service';
 //import { ViewChildren } from '@angular/core/src/metadata/di';
-import {AuthService} from '../../providers/authenticationservice/auth.service';
-import{SearchDetailsPage} from '../../pages/searchdetails/searchdetails.page';
+import { AuthService } from '../../providers/authenticationservice/auth.service';
+import { SearchDetailsPage } from '../../pages/searchdetails/searchdetails.page';
 
 @Component({
   selector: 'details-viewer',
@@ -38,6 +38,15 @@ export class DetailsComponent {
   private externallink;
   private starttestLabel;
   private user;
+  private allsearchresultList;
+  private searchdropdownValue;
+  private dropdownName;
+  private resetlabel;
+  private searchdropdownValueArray;
+  private helbredskategorierModel;
+  private emnerModel;
+  private searchtext;
+  private textfilteredList: any = [];
 
   constructor(private navParam: NavParams, private auth: AuthService, private navCtrl: NavController, private baserestService: BaseRestService) {
 
@@ -94,8 +103,8 @@ export class DetailsComponent {
       // this.externallink = tru
       // "starttest":"Start test",
       // "starttestLink": "https://app-vital.life-partners.com/#/cx/",
-      this.externallink = this.tabs[107].starttestLink+this.user.id[0];
-      this.starttestLabel= this.tabs[107].starttest;
+      this.externallink = this.tabs[107].starttestLink + this.user.id[0];
+      this.starttestLabel = this.tabs[107].starttest;
       console.log(this);
 
     }
@@ -104,9 +113,12 @@ export class DetailsComponent {
   setData() {
     this.dropdownList = this.searchData.dropdowns;
     this.searchedList = this.searchData.searchlist;
+    this.allsearchresultList = this.searchData.searchlist;
+    this.textfilteredList = this.searchData.searchlist;
     this.textfieldList = this.searchData.text;
     this.view = this.searchData.view;
     this.searchlabel = this.searchData.search;
+    this.resetlabel = this.searchData.reset;
     console.log(this.searchData);
   }
   ngAfterViewInit() {
@@ -186,13 +198,102 @@ export class DetailsComponent {
   }
   search() {
     this.showsearchList = true;
+    this.searchedList = this.allsearchresultList;
+  }
+  reset() {
+    this.emnerModel = null;
+    this.helbredskategorierModel = null;
+    this.showsearchList = false;
+    this.searchtext = null;
+    //this.dropdownList = this.searchData.dropdowns;
+    this.searchedList = this.allsearchresultList;
+
   }
   searchDetails(searchsltdItem) {
     console.log(searchsltdItem);
     this.navCtrl.push(SearchDetailsPage, { 'selectedItem': searchsltdItem })
   }
-  partnersPage(event){
+  partnersPage(event) {
     console.log("partner");
     event.preventDefault();
+  }
+  healthCategory(value, itemname) {
+    this.searchdropdownValue = value;
+    this.searchdropdownValueArray = value;
+    this.dropdownName = itemname;
+
+    if (itemname == "Emner") {
+      this.emnerModel = this.searchdropdownValue;
+    }
+    if (itemname == "Helbredskategorier") {
+      this.helbredskategorierModel = this.searchdropdownValue;
+    }
+ 
+    console.log(this.searchedList);
+    let filteredList: any = [];
+    filteredList.push(this.searchedList.filter(this.filterSearch, this));
+    if (this.searchedList.length == this.allsearchresultList.length  ||this.searchedList.length==0 ) {
+      this.searchedList = filteredList[0];
+    }
+    else {
+      if(filteredList){
+        //this.searchedList = this.searchedList.concat(filteredList[0]);
+        this.searchedList = this.searchedList.concat(filteredList[0]);
+      }
+    }
+    this.showsearchList = true;
+  }
+  
+  filterSearch(item) {
+    console.log(item)
+    let filteredvalue;
+    if (this.dropdownName == "Emner") {
+      filteredvalue = item.emner.filter(x => x == this.searchdropdownValue)[0];
+    }
+    if (this.dropdownName == "Helbredskategorier") {
+      filteredvalue = item.helbredskategorier.filter(x => x == this.searchdropdownValue)[0];
+    }
+    console.log(filteredvalue);
+    if (filteredvalue) {
+      return item;
+    }
+    else {
+      return null;
+    }
+  }
+
+  
+  textFilter(event) {
+    console.log(event);
+    this.searchtext = event.value;
+    this.searchtext = this.searchtext.toLowerCase();
+    if (this.searchtext.length >= 3) {
+      let filteredList: any = [];
+      console.log("hittt");
+      filteredList.push(this.textfilteredList.filter(this.filtertextSearch, this));
+      if (this.searchedList.length == this.allsearchresultList.length ||this.searchedList.length==0 ) {
+        this.searchedList = filteredList[0];
+      }
+      else {
+       this.searchedList =                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                   this.searchedList.concat(filteredList[0]);
+      }
+      this.showsearchList = true;
+    }
+    else{
+      this.showsearchList = false;
+    }
+  }
+
+  filtertextSearch(item) {
+    console.log(item)
+    let filteredvalue;
+    filteredvalue = item.tags.filter(x => x.indexOf(this.searchtext) !== -1)[0];
+    console.log(filteredvalue);
+    if (filteredvalue) {
+      return item;
+    }
+    else {
+      return null;
+    }
   }
 }
