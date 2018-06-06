@@ -24,4 +24,19 @@
         color: $color-white !important;
         border-bottom: 1px solid $color-white;
     }
+    .content-ios {
+        .scroll-content {
+            margin-top: 7em !important;
+        }
+    }
+    &__header{
+        &.header-ios{
+            height: 6em !important;
+            padding-top: 0em !important;
+        }
+    }
+    .title-ios{
+        background: $primary-color-theme !important;
+    }
+    
 }

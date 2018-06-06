@@ -20,5 +20,12 @@
     .toolbar-title-md{
         width: 85%;
     }
-
+    .toolbar-ios{
+        padding-top: 1em;
+    }
+    &.header-ios{
+        height: 6em !important;
+        padding-top: 2.5em !important;
+    }
+    
 }

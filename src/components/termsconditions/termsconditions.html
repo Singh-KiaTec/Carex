@@ -4,8 +4,8 @@
 
 
 <ion-content class="termsconditions">
-    <h1 padding>{{heading}}</h1>
-    <div padding>
+    <h1 *ngIf="termsdata" padding>{{heading}}</h1>
+    <div *ngIf="termsdata" padding>
         <ng-template ngFor let-item [ngForOf]="paragraphs" let-i="index" [ngForTrackBy]="trackByFn">
             <p text-left>
                 {{item}}

@@ -12,11 +12,13 @@ import { StorageService } from '../../providers/storageservice/storageservice';
 import { WindowRef } from '../../providers/windowservice/windowservice';
 import { User } from '../../models/user.model';
 import { BaseRestService } from '../../providers/restservice/base.rest.service';
-import{Environment} from '../../models/environment.model';
-import {AuthService} from '../../providers/authenticationservice/auth.service';
-import {DomSanitizer,SafeResourceUrl,} from '@angular/platform-browser';
+import { Environment } from '../../models/environment.model';
+import { AuthService } from '../../providers/authenticationservice/auth.service';
+import { DomSanitizer, SafeResourceUrl, } from '@angular/platform-browser';
+import { Keyboard } from '@ionic-native/keyboard';
 
 import $ from "jquery";
+
 
 @Component({
     selector: 'login-viewer',
@@ -31,12 +33,13 @@ export class LoginComponent {
     private source: string = '';
     private userinfo;
     private termsread;
-    private user:User;
+    private user: User;
     private environment;
-    private envi:Environment;
+    private envi: Environment;
     private iframeUrl;
-    constructor(private fb: FormBuilder, private navCtrl: NavController, 
-        private auth:AuthService,private sanitizer: DomSanitizer,private baserestService: BaseRestService, private cookieService: CookieService, private storageService: StorageService, private windowRef: WindowRef) {
+    constructor(private fb: FormBuilder, private navCtrl: NavController,
+        private keyboard: Keyboard,
+        private auth: AuthService, private sanitizer: DomSanitizer, private baserestService: BaseRestService, private cookieService: CookieService, private storageService: StorageService, private windowRef: WindowRef) {
         this.loginForm = this.fb.group({
             userid: ['', Validators.required],
             password: ['', Validators.required],
@@ -45,7 +48,7 @@ export class LoginComponent {
 
     ngOnInit() {
         // Tracking
-
+       //this.environment = this.auth.getEnvironment();
         console.log(this.iframe);
         //this.userinfo = this.cookieService.get('userdata');
         console.log("in login compinent");
@@ -63,6 +66,7 @@ export class LoginComponent {
         // )
         this.getEnvi();
 
+
         console.log(this.windowRef.nativeWindow);
         window.addEventListener("message", (data) => {
             console.log(data);
@@ -75,24 +79,16 @@ export class LoginComponent {
         // this.navCtrl.setRoot(HomePage);
         //  this.navCtrl.setRoot(NemidPage);
         this.storageService.set('terms', true);
+        this.keyboard.close();
         this.navCtrl.setRoot(TermsconditionPage);
     }
     getEnvi() {
-        this.baserestService.getEnvironment().then(
-            envi => {
-                console.log(envi);
-                this.environment= envi; this.setenvi()},
-            error=>console.error(error)
-            
-        )
+        this.iframeUrl = this.sanitizer.bypassSecurityTrustResourceUrl("https://trygsundhed.carex.dk");
+        console.log(this.iframeUrl);
+
+
     }
-    setenvi(){
-       // this.iframeUrl =this.environment.envi.environment;
-        this.auth.setEnvironment(this.environment.envi.environment)
-       this.iframeUrl= this.sanitizer.bypassSecurityTrustResourceUrl(this.environment.envi.environment);
-console.log(this.iframeUrl);
-        
-    }
+
     // onLoadFunc(myIframe) {
     //     this.source = myIframe //.contentWindow.location.href;
     //     console.log(this.source);
@@ -108,7 +104,7 @@ console.log(this.iframeUrl);
     // }
     receiveMessage(data) {
         console.log("in receive message")
-       // console.log(data.data);
+        // console.log(data.data);
         if (data.data && !data.data.messageId) {
             let userdata = JSON.parse(data.data);
             this.user = new User(userdata);

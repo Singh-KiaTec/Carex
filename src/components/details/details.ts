@@ -47,6 +47,7 @@ export class DetailsComponent {
   private emnerModel;
   private searchtext;
   private textfilteredList: any = [];
+  private baseUrl;
 
   constructor(private navParam: NavParams, private auth: AuthService, private navCtrl: NavController, private baserestService: BaseRestService) {
 
@@ -62,6 +63,7 @@ export class DetailsComponent {
   ngOnInit() {
     var tabsdata = [];
     let currentitem: any;
+    this.baseUrl = this.auth.getEnvironment();
     this.user = this.auth.getUserInfo();
     console.log(this.user);
     for (let item in this.tabs) {

@@ -10,6 +10,7 @@ import { TermsconditionPage } from '../../pages/termsconditions/termsconditions.
 import { OtherRelationsPage } from '../../pages/otherrelations/otherrelations.page';
 import { tryg } from '../../models/data/tryg';
 import { BaseRestService } from '../../providers/restservice/base.rest.service';
+import { AuthService } from '../../providers/authenticationservice/auth.service';
 
 @Component({
   selector: 'menu-viewer',
@@ -22,15 +23,24 @@ export class MenuComponent {
   rootPage: any = WelcomePage;
   private menuItems: any;
   private loading: boolean;
+  private environment;
 
   pages: Array<{ title: string, component: any }>;
-  constructor(private baserestService: BaseRestService) {
+  constructor(private baserestService: BaseRestService, private auth: AuthService, ) {
   }
 
   ngOnInit() {
     console.log("in menu");
     //this.menuLis;
 
+    this.baserestService.getEnvironment().then(
+      envi => {
+        console.log(envi);
+        this.environment = envi; this.setenvi();
+      },
+      error => console.error(error)
+
+    )
     this.baserestService.getMenuItems().then(
       menuItems => { this.menuItems = menuItems; this.setData(); this.loading = false },
       error => { this.loading = false }
@@ -50,10 +60,12 @@ export class MenuComponent {
   getMenuItems() {
 
   }
-
+  setenvi() {
+    this.auth.setEnvironment(this.environment.envi.environment);
+  }
   setData() {
     let pagesarray = [];
-    console.log(this.menuItems.menu.appName);
+    console.log(this.menuItems._body);
     for (let i in this.menuList) {
       pagesarray.push({
         title: this.menuList[i].organisation,

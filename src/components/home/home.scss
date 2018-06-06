@@ -36,4 +36,9 @@
     &__notifications{
         color: $color-white;
     }
+    &.content-ios {
+        .scroll-content {
+            margin-top: 0em !important;
+        }
+}
 }

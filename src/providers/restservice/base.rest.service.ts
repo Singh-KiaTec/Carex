@@ -5,9 +5,10 @@ import { Nav, NavController, App } from 'ionic-angular';
 import { NotificationsPage } from '../../pages/notifications/notifications.page'
 import { LoginPage } from '../../pages/login/login.page';
 import { StorageService } from '../storageservice/storageservice';
-import { Http } from '@angular/http/src/http';
-import { HTTP } from '@ionic-native/http';
+import { Http } from '@angular/http';
+import 'rxjs/add/operator/map';
 import { Platform } from 'ionic-angular';
+import { AuthService } from '../authenticationservice/auth.service';
 
 
 @Injectable()
@@ -20,11 +21,15 @@ export class BaseRestService {
     private options;
     //private platform: Platform;
     private baseUrl = '/';//"http://udv-admin.carex.dk/config/jsondata/";
-    constructor(private app: App, private storageservice: StorageService, private http: HttpClient, private platform:Platform) {
+    private udvenvi = " https://udv-tryg.carex.dk";
+    private prodUrl = "http://trygsundhed.carex.dk/";
+
+    constructor(private app: App, private storageservice: StorageService, private auth: AuthService, private http: HttpClient, private platform: Platform) {
         //  this.navCtrl = app.getActiveNavs();
+        //this.enviUrl = this.auth.getEnvironment();
         this.headers = new Headers({
             'Content-Type': 'application/json',
-            'Access-Control-Allow-Origin':  '*',
+            'Access-Control-Allow-Origin': '*',
             'Access-Control-Allow-Methods': 'POST, GET, OPTIONS, PUT',
             'Accept': 'application/json',
             "Access-Control-Allow-Headers": "X-Requested-With"
@@ -43,6 +48,7 @@ export class BaseRestService {
     ngOnInit(): void {
         //Called after the constructor, initializing input properties, and the first call to ngOnChanges.
         //Add 'implements OnInit' to the class.
+
         console.log(this.app.getActiveNavs());
         this.getPlatform();
         console.log(this.baseUrl);
@@ -80,41 +86,42 @@ export class BaseRestService {
         //  this.app.getActiveNavs().push("NotificationsPage");
     }
     getWelcomeData() {
- 
+
         //return this.http.get(this.baseUrl + 'jsondata/welcome.json', this.options).toPromise();
-        return this.http.get('/jsondata/welcome.json', this.options).toPromise();
+        return this.http.get(this.prodUrl + 'config/jsondata/welcome.php').toPromise();
     }
     getTermsandconditionsData() {
-       // this.getPlatform();
+        // this.getPlatform();
         console.log(this.baseUrl);
-        return this.http.get('/jsondata/termsandconditions.json', this.headers).toPromise();
-      //  return this.http.get('http://udv-admin.carex.dk/config/jsondata/termsandconditions.json', this.options).toPromise();
+        return this.http.get(this.prodUrl + 'config/jsondata/termsandconditions.php').toPromise();
+        //  return this.http.get('http://udv-admin.carex.dk/config/jsondata/termsandconditions.json', this.options).toPromise();
     }
     getCustomerData() {
         console.log(this.baseUrl);
-        return this.http.get('/jsondata/tryg.json', this.options).toPromise();
+        return this.http.get(this.prodUrl + 'config/jsondata/tryg.php', this.options).toPromise();
     }
-    getsmartSearchData(){
-        return this.http.get('/jsondata/smartsearch.json', this.options).toPromise();
+    getsmartSearchData() {
+       //return this.http.get(this.prodUrl + 'config/jsondata/searchlist.php', this.options).toPromise();
+        return this.http.get(this.prodUrl + 'config/jsondata/smartsearch.php', this.options).toPromise();
     }
-    logout(url){
-        return this.http.get(url+'/logout.php', this.options).toPromise();
+    logout(url) {
+        return this.http.get(url + '/logout.php', this.options).toPromise();
     }
-    getEnvironment(){
-        return this.http.get('/jsondata/envi.json', this.options).toPromise();
+    getEnvironment() {
+        return this.http.get(this.prodUrl + 'config/jsondata/envi.php', this.options).toPromise();
     }
-    getOtherRelations() { 
-         console.log(this.baseUrl);
-         return this.http.get('/jsondata/otherrelations.json', this.headers).toPromise();
-     }
-     getProfileContent(){
-        return this.http.get('/jsondata/profile.json', this.headers).toPromise(); 
-     
+    getOtherRelations() {
+        console.log(this.baseUrl);
+        return this.http.get(this.prodUrl + 'config/jsondata/otherrelations.php', this.options).toPromise();
     }
-    getMenuItems(){
-        return this.http.get('/jsondata/menu.json', this.headers).toPromise(); 
-     }
-     getSearchPage(){
-        return this.http.get('/jsondata/search.json', this.headers).toPromise(); 
-     }
+    getProfileContent() {
+        return this.http.get(this.prodUrl + 'config/jsondata/profile.php', this.options).toPromise();
+
     }
+    getMenuItems() {
+        return this.http.get(this.prodUrl + 'config/jsondata/menu.php', this.options).toPromise();
+    }
+    getSearchPage() {
+        return this.http.get(this.prodUrl + 'config/jsondata/search.php', this.options).toPromise();
+    }
+}

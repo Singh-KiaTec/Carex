@@ -66,7 +66,7 @@
           </div>
           </ng-template>
           <div float-right *ngIf="externallink && starttestLabel">
-<a href="{{externallink}}">{{starttestLabel}}</a>
+<a target='_blank' href="{{externallink}}">{{starttestLabel}}</a>
 
           </div>
         </div>
@@ -123,7 +123,7 @@
         <ion-list class="details__searchlist">
           <ion-item (click)="searchDetails(searcheditem)" *ngFor="let searcheditem of searchedList; let i= index">
             <ion-thumbnail item-start>
-              <img src="http://udv-admin.carex.dk/config/assets/imgs/searchimages/{{searcheditem.image}}">
+              <img src="{{baseUrl}}config/assets/imgs/searchimages/{{searcheditem.image}}">
             </ion-thumbnail>
             <h2>{{searcheditem.heading}}</h2>
             <p>{{searcheditem.teaser}}</p>

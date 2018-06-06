@@ -10,7 +10,7 @@ import { Title } from '@angular/platform-browser/src/browser/title';
 import { MenuPage } from '../pages/menu/menu.page';
 import { NotificationsPage } from '../pages/notifications/notifications.page';
 import { NavParams, NavController, Content, Navbar } from 'ionic-angular';
-import { OneSignal } from '@ionic-native/onesignal';
+// import { OneSignal } from '@ionic-native/onesignal';
 import {StorageService} from '../providers/storageservice/storageservice';
 import {BaseRestService} from '../providers/restservice/base.rest.service';
 import { WelcomePage } from '../pages/welcome/welcome.page';
@@ -27,7 +27,9 @@ export class MyApp {
   pages: Array<{ title: string, component: any }>;
   menuList: any = data;
 
-  constructor(public platform: Platform, public statusBar: StatusBar, public splashScreen: SplashScreen, private oneSignal: OneSignal ,public baserestService: BaseRestService,public storageService: StorageService) {
+  constructor(public platform: Platform, public statusBar: StatusBar, public splashScreen: SplashScreen, 
+    // private oneSignal: OneSignal ,
+    public baserestService: BaseRestService,public storageService: StorageService) {
     this.initializeApp();
 
   }

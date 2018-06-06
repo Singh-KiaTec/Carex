@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { AuthService } from '../../providers/authenticationservice/auth.service';
 //import { NavController } from 'ionic-angular';
 
 
@@ -8,12 +9,13 @@ import { Component } from '@angular/core';
 })
 export class HeaderComponent {
  
-    constructor(
-       // private navCtrl: NavController
-    ) { }
+    private baseUrl="http://trygsundhed.carex.dk/";
+    constructor(private auth: AuthService) { }
 
     ngOnInit() {
         // Tracking
+       // this.baseUrl="http://udv-admin.carex.dk/config/assets/imgs/unitlogos/logos/"
+       //this.baseUrl = this.auth.getEnvironment();
   console.log("in header compinent");
     }
     gotoLogin(){

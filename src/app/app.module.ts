@@ -1,15 +1,20 @@
 //DEFAULT
 import { BrowserModule } from '@angular/platform-browser';
 import { ErrorHandler, NgModule  } from '@angular/core';
+// import { InAppBrowser } from '@ionic-native/in-app-browser';
+import { FileTransfer, FileUploadOptions, FileTransferObject } from '@ionic-native/file-transfer';
+import { File } from '@ionic-native/file';
 import { IonicApp, IonicErrorHandler, IonicModule ,NavController, ViewController} from 'ionic-angular';
 import { IonicStorageModule } from '@ionic/storage';
- import { OneSignal } from '@ionic-native/onesignal';
+//  import { OneSignal } from '@ionic-native/onesignal';
  import { CookieService } from 'ngx-cookie-service';
  import { Cookie } from 'ng2-cookies';
  import { HttpModule } from '@angular/http';
  import { HttpClientModule, HttpClient } from '@angular/common/http';
  import { Pipe, PipeTransform } from '@angular/core';
 import { DomSanitizer} from '@angular/platform-browser';
+import { DocumentViewer } from '@ionic-native/document-viewer';
+import { Keyboard } from '@ionic-native/keyboard';
 
 
 
@@ -110,6 +115,7 @@ const componentDeclaration = [
   ],
   imports: [
     BrowserModule,
+    HttpModule,
     HttpClientModule,
     IonicModule.forRoot(MyApp),
     IonicStorageModule.forRoot({
@@ -138,15 +144,17 @@ const componentDeclaration = [
   providers: [
     StatusBar,
     SplashScreen,
+    FileTransfer,
+    File,
+    Keyboard,
+    DocumentViewer,
     BaseRestService,
     StorageService,
     CookieService,
-    HttpClient,
-    HttpModule,
+    HttpClient,,
     HttpClientModule,
     WindowRef,
     AuthService,
-    OneSignal,
     { provide: ErrorHandler,   useClass: IonicErrorHandler }
   ]
 })

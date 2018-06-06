@@ -6,6 +6,7 @@ import { termsconditions } from '../../models/data/termsandconditions';
 import { HomePage } from '../../pages/home/home.page';
 import { BaseRestService } from '../../providers/restservice/base.rest.service';
 import { StorageService } from '../../providers/storageservice/storageservice';
+import { AuthService } from '../../providers/authenticationservice/auth.service';
 
 
 @Component({
@@ -22,14 +23,18 @@ export class OtherrelationsComponent {
     private termsread;
     private ismenupage;
     private otherRelations;
+    private baseUrl;
 
 
-    constructor(private navCtrl: NavController, private navprams: NavParams, private baserestService: BaseRestService, private storageService: StorageService) { }
+    constructor(private navCtrl: NavController, private navprams: NavParams, private baserestService: BaseRestService,private auth:AuthService, private storageService: StorageService) { }
 
     ngOnInit() {
         // Tracking
         console.log("in Teerms");
+
+
         this.ismenupage = this.navprams.get('menupage');
+        this.baseUrl = this.auth.getEnvironment();
         this.baserestService.getOtherRelations().then(
             otherRelations => { this.otherRelations = otherRelations; this.setData(); this.loading = false },
             error => { this.loading = false }

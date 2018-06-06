@@ -28,6 +28,8 @@ export class HomeComponent {
   private pagedataModel;
   private ImgUrl;
   private showButtons= true;
+  private baseUrl;
+
 
   @ViewChild(Content) content: Content;
   @ViewChild(Navbar) navbar: Navbar;
@@ -40,6 +42,8 @@ export class HomeComponent {
     this.navdata = this.navParams.get('pageData');
     this.currentpageIndex = this.navParams.get('itemIndex');
     
+
+    this.baseUrl = this.authService.getEnvironment();
    
     if(!this.homedata){
         this.baserestService.getCustomerData().then(
