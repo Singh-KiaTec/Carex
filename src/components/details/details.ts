@@ -105,7 +105,7 @@ export class DetailsComponent {
       // this.externallink = tru
       // "starttest":"Start test",
       // "starttestLink": "https://app-vital.life-partners.com/#/cx/",
-      this.externallink = this.tabs[107].starttestLink + this.user.id[0];
+      this.externallink = this.tabs[107].starttestLink + this.user[3];
       this.starttestLabel = this.tabs[107].starttest;
       console.log(this);
 

@@ -2,8 +2,9 @@
         <header-viewer></header-viewer>
     </ion-header>
 <ion-content padding class="login">
-       <!-- <form [formGroup]="loginForm" (ngSubmit)="login()" >
-    <ion-list> 
+       <form *ngIf="showlogin" [formGroup]="loginForm"  (ngSubmit)="login()" >
+           <div>
+ <ion-list> 
           
                          <ion-item>
                              
@@ -17,8 +18,17 @@
     
 
     </ion-list>
-    <button ion-button type="submit" color="secondary" [disabled]="!loginForm.valid" class="login__login-button">Login</button>
-</form>   -->
+    <div  *ngIf="error">
+            <div class="login__error">Forkert brugernavn eller kodeord.</div>
+
+           </div>
+    </div>
+
+   
+    <button ion-button type="submit"  [disabled]="!loginForm.valid" class="login__login-button">Login</button>
+
+    <button ion-button type="button" color="secondary" (click)="forgetpassword($event)" class="login__forgetpwd">Ny Bruger/Glemt kodeord</button>
+</form>  
 <!-- <div id="iframecontent">
 <iframe #myIframe id="myIframe" (load)="onLoadFunc($event)" class="login__iframe" sandbox="allow-cross-origin allow-scripts allow-forms" src="https://udv-tryg.carex.dk/simplesaml/module.php/core/loginuserpass.php?AuthState=_71b81db81b429e56d3f1b7a57d3d25bd5304f16b1c%3Ahttps%3A%2F%2Fudv-tryg.carex.dk%2Fsimplesaml%2Fmodule.php%2Fcore%2Fas_login.php%3FAuthId%3Didp.carex.dk%26ReturnTo%3Dhttps%253A%252F%252Fudv-tryg.carex.dk%252F">
  
@@ -27,11 +37,14 @@
 
 <!-- sandbox="allow-same-origin allow-scripts allow-popups allow-forms" -->
 
-<div  *ngIf="iframeUrl" id="iframecontent">
-        <iframe #myIframe id="myIframe" class="login__iframe" sandbox="allow-scripts allow-modals allow-forms" src="https://app-idp.carex.dk">
+ <!-- <div  *ngIf="iframeUrl" id="iframecontent"> -->
+      <!--  <iframe #myIframe id="myIframe" class="login__iframe" sandbox="allow-scripts allow-modals allow-forms" src="https://app-idp.carex.dk"> -->
+           <!-- <iframe #myIframe id="myIframe"   class="login__iframe" sandbox="allow-scripts allow-modals allow-forms  allow-top-navigation" src="https://udv-admin.carex.dk/simplesaml/module.php/core/authenticate.php?as=myauthinstance">   -->
+             <!-- <https://test-tryg.carex.dk/ -->
+   
          
-        </iframe>
-        </div>
+      
+        <!-- </div> -->
 </ion-content>
 
 
@@ -46,3 +59,4 @@
             <ion-input item-right type="password" value=""></ion-input>
         </ion-item> 
 -->
+

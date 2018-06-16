@@ -21,10 +21,11 @@ export class ProfileComponent {
     rootPage: any = ProfilePage;
     private loggedout;
     private loggedUrl;
-    private user:User;
+    private user:any;
     private profileContent:any;
     private loading:boolean;
-
+private username;
+private email;
     
 
     constructor(private baserestService:BaseRestService,
@@ -35,7 +36,11 @@ export class ProfileComponent {
     ngOnInit() {
         // Tracking
         this.loggedUrl = this.auth.getEnvironment();
-        this.user = this.auth.getUserInfo();
+      //  this.user = this.auth.getUserInfo();
+      this.user = this.auth.getUserInfo();
+     this.username = this.user[0];
+     this.email = this.user[1]
+
         console.log(this.user);
 
 

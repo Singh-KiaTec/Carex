@@ -24,6 +24,7 @@ export class MenuComponent {
   private menuItems: any;
   private loading: boolean;
   private environment;
+  private userinfo;
 
   pages: Array<{ title: string, component: any }>;
   constructor(private baserestService: BaseRestService, private auth: AuthService, ) {
@@ -50,7 +51,7 @@ export class MenuComponent {
       error => { this.loading = false }
     )
 
-
+    this.userinfo = this.auth.getUserInfo();
 
     // this.pages = [
     //   { title: 'Home', component: HomePage },
@@ -63,9 +64,11 @@ export class MenuComponent {
   setenvi() {
     this.auth.setEnvironment(this.environment.envi.environment);
   }
+
+
+
   setData() {
     let pagesarray = [];
-    console.log(this.menuItems._body);
     for (let i in this.menuList) {
       pagesarray.push({
         title: this.menuList[i].organisation,
@@ -76,6 +79,7 @@ export class MenuComponent {
     }
     this.pages = pagesarray;
   }
+
 
   openPage(page) {
     // Reset the content nav to have just this page

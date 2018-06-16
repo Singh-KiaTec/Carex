@@ -17,7 +17,7 @@
 
   <ion-avatar item-start>
     <img src="{{loggedUrl}}config/assets/imgs/user2.png" />
-    <h4 class="profile__username" item-end> {{user.username}} 
+    <h4 *ngIf="user" class="profile__username" item-end> {{username}} 
        <!-- <ion-icon item-left name="create"></ion-icon> -->
      </h4>
   </ion-avatar>
@@ -25,7 +25,7 @@
     <ion-item>
         <ion-icon item-left name="person"></ion-icon>
       <ion-label color="primary">{{profileContent.profile.name}}</ion-label>
-      <ion-input disabled item-end value="{{user.username}}"></ion-input>
+      <ion-input *ngIf="user"  disabled item-end value="{{username}}"></ion-input>
     </ion-item>
     <!-- <ion-item>
         <ion-icon item-left name="person"></ion-icon>
@@ -45,7 +45,7 @@
     <ion-item *ngIf="profileContent">
       <ion-icon item-left name="mail"></ion-icon>
       <ion-label color="primary">{{profileContent.profile.email}}</ion-label>
-      <ion-input item-right disabled  value="{{user.email}}"></ion-input>
+      <ion-input item-right disabled  value="{{email}}"></ion-input>
     </ion-item>
     
     <!-- <ion-item *ngIf="profileContent">

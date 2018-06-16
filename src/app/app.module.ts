@@ -1,7 +1,7 @@
 //DEFAULT
 import { BrowserModule } from '@angular/platform-browser';
 import { ErrorHandler, NgModule  } from '@angular/core';
-// import { InAppBrowser } from '@ionic-native/in-app-browser';
+import { InAppBrowser } from '@ionic-native/in-app-browser';
 import { FileTransfer, FileUploadOptions, FileTransferObject } from '@ionic-native/file-transfer';
 import { File } from '@ionic-native/file';
 import { IonicApp, IonicErrorHandler, IonicModule ,NavController, ViewController} from 'ionic-angular';
@@ -15,6 +15,7 @@ import { IonicStorageModule } from '@ionic/storage';
 import { DomSanitizer} from '@angular/platform-browser';
 import { DocumentViewer } from '@ionic-native/document-viewer';
 import { Keyboard } from '@ionic-native/keyboard';
+
 
 
 
@@ -155,6 +156,7 @@ const componentDeclaration = [
     HttpClientModule,
     WindowRef,
     AuthService,
+    InAppBrowser,
     { provide: ErrorHandler,   useClass: IonicErrorHandler }
   ]
 })

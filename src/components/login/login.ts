@@ -1,5 +1,5 @@
 import { Component, ViewChild } from '@angular/core';
-import { NavController } from 'ionic-angular';
+import { NavController, LoadingController } from 'ionic-angular';
 import { LoginPage } from '../../pages/login/login.page';
 import { HeaderComponent } from '../header/header';
 import { HomePage } from '../../pages/home/home.page';
@@ -16,6 +16,7 @@ import { Environment } from '../../models/environment.model';
 import { AuthService } from '../../providers/authenticationservice/auth.service';
 import { DomSanitizer, SafeResourceUrl, } from '@angular/platform-browser';
 import { Keyboard } from '@ionic-native/keyboard';
+import { InAppBrowser } from '@ionic-native/in-app-browser';
 
 import $ from "jquery";
 
@@ -37,9 +38,15 @@ export class LoginComponent {
     private environment;
     private envi: Environment;
     private iframeUrl;
+    private loggedUser;
+    private loading;
+    private userInfo;
+    private error=false;
+    private showlogin=false;
+
     constructor(private fb: FormBuilder, private navCtrl: NavController,
         private keyboard: Keyboard,
-        private auth: AuthService, private sanitizer: DomSanitizer, private baserestService: BaseRestService, private cookieService: CookieService, private storageService: StorageService, private windowRef: WindowRef) {
+        private auth: AuthService, private sanitizer: DomSanitizer, private iab: InAppBrowser, public loadingCtrl: LoadingController, private baserestService: BaseRestService, private cookieService: CookieService, private storageService: StorageService, private windowRef: WindowRef) {
         this.loginForm = this.fb.group({
             userid: ['', Validators.required],
             password: ['', Validators.required],
@@ -48,7 +55,8 @@ export class LoginComponent {
 
     ngOnInit() {
         // Tracking
-       //this.environment = this.auth.getEnvironment();
+        //this.environment = this.auth.getEnvironment();
+        
         console.log(this.iframe);
         //this.userinfo = this.cookieService.get('userdata');
         console.log("in login compinent");
@@ -64,31 +72,99 @@ export class LoginComponent {
         //     },
         //     error => console.log(error)
         // )
-        this.getEnvi();
+       
+        this.loading = this.loadingCtrl.create({
+            content: 'Fetching user...'
+        }); 
 
+        this.loading.present();
 
-        console.log(this.windowRef.nativeWindow);
-        window.addEventListener("message", (data) => {
-            console.log(data);
-            this.receiveMessage(data);
-        }, false)
+        this.storageService.get('user').then(
+            loggedUser => {
+                this.loggedUser = loggedUser;
+                if (loggedUser) {
+                    this.user = new User(loggedUser);
+                    this.navCtrl.setRoot(HomePage)
+                    this.loading.dismiss();
+                    this.showlogin= false;
+                }
+                // else {
+               this.loading.dismiss();
+               this.showlogin= true;
+                // }
+
+            }
+        )
+
+        // window.addEventListener("message", (data) => {
+        //     console.log(data);
+        //     this.receiveMessage(data);
+        // }, false)
         //   this.windowRef.nativeWindow.event.message(this.receiveMessage);
     }
+
     login() {
         console.log(this.loginForm.value);
         // this.navCtrl.setRoot(HomePage);
         //  this.navCtrl.setRoot(NemidPage);
-        this.storageService.set('terms', true);
         this.keyboard.close();
-        this.navCtrl.setRoot(TermsconditionPage);
+        this.baserestService.login(this.loginForm.value.userid, this.loginForm.value.password).then(
+            userInfo => {
+                this.userInfo = userInfo;
+                this.loggedIn();
+            },
+            error => { console.log("something went wrong") 
+        this.error = true;
+        }
+
+        );
+
+  
+
     }
+    loggedIn(){
+        if(this.userInfo){
+                    this.storageService.set('terms', true);
+        console.log(this.userInfo);
+        this.user = new User(this.userInfo);
+       // this.navCtrl.setRoot(TermsconditionPage);
+       this.receiveMessage(this.userInfo);
+        }else{
+            this.error = true;
+        }
+
+    }
+    forgetpassword(event){
+
+        console.log(event);
+        window.open("https://idp.carex.dk/simplesaml/module.php/core/forgotpw.php", "_blank");
+    }
+
     getEnvi() {
+        window.top.location.href = 'https://test-tryg.carex.dk/';
+        this.loading.dismiss();
         this.iframeUrl = this.sanitizer.bypassSecurityTrustResourceUrl("https://trygsundhed.carex.dk");
-        console.log(this.iframeUrl);
+        // window.top.location.href = 'https://trygsundhed.carex.dk';
+        // console.log(this.iframeUrl);
 
+    
+       // const browser = this.iab.create('https://app-idp.carex.dk/');
 
+        // var ref = cordova.InAppBrowser.open('http://apache.org', '_blank', 'location=yes');
+        // browser.on('loadstop').subscribe(event => {
+        //     if (event) {
+        //         console.log(event);
+        //     }
+        // });
+
+        // browser.on("message").subscribe(data => {
+        //     if (data) {
+        //         console.log(data);
+        //         this.receiveMessage(data);
+        //         browser.close();
+        //     }
+        // });
     }
-
     // onLoadFunc(myIframe) {
     //     this.source = myIframe //.contentWindow.location.href;
     //     console.log(this.source);
@@ -105,23 +181,21 @@ export class LoginComponent {
     receiveMessage(data) {
         console.log("in receive message")
         // console.log(data.data);
-        if (data.data && !data.data.messageId) {
-            let userdata = JSON.parse(data.data);
-            this.user = new User(userdata);
-            if (userdata.id) {
+
+        if (data) {
+            this.storageService.set('user',data);
+            this.user = new User(data);
                 console.log("gottt ssuer")
-                this.userinfo = data.data
+                this.userinfo = data
                 console.log(this.userinfo);
-                this.user.id = userdata.id;
-                this.user.email = userdata.email;
-                this.user.username = userdata.username;
-                this.user.status = userdata.gyldighed;
-                this.user.group = userdata.group;
-                this.auth.setUserinfo(this.user);
+                this.user.id = data[3];
+                this.user.email = data[1];
+                this.user.username = data[0];
+                this.user.status = data[4];
+                this.auth.setUserinfo(data);
+                this.storageService.set('user',data);
                 this.navCtrl.setRoot(TermsconditionPage);
             }
-            // this.navCtrl.setRoot(TermsconditionPage);
-        }
     }
 
 }
