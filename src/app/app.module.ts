@@ -152,7 +152,7 @@ const componentDeclaration = [
     BaseRestService,
     StorageService,
     CookieService,
-    HttpClient,,
+    HttpClient,
     HttpClientModule,
     WindowRef,
     AuthService,
