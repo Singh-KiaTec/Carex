@@ -1,11 +1,11 @@
 import { Injectable } from '@angular/core';
-import { HttpClient, HttpHeaders } from '@angular/common/http';
-import { Response, Headers, RequestOptions } from '@angular/http';
-import { Nav, NavController, App } from 'ionic-angular';
-import { NotificationsPage } from '../../pages/notifications/notifications.page'
+import { HttpClient } from '@angular/common/http';
+import { Headers, RequestOptions } from '@angular/http';
+import { App } from 'ionic-angular';
+// import { NotificationsPage } from '../../pages/notifications/notifications.page'
 import { LoginPage } from '../../pages/login/login.page';
 import { StorageService } from '../storageservice/storageservice';
-import { Http } from '@angular/http';
+// import { Http } from '@angular/http';
 import 'rxjs/add/operator/map';
 import { Platform } from 'ionic-angular';
 import { AuthService } from '../authenticationservice/auth.service';

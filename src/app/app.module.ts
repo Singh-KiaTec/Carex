@@ -2,19 +2,14 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { ErrorHandler, NgModule  } from '@angular/core';
 import { InAppBrowser } from '@ionic-native/in-app-browser';
-import { FileTransfer, FileUploadOptions, FileTransferObject } from '@ionic-native/file-transfer';
-import { File } from '@ionic-native/file';
-import { IonicApp, IonicErrorHandler, IonicModule ,NavController, ViewController} from 'ionic-angular';
+import { IonicApp, IonicErrorHandler, IonicModule } from 'ionic-angular';
 import { IonicStorageModule } from '@ionic/storage';
 //  import { OneSignal } from '@ionic-native/onesignal';
  import { CookieService } from 'ngx-cookie-service';
- import { Cookie } from 'ng2-cookies';
+//  import { Cookie } from 'ng2-cookies';
  import { HttpModule } from '@angular/http';
  import { HttpClientModule, HttpClient } from '@angular/common/http';
- import { Pipe, PipeTransform } from '@angular/core';
-import { DomSanitizer} from '@angular/platform-browser';
-import { DocumentViewer } from '@ionic-native/document-viewer';
-import { Keyboard } from '@ionic-native/keyboard';
+
 
 
 
@@ -34,7 +29,7 @@ import { NemidPage } from '../pages/nemid/nemid.page';
 import { TermsconditionPage} from '../pages/termsconditions/termsconditions.page';
 import {SearchDetailsPage } from '../pages/searchdetails/searchdetails.page';
 import {OtherRelationsPage } from '../pages/otherrelations/otherrelations.page';
-
+import {CustomanchorPage } from '../pages/customanchor/customanchor.page';
 
 
 
@@ -44,7 +39,7 @@ import { MenuComponent } from '../components/menu/menu';
 
 
 //MODELS
-import { data } from '../models/data/data';
+// import { data } from '../models/data/data';
 
 
 
@@ -58,6 +53,7 @@ import {SafePipe} from '../providers/directory/safepipe';
 
 
 //IONIC
+  
 import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
 import { SettingsComponent } from '../components/settings/settings';
@@ -72,6 +68,7 @@ import { TermsconditionsComponent } from '../components/termsconditions/termscon
 import { HeaderComponent } from '../components/header/header';
 import {SearchDetailsComponent} from '../components/searchdetails/searchdetails';
 import {OtherrelationsComponent} from '../components/otherrelations/otherrelations';
+import {CustomanchorComponent} from '../components/customanchor/customanchor';
 
 
 const pagesDeclaration = [
@@ -88,7 +85,8 @@ const pagesDeclaration = [
   NemidPage,
   SearchDetailsPage,
   TermsconditionPage,
-  OtherRelationsPage
+  OtherRelationsPage,
+  CustomanchorPage
 ];
 
 const componentDeclaration = [
@@ -105,7 +103,8 @@ const componentDeclaration = [
   HeaderComponent,
   SearchDetailsComponent,
   SafePipe,
-  OtherrelationsComponent
+  OtherrelationsComponent,
+  CustomanchorComponent
 
 ];
 
@@ -145,10 +144,6 @@ const componentDeclaration = [
   providers: [
     StatusBar,
     SplashScreen,
-    FileTransfer,
-    File,
-    Keyboard,
-    DocumentViewer,
     BaseRestService,
     StorageService,
     CookieService,

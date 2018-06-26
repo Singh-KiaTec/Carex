@@ -1,24 +1,23 @@
-import { Component, ViewChild } from '@angular/core';
+import { Component } from '@angular/core';
 import { NavController, LoadingController } from 'ionic-angular';
-import { LoginPage } from '../../pages/login/login.page';
-import { HeaderComponent } from '../header/header';
+// import { LoginPage } from '../../pages/login/login.page';
+// import { HeaderComponent } from '../header/header';
 import { HomePage } from '../../pages/home/home.page';
-import { FormArray, FormBuilder, FormGroup, Validator, FormControl } from '@angular/forms';
+import { FormBuilder, FormGroup } from '@angular/forms';
 import { Validators } from '@angular/forms';
-import { NemidPage } from '../../pages/nemid/nemid.page';
+// import { NemidPage } from '../../pages/nemid/nemid.page';
 import { TermsconditionPage } from '../../pages/termsconditions/termsconditions.page';
-import { CookieService } from 'ngx-cookie-service';
+// import { CookieService } from 'ngx-cookie-service';
 import { StorageService } from '../../providers/storageservice/storageservice';
-import { WindowRef } from '../../providers/windowservice/windowservice';
+// import { WindowRef } from '../../providers/windowservice/windowservice';
 import { User } from '../../models/user.model';
 import { BaseRestService } from '../../providers/restservice/base.rest.service';
 import { Environment } from '../../models/environment.model';
 import { AuthService } from '../../providers/authenticationservice/auth.service';
-import { DomSanitizer, SafeResourceUrl, } from '@angular/platform-browser';
-import { Keyboard } from '@ionic-native/keyboard';
+// import { DomSanitizer } from '@angular/platform-browser';
 import { InAppBrowser } from '@ionic-native/in-app-browser';
 
-import $ from "jquery";
+// import $ from "jquery";
 
 
 @Component({
@@ -26,8 +25,6 @@ import $ from "jquery";
     templateUrl: 'login.html'
 })
 export class LoginComponent {
-
-    @ViewChild('myIframe') iframe = HTMLIFrameElement;
 
 
     private loginForm: FormGroup;
@@ -45,8 +42,7 @@ export class LoginComponent {
     private showlogin=false;
 
     constructor(private fb: FormBuilder, private navCtrl: NavController,
-        private keyboard: Keyboard,
-        private auth: AuthService, private sanitizer: DomSanitizer, private iab: InAppBrowser, public loadingCtrl: LoadingController, private baserestService: BaseRestService, private cookieService: CookieService, private storageService: StorageService, private windowRef: WindowRef) {
+        private auth: AuthService, private iab: InAppBrowser, public loadingCtrl: LoadingController, private baserestService: BaseRestService, private storageService: StorageService) {
         this.loginForm = this.fb.group({
             userid: ['', Validators.required],
             password: ['', Validators.required],
@@ -57,8 +53,9 @@ export class LoginComponent {
         // Tracking
         //this.environment = this.auth.getEnvironment();
         
-        console.log(this.iframe);
+    
         //this.userinfo = this.cookieService.get('userdata');
+
         console.log("in login compinent");
         // this.storageService.get('terms').then(
         //     termsread => {
@@ -74,7 +71,7 @@ export class LoginComponent {
         // )
        
         this.loading = this.loadingCtrl.create({
-            content: 'Fetching user...'
+            content: ''
         }); 
 
         this.loading.present();
@@ -88,10 +85,10 @@ export class LoginComponent {
                     this.loading.dismiss();
                     this.showlogin= false;
                 }
-                // else {
+                else {
                this.loading.dismiss();
                this.showlogin= true;
-                // }
+             }
 
             }
         )
@@ -107,7 +104,7 @@ export class LoginComponent {
         console.log(this.loginForm.value);
         // this.navCtrl.setRoot(HomePage);
         //  this.navCtrl.setRoot(NemidPage);
-        this.keyboard.close();
+       // this.keyboard.close();
         this.baserestService.login(this.loginForm.value.userid, this.loginForm.value.password).then(
             userInfo => {
                 this.userInfo = userInfo;
@@ -123,8 +120,9 @@ export class LoginComponent {
 
     }
     loggedIn(){
+        this.storageService.set('welcome', true);
         if(this.userInfo){
-                    this.storageService.set('terms', true);
+                    this.storageService.set('terms', false);
         console.log(this.userInfo);
         this.user = new User(this.userInfo);
        // this.navCtrl.setRoot(TermsconditionPage);
@@ -136,20 +134,22 @@ export class LoginComponent {
     }
     forgetpassword(event){
 
-        console.log(event);
-        window.open("https://idp.carex.dk/simplesaml/module.php/core/forgotpw.php", "_blank");
+        // console.log(event);
+        // window.open("https://trygsundhed.carex.dk/simplesaml/module.php/core/forgotpw.php", "_blank");
+        this.iab.create('https://trygsundhed.carex.dk/simplesaml/module.php/core/forgotpw.php', "_system","location=yes,hardwareback=yes");
+
     }
 
     getEnvi() {
-        window.top.location.href = 'https://test-tryg.carex.dk/';
+       // window.top.location.href = 'https://test-tryg.carex.dk/';
         this.loading.dismiss();
-        this.iframeUrl = this.sanitizer.bypassSecurityTrustResourceUrl("https://trygsundhed.carex.dk");
+        // this.iframeUrl = this.sanitizer.bypassSecurityTrustResourceUrl("https://trygsundhed.carex.dk");
         // window.top.location.href = 'https://trygsundhed.carex.dk';
         // console.log(this.iframeUrl);
 
     
-       // const browser = this.iab.create('https://app-idp.carex.dk/');
-
+   //    const browser = this.iab.create('https://app-idp.carex.dk/');
+       
         // var ref = cordova.InAppBrowser.open('http://apache.org', '_blank', 'location=yes');
         // browser.on('loadstop').subscribe(event => {
         //     if (event) {
@@ -181,7 +181,7 @@ export class LoginComponent {
     receiveMessage(data) {
         console.log("in receive message")
         // console.log(data.data);
-
+this.auth.setUserinfo(data);
         if (data) {
             this.storageService.set('user',data);
             this.user = new User(data);

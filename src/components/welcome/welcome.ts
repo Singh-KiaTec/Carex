@@ -1,13 +1,13 @@
 import { Component, ViewChild } from '@angular/core';
-import { WelcomePage } from '../../pages/welcome/welcome.page';
-import { welcome } from '../../models/data/welcome';
+// import { WelcomePage } from '../../pages/welcome/welcome.page';
+// import { welcome } from '../../models/data/welcome';
 import { LoginPage } from '../../pages/login/login.page';
 import { HomePage } from '../../pages/home/home.page';
-import { HeaderComponent } from '../header/header';
+// import { HeaderComponent } from '../header/header';
 import { BaseRestService } from '../../providers/restservice/base.rest.service';
-import { Nav, NavController, App, ViewController } from 'ionic-angular';
+import { Nav } from 'ionic-angular';
 import { StorageService } from '../../providers/storageservice/storageservice';
-import { errorHandler } from '@angular/platform-browser/src/browser';
+import { AuthService } from '../../providers/authenticationservice/auth.service';
 
 
 @Component({
@@ -20,26 +20,35 @@ export class WelcomeComponent {
     //  rootPage: any = WelcomePage;
 
 
-    private welcomedata: any = welcome;
+    private welcomedata: any;
     private heading: any;
     private paragraphs;
     private condition;
     private loading;
     private welcomeread;
+    private user;
 
-    constructor(private baserestService: BaseRestService, public navCtrl: NavController, private storageService: StorageService) { }
+    constructor(private baserestService: BaseRestService, private storageService: StorageService, private auth: AuthService) { }
 
     ngOnInit() {
         // Tracking
         this.loading = true;
         this.getWelcomeData();
+        this.storageService.get('user').then(
+            user => {
+                if (user) {
+                    this.user = user;
+                }
+            },
+            error => console.log(error)
+        )
         this.storageService.get('welcome').then(
             welcome => {
-            this.welcomeread = welcome;
-                if (this.welcomeread) {
-                    this.baserestService.navigateTo(LoginPage, null);
+                this.welcomeread = welcome;
+                if (welcome) {
+                    this.checkUser();
                 }
-                else{
+                else {
                     this.storageService.set('welcome', false);
                 }
             },
@@ -48,20 +57,18 @@ export class WelcomeComponent {
     }
     getWelcomeData() {
         this.baserestService.getWelcomeData().then(
-            welcomeData => { this.welcomedata = welcomeData; 
-                console.log("in welcoe");
-                console.log(welcomeData)
-                this.setData(); this.loading = false },
+            welcomeData => {
+            this.welcomedata = welcomeData;
+                this.setData(); this.loading = false
+            },
             error => { console.log("error"); this.loading = false }
         );
 
     }
     setData() {
-        console.log(this.welcomedata);
         this.heading = this.welcomedata.info.heading;
         this.paragraphs = this.welcomedata.info.paragraphs;
         this.condition = this.welcomedata.info.conditions;
-        console.log(this.heading);
     }
     gotoLogin() {
         console.log("go to login");
@@ -72,6 +79,19 @@ export class WelcomeComponent {
 
         //this.navCtrl.setRoot(LoginPage, {});
         // this.navCtrl.setRoot(HomePage, {});
+    }
+    checkUser() {
+
+        if (!this.user) {
+            this.user = this.auth.getUserInfo();
+        }
+        if (this.user) {
+            this.baserestService.navigateTo(HomePage, null);
+        }
+        else {
+            this.baserestService.navigateTo(LoginPage, null);
+        }
+
     }
 }
 

@@ -44,7 +44,10 @@
             <div  id="{{c}}" *ngIf="c==0" [ngClass]="(selectedContainer==0)? 'details__show': 'details__hide' ">
               <ng-template ngFor let-item [ngForOf]="tabsContent" let-i="index" [ngForTrackBy]="trackByFn">
                 <div class="details__item">
-                  <div id="{{i}}" [innerHtml]="item">
+                  <div id="{{i}}" *ngIf="item.indexOf('<a')!==0" [innerHtml]="item">
+                  </div>
+                  <div id="{{i}}" *ngIf="item.indexOf('<a')==0">
+                    <customanchor-viewer [content]="item"></customanchor-viewer>
                   </div>
                 </div>
               </ng-template>
@@ -59,14 +62,17 @@
               </ng-template> -->
               <ng-template ngFor let-item [ngForOf]="tabsContent" let-i="index" [ngForTrackBy]="trackByFn">
                   <div class="details__item">
-                    <div id="{{i}}" [innerHtml]="item">
+                      <div id="{{i}}" *ngIf="item.indexOf('<a')!==0" [innerHtml]="item">
+                      </div>
+                      <div id="{{i}}" *ngIf="item.indexOf('<a')==0">
+                        <customanchor-viewer [content]="item"></customanchor-viewer>
+                      </div>
                     </div>
-                  </div>
                 </ng-template>
           </div>
           </ng-template>
           <div float-right *ngIf="externallink && starttestLabel">
-<a target='_blank' href="{{externallink}}">{{starttestLabel}}</a>
+<a (click)=openwindow($event)  href="#">{{starttestLabel}}</a>
 
           </div>
         </div>

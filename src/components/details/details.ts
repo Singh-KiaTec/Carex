@@ -1,11 +1,12 @@
 import { Component, ViewChild, ViewChildren } from '@angular/core';
 import { NavParams, Navbar } from 'ionic-angular';
-import { Button } from 'ionic-angular/components/button/button';
-import { NavController } from 'ionic-angular/navigation/nav-controller';
+import { Button ,NavController} from 'ionic-angular';
 import { BaseRestService } from '../../providers/restservice/base.rest.service';
 //import { ViewChildren } from '@angular/core/src/metadata/di';
 import { AuthService } from '../../providers/authenticationservice/auth.service';
 import { SearchDetailsPage } from '../../pages/searchdetails/searchdetails.page';
+//  import { CustomanchorComponent } from '../customanchor/customanchor';
+import { InAppBrowser,InAppBrowserOptions } from '@ionic-native/in-app-browser';
 
 @Component({
   selector: 'details-viewer',
@@ -48,11 +49,14 @@ export class DetailsComponent {
   private searchtext;
   private textfilteredList: any = [];
   private baseUrl;
+  private  options : any;
 
-  constructor(private navParam: NavParams, private auth: AuthService, private navCtrl: NavController, private baserestService: BaseRestService) {
+  constructor(private navParam: NavParams,
+    private iab: InAppBrowser, private auth: AuthService, private navCtrl: NavController, private baserestService: BaseRestService) {
 
     this.selectedMenuItem = this.navParam.get('selectedItem');
     this.selectedPage = this.navParam.get('selectedPage');
+    this.user = this.navParam.get('userinfo');
     this.primaryColor = this.selectedPage.main_color;
     this.pagetitle = this.selectedMenuItem[1];
     this.tabs = this.selectedMenuItem[8];
@@ -61,11 +65,28 @@ export class DetailsComponent {
   }
 
   ngOnInit() {
+    this.options= {
+      location :  'no',
+      hidden : 'no', //Or  'yes'
+      clearcache : 'yes',
+      clearsessioncache : 'yes',
+      zoom : 'yes',//Android only ,shows browser zoom controls 
+      hardwareback : 'yes',
+      mediaPlaybackRequiresUserAction : 'no',
+      shouldPauseOnSuspend : 'no', //Android only 
+      closebuttoncaption : 'Close', //iOS only
+      disallowoverscroll : 'no', //iOS only 
+      toolbar : 'yes', //iOS only 
+      enableViewportScale : 'no', //iOS only 
+      allowInlineMediaPlayback : 'no',//iOS only 
+      presentationstyle : 'pagesheet',//iOS only 
+      fullscreen : 'yes',//Windows only    
+  };
     var tabsdata = [];
     let currentitem: any;
     this.baseUrl = this.auth.getEnvironment();
-    this.user = this.auth.getUserInfo();
-    console.log(this.user);
+    // this.user = this.auth.getUserInfo();
+    // console.log(this.user);
     for (let item in this.tabs) {
       currentitem = this.tabs[item];
       this.tabstoDisplay.push(currentitem.tab_name);
@@ -211,6 +232,11 @@ export class DetailsComponent {
     this.searchedList = this.allsearchresultList;
 
   }
+  openwindow(event) {
+    event.preventDefault();
+    // window.open(this.url,"_system");
+  this.iab.create(this.externallink, "_system","location=yes,hardwareback=yes");
+  }
   searchDetails(searchsltdItem) {
     console.log(searchsltdItem);
     this.navCtrl.push(SearchDetailsPage, { 'selectedItem': searchsltdItem })
@@ -230,22 +256,22 @@ export class DetailsComponent {
     if (itemname == "Helbredskategorier") {
       this.helbredskategorierModel = this.searchdropdownValue;
     }
- 
+
     console.log(this.searchedList);
     let filteredList: any = [];
     filteredList.push(this.searchedList.filter(this.filterSearch, this));
-    if (this.searchedList.length == this.allsearchresultList.length  ||this.searchedList.length==0 ) {
+    if (this.searchedList.length == this.allsearchresultList.length || this.searchedList.length == 0) {
       this.searchedList = filteredList[0];
     }
     else {
-      if(filteredList){
+      if (filteredList) {
         //this.searchedList = this.searchedList.concat(filteredList[0]);
         this.searchedList = this.searchedList.concat(filteredList[0]);
       }
     }
     this.showsearchList = true;
   }
-  
+
   filterSearch(item) {
     console.log(item)
     let filteredvalue;
@@ -264,7 +290,7 @@ export class DetailsComponent {
     }
   }
 
-  
+
   textFilter(event) {
     console.log(event);
     this.searchtext = event.value;
@@ -273,15 +299,15 @@ export class DetailsComponent {
       let filteredList: any = [];
       console.log("hittt");
       filteredList.push(this.textfilteredList.filter(this.filtertextSearch, this));
-      if (this.searchedList.length == this.allsearchresultList.length ||this.searchedList.length==0 ) {
+      if (this.searchedList.length == this.allsearchresultList.length || this.searchedList.length == 0) {
         this.searchedList = filteredList[0];
       }
       else {
-       this.searchedList =                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                   this.searchedList.concat(filteredList[0]);
+        this.searchedList = this.searchedList.concat(filteredList[0]);
       }
       this.showsearchList = true;
     }
-    else{
+    else {
       this.showsearchList = false;
     }
   }

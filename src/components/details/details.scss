@@ -59,9 +59,10 @@
         display: block;
     }
     &__searchbutton{
-        background: $primary-color-theme;;
+        background: $primary-color-theme;
         color:  $color-white;
         width: 48%;
+        border-color: $primary-color-theme;
     }
     &__resetbutton{
         color: $primary-color-theme;;

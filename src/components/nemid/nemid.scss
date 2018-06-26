@@ -1,9 +1,10 @@
-.nemid{
-
-    &__login-button{
-  width: 100%;
+@import '../../assets/sass/variables';
+.nemid {
+    &__login-button {
+        width: 100%;
+        background: $color-primary-gray !important;
     }
-    &__iframe{
+    &__iframe {
         // height: 100%;
         // width: 100%;
     }

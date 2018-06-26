@@ -1,9 +1,9 @@
 import { Component } from '@angular/core';
 import { NavController, NavParams } from 'ionic-angular';
-import { TermsconditionPage } from '../../pages/termsconditions/termsconditions.page';
-import { HeaderComponent } from '../header/header';
-import { termsconditions } from '../../models/data/termsandconditions';
-import { HomePage } from '../../pages/home/home.page';
+// import { TermsconditionPage } from '../../pages/termsconditions/termsconditions.page';
+// import { HeaderComponent } from '../header/header';
+// import { termsconditions } from '../../models/data/termsandconditions';
+ import { HomePage } from '../../pages/home/home.page';
 import { BaseRestService } from '../../providers/restservice/base.rest.service';
 import { StorageService } from '../../providers/storageservice/storageservice';
 
@@ -16,7 +16,7 @@ export class TermsconditionsComponent {
 
     private heading;
     private paragraphs;
-    private termsdata: any = termsconditions;
+    private termsdata: any;
     private nb;
     private loading;
     private termsread;
@@ -45,9 +45,9 @@ export class TermsconditionsComponent {
                            this.navCtrl.setRoot(HomePage);
                     }
                 }
-                else {
-                    this.storageService.set('terms', false);
-                }
+                // else {
+                //     this.storageService.set('terms', false);
+                // }
             },
             error => console.log(error)
         )

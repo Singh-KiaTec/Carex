@@ -1,5 +1,5 @@
 import { Component, ViewChild } from '@angular/core';
-import { Nav, NavController } from 'ionic-angular';
+import { Nav } from 'ionic-angular';
 //import {data} from '../../models/data/data';
 import { HomePage } from '../../pages/home/home.page';
 import { SettingsPage } from '../../pages/settings/settings.page';
@@ -8,9 +8,10 @@ import { NotificationsPage } from '../../pages/notifications/notifications.page'
 import { WelcomePage } from '../../pages/welcome/welcome.page';
 import { TermsconditionPage } from '../../pages/termsconditions/termsconditions.page';
 import { OtherRelationsPage } from '../../pages/otherrelations/otherrelations.page';
-import { tryg } from '../../models/data/tryg';
+// import { tryg } from '../../models/data/tryg';
 import { BaseRestService } from '../../providers/restservice/base.rest.service';
 import { AuthService } from '../../providers/authenticationservice/auth.service';
+import {StorageService} from '../../providers/storageservice/storageservice';
 
 @Component({
   selector: 'menu-viewer',
@@ -27,7 +28,7 @@ export class MenuComponent {
   private userinfo;
 
   pages: Array<{ title: string, component: any }>;
-  constructor(private baserestService: BaseRestService, private auth: AuthService, ) {
+  constructor(private baserestService: BaseRestService, private storageService :StorageService, private auth: AuthService ) {
   }
 
   ngOnInit() {
@@ -51,12 +52,28 @@ export class MenuComponent {
       error => { this.loading = false }
     )
 
-    this.userinfo = this.auth.getUserInfo();
+    // this.userinfo = this.auth.getUserInfo();
+    // console.log(this.userinfo);
 
-    // this.pages = [
-    //   { title: 'Home', component: HomePage },
-    //   { title: 'List', component: ListPage }
-    // ];
+  //   this.storageService.get('user').then(
+  //     userinfo => {
+  //         if (userinfo) {
+  //             this.userinfo = userinfo;
+  //         }}
+  // );
+
+
+  this.storageService.get('user').then(
+    userinfo => {
+      if (userinfo) {
+        this.userinfo = userinfo;
+      }
+    },
+    error => { console.log(error) }
+  );
+
+
+
   }
   getMenuItems() {
 
@@ -90,7 +107,10 @@ export class MenuComponent {
     this.nav.setRoot(page.component, { 'pageData': item, 'itemIndex': itemIndex });
   }
   openProfile() {
-    this.nav.push(ProfilePage, {});
+    if(!this.userinfo){
+      this.userinfo = this.auth.getUserInfo();
+    }
+    this.nav.push(ProfilePage, { 'userinfo': this.userinfo});
   }
   openNotifications() {
     this.nav.push(NotificationsPage, { 'resultData': '' });

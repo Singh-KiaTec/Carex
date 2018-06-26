@@ -1,7 +1,11 @@
+
+@import '../../assets/sass/variables';
+
 .welcome{
     line-height: 1.5em;
     
     &__gotologin{
         margin-top: 2em;
+        background: $color-primary-gray !important;
     }
 }

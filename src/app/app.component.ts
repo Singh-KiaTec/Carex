@@ -1,19 +1,19 @@
-import { Component, ViewChild, Inject } from '@angular/core';
+import { Component, ViewChild } from '@angular/core';
 import { Nav, Platform } from 'ionic-angular';
 import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
 
 import { HomePage } from '../pages/home/home.page';
-import { ListPage } from '../pages/list/list';
+// import { ListPage } from '../pages/list/list';
 import { data } from '../../src/models/data/data'
-import { Title } from '@angular/platform-browser/src/browser/title';
-import { MenuPage } from '../pages/menu/menu.page';
-import { NotificationsPage } from '../pages/notifications/notifications.page';
-import { NavParams, NavController, Content, Navbar } from 'ionic-angular';
+// import { Title } from '@angular/platform-browser/src/browser/title';
+// import { MenuPage } from '../pages/menu/menu.page';
+// import { NotificationsPage } from '../pages/notifications/notifications.page';
+// import { NavParams, NavController, Content, Navbar } from 'ionic-angular';
 // import { OneSignal } from '@ionic-native/onesignal';
 import {StorageService} from '../providers/storageservice/storageservice';
 import {BaseRestService} from '../providers/restservice/base.rest.service';
-import { WelcomePage } from '../pages/welcome/welcome.page';
+// import { WelcomePage } from '../pages/welcome/welcome.page';
 
 @Component({
   templateUrl: 'app.html'
@@ -39,6 +39,8 @@ export class MyApp {
       // Okay, so the platform is ready and our plugins are available.
       // Here you can do any higher level native things you might need.
       this.statusBar.styleDefault();
+      this.statusBar.overlaysWebView(false);
+      this.statusBar.backgroundColorByHexString('#dc0000');
       this.splashScreen.hide();
       //this.oneSignal.startInit("86c266d2-3554-4095-97c5-6efc0ac1e91a", "599014675139");
 
