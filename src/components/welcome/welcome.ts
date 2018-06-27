@@ -34,19 +34,12 @@ export class WelcomeComponent {
         // Tracking
         this.loading = true;
         this.getWelcomeData();
-        this.storageService.get('user').then(
-            user => {
-                if (user) {
-                    this.user = user;
-                }
-            },
-            error => console.log(error)
-        )
         this.storageService.get('welcome').then(
             welcome => {
                 this.welcomeread = welcome;
                 if (welcome) {
-                    this.checkUser();
+                    //this.checkUser();
+                    this.baserestService.navigateTo(LoginPage, null);
                 }
                 else {
                     this.storageService.set('welcome', false);
@@ -80,19 +73,17 @@ export class WelcomeComponent {
         //this.navCtrl.setRoot(LoginPage, {});
         // this.navCtrl.setRoot(HomePage, {});
     }
-    checkUser() {
+    // checkUser() {
 
-        if (!this.user) {
-            this.user = this.auth.getUserInfo();
-        }
-        if (this.user) {
-            this.baserestService.navigateTo(HomePage, null);
-        }
-        else {
-            this.baserestService.navigateTo(LoginPage, null);
-        }
+    //     if (!this.user) {
+    //         this.user = this.auth.getUserInfo();
+    //     }
+    //     if (this.user) {
+    //         this.baserestService.navigateTo(HomePage, null);
+    //     }
+    //     else {
+    //         this.baserestService.navigateTo(LoginPage, null);
+    //     }
 
-    }
+    // }
 }
-
-

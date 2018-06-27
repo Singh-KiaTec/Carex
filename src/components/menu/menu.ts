@@ -35,14 +35,14 @@ export class MenuComponent {
     console.log("in menu");
     //this.menuLis;
 
-    this.baserestService.getEnvironment().then(
-      envi => {
-        console.log(envi);
-        this.environment = envi; this.setenvi();
-      },
-      error => console.error(error)
+    // this.baserestService.getEnvironment().then(
+    //   envi => {
+    //     console.log(envi);
+    //     this.environment = envi; this.setenvi();
+    //   },
+    //   error => console.error(error)
 
-    )
+    // )
     this.baserestService.getMenuItems().then(
       menuItems => { this.menuItems = menuItems; this.setData(); this.loading = false },
       error => { this.loading = false }
@@ -75,16 +75,14 @@ export class MenuComponent {
 
 
   }
-  getMenuItems() {
-
-  }
-  setenvi() {
-    this.auth.setEnvironment(this.environment.envi.environment);
-  }
+  // // setenvi() {
+  //    this.auth.setEnvironment('http://trygsundhed.carex.dk/');
+  // // }
 
 
 
   setData() {
+    this.auth.setEnvironment('http://trygsundhed.carex.dk/');
     let pagesarray = [];
     for (let i in this.menuList) {
       pagesarray.push({

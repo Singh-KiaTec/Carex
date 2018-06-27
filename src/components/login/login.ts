@@ -38,8 +38,8 @@ export class LoginComponent {
     private loggedUser;
     private loading;
     private userInfo;
-    private error=false;
-    private showlogin=false;
+    private error = false;
+    private showlogin = false;
 
     constructor(private fb: FormBuilder, private navCtrl: NavController,
         private auth: AuthService, private iab: InAppBrowser, public loadingCtrl: LoadingController, private baserestService: BaseRestService, private storageService: StorageService) {
@@ -52,8 +52,8 @@ export class LoginComponent {
     ngOnInit() {
         // Tracking
         //this.environment = this.auth.getEnvironment();
-        
-    
+
+
         //this.userinfo = this.cookieService.get('userdata');
 
         console.log("in login compinent");
@@ -69,10 +69,10 @@ export class LoginComponent {
         //     },
         //     error => console.log(error)
         // )
-       
+
         this.loading = this.loadingCtrl.create({
             content: ''
-        }); 
+        });
 
         this.loading.present();
 
@@ -81,75 +81,70 @@ export class LoginComponent {
                 this.loggedUser = loggedUser;
                 if (loggedUser) {
                     this.user = new User(loggedUser);
-                    this.navCtrl.setRoot(HomePage)
                     this.loading.dismiss();
-                    this.showlogin= false;
+                    this.showlogin = false;
+                    this.navCtrl.setRoot(HomePage)
                 }
                 else {
-               this.loading.dismiss();
-               this.showlogin= true;
-             }
+                    this.loading.dismiss();
+                    this.showlogin = true;
+                }
 
             }
         )
-
-        // window.addEventListener("message", (data) => {
-        //     console.log(data);
-        //     this.receiveMessage(data);
-        // }, false)
-        //   this.windowRef.nativeWindow.event.message(this.receiveMessage);
     }
 
     login() {
         console.log(this.loginForm.value);
         // this.navCtrl.setRoot(HomePage);
         //  this.navCtrl.setRoot(NemidPage);
-       // this.keyboard.close();
+        // this.keyboard.close();
         this.baserestService.login(this.loginForm.value.userid, this.loginForm.value.password).then(
             userInfo => {
                 this.userInfo = userInfo;
                 this.loggedIn();
             },
-            error => { console.log("something went wrong") 
-        this.error = true;
-        }
+            error => {
+                console.log("something went wrong")
+                this.error = true;
+            }
 
         );
 
-  
+
 
     }
-    loggedIn(){
+    loggedIn() {
         this.storageService.set('welcome', true);
-        if(this.userInfo){
-                    this.storageService.set('terms', false);
-        console.log(this.userInfo);
-        this.user = new User(this.userInfo);
-       // this.navCtrl.setRoot(TermsconditionPage);
-       this.receiveMessage(this.userInfo);
-        }else{
+        if (this.userInfo) {
+            this.storageService.set('terms', false);
+            console.log(this.userInfo);
+            this.user = new User(this.userInfo);
+            // this.navCtrl.setRoot(TermsconditionPage);
+            this.receiveMessage(this.userInfo);
+        } else {
             this.error = true;
         }
 
     }
-    forgetpassword(event){
+    forgetpassword(event) {
 
         // console.log(event);
         // window.open("https://trygsundhed.carex.dk/simplesaml/module.php/core/forgotpw.php", "_blank");
-        this.iab.create('https://trygsundhed.carex.dk/simplesaml/module.php/core/forgotpw.php', "_system","location=yes,hardwareback=yes");
+        this.iab.create('https://trygsundhed.carex.dk/simplesaml/module.php/core/forgotpw.php', "_system", "location=yes,hardwareback=yes");
 
     }
 
     getEnvi() {
-       // window.top.location.href = 'https://test-tryg.carex.dk/';
+        // window.top.location.href = 'https://test-tryg.carex.dk/';
         this.loading.dismiss();
         // this.iframeUrl = this.sanitizer.bypassSecurityTrustResourceUrl("https://trygsundhed.carex.dk");
         // window.top.location.href = 'https://trygsundhed.carex.dk';
         // console.log(this.iframeUrl);
 
-    
-   //    const browser = this.iab.create('https://app-idp.carex.dk/');
-       
+
+        //    const browser = this.iab.create('https://app-idp.carex.dk/');
+
         // var ref = cordova.InAppBrowser.open('http://apache.org', '_blank', 'location=yes');
         // browser.on('loadstop').subscribe(event => {
         //     if (event) {
@@ -181,21 +176,21 @@ export class LoginComponent {
     receiveMessage(data) {
         console.log("in receive message")
         // console.log(data.data);
-this.auth.setUserinfo(data);
+        this.auth.setUserinfo(data);
         if (data) {
-            this.storageService.set('user',data);
+            this.storageService.set('user', data);
             this.user = new User(data);
-                console.log("gottt ssuer")
-                this.userinfo = data
-                console.log(this.userinfo);
-                this.user.id = data[3];
-                this.user.email = data[1];
-                this.user.username = data[0];
-                this.user.status = data[4];
-                this.auth.setUserinfo(data);
-                this.storageService.set('user',data);
-                this.navCtrl.setRoot(TermsconditionPage);
-            }
+            console.log("gottt ssuer")
+            this.userinfo = data
+            console.log(this.userinfo);
+            this.user.id = data[3];
+            this.user.email = data[1];
+            this.user.username = data[0];
+            this.user.status = data[4];
+            this.auth.setUserinfo(data);
+            this.storageService.set('user', data);
+            this.navCtrl.setRoot(TermsconditionPage);
+        }
     }
 
 }

@@ -18,7 +18,7 @@
           <ion-title text-center>
               <div *ngIf="pagedata">
                   <!-- <img  class="logo" [width]="" [height]="45" src="assets/imgs/unitlogos/CareX_hvid_gronlogo-66.png" /> -->
-                  <img class="logo" [width]="" [height]="40" src="{{baseUrl}}config/assets/imgs/unitlogos/logos/{{pagedata.logo}}" />
+                  <img class="logo" [width]="" [height]="40" src="http://trygsundhed.carex.dk/config/assets/imgs/unitlogos/logos/{{pagedata.logo}}" />
               </div>
           </ion-title>
 
@@ -35,7 +35,7 @@
       <ion-content  class="home">
         <div (swipe)="swipeEvent($event)" >
         <div *ngIf="pagedata">
-            <img  class="home__bg-image"  src="{{baseUrl}}config/assets/imgs/unitlogos/logos/{{pagedata.bg_image}}" />
+            <img  class="home__bg-image"  src="http://trygsundhed.carex.dk/config/assets/imgs/unitlogos/logos/{{pagedata.bg_image}}" />
         </div>
         <!-- <p>
           If you get lost, the <a href="http://ionicframework.com/docs/v2">docs</a> will show you the way.

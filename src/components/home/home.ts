@@ -28,7 +28,7 @@ export class HomeComponent {
   private pagedataModel;
   private ImgUrl;
   private showButtons = true;
-  private baseUrl;
+  // private baseUrl;
   private userinfo: any;
 
 
@@ -44,7 +44,7 @@ export class HomeComponent {
     this.currentpageIndex = this.navParams.get('itemIndex');
 
 
-    this.baseUrl = this.auth.getEnvironment();
+    // this.baseUrl = this.auth.getEnvironment();
 
     if (!this.homedata) {
       this.baserestService.getCustomerData().then(
