@@ -1,12 +1,12 @@
 import { Component, ViewChild, ViewChildren } from '@angular/core';
 import { NavParams, Navbar } from 'ionic-angular';
-import { Button ,NavController} from 'ionic-angular';
+import { Button, NavController } from 'ionic-angular';
 import { BaseRestService } from '../../providers/restservice/base.rest.service';
 //import { ViewChildren } from '@angular/core/src/metadata/di';
 import { AuthService } from '../../providers/authenticationservice/auth.service';
 import { SearchDetailsPage } from '../../pages/searchdetails/searchdetails.page';
 //  import { CustomanchorComponent } from '../customanchor/customanchor';
-import { InAppBrowser,InAppBrowserOptions } from '@ionic-native/in-app-browser';
+import { InAppBrowser, InAppBrowserOptions } from '@ionic-native/in-app-browser';
 
 @Component({
   selector: 'details-viewer',
@@ -46,10 +46,12 @@ export class DetailsComponent {
   private searchdropdownValueArray;
   private helbredskategorierModel;
   private emnerModel;
-  private searchtext;
+  private searchtext: any;
   private textfilteredList: any = [];
   private baseUrl;
-  private  options : any;
+  private totallist = '0';
+  private options: any;
+  private allcatalogs:any;
 
   constructor(private navParam: NavParams,
     private iab: InAppBrowser, private auth: AuthService, private navCtrl: NavController, private baserestService: BaseRestService) {
@@ -65,23 +67,23 @@ export class DetailsComponent {
   }
 
   ngOnInit() {
-    this.options= {
-      location :  'no',
-      hidden : 'no', //Or  'yes'
-      clearcache : 'yes',
-      clearsessioncache : 'yes',
-      zoom : 'yes',//Android only ,shows browser zoom controls 
-      hardwareback : 'yes',
-      mediaPlaybackRequiresUserAction : 'no',
-      shouldPauseOnSuspend : 'no', //Android only 
-      closebuttoncaption : 'Close', //iOS only
-      disallowoverscroll : 'no', //iOS only 
-      toolbar : 'yes', //iOS only 
-      enableViewportScale : 'no', //iOS only 
-      allowInlineMediaPlayback : 'no',//iOS only 
-      presentationstyle : 'pagesheet',//iOS only 
-      fullscreen : 'yes',//Windows only    
-  };
+    this.options = {
+      location: 'no',
+      hidden: 'no', //Or  'yes'
+      clearcache: 'yes',
+      clearsessioncache: 'yes',
+      zoom: 'yes',//Android only ,shows browser zoom controls 
+      hardwareback: 'yes',
+      mediaPlaybackRequiresUserAction: 'no',
+      shouldPauseOnSuspend: 'no', //Android only 
+      closebuttoncaption: 'Close', //iOS only
+      disallowoverscroll: 'no', //iOS only 
+      toolbar: 'yes', //iOS only 
+      enableViewportScale: 'no', //iOS only 
+      allowInlineMediaPlayback: 'no',//iOS only 
+      presentationstyle: 'pagesheet',//iOS only 
+      fullscreen: 'yes',//Windows only    
+    };
     var tabsdata = [];
     let currentitem: any;
     this.baseUrl = this.auth.getEnvironment();
@@ -98,6 +100,7 @@ export class DetailsComponent {
     }
     this.tabsContent = tabsdata[0];
     this.tabsdata = tabsdata;
+
 
     this.navbar.setElementStyle("background-color", this.primaryColor);
     this.secondaryColor = this.hex2rgb();
@@ -136,12 +139,14 @@ export class DetailsComponent {
   setData() {
     this.dropdownList = this.searchData.dropdowns;
     this.searchedList = this.searchData.searchlist;
+    this.totallist = this.searchData.searchlist.length;
     this.allsearchresultList = this.searchData.searchlist;
     this.textfilteredList = this.searchData.searchlist;
     this.textfieldList = this.searchData.text;
     this.view = this.searchData.view;
     this.searchlabel = this.searchData.search;
     this.resetlabel = this.searchData.reset;
+    this.allcatalogs = this.searchData.allcatalogs;
     console.log(this.searchData);
   }
   ngAfterViewInit() {
@@ -162,6 +167,7 @@ export class DetailsComponent {
     console.log(this.searchData);
     this.dropdownList = this.searchData.dropdowns;
     this.searchedList = this.searchData.searchlist;
+    this.totallist = this.searchedList.length ? this.searchedList.length : '0';
     this.textfieldList = this.searchData.text;
   }
 
@@ -221,21 +227,23 @@ export class DetailsComponent {
   }
   search() {
     this.showsearchList = true;
-    this.searchedList = this.allsearchresultList;
+    // this.searchedList = this.allsearchresultList;
   }
-  reset() {
-    this.emnerModel = null;
+  reset(event) {
+    event.preventDefault();
+    this.searchedList = this.allsearchresultList;
+    this.totallist = this.allsearchresultList.length ? this.allsearchresultList.length : '0';
+    this.emnerModel = this.emnerModel ? null : this.emnerModel;
     this.helbredskategorierModel = null;
     this.showsearchList = false;
-    this.searchtext = null;
-    //this.dropdownList = this.searchData.dropdowns;
-    this.searchedList = this.allsearchresultList;
+    this.searchtext = this.searchtext ? null : this.searchtext;
 
   }
+
   openwindow(event) {
     event.preventDefault();
     // window.open(this.url,"_system");
-  this.iab.create(this.externallink, "_system","location=yes,hardwareback=yes");
+    this.iab.create(this.externallink, "_system", "location=yes,hardwareback=yes");
   }
   searchDetails(searchsltdItem) {
     console.log(searchsltdItem);
@@ -246,45 +254,102 @@ export class DetailsComponent {
     event.preventDefault();
   }
   healthCategory(value, itemname) {
-    this.searchdropdownValue = value;
-    this.searchdropdownValueArray = value;
-    this.dropdownName = itemname;
+    if (value.length > 0) {
+      this.searchdropdownValue = value;
+      this.searchdropdownValueArray = value;
+      this.dropdownName = itemname;
 
-    if (itemname == "Emner") {
-      this.emnerModel = this.searchdropdownValue;
-    }
-    if (itemname == "Helbredskategorier") {
-      this.helbredskategorierModel = this.searchdropdownValue;
-    }
-
-    console.log(this.searchedList);
-    let filteredList: any = [];
-    filteredList.push(this.searchedList.filter(this.filterSearch, this));
-    if (this.searchedList.length == this.allsearchresultList.length || this.searchedList.length == 0) {
-      this.searchedList = filteredList[0];
-    }
-    else {
-      if (filteredList) {
-        //this.searchedList = this.searchedList.concat(filteredList[0]);
-        this.searchedList = this.searchedList.concat(filteredList[0]);
+      if (itemname == "Emner") {
+        this.emnerModel = this.searchdropdownValue;
       }
+      if (itemname == "Helbredskategorier") {
+        this.helbredskategorierModel = this.searchdropdownValue;
+      }
+      this.getSearchedList();
+
     }
-    this.showsearchList = true;
   }
 
+  getSearchedList() {
+    console.log(this.searchedList);
+    let filteredList: any = [];
+
+    if ((!this.helbredskategorierModel && !this.emnerModel && this.searchtext.length < 3) || ((this.helbredskategorierModel || this.emnerModel) && (this.searchtext && this.searchtext.length < 3))) {
+      if (this.searchedList.length == this.allsearchresultList.length || this.searchedList.length == 0) {
+        // this.searchedList = filteredList[0];
+      }
+      else {
+        this.searchedList = this.allsearchresultList;
+        filteredList.push(this.searchedList.filter(this.filterSearch, this));
+        this.searchedList = filteredList[0];
+      }
+    }
+    else {
+      this.searchedList = this.allsearchresultList;
+      filteredList.push(this.searchedList.filter(this.filterSearch, this));
+      if (this.searchedList.length == this.allsearchresultList.length || this.searchedList.length == 0) {
+        this.searchedList = filteredList[0];
+      }
+      else {
+        if (filteredList) {
+          //this.searchedList = this.searchedList.concat(filteredList[0]);
+          this.searchedList = filteredList[0];
+        }
+        else {
+          // this.searchedList = this.allsearchresultList;
+        }
+      }
+    }
+
+    this.totallist = this.searchedList.length ? this.searchedList.length : '0';
+    this.showsearchList = false;
+  }
   filterSearch(item) {
-    console.log(item)
     let filteredvalue;
-    if (this.dropdownName == "Emner") {
-      filteredvalue = item.emner.filter(x => x == this.searchdropdownValue)[0];
+    let tempval;
+    let textsearchedval;
+    if (this.emnerModel && !this.helbredskategorierModel && (!this.searchtext || this.searchtext.length < 3)) {
+      filteredvalue = item.emner.filter(x => x == this.emnerModel)[0];
     }
-    if (this.dropdownName == "Helbredskategorier") {
-      filteredvalue = item.helbredskategorier.filter(x => x == this.searchdropdownValue)[0];
+    if (this.helbredskategorierModel && !this.emnerModel && (!this.searchtext || this.searchtext.length < 3)) {
+      filteredvalue = item.helbredskategorier.filter(x => x == this.helbredskategorierModel)[0];
     }
-    console.log(filteredvalue);
-    if (filteredvalue) {
+    if ((this.helbredskategorierModel && this.emnerModel) && (!this.searchtext || this.searchtext.length < 3)) {
+      filteredvalue = item.emner.filter(x => x == this.emnerModel)[0];
+      tempval = item.helbredskategorier.filter(x => x == this.helbredskategorierModel)[0];
+    }
+    if (this.helbredskategorierModel && this.emnerModel && (this.searchtext && this.searchtext.length >= 3)) {
+      filteredvalue = item.emner.filter(x => x == this.emnerModel)[0];
+      tempval = item.helbredskategorier.filter(x => x == this.helbredskategorierModel)[0];
+      textsearchedval = item.tags.filter(x => x.indexOf(this.searchtext) !== -1)[0];
+    }
+
+
+    if (this.helbredskategorierModel && !this.emnerModel && (this.searchtext && this.searchtext.length >= 3)) {
+      tempval = item.helbredskategorier.filter(x => x == this.helbredskategorierModel)[0];
+      textsearchedval = item.tags.filter(x => x.indexOf(this.searchtext) !== -1)[0];
+    }
+    if (!this.helbredskategorierModel && this.emnerModel && (this.searchtext && this.searchtext.length >= 3)) {
+      filteredvalue = item.emner.filter(x => x == this.emnerModel)[0];
+      textsearchedval = item.tags.filter(x => x.indexOf(this.searchtext) !== -1)[0];
+    }
+    if ((!this.helbredskategorierModel || !this.emnerModel) && filteredvalue) {
       return item;
     }
+    if ((this.helbredskategorierModel && this.emnerModel) && (filteredvalue && tempval)) {
+      return item;
+    }
+    if (this.helbredskategorierModel && this.emnerModel && (this.searchtext && this.searchtext.length >= 3) && (filteredvalue && tempval && textsearchedval)) {
+      return item;
+    }
+
+    if (this.helbredskategorierModel && !this.emnerModel && (this.searchtext && this.searchtext.length >= 3) && (tempval && textsearchedval)) {
+      return item;
+    }
+    if (!this.helbredskategorierModel && this.emnerModel && (this.searchtext && this.searchtext.length >= 3) && (filteredvalue && textsearchedval)) {
+      return item;
+    }
+
     else {
       return null;
     }
@@ -292,32 +357,48 @@ export class DetailsComponent {
 
 
   textFilter(event) {
-    console.log(event);
-    this.searchtext = event.value;
-    this.searchtext = this.searchtext.toLowerCase();
+    // event.preventDefault();
+    this.showsearchList = false;
+    this.searchtext = event.value.toLowerCase();
     if (this.searchtext.length >= 3) {
       let filteredList: any = [];
-      console.log("hittt");
       filteredList.push(this.textfilteredList.filter(this.filtertextSearch, this));
-      if (this.searchedList.length == this.allsearchresultList.length || this.searchedList.length == 0) {
-        this.searchedList = filteredList[0];
-      }
-      else {
-        this.searchedList = this.searchedList.concat(filteredList[0]);
-      }
-      this.showsearchList = true;
+      this.searchedList = filteredList[0];
+      this.totallist = this.searchedList.length ? this.searchedList.length : '0';
     }
     else {
-      this.showsearchList = false;
+      this.getSearchedList();
+
     }
+    this.totallist = this.searchedList.length ? this.searchedList.length : '0';
   }
 
   filtertextSearch(item) {
-    console.log(item)
-    let filteredvalue;
-    filteredvalue = item.tags.filter(x => x.indexOf(this.searchtext) !== -1)[0];
-    console.log(filteredvalue);
-    if (filteredvalue) {
+    //  let filteredvalue;
+    let tempval;
+    let helbredskategoriervalue;
+    let emnervalue;
+    let textsearchedval;
+
+    textsearchedval = item.tags.filter(x => x.indexOf(this.searchtext) != -1)[0];
+
+
+
+    if (this.emnerModel && !this.helbredskategorierModel) {
+      emnervalue = item.emner.filter(x => x == this.emnerModel)[0];
+    }
+    if (this.helbredskategorierModel && !this.emnerModel) {
+      helbredskategoriervalue = item.helbredskategorier.filter(x => x == this.helbredskategorierModel)[0];
+    }
+    if (this.helbredskategorierModel && this.emnerModel) {
+      emnervalue = item.emner.filter(x => x == this.emnerModel)[0];
+      helbredskategoriervalue = item.helbredskategorier.filter(x => x == this.helbredskategorierModel)[0];
+    }
+    if ((!this.helbredskategorierModel || !this.emnerModel) && textsearchedval) {
+      return item;
+    }
+
+    if (this.helbredskategorierModel && this.emnerModel && (textsearchedval && emnervalue && helbredskategoriervalue)) {
       return item;
     }
     else {

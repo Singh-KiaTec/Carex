@@ -1,7 +1,6 @@
 @import '../../assets/sass/variables';
 .profile {
     line-height: 1.5em;
-
     .toolbar,
     .toolbar-title,
     .bar-button-default-md {
@@ -45,5 +44,10 @@
     .logout {
         background: $primary-color-theme;
         width: 100%;
+    }
+    &__emailid-input {
+        input {
+            text-overflow: ellipsis;
+        }
     }
 }

@@ -115,8 +115,12 @@
         </ion-list>
 
       </div>
-      <div padding >
-          <button *ngIf="showsearchbutton && searchlabel" ion-button outline class="details__resetbutton" (click)="reset()">{{resetlabel}}
+
+      <div padding *ngIf="showsearchbutton && totallist" class="details__countinfo">
+        {{totallist}} {{allcatalogs}}
+      </div>
+      <div padding>
+          <button *ngIf="showsearchbutton && searchlabel" ion-button outline class="details__resetbutton" (click)="reset($event)">{{resetlabel}}
           &nbsp;  <ion-icon name="refresh"></ion-icon>
          </button>
       <button *ngIf="showsearchbutton && searchlabel" ion-button outline class="details__searchbutton" (click)="search()">{{searchlabel}}

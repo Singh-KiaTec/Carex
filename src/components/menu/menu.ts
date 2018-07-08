@@ -11,7 +11,8 @@ import { OtherRelationsPage } from '../../pages/otherrelations/otherrelations.pa
 // import { tryg } from '../../models/data/tryg';
 import { BaseRestService } from '../../providers/restservice/base.rest.service';
 import { AuthService } from '../../providers/authenticationservice/auth.service';
-import {StorageService} from '../../providers/storageservice/storageservice';
+import { StorageService } from '../../providers/storageservice/storageservice';
+import { ConfigurationService } from '../../providers/utils/configservices';
 
 @Component({
   selector: 'menu-viewer',
@@ -21,14 +22,15 @@ export class MenuComponent {
   @ViewChild(Nav) nav: Nav;
 
   menuList: any;
-  rootPage: any = WelcomePage;
+  rootPage: any;
   private menuItems: any;
   private loading: boolean;
   private environment;
   private userinfo;
+  private appVersion;
 
   pages: Array<{ title: string, component: any }>;
-  constructor(private baserestService: BaseRestService, private storageService :StorageService, private auth: AuthService ) {
+  constructor(private baserestService: BaseRestService, private storageService: StorageService, private configurationService: ConfigurationService, private auth: AuthService) {
   }
 
   ngOnInit() {
@@ -55,22 +57,34 @@ export class MenuComponent {
     // this.userinfo = this.auth.getUserInfo();
     // console.log(this.userinfo);
 
-  //   this.storageService.get('user').then(
-  //     userinfo => {
-  //         if (userinfo) {
-  //             this.userinfo = userinfo;
-  //         }}
-  // );
+    //   this.storageService.get('user').then(
+    //     userinfo => {
+    //         if (userinfo) {
+    //             this.userinfo = userinfo;
+    //         }}
+    // );
+
+    // this.configurationService.getAppVersionNumber().then(
+    //   (appVersion) => {
+    //     this.appVersion = appVersion
+    //   }
+    // );
 
 
-  this.storageService.get('user').then(
-    userinfo => {
-      if (userinfo) {
-        this.userinfo = userinfo;
-      }
-    },
-    error => { console.log(error) }
-  );
+    this.storageService.get('user').then(
+      userinfo => {
+        if (userinfo) {
+          this.auth.setUserinfo(userinfo);
+          this.userinfo = userinfo;
+          this.rootPage = HomePage;
+          //this.nav.setRoot(HomePage);
+        }
+        else {
+          this.rootPage = WelcomePage;
+        }
+      },
+      error => { console.log(error) }
+    );
 
 
 
@@ -105,10 +119,10 @@ export class MenuComponent {
     this.nav.setRoot(page.component, { 'pageData': item, 'itemIndex': itemIndex });
   }
   openProfile() {
-    if(!this.userinfo){
+    if (!this.userinfo) {
       this.userinfo = this.auth.getUserInfo();
     }
-    this.nav.push(ProfilePage, { 'userinfo': this.userinfo});
+    this.nav.push(ProfilePage, { 'userinfo': this.userinfo });
   }
   openNotifications() {
     this.nav.push(NotificationsPage, { 'resultData': '' });

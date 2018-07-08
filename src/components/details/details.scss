@@ -83,5 +83,10 @@
         margin-top: 1.5em;
         margin-bottom: 1.5em;
     }
-
+   &__countinfo{
+       text-align: center;
+       font-size: 1.3em;
+       color: $color-primary-gray;
+       margin-top: -2em;
+   }
 }

@@ -27,6 +27,7 @@ export class WelcomeComponent {
     private loading;
     private welcomeread;
     private user;
+    private continue;
 
     constructor(private baserestService: BaseRestService, private storageService: StorageService, private auth: AuthService) { }
 
@@ -34,19 +35,24 @@ export class WelcomeComponent {
         // Tracking
         this.loading = true;
         this.getWelcomeData();
-        this.storageService.get('welcome').then(
-            welcome => {
-                this.welcomeread = welcome;
-                if (welcome) {
-                    //this.checkUser();
-                    this.baserestService.navigateTo(LoginPage, null);
-                }
-                else {
-                    this.storageService.set('welcome', false);
-                }
-            },
-            error => console.log(error)
-        )
+    
+           // this.user = this.auth.getUserInfo();
+        // this.storageService.get('welcome').then(
+        //     welcome => {
+        //         this.welcomeread = welcome;
+        //         if (welcome) {
+        //             //this.checkUser();
+        //             this.baserestService.navigateTo(LoginPage, null);
+        //         }
+        //         else {
+        //             this.storageService.set('welcome', false);
+        //         }
+        //     },
+        //     error => console.log(error)
+        // )
+        // if (!this.user) {
+        //     this.baserestService.navigateTo(HomePage,this.user);
+        // }
     }
     getWelcomeData() {
         this.baserestService.getWelcomeData().then(
@@ -62,6 +68,7 @@ export class WelcomeComponent {
         this.heading = this.welcomedata.info.heading;
         this.paragraphs = this.welcomedata.info.paragraphs;
         this.condition = this.welcomedata.info.conditions;
+        this.continue = this.welcomedata.info.continue;
     }
     gotoLogin() {
         console.log("go to login");

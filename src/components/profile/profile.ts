@@ -2,7 +2,7 @@ import { Component } from '@angular/core';
 import { NavParams, Navbar } from 'ionic-angular';
 import { ProfilePage } from '../../pages/profile/profile.page';
 import {BaseRestService} from '../../providers/restservice/base.rest.service';
-// import {WelcomePage} from '../../pages/welcome/welcome.page'
+import {WelcomePage} from '../../pages/welcome/welcome.page'
 import { NavController } from 'ionic-angular';
 import {StorageService} from '../../providers/storageservice/storageservice'
 import {AuthService} from '../../providers/authenticationservice/auth.service';
@@ -41,8 +41,8 @@ private email;
       this.user = this.navParam.get('userinfo');
 
 
-     this.username = this.user[0];
-     this.email = this.user[1]
+     this.username = this.user[2];
+     this.email = this.user[1];
 
         console.log(this.user);
         this.baserestService.getProfileContent().then(
@@ -73,7 +73,7 @@ private email;
     }
     initializeApp(){
         this.storageService.clear();
-        this.navCtrl.setRoot(LoginPage);
+        this.navCtrl.setRoot(WelcomePage);
     }
 }
 

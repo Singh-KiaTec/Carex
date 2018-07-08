@@ -1,15 +1,17 @@
 //DEFAULT
 import { BrowserModule } from '@angular/platform-browser';
-import { ErrorHandler, NgModule  } from '@angular/core';
+import { ErrorHandler, NgModule } from '@angular/core';
 import { InAppBrowser } from '@ionic-native/in-app-browser';
 import { IonicApp, IonicErrorHandler, IonicModule } from 'ionic-angular';
 import { IonicStorageModule } from '@ionic/storage';
 //  import { OneSignal } from '@ionic-native/onesignal';
- import { CookieService } from 'ngx-cookie-service';
+import { CookieService } from 'ngx-cookie-service';
 //  import { Cookie } from 'ng2-cookies';
- import { HttpModule } from '@angular/http';
- import { HttpClientModule, HttpClient } from '@angular/common/http';
-
+import { HttpModule } from '@angular/http';
+import { HttpClientModule, HttpClient } from '@angular/common/http';
+import { Keyboard } from '@ionic-native/keyboard';
+import { AppVersion } from '@ionic-native/app-version';
+import { Market } from '@ionic-native/market';
 
 
 
@@ -26,10 +28,10 @@ import { NotificationsPage } from '../pages/notifications/notifications.page';
 import { LoginPage } from '../pages/login/login.page';
 import { WelcomePage } from '../pages/welcome/welcome.page';
 import { NemidPage } from '../pages/nemid/nemid.page';
-import { TermsconditionPage} from '../pages/termsconditions/termsconditions.page';
-import {SearchDetailsPage } from '../pages/searchdetails/searchdetails.page';
-import {OtherRelationsPage } from '../pages/otherrelations/otherrelations.page';
-import {CustomanchorPage } from '../pages/customanchor/customanchor.page';
+import { TermsconditionPage } from '../pages/termsconditions/termsconditions.page';
+import { SearchDetailsPage } from '../pages/searchdetails/searchdetails.page';
+import { OtherRelationsPage } from '../pages/otherrelations/otherrelations.page';
+import { CustomanchorPage } from '../pages/customanchor/customanchor.page';
 
 
 
@@ -48,12 +50,13 @@ import { BaseRestService } from '../providers/restservice/base.rest.service';
 import { StorageService } from '../providers/storageservice/storageservice';
 import { WindowRef } from '../providers/windowservice/windowservice';
 import { AuthService } from '../providers/authenticationservice/auth.service';
-import {SafePipe} from '../providers/directory/safepipe';
+import { SafePipe } from '../providers/directory/safepipe';
+import { ConfigurationService } from '../providers/utils/configservices';
 
 
 
 //IONIC
-  
+
 import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
 import { SettingsComponent } from '../components/settings/settings';
@@ -66,9 +69,9 @@ import { LoginComponent } from '../components/login/login';
 import { WelcomeComponent } from '../components/welcome/welcome';
 import { TermsconditionsComponent } from '../components/termsconditions/termsconditions';
 import { HeaderComponent } from '../components/header/header';
-import {SearchDetailsComponent} from '../components/searchdetails/searchdetails';
-import {OtherrelationsComponent} from '../components/otherrelations/otherrelations';
-import {CustomanchorComponent} from '../components/customanchor/customanchor';
+import { SearchDetailsComponent } from '../components/searchdetails/searchdetails';
+import { OtherrelationsComponent } from '../components/otherrelations/otherrelations';
+import { CustomanchorComponent } from '../components/customanchor/customanchor';
 
 
 const pagesDeclaration = [
@@ -120,7 +123,7 @@ const componentDeclaration = [
     IonicModule.forRoot(MyApp),
     IonicStorageModule.forRoot({
       name: 'carexDB',
-         driverOrder: ['indexeddb', 'sqlite', 'websql']
+      driverOrder: ['indexeddb', 'sqlite', 'websql']
     })
   ],
   bootstrap: [IonicApp],
@@ -139,7 +142,7 @@ const componentDeclaration = [
     SearchDetailsPage,
     TermsconditionPage,
     OtherRelationsPage
-    
+
   ],
   providers: [
     StatusBar,
@@ -147,12 +150,16 @@ const componentDeclaration = [
     BaseRestService,
     StorageService,
     CookieService,
+    ConfigurationService,
     HttpClient,
+    Keyboard,
+    Market,
+    AppVersion,
     HttpClientModule,
     WindowRef,
     AuthService,
     InAppBrowser,
-    { provide: ErrorHandler,   useClass: IonicErrorHandler }
+    { provide: ErrorHandler, useClass: IonicErrorHandler }
   ]
 })
 export class AppModule { }

@@ -40,9 +40,16 @@ export class LoginComponent {
     private userInfo;
     private error = false;
     private showlogin = false;
+    private loginData: any;
+    private username;
+    private password;
+    private errormsg;
+    private submit;
+    private forgetpasswordlabel;
+
 
     constructor(private fb: FormBuilder, private navCtrl: NavController,
-        private auth: AuthService, private iab: InAppBrowser, public loadingCtrl: LoadingController, private baserestService: BaseRestService, private storageService: StorageService) {
+        private auth: AuthService, private iab: InAppBrowser, private baserestService: BaseRestService, private storageService: StorageService) {
         this.loginForm = this.fb.group({
             userid: ['', Validators.required],
             password: ['', Validators.required],
@@ -52,8 +59,7 @@ export class LoginComponent {
     ngOnInit() {
         // Tracking
         //this.environment = this.auth.getEnvironment();
-
-
+        this.getloginData();
         //this.userinfo = this.cookieService.get('userdata');
 
         console.log("in login compinent");
@@ -70,23 +76,17 @@ export class LoginComponent {
         //     error => console.log(error)
         // )
 
-        this.loading = this.loadingCtrl.create({
-            content: ''
-        });
-
-        this.loading.present();
 
         this.storageService.get('user').then(
             loggedUser => {
                 this.loggedUser = loggedUser;
                 if (loggedUser) {
                     this.user = new User(loggedUser);
-                    this.loading.dismiss();
+
                     this.showlogin = false;
                     this.navCtrl.setRoot(HomePage)
                 }
                 else {
-                    this.loading.dismiss();
                     this.showlogin = true;
                 }
 
@@ -114,6 +114,25 @@ export class LoginComponent {
 
 
     }
+    getloginData() {
+        this.baserestService.getloginData().then(
+            loginData => {
+                this.loginData = loginData;
+                this.setData();
+                this.loading = false
+            },
+            error => { console.log("error"); this.loading = false }
+        );
+
+    }
+    setData() {
+        this.submit = this.loginData.submit;
+        this.password = this.loginData.password;
+        this.errormsg = this.loginData.errormsg;
+        this.forgetpasswordlabel = this.loginData.forgetpassword;
+        this.username = this.loginData.username;
+    }
+
     loggedIn() {
         this.storageService.set('welcome', true);
         if (this.userInfo) {

@@ -91,6 +91,10 @@ export class BaseRestService {
         //return this.http.get(this.baseUrl + 'jsondata/welcome.json', this.options).toPromise();
         return this.http.get(this.prodUrl + 'config/jsondata/welcome.php').toPromise();
     }
+    getloginData() {
+        //return this.http.get(this.baseUrl + 'jsondata/welcome.json', this.options).toPromise();
+        return this.http.get(this.prodUrl + 'config/jsondata/login.php').toPromise();
+    }
     getTermsandconditionsData() {
         // this.getPlatform();
         console.log(this.baseUrl);
@@ -99,11 +103,11 @@ export class BaseRestService {
     }
     getCustomerData() {
         console.log(this.baseUrl);
-        return this.http.get(this.prodUrl + 'config/jsondata/tryg.php', this.options).toPromise();
+        return this.http.get(this.prodUrl + 'config/jsondata/trygv2.php', this.options).toPromise();
     }
     getsmartSearchData() {
-       //return this.http.get(this.prodUrl + 'config/jsondata/searchlist.php', this.options).toPromise();
-        return this.http.get(this.prodUrl + 'config/jsondata/smartsearch.php', this.options).toPromise();
+        //return this.http.get(this.prodUrl + 'config/jsondata/searchlist.php', this.options).toPromise();
+        return this.http.get(this.prodUrl + 'config/jsondata/smartsearchv2.php', this.options).toPromise();
     }
     logout(url) {
         this.storageservice.clear();
@@ -111,7 +115,7 @@ export class BaseRestService {
     }
     login(username, password) {
         this.formdata = new FormData();
-   
+
         this.formdata.append('action', 'login');
         this.formdata.append('username', username);
         this.formdata.append('password', password);
@@ -135,7 +139,10 @@ export class BaseRestService {
     getSearchPage() {
         return this.http.get(this.prodUrl + 'config/jsondata/search.php', this.options).toPromise();
     }
-    checklogin(){
+    checklogin() {
         return this.http.get("https://test-tryg.carex.dk/", this.options).toPromise();
+    }
+    getappVersion() {
+        return this.http.get(this.prodUrl + 'config/jsondata/appversion.php', this.options).toPromise();
     }
 }

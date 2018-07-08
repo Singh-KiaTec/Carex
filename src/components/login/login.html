@@ -1,33 +1,33 @@
-<ion-header class="header">
+<!-- <ion-header class="header">
         <header-viewer></header-viewer>
-    </ion-header>
-<ion-content padding class="login">
+    </ion-header> -->
+
        <form  [formGroup]="loginForm"  (ngSubmit)="login()" >
-           <div>
+           <div *ngIf="loginData">
  <ion-list> 
           
                          <ion-item>
                              
-                                    <ion-label class="dark">Brugernavn: </ion-label>
+                                    <ion-label class="dark">{{username}} </ion-label>
                                       <ion-input  type="text" formControlName="userid"></ion-input>
                                 </ion-item>
                                 <ion-item>
-                                    <ion-label class="dark">Adgangskode: </ion-label>
+                                    <ion-label class="dark">{{password}} </ion-label>
                                       <ion-input type="password" class="form-control" formControlName="password"></ion-input>
                                 </ion-item>
     
 
     </ion-list>
     <div  *ngIf="error">
-            <div class="login__error">Forkert brugernavn eller adgangskode.</div>
+            <div class="login__error">{{errormsg}}</div>
 
            </div>
     </div>
 
    
-    <button ion-button type="submit"  [disabled]="!loginForm.valid" class="login__login-button">Login</button>
+    <button ion-button type="submit"  [disabled]="!loginForm.valid" class="login__login-button">{{submit}}</button>
 
-    <button ion-button type="button" color="secondary" (click)="forgetpassword($event)" class="login__forgetpwd">Ny Bruger / glemt adgangskode</button>
+    <button ion-button type="button" color="secondary" (click)="forgetpassword($event)" class="login__forgetpwd">{{forgetpasswordlabel}}</button>
 </form>  
 <!-- <div id="iframecontent">
 <iframe #myIframe id="myIframe" (load)="onLoadFunc($event)" class="login__iframe" sandbox="allow-cross-origin allow-scripts allow-forms" src="https://udv-tryg.carex.dk/simplesaml/module.php/core/loginuserpass.php?AuthState=_71b81db81b429e56d3f1b7a57d3d25bd5304f16b1c%3Ahttps%3A%2F%2Fudv-tryg.carex.dk%2Fsimplesaml%2Fmodule.php%2Fcore%2Fas_login.php%3FAuthId%3Didp.carex.dk%26ReturnTo%3Dhttps%253A%252F%252Fudv-tryg.carex.dk%252F">
@@ -45,7 +45,7 @@
          
       
         <!-- </div> -->
-</ion-content>
+
 
 
 
@@ -59,4 +59,3 @@
             <ion-input item-right type="password" value=""></ion-input>
         </ion-item> 
 -->
-

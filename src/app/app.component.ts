@@ -11,9 +11,13 @@ import { data } from '../../src/models/data/data'
 // import { NotificationsPage } from '../pages/notifications/notifications.page';
 // import { NavParams, NavController, Content, Navbar } from 'ionic-angular';
 // import { OneSignal } from '@ionic-native/onesignal';
-import {StorageService} from '../providers/storageservice/storageservice';
-import {BaseRestService} from '../providers/restservice/base.rest.service';
+import { StorageService } from '../providers/storageservice/storageservice';
+import { BaseRestService } from '../providers/restservice/base.rest.service';
 // import { WelcomePage } from '../pages/welcome/welcome.page';
+import { Keyboard } from '@ionic-native/keyboard';
+import { ConfigurationService } from '../providers/utils/configservices';
+//declare var cordova: any;
+const updateTimerInterval: number = 14400000;
 
 @Component({
   templateUrl: 'app.html'
@@ -22,14 +26,18 @@ export class MyApp {
   @ViewChild(Nav) nav: Nav;
   // @ViewChild('myNav') nav: NavController
 
-  rootPage: any = HomePage;
+  public rootPage: any = HomePage;
+  private updateTimer: any;
+  private isReadyForUpdateCheck: boolean = true;
+
 
   pages: Array<{ title: string, component: any }>;
   menuList: any = data;
 
-  constructor(public platform: Platform, public statusBar: StatusBar, public splashScreen: SplashScreen, 
+  constructor(public platform: Platform, public statusBar: StatusBar, public keyboard: Keyboard, public splashScreen: SplashScreen,
     // private oneSignal: OneSignal ,
-    public baserestService: BaseRestService,public storageService: StorageService) {
+    public configurationService: ConfigurationService,
+    public baserestService: BaseRestService, public storageService: StorageService) {
     this.initializeApp();
 
   }
@@ -38,9 +46,11 @@ export class MyApp {
     this.platform.ready().then(() => {
       // Okay, so the platform is ready and our plugins are available.
       // Here you can do any higher level native things you might need.
+
       this.statusBar.styleDefault();
       this.statusBar.overlaysWebView(false);
       this.statusBar.backgroundColorByHexString('#dc0000');
+      this.keyboard.disableScroll(true);
       this.splashScreen.hide();
       //this.oneSignal.startInit("86c266d2-3554-4095-97c5-6efc0ac1e91a", "599014675139");
 
@@ -64,11 +74,11 @@ export class MyApp {
 
       // this.oneSignal.handleNotificationReceived().subscribe((resultData) => {
       //   // do something when notification is received
-      
+
       //   this.storageService.validatesetNotification('allstorednotifications',resultData);
       //   console.log(resultData);
       // });
-  
+
       // this.oneSignal.handleNotificationOpened().subscribe((resultData) => {
       //   // do something when a notification is opened
       //   console.log('notificationOpenedCallback: ' + JSON.stringify(resultData));
@@ -76,22 +86,37 @@ export class MyApp {
       //   this.nav.push(NotificationsPage, { "resultData": resultData });
       // });
 
-   
+     this.checkForUpdates();
     });
-    
 
 
+
+    this.platform.resume.subscribe(
+      () => {
+          this.checkForUpdates();
+        }
+    );
 
   }
-  notificationOpenedCallback(resultData){
+  checkForUpdates() {
+    this.configurationService.getAppVersionNumber().then(
+      (data) => {
+        console.log(data);
+        this.configurationService.checkForceUpdate(data);
+      }
+    );
+
+  }
+
+  notificationOpenedCallback(resultData) {
     console.log(resultData);
     //this.nav.push(NotificationsPage, { "resultData": resultData });
     this.baserestService.pushNotification(resultData);
- 
+
   }
-  notificationReceived(resultData){
+  notificationReceived(resultData) {
     console.log(resultData);
-    this.storageService.validatesetNotification('allstorednotifications',resultData);
-         console.log(resultData);
+    this.storageService.validatesetNotification('allstorednotifications', resultData);
+    console.log(resultData);
   }
 }
