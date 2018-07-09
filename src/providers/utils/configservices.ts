@@ -68,19 +68,6 @@ export class ConfigurationService {
       async performManualUpdate() {
         const haveUpdate = await Pro.deploy.check()
         if (haveUpdate){
-            const alert = this.alertCtrl.create({
-                title: 'App Update!',
-                subTitle: 'Please update your app to new version!',
-                buttons: [
-                    {
-                        text: 'Update',
-                        handler: data => {
-                            console.log('ok');//this.openStore();
-                        }
-                    }]
-            });
-            alert.present();
-
           this.downloadProgress = 0;
           this.extractProgress = 0;
       
