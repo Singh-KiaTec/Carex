@@ -13,11 +13,13 @@ import { data } from '../../src/models/data/data'
 // import { OneSignal } from '@ionic-native/onesignal';
 import { StorageService } from '../providers/storageservice/storageservice';
 import { BaseRestService } from '../providers/restservice/base.rest.service';
+import {Pro} from '@ionic/pro';
 // import { WelcomePage } from '../pages/welcome/welcome.page';
 import { Keyboard } from '@ionic-native/keyboard';
 import { ConfigurationService } from '../providers/utils/configservices';
 //declare var cordova: any;
 const updateTimerInterval: number = 14400000;
+
 
 @Component({
   templateUrl: 'app.html'
@@ -29,6 +31,9 @@ export class MyApp {
   public rootPage: any = HomePage;
   private updateTimer: any;
   private isReadyForUpdateCheck: boolean = true;
+  public deployChannel='master';
+  public downlaodProgress= 0;
+
 
 
   pages: Array<{ title: string, component: any }>;
@@ -86,17 +91,22 @@ export class MyApp {
       //   this.nav.push(NotificationsPage, { "resultData": resultData });
       // });
 
-     this.checkForUpdates();
+     // this.checkForUpdates();
+     this.checkForIonicUpdates();
     });
 
 
 
     this.platform.resume.subscribe(
       () => {
-          this.checkForUpdates();
+          //this.checkForUpdates();
+          this.checkForIonicUpdates();
         }
     );
 
+  }
+  checkForIonicUpdates(){
+    this.configurationService.performManualUpdate();
   }
   checkForUpdates() {
     this.configurationService.getAppVersionNumber().then(

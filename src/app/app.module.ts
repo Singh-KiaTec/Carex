@@ -12,7 +12,8 @@ import { HttpClientModule, HttpClient } from '@angular/common/http';
 import { Keyboard } from '@ionic-native/keyboard';
 import { AppVersion } from '@ionic-native/app-version';
 import { Market } from '@ionic-native/market';
-
+import {Pro} from '@ionic/pro';
+import { Injectable, Injector } from '@angular/core';
 
 
 
@@ -73,6 +74,32 @@ import { SearchDetailsComponent } from '../components/searchdetails/searchdetail
 import { OtherrelationsComponent } from '../components/otherrelations/otherrelations';
 import { CustomanchorComponent } from '../components/customanchor/customanchor';
 
+
+Pro.init('2564d9e8',{
+  appVersion:'0.0.7'
+
+});
+
+@Injectable()
+export class MyErrorHandler implements ErrorHandler {
+  ionicErrorHandler: IonicErrorHandler;
+
+  constructor(injector: Injector) {
+    try {
+      this.ionicErrorHandler = injector.get(IonicErrorHandler);
+    } catch(e) {
+      // Unable to get the IonicErrorHandler provider, ensure
+      // IonicErrorHandler has been added to the providers list below
+    }
+  }
+
+  handleError(err: any): void {
+    Pro.monitoring.handleNewError(err);
+    // Remove this if you want to disable Ionic's auto exception handling
+    // in development mode.
+    this.ionicErrorHandler && this.ionicErrorHandler.handleError(err);
+  }
+}
 
 const pagesDeclaration = [
   MenuPage,
@@ -159,7 +186,8 @@ const componentDeclaration = [
     WindowRef,
     AuthService,
     InAppBrowser,
-    { provide: ErrorHandler, useClass: IonicErrorHandler }
+    // { provide: ErrorHandler, useClass: IonicErrorHandler }
+    [{provide: ErrorHandler, useClass: MyErrorHandler }]
   ]
 })
 export class AppModule { }

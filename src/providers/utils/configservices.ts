@@ -5,6 +5,7 @@ import { PopoverController, AlertController, ToastController, Platform } from 'i
 import { StorageService } from '../storageservice/storageservice';
 import { BaseRestService } from '../../providers/restservice/base.rest.service';
 import { AppVersion } from '@ionic-native/app-version';
+import {Pro} from '@ionic/pro';
 import { Market } from '@ionic-native/market';
 const environment = "environment";
 const updateInterval: number = 14400000;
@@ -13,6 +14,10 @@ const updateInterval: number = 14400000;
 @Injectable()
 export class ConfigurationService {
     private versionNumber;
+    public deployChannel;
+    public isBeta;
+    public downloadProgress:any;
+    public extractProgress:any;
 
 
     constructor(private appVersion: AppVersion,
@@ -48,6 +53,36 @@ export class ConfigurationService {
         );
 
     }
+    async checkChannel() {
+        try {
+          const res = await Pro.deploy.info();
+          this.deployChannel = res.channel;
+          //this.isBeta = (this.deployChannel === 'Beta')
+        } catch (err) {
+          // We encountered an error.
+          // Here's how we would log it to Ionic Pro Monitoring while also catching:
+    
+          // Pro.monitoring.exception(err);
+        }
+      }
+      async performManualUpdate() {
+        const haveUpdate = await Pro.deploy.check()
+        if (haveUpdate){
+          this.downloadProgress = 0;
+          this.extractProgress = 0;
+      
+          await Pro.deploy.download((progress) => {
+            this.downloadProgress = progress;
+          })
+          await Pro.deploy.extract((progress) => {
+            this.extractProgress = progress;
+          })
+          await Pro.deploy.redirect();
+        }
+      }
+    // getSnapshot(){
+
+    // }
     deployApp(appInfo) {
         this.storageService.set('snapshot', appInfo);
         console.log(appInfo);
