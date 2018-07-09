@@ -58,7 +58,8 @@ export class SearchDetailsComponent {
 
     }
 
-    downloadPdf() {
+    downloadPdf(event) {
+        event.preventDefault();
         // let path:any;
         // if (this.platform.is('ios')) {
         //     path = this.file.documentsDirectory;
@@ -67,8 +68,8 @@ export class SearchDetailsComponent {
         //   }
         // const transfer = this.transfer.create();
         // window.open("https://docs.google.com/viewer?url="+this.bilagurl, "_blank");
-        let browser = this.iab.create("https://docs.google.com/viewer?url=" + this.bilagurl, "_blank");
-        browser.show();
+       this.iab.create("https://docs.google.com/viewer?url=" + this.bilagurl, "_system", "location=no,hardwareback=yes");
+       
 
         // transfer.download(this.bilagurl,this.file.dataDirectory + this.bilagName).then((entry) => {
         //   console.log('download complete: ' + entry.toURL());

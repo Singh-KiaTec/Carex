@@ -19,7 +19,7 @@
         <img class="searchdetails__bg-image" src="{{baseUrl}}config/assets/imgs/searchimages/{{searchselectedItem.image}}"
         />
         <div *ngIf="bilagName" class="searchdetails__download">
-                <p class="searchdetails__downloadlink" margin (click)="downloadPdf()">
+                <p class="searchdetails__downloadlink" margin (click)="downloadPdf($event)">
                     <ion-icon name="cloud-download"></ion-icon>
                 </p>
             </div>

@@ -150,7 +150,7 @@ export class LoginComponent {
 
         // console.log(event);
         // window.open("https://trygsundhed.carex.dk/simplesaml/module.php/core/forgotpw.php", "_blank");
-        this.iab.create('https://trygsundhed.carex.dk/simplesaml/module.php/core/forgotpw.php', "_system", "location=yes,hardwareback=yes");
+        this.iab.create('https://trygsundhed.carex.dk/simplesaml/module.php/core/forgotpw.php', "_system", "location=no,hardwareback=yes");
 
     }
 
