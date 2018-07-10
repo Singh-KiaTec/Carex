@@ -10,7 +10,7 @@ import { Market } from '@ionic-native/market';
 import { PopoverIonicdeploy } from '../../components/ionicpopover/ionicpopover';
 
 const environment = "environment";
-const updateInterval: number = 0;//14400000;
+const updateInterval: number = 14400000;
 
 
 @Injectable()
