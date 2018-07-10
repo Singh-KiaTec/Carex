@@ -77,6 +77,18 @@ export class ConfigurationService {
     async checkForIonicDeploy() {
         const haveUpdate = await Pro.deploy.check()
         if (haveUpdate) {
+            const alert = this.alertCtrl.create({
+                title: 'App Update!',
+                subTitle: 'Please update your app to new version!',
+                buttons: [
+                    {
+                        text: 'Update',
+                        handler: data => {
+                           console.log("updateing");
+                        }
+                    }]
+            });
+            alert.present();
             this.downloadProgress = 0;
             this.extractProgress = 0;
 
@@ -87,9 +99,10 @@ export class ConfigurationService {
             await Pro.deploy.extract((progress) => {
                 console.log(progress);
                 this.extractProgress = progress;
-                this.displayIonicdeployDialog();
+                //this.displayIonicdeployDialog();
 
             })
+            alert.dismiss();
             await Pro.deploy.redirect();
         }
     }
