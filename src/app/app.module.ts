@@ -169,7 +169,8 @@ const componentDeclaration = [
     NemidPage,
     SearchDetailsPage,
     TermsconditionPage,
-    OtherRelationsPage
+    OtherRelationsPage,
+    PopoverIonicdeploy
 
   ],
   providers: [
