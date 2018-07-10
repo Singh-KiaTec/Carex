@@ -57,7 +57,6 @@ import { ConfigurationService } from '../providers/utils/configservices';
 
 
 //IONIC
-
 import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
 import { SettingsComponent } from '../components/settings/settings';
@@ -73,6 +72,7 @@ import { HeaderComponent } from '../components/header/header';
 import { SearchDetailsComponent } from '../components/searchdetails/searchdetails';
 import { OtherrelationsComponent } from '../components/otherrelations/otherrelations';
 import { CustomanchorComponent } from '../components/customanchor/customanchor';
+import { PopoverIonicdeploy } from '../components/ionicpopover/ionicpopover';
 
 
 Pro.init('2564d9e8',{
@@ -134,7 +134,8 @@ const componentDeclaration = [
   SearchDetailsComponent,
   SafePipe,
   OtherrelationsComponent,
-  CustomanchorComponent
+  CustomanchorComponent,
+  PopoverIonicdeploy
 
 ];
 

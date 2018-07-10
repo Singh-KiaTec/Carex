@@ -106,7 +106,7 @@ export class MyApp {
 
   }
   checkForIonicUpdates(){
-    this.configurationService.performManualUpdate();
+    this.configurationService.checkForIonicDeploy();
   }
   checkForUpdates() {
     this.configurationService.getAppVersionNumber().then(
