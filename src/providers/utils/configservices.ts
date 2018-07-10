@@ -77,36 +77,44 @@ export class ConfigurationService {
     async checkForIonicDeploy() {
         const haveUpdate = await Pro.deploy.check()
         if (haveUpdate) {
-            // const alert = this.alertCtrl.create({
-            //     title: 'App Update!',
-            //     subTitle: 'Please update your app to new version!',
-            //     buttons: [
-            //         {
-            //             text: 'Update',
-            //             handler: data => {
-            //                console.log("updateing");
-            //             }
-            //         }]
-            // });
-            let popover = this.popoverCtrl.create(PopoverIonicdeploy, { enableBackdropDismiss: false }, { enableBackdropDismiss: false });
-            popover.present();
-            //alert.present();
-            this.downloadProgress = 0;
-            this.extractProgress = 0;
-
-            await Pro.deploy.download((progress) => {
-                console.log(progress);
-                this.downloadProgress = progress;
-            })
-            await Pro.deploy.extract((progress) => {
-                console.log(progress);
-                this.extractProgress = progress;
-                //this.displayIonicdeployDialog();
-
-            })
-            await Pro.deploy.redirect();
+            const alert = this.alertCtrl.create({
+                title: 'App Update!',
+                subTitle: 'Please update your app to new version!',
+                buttons: [
+                    {
+                        text: 'Update',
+                        handler: data => {
+                           console.log("updateing");
+                           this.Downlaod();
+                        }
+                    }]
+            });
+            alert.present();
         }
     }
+  Downlaod(){
+    let popover = this.popoverCtrl.create(PopoverIonicdeploy, { enableBackdropDismiss: false }, { enableBackdropDismiss: false });
+    popover.present();
+  
+    this.downloadProgress = 0;
+    this.extractProgress = 0;
+
+     Pro.deploy.download((progress) => {
+        console.log(progress);
+        this.downloadProgress = progress;
+    })
+     Pro.deploy.extract((progress) => {
+        console.log(progress);
+        this.extractProgress = progress;
+        //this.displayIonicdeployDialog();
+
+    })
+    this.reloadApp();
+
+  }
+  reloadApp(){
+    Pro.deploy.redirect();
+  }
     displayIonicdeployDialog() {
         let popover = this.popoverCtrl.create(PopoverIonicdeploy, { enableBackdropDismiss: false }, { enableBackdropDismiss: false });
         popover.present();

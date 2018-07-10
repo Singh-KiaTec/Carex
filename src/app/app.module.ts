@@ -179,7 +179,6 @@ const componentDeclaration = [
     BaseRestService,
     StorageService,
     CookieService,
-    Pro,
     ConfigurationService,
     HttpClient,
     Keyboard,

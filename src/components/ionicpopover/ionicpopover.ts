@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { NavParams, ViewController, Platform } from 'ionic-angular';
-import { Pro } from '@ionic/pro';
+
 
 declare var cordova: any;
 
@@ -12,14 +12,13 @@ export class PopoverIonicdeploy {
     constructor(
         public params: NavParams,
         public viewCtrl: ViewController,
-        private platform: Platform,
-        private pro: Pro
+        private platform: Platform
     ) {
 
     }
 
     reloadApp() {
-        this.pro.deploy.redirect();
+       // this.pro.deploy.redirect();
     }
 
     dismiss() {
