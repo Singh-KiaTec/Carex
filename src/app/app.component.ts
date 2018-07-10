@@ -103,10 +103,10 @@ export class MyApp {
     this.platform.resume.subscribe(
       () => {
         //this.checkForUpdates();
-        if (this.isReadyForUpdateCheck) {
+       // if (this.isReadyForUpdateCheck) {
           this.checkForIonicUpdates();
-          this.isReadyForUpdateCheck = false;
-        }
+         // this.isReadyForUpdateCheck = false;
+        //}
       }
     );
 

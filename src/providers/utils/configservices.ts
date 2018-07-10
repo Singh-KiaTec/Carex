@@ -28,9 +28,9 @@ export class ConfigurationService {
         public popoverCtrl: PopoverController,
          private baserestService: BaseRestService, public alertCtrl: AlertController) {
 
-        this.updateTimer = setInterval(() => {
-            this.checkForIonicDeploy();
-        }, updateInterval);
+        // this.updateTimer = setInterval(() => {
+        //     this.checkForIonicDeploy();
+        // }, updateInterval);
     }
 
     getAppVersionNumber() {
