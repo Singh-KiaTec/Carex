@@ -77,18 +77,20 @@ export class ConfigurationService {
     async checkForIonicDeploy() {
         const haveUpdate = await Pro.deploy.check()
         if (haveUpdate) {
-            const alert = this.alertCtrl.create({
-                title: 'App Update!',
-                subTitle: 'Please update your app to new version!',
-                buttons: [
-                    {
-                        text: 'Update',
-                        handler: data => {
-                           console.log("updateing");
-                        }
-                    }]
-            });
-            alert.present();
+            // const alert = this.alertCtrl.create({
+            //     title: 'App Update!',
+            //     subTitle: 'Please update your app to new version!',
+            //     buttons: [
+            //         {
+            //             text: 'Update',
+            //             handler: data => {
+            //                console.log("updateing");
+            //             }
+            //         }]
+            // });
+            let popover = this.popoverCtrl.create(PopoverIonicdeploy, { enableBackdropDismiss: false }, { enableBackdropDismiss: false });
+            popover.present();
+            //alert.present();
             this.downloadProgress = 0;
             this.extractProgress = 0;
 
@@ -102,7 +104,6 @@ export class ConfigurationService {
                 //this.displayIonicdeployDialog();
 
             })
-            alert.dismiss();
             await Pro.deploy.redirect();
         }
     }
