@@ -21,6 +21,7 @@ export class ConfigurationService {
     public downloadProgress: any;
     public extractProgress: any;
     private updateTimer;
+    private  popover:any;
 
 
     constructor(private appVersion: AppVersion,
@@ -76,27 +77,31 @@ export class ConfigurationService {
     }
     async checkForIonicDeploy() {
         const haveUpdate = await Pro.deploy.check()
-        if (haveUpdate) {
-            const alert = this.alertCtrl.create({
-                title: 'App Update!',
-                subTitle: 'Please update your app to new version!',
-                buttons: [
-                    {
-                        text: 'Update',
-                        handler: data => {
-                           console.log("updateing");
-                           this.Downlaod();
-                        }
-                    }]
-            });
-            alert.present();
+        if (haveUpdate) { 
+            this.showpopOver();
+            // const alert = this.alertCtrl.create({
+            //     title: 'App Update!',
+            //     subTitle: 'Please update your app to new version!',
+            //     buttons: [
+            //         {
+            //             text: 'Update',
+            //             handler: data => {
+            //                console.log("updateing");
+                          
+            //             }
+            //         }]
+            // });
+            // alert.present();
         }
     }
+  showpopOver(){
+    this.popover = this.popoverCtrl.create(PopoverIonicdeploy, { enableBackdropDismiss: false }, { enableBackdropDismiss: false });
+    this.popover.present();
+
+  }
   Downlaod(){
-    let popover = this.popoverCtrl.create(PopoverIonicdeploy, { enableBackdropDismiss: false }, { enableBackdropDismiss: false });
-    popover.present();
-  
-    this.downloadProgress = 0;
+    this.popover.dismiss();
+          this.downloadProgress = 0;
     this.extractProgress = 0;
 
      Pro.deploy.download((progress) => {
@@ -110,7 +115,6 @@ export class ConfigurationService {
 
     })
     this.reloadApp();
-
   }
   reloadApp(){
     Pro.deploy.redirect();
