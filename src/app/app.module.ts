@@ -12,7 +12,7 @@ import { HttpClientModule, HttpClient } from '@angular/common/http';
 import { Keyboard } from '@ionic-native/keyboard';
 import { AppVersion } from '@ionic-native/app-version';
 import { Market } from '@ionic-native/market';
-import {Pro} from '@ionic/pro';
+// import {Pro} from '@ionic/pro';
 import { Injectable, Injector } from '@angular/core';
 
 
@@ -73,33 +73,34 @@ import { SearchDetailsComponent } from '../components/searchdetails/searchdetail
 import { OtherrelationsComponent } from '../components/otherrelations/otherrelations';
 import { CustomanchorComponent } from '../components/customanchor/customanchor';
 import { PopoverIonicdeploy } from '../components/ionicpopover/ionicpopover';
+import { DropDownPopOver } from '../components/dropdownpopover/dropdownpopover';
 
 
-Pro.init('2564d9e8',{
-  appVersion:'0.0.7'
+// Pro.init('2564d9e8',{
+//   appVersion:'0.0.7'
 
-});
+// });
 
-@Injectable()
-export class MyErrorHandler implements ErrorHandler {
-  ionicErrorHandler: IonicErrorHandler;
+// @Injectable()
+// export class MyErrorHandler implements ErrorHandler {
+//   ionicErrorHandler: IonicErrorHandler;
 
-  constructor(injector: Injector) {
-    try {
-      this.ionicErrorHandler = injector.get(IonicErrorHandler);
-    } catch(e) {
-      // Unable to get the IonicErrorHandler provider, ensure
-      // IonicErrorHandler has been added to the providers list below
-    }
-  }
+//   constructor(injector: Injector) {
+//     try {
+//       this.ionicErrorHandler = injector.get(IonicErrorHandler);
+//     } catch(e) {
+//       // Unable to get the IonicErrorHandler provider, ensure
+//       // IonicErrorHandler has been added to the providers list below
+//     }
+//   }
 
-  handleError(err: any): void {
-    Pro.monitoring.handleNewError(err);
-    // Remove this if you want to disable Ionic's auto exception handling
-    // in development mode.
-    this.ionicErrorHandler && this.ionicErrorHandler.handleError(err);
-  }
-}
+//   handleError(err: any): void {
+//     Pro.monitoring.handleNewError(err);
+//     // Remove this if you want to disable Ionic's auto exception handling
+//     // in development mode.
+//     this.ionicErrorHandler && this.ionicErrorHandler.handleError(err);
+//   }
+// }
 
 const pagesDeclaration = [
   MenuPage,
@@ -135,7 +136,8 @@ const componentDeclaration = [
   SafePipe,
   OtherrelationsComponent,
   CustomanchorComponent,
-  PopoverIonicdeploy
+  PopoverIonicdeploy,
+  DropDownPopOver
 
 ];
 
@@ -148,7 +150,21 @@ const componentDeclaration = [
     BrowserModule,
     HttpModule,
     HttpClientModule,
-    IonicModule.forRoot(MyApp),
+    IonicModule.forRoot(MyApp, {
+      platforms: {
+        ios: {
+          backButtonText: 'Tilbage',
+          scrollAssist: true, 
+          autoFocusAssist: true,
+          scrollPadding: true
+        },
+        android: {
+          scrollAssist: false, 
+          autoFocusAssist: false
+        }
+      }
+    }),
+    // IonicModule.forRoot(MyApp),
     IonicStorageModule.forRoot({
       name: 'carexDB',
       driverOrder: ['indexeddb', 'sqlite', 'websql']
@@ -170,7 +186,8 @@ const componentDeclaration = [
     SearchDetailsPage,
     TermsconditionPage,
     OtherRelationsPage,
-    PopoverIonicdeploy
+    PopoverIonicdeploy,
+    DropDownPopOver
 
   ],
   providers: [
@@ -188,8 +205,8 @@ const componentDeclaration = [
     WindowRef,
     AuthService,
     InAppBrowser,
-    // { provide: ErrorHandler, useClass: IonicErrorHandler }
-    [{provide: ErrorHandler, useClass: MyErrorHandler }]
+    { provide: ErrorHandler, useClass: IonicErrorHandler }
+    //[{provide: ErrorHandler, useClass: MyErrorHandler }]
   ]
 })
 export class AppModule { }

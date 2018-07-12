@@ -14,7 +14,7 @@
   </ion-navbar>
 </ion-header>
 
-<ion-content class="details">
+<ion-content #detailsContent  class="details">
   <div class="detailspage" (swipe)="switchTab($event)">
     <ion-grid>
 
@@ -41,7 +41,7 @@
         <div padding class="details__content" *ngIf="tabstoDisplay && tabsContent">
           <ng-template ngFor let-content [ngForOf]="tabstoDisplay" let-c="index" [ngForTrackBy]="trackByFn">
 
-            <div  id="{{c}}" *ngIf="c==0" [ngClass]="(selectedContainer==0)? 'details__show': 'details__hide' ">
+            <div id="{{c}}" *ngIf="c==0" [ngClass]="(selectedContainer==0)? 'details__show': 'details__hide' ">
               <ng-template ngFor let-item [ngForOf]="tabsContent" let-i="index" [ngForTrackBy]="trackByFn">
                 <div class="details__item">
                   <div id="{{i}}" *ngIf="item.indexOf('<a')!==0" [innerHtml]="item">
@@ -61,18 +61,18 @@
                 </div>
               </ng-template> -->
               <ng-template ngFor let-item [ngForOf]="tabsContent" let-i="index" [ngForTrackBy]="trackByFn">
-                  <div class="details__item">
-                      <div id="{{i}}" *ngIf="item.indexOf('<a')!==0" [innerHtml]="item">
-                      </div>
-                      <div id="{{i}}" *ngIf="item.indexOf('<a')==0">
-                        <customanchor-viewer [content]="item"></customanchor-viewer>
-                      </div>
-                    </div>
-                </ng-template>
-          </div>
+                <div class="details__item">
+                  <div id="{{i}}" *ngIf="item.indexOf('<a')!==0" [innerHtml]="item">
+                  </div>
+                  <div id="{{i}}" *ngIf="item.indexOf('<a')==0">
+                    <customanchor-viewer [content]="item"></customanchor-viewer>
+                  </div>
+                </div>
+              </ng-template>
+            </div>
           </ng-template>
           <div float-right *ngIf="externallink && starttestLabel">
-<a (click)=openwindow($event)  href="#">{{starttestLabel}}</a>
+            <a (click)=openwindow($event) href="#">{{starttestLabel}}</a>
 
           </div>
         </div>
@@ -83,12 +83,12 @@
           <ng-template ngFor let-dropdownitem [ngForOf]="dropdownList" let-c="index" [ngForTrackBy]="trackByFn">
             <ion-item>
               <ion-label floating>{{dropdownitem.label}}</ion-label>
-              <ion-select #c (ionChange)="healthCategory(c.value, dropdownitem.label)" [(ngModel)]='emnerModel'   *ngIf="dropdownitem.label=='Emner'" >
-                  <ion-option *ngFor="let option of dropdownitem.dropdownlist; let i = index;" value="{{option}}">
-                      {{option}}
-                    </ion-option>
-                  </ion-select>
-             <ion-select #c (ionChange)="healthCategory(c.value, dropdownitem.label)" [(ngModel)]='helbredskategorierModel' *ngIf="dropdownitem.label=='Helbredskategorier'" >
+              <ion-select #c (ionChange)="healthCategory(c.value, dropdownitem.label)" [(ngModel)]='emnerModel' *ngIf="dropdownitem.label=='Emner'">
+                <ion-option *ngFor="let option of dropdownitem.dropdownlist; let i = index;" value="{{option}}">
+                  {{option}}
+                </ion-option>
+              </ion-select>
+              <ion-select #c (ionChange)="healthCategory(c.value, dropdownitem.label)" [(ngModel)]='helbredskategorierModel' *ngIf="dropdownitem.label=='Helbredskategorier'">
                 <ion-option *ngFor="let option of dropdownitem.dropdownlist; let i = index;" value="{{option}}">
                   {{option}}
                 </ion-option>
@@ -109,7 +109,7 @@
           <ng-template *ngIf="textfieldList" ngFor let-textfielditem [ngForOf]="textfieldList" let-c="index" [ngForTrackBy]="trackByFn">
             <ion-item>
               <ion-label floating>{{textfielditem.label}}</ion-label>
-              <ion-input value="{{searchtext}}" (ionChange)="textFilter($event)" type="text" ></ion-input>
+              <ion-input value="{{searchtext}}" (ionChange)="textFilter($event)" type="text"></ion-input>
             </ion-item>
           </ng-template>
         </ion-list>
@@ -119,15 +119,17 @@
       <div padding *ngIf="showsearchbutton && totallist" class="details__countinfo">
         {{totallist}} {{allcatalogs}}
       </div>
+      <!-- <button  ion-button outline (click)="opendropDown($event)">opendropDown
+       </button> -->
       <div padding>
-          <button *ngIf="showsearchbutton && searchlabel" ion-button outline class="details__resetbutton" (click)="reset($event)">{{resetlabel}}
-          &nbsp;  <ion-icon name="refresh"></ion-icon>
-         </button>
-      <button *ngIf="showsearchbutton && searchlabel" ion-button outline class="details__searchbutton" (click)="search()">{{searchlabel}}
-       &nbsp; <ion-icon name="search"></ion-icon>
-      </button>
+        <button *ngIf="showsearchbutton && searchlabel" ion-button outline class="details__resetbutton" (click)="reset($event)">{{resetlabel}} &nbsp;
+          <ion-icon name="refresh"></ion-icon>
+        </button>
+        <button *ngIf="showsearchbutton && searchlabel" ion-button outline class="details__searchbutton" (click)="search()">{{searchlabel}} &nbsp;
+          <ion-icon name="search"></ion-icon>
+        </button>
       </div>
-    
+
 
       <div padding *ngIf="showsearchList">
         <ion-list class="details__searchlist">

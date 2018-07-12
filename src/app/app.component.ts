@@ -13,7 +13,7 @@ import { data } from '../../src/models/data/data'
 // import { OneSignal } from '@ionic-native/onesignal';
 import { StorageService } from '../providers/storageservice/storageservice';
 import { BaseRestService } from '../providers/restservice/base.rest.service';
-import { Pro } from '@ionic/pro';
+// import { Pro } from '@ionic/pro';
 // import { WelcomePage } from '../pages/welcome/welcome.page';
 import { Keyboard } from '@ionic-native/keyboard';
 import { ConfigurationService } from '../providers/utils/configservices';
@@ -50,13 +50,16 @@ export class MyApp {
   initializeApp() {
     this.platform.ready().then(() => {
       // Okay, so the platform is ready and our plugins are available.
-      // Here you can do any higher level native things you might need.
+      // Here you can do any higher level native things you might need.;
 
-      this.statusBar.styleDefault();
+      //this.statusBar.styleDefault();
+      this.statusBar.styleLightContent();
       this.statusBar.overlaysWebView(false);
       this.statusBar.backgroundColorByHexString('#dc0000');
+       this.splashScreen.hide();
       this.keyboard.disableScroll(true);
-      this.splashScreen.hide();
+     
+      this.keyboard.hideKeyboardAccessoryBar(false);
       //this.oneSignal.startInit("86c266d2-3554-4095-97c5-6efc0ac1e91a", "599014675139");
 
       // OneSignal Code start:
@@ -92,7 +95,7 @@ export class MyApp {
       // });
 
       // this.checkForUpdates();
-      this.checkForIonicUpdates();
+     // this.checkForIonicUpdates();
       // this.updateTimer = setInterval(() => {
       //   this.isReadyForUpdateCheck = true;
       // }, updateTimerInterval);
@@ -104,7 +107,7 @@ export class MyApp {
       () => {
         //this.checkForUpdates();
        // if (this.isReadyForUpdateCheck) {
-          this.checkForIonicUpdates();
+         // this.checkForIonicUpdates();
          // this.isReadyForUpdateCheck = false;
         //}
       }

@@ -119,11 +119,11 @@ export class ConfigurationService {
   reloadApp(){
     Pro.deploy.redirect();
   }
-    displayIonicdeployDialog() {
-        let popover = this.popoverCtrl.create(PopoverIonicdeploy, { enableBackdropDismiss: false }, { enableBackdropDismiss: false });
-        popover.present();
+    // displayIonicdeployDialog() {
+    //     let popover = this.popoverCtrl.create(PopoverIonicdeploy, { enableBackdropDismiss: false }, { enableBackdropDismiss: false });
+    //     popover.present();
 
-    }
+    // }
     deployApp(appInfo) {
         this.storageService.set('snapshot', appInfo);
         console.log(appInfo);

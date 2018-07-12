@@ -13,15 +13,15 @@ export class PopoverIonicdeploy {
     constructor(
         public params: NavParams,
         public viewCtrl: ViewController,
-        private platform: Platform,
-        private configurationService: ConfigurationService
+        private platform: Platform
+        // private configurationService: ConfigurationService
     ) {
 
     }
 
     reloadApp() {
        // this.pro.deploy.redirect();
-       this.configurationService.Downlaod();
+     //  this.configurationService.Downlaod();
     }
 
     dismiss() {

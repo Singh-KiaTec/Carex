@@ -1,5 +1,5 @@
 import { Component, ViewChild, ViewChildren } from '@angular/core';
-import { NavParams, Navbar } from 'ionic-angular';
+import { NavParams, Navbar, PopoverController, Platform } from 'ionic-angular';
 import { Button, NavController } from 'ionic-angular';
 import { BaseRestService } from '../../providers/restservice/base.rest.service';
 //import { ViewChildren } from '@angular/core/src/metadata/di';
@@ -7,6 +7,8 @@ import { AuthService } from '../../providers/authenticationservice/auth.service'
 import { SearchDetailsPage } from '../../pages/searchdetails/searchdetails.page';
 //  import { CustomanchorComponent } from '../customanchor/customanchor';
 import { InAppBrowser, InAppBrowserOptions } from '@ionic-native/in-app-browser';
+import { DropDownPopOver } from '../dropdownpopover/dropdownpopover';
+import { Keyboard } from '@ionic-native/keyboard';
 
 @Component({
   selector: 'details-viewer',
@@ -28,6 +30,7 @@ export class DetailsComponent {
   private showsearchList = false;
   @ViewChild(Navbar) navbar: Navbar;
   @ViewChildren('navbuttons') navbuttons: Button;
+  @ViewChild('detailsContent') detailsContent;
   private tabs;
   private tabstoDisplay: any = [];
   private showsearchbutton = false;
@@ -51,10 +54,15 @@ export class DetailsComponent {
   private baseUrl;
   private totallist = '0';
   private options: any;
-  private allcatalogs:any;
+  private allcatalogs: any;
+  private movecontentTop = false;
+  private movecontentTopEnable = 0;
 
   constructor(private navParam: NavParams,
-    private iab: InAppBrowser, private auth: AuthService, private navCtrl: NavController, private baserestService: BaseRestService) {
+    private iab: InAppBrowser,
+    private popoverCtrl: PopoverController,
+    private platform: Platform,
+    private keyboard: Keyboard, private auth: AuthService, private navCtrl: NavController, private baserestService: BaseRestService) {
 
     this.selectedMenuItem = this.navParam.get('selectedItem');
     this.selectedPage = this.navParam.get('selectedPage');
@@ -62,10 +70,17 @@ export class DetailsComponent {
     this.primaryColor = this.selectedPage.main_color;
     this.pagetitle = this.selectedMenuItem[1];
     this.tabs = this.selectedMenuItem[8];
-
-
+    if (this.platform.is('iphone')) {
+      this.keyboard.onKeyboardShow().subscribe(
+        () => this.keyboardEnabled(),
+        error => console.error("error")
+      )
+      this.keyboard.onKeyboardHide().subscribe(
+        () => this.keyboardDisabled(),
+        error => console.error("error")
+      )
+    }
   }
-
   ngOnInit() {
     this.options = {
       location: 'no',
@@ -84,6 +99,7 @@ export class DetailsComponent {
       presentationstyle: 'pagesheet',//iOS only 
       fullscreen: 'yes',//Windows only    
     };
+
     var tabsdata = [];
     let currentitem: any;
     this.baseUrl = this.auth.getEnvironment();
@@ -134,8 +150,25 @@ export class DetailsComponent {
       console.log(this);
 
     }
+    //this.keyboard.disableScroll(true);
   }
 
+  keyboardDisabled() {
+    if (this.platform.is('iphone')) {
+      console.log("in keyboard disable");
+      this.movecontentTop = false;
+      this.movecontentTopEnable = 0;
+      this.detailsContent._elementRef.nativeElement.className = "content content-ios details statusbar-padding";
+    }
+  }
+  keyboardEnabled() {
+    this.movecontentTopEnable = this.movecontentTopEnable + 1;
+    if (this.platform.is('iphone') && (this.movecontentTopEnable == 1)) {
+      console.log("in keyboard enable");
+      this.movecontentTop = true;
+      this.detailsContent._elementRef.nativeElement.className = "content content-ios details details--movecontentTop statusbar-padding";
+    }
+  }
   setData() {
     this.dropdownList = this.searchData.dropdowns;
     this.searchedList = this.searchData.searchlist;
@@ -358,6 +391,7 @@ export class DetailsComponent {
 
   textFilter(event) {
     // event.preventDefault();
+    this.movecontentTop = true;
     this.showsearchList = false;
     this.searchtext = event.value.toLowerCase();
     if (this.searchtext.length >= 3) {
@@ -404,5 +438,12 @@ export class DetailsComponent {
     else {
       return null;
     }
+  }
+
+
+  opendropDown(event) {
+    event.preventDefault();
+    let popover = this.popoverCtrl.create(DropDownPopOver, { enableBackdropDismiss: false }, { enableBackdropDismiss: false });
+    popover.present();
   }
 }
