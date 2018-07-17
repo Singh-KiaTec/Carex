@@ -94,8 +94,8 @@ export class MyApp {
       //   this.nav.push(NotificationsPage, { "resultData": resultData });
       // });
 
-      // this.checkForUpdates();
-     // this.checkForIonicUpdates();
+   //   this.checkForUpdates();
+     this.checkForIonicUpdates();
       // this.updateTimer = setInterval(() => {
       //   this.isReadyForUpdateCheck = true;
       // }, updateTimerInterval);
@@ -105,10 +105,10 @@ export class MyApp {
 
     this.platform.resume.subscribe(
       () => {
-        //this.checkForUpdates();
-       // if (this.isReadyForUpdateCheck) {
-         // this.checkForIonicUpdates();
-         // this.isReadyForUpdateCheck = false;
+       // this.checkForUpdates();
+       //if (this.isReadyForUpdateCheck) {
+         this.checkForIonicUpdates();
+        // this.isReadyForUpdateCheck = false;
         //}
       }
     );

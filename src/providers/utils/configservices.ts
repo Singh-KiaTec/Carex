@@ -93,6 +93,9 @@ export class ConfigurationService {
             // });
             // alert.present();
         }
+        else{
+            return;
+        }
     }
   showpopOver(){
     this.popover = this.popoverCtrl.create(PopoverIonicdeploy, { enableBackdropDismiss: false }, { enableBackdropDismiss: false });
@@ -100,7 +103,7 @@ export class ConfigurationService {
 
   }
   Downlaod(){
-    this.popover.dismiss();
+    
           this.downloadProgress = 0;
     this.extractProgress = 0;
 
@@ -114,6 +117,7 @@ export class ConfigurationService {
         //this.displayIonicdeployDialog();
 
     })
+    this.popover.dismiss();
     this.reloadApp();
   }
   reloadApp(){
