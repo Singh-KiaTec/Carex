@@ -12,8 +12,9 @@ import { HttpClientModule, HttpClient } from '@angular/common/http';
 import { Keyboard } from '@ionic-native/keyboard';
 import { AppVersion } from '@ionic-native/app-version';
 import { Market } from '@ionic-native/market';
-import {Pro} from '@ionic/pro';
+import { Pro } from '@ionic/pro';
 import { Injectable, Injector } from '@angular/core';
+import {ProgressBarModule} from "angular-progress-bar";
 
 
 
@@ -76,8 +77,8 @@ import { PopoverIonicdeploy } from '../components/ionicpopover/ionicpopover';
 import { DropDownPopOver } from '../components/dropdownpopover/dropdownpopover';
 
 
-Pro.init('2564d9e8',{
-  appVersion:'0.0.7'
+Pro.init('2564d9e8', {
+  appVersion: '0.0.7'
 
 });
 
@@ -88,7 +89,7 @@ export class MyErrorHandler implements ErrorHandler {
   constructor(injector: Injector) {
     try {
       this.ionicErrorHandler = injector.get(IonicErrorHandler);
-    } catch(e) {
+    } catch (e) {
       // Unable to get the IonicErrorHandler provider, ensure
       // IonicErrorHandler has been added to the providers list below
     }
@@ -150,16 +151,17 @@ const componentDeclaration = [
     BrowserModule,
     HttpModule,
     HttpClientModule,
+    ProgressBarModule,
     IonicModule.forRoot(MyApp, {
       platforms: {
         ios: {
           backButtonText: 'Tilbage',
-          scrollAssist: true, 
+          scrollAssist: true,
           autoFocusAssist: true,
           scrollPadding: true
         },
         android: {
-          scrollAssist: false, 
+          scrollAssist: false,
           autoFocusAssist: false
         }
       }
@@ -205,8 +207,8 @@ const componentDeclaration = [
     WindowRef,
     AuthService,
     InAppBrowser,
-   // { provide: ErrorHandler, useClass: IonicErrorHandler }
-    [{provide: ErrorHandler, useClass: MyErrorHandler }]
+    // { provide: ErrorHandler, useClass: IonicErrorHandler }
+    [{ provide: ErrorHandler, useClass: MyErrorHandler }]
   ]
 })
 export class AppModule { }

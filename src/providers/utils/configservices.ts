@@ -93,9 +93,7 @@ export class ConfigurationService {
             // });
             // alert.present();
         }
-        else{
-            return;
-        }
+        else{}
     }
   showpopOver(){
     this.popover = this.popoverCtrl.create(PopoverIonicdeploy, { enableBackdropDismiss: false }, { enableBackdropDismiss: false });

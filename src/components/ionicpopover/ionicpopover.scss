@@ -3,4 +3,12 @@
     padding: 10% 10% 10% 10%;
     display: inline-block;
     margin: 0 auto; 
+
+
+    &--hide{
+        display: none;
+    }
+    &--show{
+        display: block;
+    }
 }

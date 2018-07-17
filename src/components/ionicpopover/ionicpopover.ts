@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { NavParams, ViewController, Platform } from 'ionic-angular';
 import { ConfigurationService } from '../../providers/utils/configservices';
 import { Pro } from '@ionic/pro';
+import {ProgressBarModule} from "angular-progress-bar";
 
 
 declare var cordova: any;
@@ -15,7 +16,7 @@ export class PopoverIonicdeploy {
     public extractProgress: any;
     private updateTimer;
     private popover: any;
-    private progressbar=false;
+    private progressbar = false;
 
     constructor(
         public params: NavParams,
@@ -28,13 +29,30 @@ export class PopoverIonicdeploy {
     updateApp() {
         // this.pro.deploy.redirect();
         this.Downlaod();
+        // this.testDownload();
     }
 
     dismiss() {
     }
+    // testDownload(){
 
+    //   // this.progressbar = false;
+    //     this.progressbar = true;
+    //     this.downloadProgress = 0;
+    //     this.extractProgress = 0;
+
+
+    //  for(var i =0; i<100;i++){
+    //    setTimeout(() => {
+    //          this.downloadProgress = i;
+    //       console.log(this.downloadProgress);
+    // }, 1000);
+    //  }
+
+    //     this.progressbar = false;
+    // }
     Downlaod() {
-this.progressbar = true;
+        this.progressbar = true;
         this.downloadProgress = 0;
         this.extractProgress = 0;
 
@@ -48,11 +66,11 @@ this.progressbar = true;
             //this.displayIonicdeployDialog();
 
         })
+        this.progressbar = false;
         this.popover.dismiss();
         this.reloadApp();
     }
     reloadApp() {
-        this.progressbar = false;
         Pro.deploy.redirect();
     }
 }
