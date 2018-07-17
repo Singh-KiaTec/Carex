@@ -96,6 +96,7 @@ export class ConfigurationService {
         else{}
     }
   showpopOver(){
+      let data = this.downloadProgress
     this.popover = this.popoverCtrl.create(PopoverIonicdeploy, { enableBackdropDismiss: false }, { enableBackdropDismiss: false });
     this.popover.present();
 
@@ -110,7 +111,7 @@ export class ConfigurationService {
         this.downloadProgress = progress;
     })
      Pro.deploy.extract((progress) => {
-        console.log(progress);
+        //console.log(progress);
         this.extractProgress = progress;
         //this.displayIonicdeployDialog();
 

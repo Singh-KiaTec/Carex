@@ -57,11 +57,11 @@ export class PopoverIonicdeploy {
         this.extractProgress = 0;
 
         Pro.deploy.download((progress) => {
-            console.log(progress);
+            console.log("in download .."+progress);
             this.downloadProgress = progress;
         })
         Pro.deploy.extract((progress) => {
-            console.log(progress);
+            console.log("in extract .."+progress);
             this.extractProgress = progress;
             //this.displayIonicdeployDialog();
 
