@@ -14,8 +14,8 @@
   </ion-navbar>
 </ion-header>
 
-<ion-content #detailsContent  class="details">
-  <div class="detailspage" (swipe)="switchTab($event)">
+<ion-content #detailsContent class="details">
+  <div class="detailspage">
     <ion-grid>
 
       <!-- <ion-row>
@@ -23,7 +23,7 @@
           </ion-row> -->
       <!-- {{pagedata.organisation}}  -->
 
-      <ion-row *ngIf="tabstoDisplay">
+      <ion-row (swipe)="switchTab($event)" *ngIf="tabstoDisplay">
         <div class="details__container">
           <!-- <ul> -->
           <ng-template ngFor let-item [ngForOf]="tabstoDisplay" let-i="index" [ngForTrackBy]="trackByFn">
@@ -157,6 +157,103 @@ Helbredskategorier
 <ion-icon class="icon-dropdown"></ion-icon>
 </ion-item> -->
 
+      <div paddding *ngIf="allQuestion && hideQuestion==false">
+
+        <!-- in questions -->
+        <!-- <div (swipe)="switchQuestions($event)">
+        <ng-template ngFor let-item [ngForOf]="allQuestion" let-i="index" [ngForTrackBy]="trackByFn">
+          <div class="details__questionitem ">
+
+            <div id="{{i}}">
+              {{item.label}}
+              <ng-template ngFor let-dropdownitem [ngForOf]="item.dropdownlist" let-i="index" [ngForTrackBy]="trackByFn">
+                <ion-item>
+                  <ion-label>{{dropdownitem}}</ion-label>
+                  <ion-toggle  checked="false"></ion-toggle>
+                </ion-item>
+              </ng-template>
+            </div>
+          </div>
+        </ng-template>
+      </div> -->
+        <!-- 
+      <ion-slides>
+          <ion-slide id="slide1">
+            <h1 id="slide1">Slide 1</h1>
+          </ion-slide>
+          <ion-slide id="slide2">
+            <h1 id="slide2">Slide 2</h1>
+          </ion-slide>
+          <ion-slide id="slide3">
+            <h1 id="slide3">Slide 3</h1>
+          </ion-slide>
+        </ion-slides> -->
+        <!-- <ion-slide-box selected="activeSlideIndex"></ion-slide-box> -->
+        <ion-slides pager>
+          <ng-template ngFor let-item [ngForOf]="allQuestion" let-i="index" [ngForTrackBy]="trackByFn">
+            <ion-slide id="slide1">
+              <div id="slide1" class="details__questionitem">
+
+                <div id="{{i}}">
+               <span>  {{item.label}}</span>
+                  <ng-template ngFor let-dropdownitem [ngForOf]="item.dropdownlist" let-i="index" [ngForTrackBy]="trackByFn">
+                    <ion-item>
+                      <ion-label>{{dropdownitem}}</ion-label>
+                      <ion-toggle checked="false"></ion-toggle>
+                    </ion-item>
+                  </ng-template>
+                </div>
+              </div>
+            </ion-slide>
+          </ng-template>
+        </ion-slides>
+
+      </div>
+
+
+      <div paddding *ngIf="hidecontactus==false">
+        <ion-list>
+          <ion-item>
+            <ion-label color="">Email</ion-label>
+            <ion-input placeholder="Text Input"></ion-input>
+          </ion-item>
+
+          <ion-item>
+            <ion-label color="" >Phone Number</ion-label>
+            <ion-input type="tel" placeholder="Tel Input"></ion-input>
+          </ion-item>
+
+          <ion-item>
+            <ion-label color="">Overordnet årsag til henvendelse:</ion-label>
+            <ion-select>
+              <ion-option value="Pludselig overbelastning på arbejdet">Pludselig overbelastning på arbejdet</ion-option>
+              <ion-option value="Gradvis overbelastning på arbejdet">Gradvis overbelastning på arbejdet</ion-option>
+              <ion-option value="Ulykke/uheld på arbejdet">Ulykke/uheld på arbejdet</ion-option>
+              <ion-option value="Pludselig overbelastning i fritiden">Pludselig overbelastning i fritiden</ion-option>
+              <ion-option value="Gradvis overbelastning i fritiden">Gradvis overbelastning i fritiden</ion-option>
+              <ion-option value="Ulykke/uheld i fritiden">Ulykke/uheld i fritiden</ion-option>
+            </ion-select>
+          </ion-item>
+
+          <ion-item>
+            <ion-label color="">Passende tidspunkt:</ion-label>
+            <ion-select>
+              <ion-option value="8-11">8-11</ion-option>
+              <ion-option value="8-13">11-13</ion-option>
+              <ion-option value="8-16">13-16</ion-option>
+            </ion-select>
+          </ion-item>
+          <!-- <ion-item>
+              <ion-label color="stable" >Øvrige informationer til rådgivningslinjen</ion-label>
+          </ion-item> -->
+          <ion-item>
+            <ion-textarea placeholder="Øvrige informationer til rådgivningslinjen"></ion-textarea>
+          </ion-item>
+        </ion-list>
+        <button ion-button round outline>Annuller</button>
+         <button float-right ion-button round>Send</button>
+
+      </div>
 
 
       <div *ngIf="!tabs">

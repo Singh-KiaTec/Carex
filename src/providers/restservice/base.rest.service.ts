@@ -103,7 +103,7 @@ export class BaseRestService {
     }
     getCustomerData() {
         console.log(this.baseUrl);
-        return this.http.get(this.prodUrl + 'config/jsondata/trygv2.php', this.options).toPromise();
+        return this.http.get(this.prodUrl + 'config/jsondata/tryg-proto.php', this.options).toPromise();
     }
     getsmartSearchData() {
         //return this.http.get(this.prodUrl + 'config/jsondata/searchlist.php', this.options).toPromise();
@@ -144,5 +144,8 @@ export class BaseRestService {
     }
     getappVersion() {
         return this.http.get(this.prodUrl + 'config/jsondata/appversion.php', this.options).toPromise();
+    }
+    getQuestionary() {
+        return this.http.get(this.prodUrl + 'config/jsondata/question.php', this.options).toPromise();
     }
 }

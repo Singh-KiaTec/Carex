@@ -10,6 +10,7 @@ import { InAppBrowser, InAppBrowserOptions } from '@ionic-native/in-app-browser'
 import { DropDownPopOver } from '../dropdownpopover/dropdownpopover';
 import { Keyboard } from '@ionic-native/keyboard';
 
+
 @Component({
   selector: 'details-viewer',
   templateUrl: 'details.html'
@@ -57,6 +58,11 @@ export class DetailsComponent {
   private allcatalogs: any;
   private movecontentTop = false;
   private movecontentTopEnable = 0;
+  private questionspage;
+  private allQuestion;
+  private myActiveSlide;
+  private hideQuestion = false;
+  private hidecontactus = false;
 
   constructor(private navParam: NavParams,
     private iab: InAppBrowser,
@@ -150,7 +156,18 @@ export class DetailsComponent {
       console.log(this);
 
     }
-    //this.keyboard.disableScroll(true);
+    if (this.pagetitle == "Stress og Trivsel") {
+      this.baserestService.getQuestionary().then(
+        questionspage => { this.questionspage = questionspage; this.setQuestionary(questionspage) },
+        error => console.log(error)
+      )
+    }
+  }
+  setQuestionary(data) {
+    this.myActiveSlide = 1;
+    this.hideQuestion = false;
+    console.log(data);
+    this.allQuestion = this.questionspage.dropdowns;
   }
 
   keyboardDisabled() {
@@ -208,6 +225,15 @@ export class DetailsComponent {
   switchonTab(id) {
     this.selectedContainer = id;
     this.tabsContent = this.tabsdata[id];
+    this.hidecontactus = true;
+    this.hideQuestion = true;
+    if (this.tabsContent == "Sæt venligst, ved hvert af de 5 udsagn, et kryds i det felt der kommer tættest på, hvordan du har følt dig i de sidste 2 uger. ") {
+      this.hideQuestion = false;
+    }
+    if (this.tabsContent == "Beredskab") {
+      this.hidecontactus = false;
+    }
+
     console.log(this.selectedContainer);
     let defaulttab: any = this.navbuttons;
     if (defaulttab) {
@@ -217,6 +243,7 @@ export class DetailsComponent {
           return;
         }
         else {
+          //this.hideQuestion=true;
           defaulttab._results[index].setElementStyle("background-color", this.secondaryColor);
         }
       });
@@ -238,25 +265,29 @@ export class DetailsComponent {
 
   switchTab(e) {
     console.log(e.direction);
-    console.log("in switch tabd");
-    if (e.direction == 4) {
-      this.selectedContainer = +this.selectedContainer - 1;
-      if (this.selectedContainer < 0) {
-        this.selectedContainer = this.tabstoDisplay.length - 1;
+    let event: any = e;
+    if (event.target.id != "slide1" && event.target.id != "slide2" && event.target.id != "slide3") {
+      console.log("in switch tabd");
+      if (e.direction == 4) {
+        this.selectedContainer = +this.selectedContainer - 1;
+        if (this.selectedContainer < 0) {
+          this.selectedContainer = this.tabstoDisplay.length - 1;
+        }
+        this.switchonTab(this.selectedContainer);
+        console.log("backwaords");
       }
-      this.switchonTab(this.selectedContainer);
-      console.log("backwaords");
-    }
 
 
-    if (e.direction == 2) {
-      this.selectedContainer = +this.selectedContainer + 1;
-      if (this.selectedContainer == this.tabstoDisplay.length) {
-        this.selectedContainer = 0;
+      if (e.direction == 2) {
+        this.selectedContainer = +this.selectedContainer + 1;
+        if (this.selectedContainer == this.tabstoDisplay.length) {
+          this.selectedContainer = 0;
+        }
+        this.switchonTab(this.selectedContainer);
+        console.log("in swipe forward");
       }
-      this.switchonTab(this.selectedContainer);
-      console.log("in swipe forward");
     }
+
   }
   search() {
     this.showsearchList = true;
@@ -445,5 +476,16 @@ export class DetailsComponent {
     event.preventDefault();
     let popover = this.popoverCtrl.create(DropDownPopOver, { enableBackdropDismiss: false }, { enableBackdropDismiss: false });
     popover.present();
+  }
+
+  switchQuestions(e) {
+    console.log(e.direction);
+    if (e.direction == 4) {
+
+      console.log("backwaords");
+    }
+    if (e.direction == 2) {
+      console.log("in swipe forward");
+    }
   }
 }

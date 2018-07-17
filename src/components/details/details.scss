@@ -17,9 +17,9 @@
     // .scroll-content{
     //     background: $color-menu-gray;
     // }
-    .item-inner {
-        border-bottom: 1px solid $primary-color-theme !important;
-    }
+    // .item-inner {
+    //     border-bottom: 1px solid $primary-color-theme !important;
+    // }
     .toolbar,
     .bar-button-default-md {
         color: $color-text-gray !important;
@@ -84,6 +84,7 @@
     &--movecontentTop {
         margin-top: -14.2em !important;
     }
+
 }
 
 .alert-ios .alert-wrapper,
@@ -99,4 +100,19 @@
 .alert-ios .alert-radio-group,
 .alert-ios .alert-checkbox-group {
     max-height: 24em;
-}
+}  
+.swiper-container-horizontal > .swiper-pagination-bullets {
+   bottom: 0;
+    }
+    .swiper-slide{
+   height: 29em;
+    }
+    .swiper-wrapper{
+        margin-top: -102px;
+    }
+ textarea{
+     height: 10em;
+ }   
+//  .details .item-inner{
+//  border: none;
+//  }
