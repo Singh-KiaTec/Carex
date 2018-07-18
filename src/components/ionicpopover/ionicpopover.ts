@@ -62,7 +62,7 @@ export class PopoverIonicdeploy {
         Pro.deploy.download((progress) => {
             console.log("in download .." + progress);
             this.downloadProgress = progress;
-            this.reloadApp();
+           // this.reloadApp();
         })
         // Pro.deploy.extract((progress) => {
         //     console.log("in extract .." + progress);
