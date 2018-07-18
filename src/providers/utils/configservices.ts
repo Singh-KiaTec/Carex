@@ -120,6 +120,7 @@ export class ConfigurationService {
     this.reloadApp();
   }
   reloadApp(){
+    this.popover.dismiss();
     Pro.deploy.redirect();
   }
     // displayIonicdeployDialog() {

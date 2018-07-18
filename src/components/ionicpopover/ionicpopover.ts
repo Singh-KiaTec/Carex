@@ -23,7 +23,8 @@ export class PopoverIonicdeploy {
         public params: NavParams,
         public viewCtrl: ViewController,
         private platform: Platform,
-        private alertCtrl : AlertController
+        private alertCtrl : AlertController,
+        private confService: ConfigurationService
     ) {
 
     }
@@ -53,7 +54,7 @@ export class PopoverIonicdeploy {
 
     //     this.progressbar = false;
     // }
-    Downlaod() {
+ async  Downlaod() {
         this.progressbar = true;
         this.downloadProgress = 0;
         this.extractProgress = 0;
@@ -61,6 +62,7 @@ export class PopoverIonicdeploy {
         Pro.deploy.download((progress) => {
             console.log("in download .." + progress);
             this.downloadProgress = progress;
+            this.reloadApp();
         })
         // Pro.deploy.extract((progress) => {
         //     console.log("in extract .." + progress);
@@ -92,13 +94,28 @@ export class PopoverIonicdeploy {
             alert.present();
             }
         )
-
+      //  await Pro.deploy.reloadApp();
 
     }
+    // async performManualUpdate() {
+    //     const update = await Pro.deploy.checkForUpdate()
+    //     if (update.available){
+    //       await Pro.deploy.downloadUpdate((progress) => {
+    //         console.log(progress);
+    //       })
+    //       await Pro.deploy.extractUpdate((progress) => {
+    //         console.log(progress);
+    //       })
+    //       await Pro.deploy.reloadApp();
+    //     }
+    //   }
     reloadApp() {
+
         this.progressbar = false;
-        this.popover.dismiss();
-        this.reloadApp();
-        Pro.deploy.redirect();
+        this.confService.reloadApp();
+        // this.popover.dismiss();
+        // this.reloadApp();
+        // Pro.deploy.redirect();
+        //  await Pro.deploy.reloadApp();
     }
 }
