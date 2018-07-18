@@ -68,7 +68,7 @@ export class PopoverIonicdeploy {
         // })
         Pro.deploy.extract().then(
             (progress) => {
-                console.log("in extract .." + progress);
+                console.log("in extract newwwwwww.." + progress);
                 this.extractProgress = progress;
                 this.reloadApp();
             })
