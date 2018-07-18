@@ -84,7 +84,6 @@ export class PopoverIonicdeploy {
                     {
                         text: 'Reload App',
                         handler: data => {
-                            alert.dismiss();
                             this.reloadApp();
                            console.log("error");
                           
