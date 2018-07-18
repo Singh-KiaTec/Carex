@@ -70,13 +70,15 @@ export class PopoverIonicdeploy {
         //     //this.displayIonicdeployDialog();
 
         // })
-        // Pro.deploy.extract().then(
-        //     (progress) => {
-        //         console.log("in extract newwwwwww.." + progress);
-        //         this.extractProgress = progress;
-        //         this.reloadApp();
-        //     }
-        // )
+        Pro.deploy.extract().then(
+            (progress) => {
+                console.log("in extract newwwwwww.." + progress);
+                this.extractProgress = progress;
+              //  this.reloadApp();
+            },
+            (error)=>{console.log(error);}
+            
+        )
 
     //     (error)=>{
     //         const alert = this.alertCtrl.create({
