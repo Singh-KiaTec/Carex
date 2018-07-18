@@ -2,14 +2,14 @@
     <div class="popoverInnerDialog">
         <label padding (click)="updateApp()" [ngClass]="(progressbar==true)? 'popoverInnerDialog--hide' : 'popoverInnerDialog--show'" >Please update your app to new version!</label>
         <label [ngClass]="(progressbar==false)? 'popoverInnerDialog--hide' : 'popoverInnerDialog--show'">Please wait while we update to new version!</label>
-        <div [ngClass]="(progressbar==false)? 'popoverInnerDialog--hide' : 'popoverInnerDialog--show'">{{downloadProgress}}%</div>
+        <div [ngClass]="(progressbar==false)? 'popoverInnerDialog--hide' : 'popoverInnerDialog--show'">{{extractProgress}}%</div>
         <button padding (click)="updateApp()" [ngClass]="(progressbar==true)? 'popoverInnerDialog--hide' : 'popoverInnerDialog--show'"  ion-button block>Update</button>
   
     </div>
       
         <div [ngClass]="(progressbar==false)? 'popoverInnerDialog--hide' : 'popoverInnerDialog--show'">
 
-        <progress-bar [progress]="downloadProgress" [color]="'#488aff'">
+        <progress-bar [progress]="extractProgress" [color]="'#488aff'">
             </progress-bar>
         </div>
     <!-- <div *ngIf="progressbar==true" class="popoverInnerDialog">
