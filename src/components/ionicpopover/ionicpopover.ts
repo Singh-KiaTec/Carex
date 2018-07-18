@@ -1,8 +1,9 @@
 import { Component } from '@angular/core';
-import { NavParams, ViewController, Platform } from 'ionic-angular';
+import { NavParams, ViewController, Platform , AlertController} from 'ionic-angular';
 import { ConfigurationService } from '../../providers/utils/configservices';
 import { Pro } from '@ionic/pro';
 import { ProgressBarModule } from "angular-progress-bar";
+
 
 
 declare var cordova: any;
@@ -21,7 +22,8 @@ export class PopoverIonicdeploy {
     constructor(
         public params: NavParams,
         public viewCtrl: ViewController,
-        private platform: Platform
+        private platform: Platform,
+        private alertCtrl : AlertController
     ) {
 
     }
@@ -71,7 +73,25 @@ export class PopoverIonicdeploy {
                 console.log("in extract newwwwwww.." + progress);
                 this.extractProgress = progress;
                 this.reloadApp();
-            })
+            },
+            (error)=>{
+                  const alert = this.alertCtrl.create({
+                title: 'Error!',
+                subTitle: 'Please try again',
+                buttons: [
+                    {
+                        text: 'Reload App',
+                        handler: data => {
+                            alert.dismiss();
+                            this.reloadApp();
+                           console.log("error");
+                          
+                        }
+                    }]
+            });
+            alert.present();
+            }
+        )
 
 
     }
