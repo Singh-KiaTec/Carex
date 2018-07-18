@@ -116,11 +116,9 @@ export class ConfigurationService {
         //this.displayIonicdeployDialog();
 
     })
-    this.popover.dismiss();
     this.reloadApp();
   }
   reloadApp(){
-    this.popover.dismiss();
     Pro.deploy.redirect();
   }
     // displayIonicdeployDialog() {
