@@ -54,7 +54,7 @@ export class PopoverIonicdeploy {
 
     //     this.progressbar = false;
     // }
- async  Downlaod() {
+   Downlaod() {
         this.progressbar = true;
         this.downloadProgress = 0;
         this.extractProgress = 0;
@@ -70,29 +70,30 @@ export class PopoverIonicdeploy {
         //     //this.displayIonicdeployDialog();
 
         // })
-        Pro.deploy.extract().then(
-            (progress) => {
-                console.log("in extract newwwwwww.." + progress);
-                this.extractProgress = progress;
-                this.reloadApp();
-            },
-            (error)=>{
-                  const alert = this.alertCtrl.create({
-                title: 'Error!',
-                subTitle: 'Please try again',
-                buttons: [
-                    {
-                        text: 'Reload App',
-                        handler: data => {
-                            this.reloadApp();
-                           console.log("error");
-                          
-                        }
-                    }]
-            });
-            alert.present();
-            }
-        )
+        // Pro.deploy.extract().then(
+        //     (progress) => {
+        //         console.log("in extract newwwwwww.." + progress);
+        //         this.extractProgress = progress;
+        //         this.reloadApp();
+        //     }
+        // )
+
+    //     (error)=>{
+    //         const alert = this.alertCtrl.create({
+    //       title: 'Error!',
+    //       subTitle: 'Please try again',
+    //       buttons: [
+    //           {
+    //               text: 'Reload App',
+    //               handler: data => {
+    //                   this.reloadApp();
+    //                  console.log("error");
+                    
+    //               }
+    //           }]
+    //   });
+    //   alert.present();
+    //   }
       //  await Pro.deploy.reloadApp();
 
     }
