@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { NavParams, ViewController, Platform , AlertController} from 'ionic-angular';
+import { NavParams, ViewController, Platform, AlertController } from 'ionic-angular';
 import { ConfigurationService } from '../../providers/utils/configservices';
 import { Pro } from '@ionic/pro';
 import { ProgressBarModule } from "angular-progress-bar";
@@ -23,13 +23,13 @@ export class PopoverIonicdeploy {
         public params: NavParams,
         public viewCtrl: ViewController,
         private platform: Platform,
-        private alertCtrl : AlertController,
+        private alertCtrl: AlertController,
         private confService: ConfigurationService
     ) {
 
     }
 
-    updateApp() {
+    async updateApp() {
         // this.pro.deploy.redirect();
         this.Downlaod();
         // this.testDownload();
@@ -54,49 +54,62 @@ export class PopoverIonicdeploy {
 
     //     this.progressbar = false;
     // }
-   Downlaod() {
+    async   Downlaod() {
         this.progressbar = true;
         this.downloadProgress = 0;
         this.extractProgress = 0;
 
-        Pro.deploy.download((progress) => {
-            console.log("in download .." + progress);
-            this.downloadProgress = progress;
-           // this.reloadApp();
-        })
+    //     Pro.deploy.download().then(
+    //         (progress) => {
+    //             console.log("in download .." + progress);
+    //             this.downloadProgress = progress;
+    //             // this.reloadApp();
+    //         },
+    //         (error) => { console.log(error) }
+        
+    // )
         // Pro.deploy.extract((progress) => {
         //     console.log("in extract .." + progress);
         //     this.extractProgress = progress;
         //     //this.displayIonicdeployDialog();
 
         // })
-        Pro.deploy.extract().then(
-            (progress) => {
-                console.log("in extract newwwwwww.." + progress);
-                this.extractProgress = progress;
-              //  this.reloadApp();
-            },
-            (error)=>{console.log(error);}
-            
-        )
+        // Pro.deploy.extract().then(
+        //     (progress) => {
+        //         console.log("in extract newwwwwww.." + progress);
+        //         this.extractProgress = progress;
+        //         //  this.reloadApp();
+        //     },
+        //     (error) => { console.log(error); }
 
-    //     (error)=>{
-    //         const alert = this.alertCtrl.create({
-    //       title: 'Error!',
-    //       subTitle: 'Please try again',
-    //       buttons: [
-    //           {
-    //               text: 'Reload App',
-    //               handler: data => {
-    //                   this.reloadApp();
-    //                  console.log("error");
-                    
-    //               }
-    //           }]
-    //   });
-    //   alert.present();
-    //   }
-      //  await Pro.deploy.reloadApp();
+        // )
+        await Pro.deploy.download((progress) => {
+            this.downloadProgress = progress;
+            console.log("in download .." + progress);
+          })
+          await Pro.deploy.extract((progress) => {
+            this.extractProgress = progress;
+            console.log("in extract newwwwwww.." + progress);
+          })
+          await Pro.deploy.redirect();
+
+        //     (error)=>{
+        //         const alert = this.alertCtrl.create({
+        //       title: 'Error!',
+        //       subTitle: 'Please try again',
+        //       buttons: [
+        //           {
+        //               text: 'Reload App',
+        //               handler: data => {
+        //                   this.reloadApp();
+        //                  console.log("error");
+
+        //               }
+        //           }]
+        //   });
+        //   alert.present();
+        //   }
+        //  await Pro.deploy.reloadApp();
 
     }
     // async performManualUpdate() {
