@@ -65,7 +65,7 @@ export class ConfigurationService {
     }
     async checkChannel() {
         try {
-            const res = await Pro.deploy.info();
+            const res = await Pro.deploy.getCurrentVersion();
             this.deployChannel = res.channel;
             //this.isBeta = (this.deployChannel === 'Beta')
         } catch (err) {
@@ -76,7 +76,7 @@ export class ConfigurationService {
         }
     }
     async checkForIonicDeploy() {
-        const haveUpdate = await Pro.deploy.check()
+        const haveUpdate = await Pro.deploy.checkForUpdate()
         if (haveUpdate) { 
             this.showpopOver();
             // const alert = this.alertCtrl.create({
@@ -106,11 +106,11 @@ export class ConfigurationService {
           this.downloadProgress = 0;
     this.extractProgress = 0;
 
-     Pro.deploy.download((progress) => {
+     Pro.deploy.downloadUpdate((progress) => {
         console.log(progress);
         this.downloadProgress = progress;
     })
-     Pro.deploy.extract((progress) => {
+     Pro.deploy.extractUpdate((progress) => {
         //console.log(progress);
         this.extractProgress = progress;
         //this.displayIonicdeployDialog();
@@ -119,7 +119,7 @@ export class ConfigurationService {
     this.reloadApp();
   }
   reloadApp(){
-    Pro.deploy.redirect();
+    Pro.deploy.reloadApp();
   }
     // displayIonicdeployDialog() {
     //     let popover = this.popoverCtrl.create(PopoverIonicdeploy, { enableBackdropDismiss: false }, { enableBackdropDismiss: false });

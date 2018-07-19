@@ -29,11 +29,19 @@ export class PopoverIonicdeploy {
 
     }
 
-    updateApp() {
+    async updateApp() {
         // this.pro.deploy.redirect();
-        this.Downlaod();
-        // this.testDownload();
-    }
+
+              await Pro.deploy.downloadUpdate((progress) => {
+                  this.downloadProgress= progress
+                console.log("in download.."+progress);
+              })
+              await Pro.deploy.extractUpdate((progress) => {
+                  this.extractProgress = progress;
+                console.log("in extract ..."+progress);
+              })
+              await Pro.deploy.reloadApp();
+            }
 
     dismiss() {
     }
@@ -59,7 +67,7 @@ export class PopoverIonicdeploy {
         this.downloadProgress = 0;
         this.extractProgress = 0;
 
-        Pro.deploy.download().then(
+        Pro.deploy.downloadUpdate().then(
             (progress) => {
                 console.log("in download .." + progress);
                 this.downloadProgress = progress;
@@ -74,7 +82,7 @@ export class PopoverIonicdeploy {
         //     //this.displayIonicdeployDialog();
 
         // })
-        Pro.deploy.extract().then(
+        Pro.deploy.extractUpdate().then(
             (progress) => {
                 console.log("in extract newwwwwww.." + progress);
                 this.extractProgress = progress;
@@ -83,7 +91,7 @@ export class PopoverIonicdeploy {
             (error) => { console.log(error); }
 
         )
-         Pro.deploy.redirect();
+         Pro.deploy.reloadApp();
 
         //     (error)=>{
         //         const alert = this.alertCtrl.create({
