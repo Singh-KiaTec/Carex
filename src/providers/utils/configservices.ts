@@ -79,7 +79,8 @@ export class ConfigurationService {
         }
     }
     async checkForIonicDeploy() {
-        const config = {
+        try{
+             const config = {
             'appId': '2564d9e8',
             'channel': 'master'
         }
@@ -107,6 +108,10 @@ export class ConfigurationService {
             // alert.present();
         }
         else { }
+        }
+       catch(e){
+           Pro.monitoring.exception(e);
+       }
     }
     showpopOver() {
         let data = this.downloadProgress

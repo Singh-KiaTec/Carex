@@ -34,8 +34,8 @@ export class PopoverIonicdeploy {
         this.progressbar = true;
         this.downloadProgress = 0;
         this.extractProgress = 0;
-        
-              await Pro.deploy.downloadUpdate((progress) => {
+        try{
+             await Pro.deploy.downloadUpdate((progress) => {
                   this.downloadProgress= progress
                 console.log("in download.."+progress);
               })
@@ -45,6 +45,11 @@ export class PopoverIonicdeploy {
               })
               await Pro.deploy.reloadApp();
             }
+            catch(e){
+                Pro.monitoring.exception(e);
+            }
+     }   
+             
 
     dismiss() {
     }
