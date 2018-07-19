@@ -31,6 +31,17 @@ export class PopoverIonicdeploy {
 
     async updateApp() {
         // this.pro.deploy.redirect();
+        await Pro.deploy.getAvailableVersions().then((snapshots) => {
+            console.log('Snapshots', snapshots);
+            // snapshots will be an array of snapshot uuids
+             Pro.deploy.getCurrentVersion().then((x) => {
+              console.log('Current snapshot infos', x);
+              for (let suuid of snapshots) {
+                  console.log(suuid);
+                }
+             });
+            });
+
         this.progressbar = true;
         this.downloadProgress = 0;
         this.extractProgress = 0;
