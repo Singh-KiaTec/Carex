@@ -31,7 +31,10 @@ export class PopoverIonicdeploy {
 
     async updateApp() {
         // this.pro.deploy.redirect();
-
+        this.progressbar = true;
+        this.downloadProgress = 0;
+        this.extractProgress = 0;
+        
               await Pro.deploy.downloadUpdate((progress) => {
                   this.downloadProgress= progress
                 console.log("in download.."+progress);
