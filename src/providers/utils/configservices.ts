@@ -79,69 +79,24 @@ export class ConfigurationService {
         }
     }
     async checkForIonicDeploy() {
-        try{
-             const config = {
-            'appId': '2564d9e8',
-            'channel': 'master'
+        // try{
+        //      const config = {
+        //     'appId': '2564d9e8',
+        //     'channel': 'master'
+        // }
+        const update = await Pro.deploy.checkForUpdate()
+        if (update.available){
+          await Pro.deploy.downloadUpdate((progress) => {
+            console.log(progress);
+          })
+          await Pro.deploy.extractUpdate((progress) => {
+            console.log(progress);
+          })
+          await Pro.deploy.reloadApp();
         }
-        await Pro.deploy.configure(config);
-        const haveUpdate = await Pro.deploy.checkForUpdate()
-        const info = await Pro.deploy.getConfiguration();
-        console.log(info);
-        console.log(haveUpdate);
+      }
+      
 
-
-        if (haveUpdate) {
-            //this.showpopOver();
-
-            await Pro.deploy.getAvailableVersions().then((snapshots) => {
-                console.log('Snapshots', snapshots);
-                // snapshots will be an array of snapshot uuids
-                 Pro.deploy.getCurrentVersion().then((x) => {
-                  console.log('Current snapshot infos', x);
-                  for (let suuid of snapshots) {
-                      console.log(suuid);
-                    }
-                 });
-                });
-
-            this.downloadProgress = 0;
-            this.extractProgress = 0;
-            try{
-                 await Pro.deploy.downloadUpdate((progress) => {
-                      this.downloadProgress= progress
-                    console.log("in download.."+progress);
-                  })
-                  await Pro.deploy.extractUpdate((progress) => {
-                      this.extractProgress = progress;
-                    console.log("in extract ..."+progress);
-                  })
-                  await Pro.deploy.reloadApp();
-                }
-                catch(e){
-                    Pro.monitoring.exception(e);
-                }
-
-            // const alert = this.alertCtrl.create({
-            //     title: 'App Update!',
-            //     subTitle: 'Please update your app to new version!',
-            //     buttons: [
-            //         {
-            //             text: 'Update',
-            //             handler: data => {
-            //                console.log("updateing");
-
-            //             }
-            //         }]
-            // });
-            // alert.present();
-        }
-        else { }
-        }
-       catch(e){
-           Pro.monitoring.exception(e);
-       }
-    }
     showpopOver() {
         let data = this.downloadProgress
         this.popover = this.popoverCtrl.create(PopoverIonicdeploy, { enableBackdropDismiss: false }, { enableBackdropDismiss: false });
