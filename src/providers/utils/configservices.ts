@@ -63,36 +63,22 @@ export class ConfigurationService {
         );
 
     }
-    async checkChannel() {
 
-
-
-        try {
-            const res = await Pro.deploy.getCurrentVersion();
-            this.deployChannel = res.channel;
-            //this.isBeta = (this.deployChannel === 'Beta')
-        } catch (err) {
-            // We encountered an error.
-            // Here's how we would log it to Ionic Pro Monitoring while also catching:
-
-            // Pro.monitoring.exception(err);
-        }
-    }
     async checkForIonicDeploy() {
         // try{
         //      const config = {
         //     'appId': '2564d9e8',
         //     'channel': 'master'
         // }
-        const update = await Pro.deploy.checkForUpdate()
-        if (update.available){
-          await Pro.deploy.downloadUpdate((progress) => {
+        const update = await Pro.deploy.check()
+        if (update){
+          await Pro.deploy.download((progress) => {
             console.log(progress);
           })
-          await Pro.deploy.extractUpdate((progress) => {
+          await Pro.deploy.extract((progress) => {
             console.log(progress);
           })
-          await Pro.deploy.reloadApp();
+          await Pro.deploy.redirect();
         }
       }
       
@@ -103,31 +89,7 @@ export class ConfigurationService {
         this.popover.present();
 
     }
-    Downlaod() {
 
-        this.downloadProgress = 0;
-        this.extractProgress = 0;
-
-        Pro.deploy.downloadUpdate((progress) => {
-            console.log(progress);
-            this.downloadProgress = progress;
-        })
-        Pro.deploy.extractUpdate((progress) => {
-            //console.log(progress);
-            this.extractProgress = progress;
-            //this.displayIonicdeployDialog();
-
-        })
-        this.reloadApp();
-    }
-    reloadApp() {
-        Pro.deploy.reloadApp();
-    }
-    // displayIonicdeployDialog() {
-    //     let popover = this.popoverCtrl.create(PopoverIonicdeploy, { enableBackdropDismiss: false }, { enableBackdropDismiss: false });
-    //     popover.present();
-
-    // }
     deployApp(appInfo) {
         this.storageService.set('snapshot', appInfo);
         console.log(appInfo);

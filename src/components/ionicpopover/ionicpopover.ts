@@ -29,37 +29,37 @@ export class PopoverIonicdeploy {
 
     }
 
-    async updateApp() {
-        // this.pro.deploy.redirect();
-        await Pro.deploy.getAvailableVersions().then((snapshots) => {
-            console.log('Snapshots', snapshots);
-            // snapshots will be an array of snapshot uuids
-             Pro.deploy.getCurrentVersion().then((x) => {
-              console.log('Current snapshot infos', x);
-              for (let suuid of snapshots) {
-                  console.log(suuid);
-                }
-             });
-            });
+    // async updateApp() {
+    //     // this.pro.deploy.redirect();
+    //     await Pro.deploy.getAvailableVersions().then((snapshots) => {
+    //         console.log('Snapshots', snapshots);
+    //         // snapshots will be an array of snapshot uuids
+    //          Pro.deploy.getCurrentVersion().then((x) => {
+    //           console.log('Current snapshot infos', x);
+    //           for (let suuid of snapshots) {
+    //               console.log(suuid);
+    //             }
+    //          });
+    //         });
 
-        this.progressbar = true;
-        this.downloadProgress = 0;
-        this.extractProgress = 0;
-        try{
-             await Pro.deploy.downloadUpdate((progress) => {
-                  this.downloadProgress= progress
-                console.log("in download.."+progress);
-              })
-              await Pro.deploy.extractUpdate((progress) => {
-                  this.extractProgress = progress;
-                console.log("in extract ..."+progress);
-              })
-              await Pro.deploy.reloadApp();
-            }
-            catch(e){
-                Pro.monitoring.exception(e);
-            }
-     }   
+    //     this.progressbar = true;
+    //     this.downloadProgress = 0;
+    //     this.extractProgress = 0;
+    //     try{
+    //          await Pro.deploy.downloadUpdate((progress) => {
+    //               this.downloadProgress= progress
+    //             console.log("in download.."+progress);
+    //           })
+    //           await Pro.deploy.extractUpdate((progress) => {
+    //               this.extractProgress = progress;
+    //             console.log("in extract ..."+progress);
+    //           })
+    //           await Pro.deploy.reloadApp();
+    //         }
+    //         catch(e){
+    //             Pro.monitoring.exception(e);
+    //         }
+    //  }   
              
 
     dismiss() {
@@ -82,35 +82,35 @@ export class PopoverIonicdeploy {
     //     this.progressbar = false;
     // }
     Downlaod() {
-        this.progressbar = true;
-        this.downloadProgress = 0;
-        this.extractProgress = 0;
+    //     this.progressbar = true;
+    //     this.downloadProgress = 0;
+    //     this.extractProgress = 0;
 
-        Pro.deploy.downloadUpdate().then(
-            (progress) => {
-                console.log("in download .." + progress);
-                this.downloadProgress = progress;
-                // this.reloadApp();
-            },
-            (error) => { console.log(error) }
+    //     Pro.deploy.downloadUpdate().then(
+    //         (progress) => {
+    //             console.log("in download .." + progress);
+    //             this.downloadProgress = progress;
+    //             // this.reloadApp();
+    //         },
+    //         (error) => { console.log(error) }
         
-    )
-        // Pro.deploy.extract((progress) => {
-        //     console.log("in extract .." + progress);
-        //     this.extractProgress = progress;
-        //     //this.displayIonicdeployDialog();
+    // )
+    //     // Pro.deploy.extract((progress) => {
+    //     //     console.log("in extract .." + progress);
+    //     //     this.extractProgress = progress;
+    //     //     //this.displayIonicdeployDialog();
 
-        // })
-        Pro.deploy.extractUpdate().then(
-            (progress) => {
-                console.log("in extract newwwwwww.." + progress);
-                this.extractProgress = progress;
-                //  this.reloadApp();
-            },
-            (error) => { console.log(error); }
+    //     // })
+    //     Pro.deploy.extractUpdate().then(
+    //         (progress) => {
+    //             console.log("in extract newwwwwww.." + progress);
+    //             this.extractProgress = progress;
+    //             //  this.reloadApp();
+    //         },
+    //         (error) => { console.log(error); }
 
-        )
-         Pro.deploy.reloadApp();
+    //     )
+    //      Pro.deploy.reloadApp();
 
         //     (error)=>{
         //         const alert = this.alertCtrl.create({
@@ -146,7 +146,7 @@ export class PopoverIonicdeploy {
     reloadApp() {
 
         this.progressbar = false;
-        this.confService.reloadApp();
+       // this.confService.reloadApp();
         // this.popover.dismiss();
         // this.reloadApp();
         // Pro.deploy.redirect();
