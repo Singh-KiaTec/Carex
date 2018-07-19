@@ -65,11 +65,7 @@ export class ConfigurationService {
     }
     async checkChannel() {
 
-            const config = {
-              'appId': '2564d9e8',
-              'channel': 'master'
-            }
-            await Pro.deploy.configure(config);
+     
 
         try {
             const res = await Pro.deploy.getCurrentVersion();
@@ -83,7 +79,17 @@ export class ConfigurationService {
         }
     }
     async checkForIonicDeploy() {
+               const config = {
+              'appId': '2564d9e8',
+              'channel': 'master'
+            }
+            await Pro.deploy.configure(config);
         const haveUpdate = await Pro.deploy.checkForUpdate()
+        const info = await Pro.deploy.getConfiguration();
+console.log(info);
+console.log(haveUpdate);
+
+
         if (haveUpdate) { 
             this.showpopOver();
             // const alert = this.alertCtrl.create({
