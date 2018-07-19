@@ -92,7 +92,36 @@ export class ConfigurationService {
 
 
         if (haveUpdate) {
-            this.showpopOver();
+            //this.showpopOver();
+
+            await Pro.deploy.getAvailableVersions().then((snapshots) => {
+                console.log('Snapshots', snapshots);
+                // snapshots will be an array of snapshot uuids
+                 Pro.deploy.getCurrentVersion().then((x) => {
+                  console.log('Current snapshot infos', x);
+                  for (let suuid of snapshots) {
+                      console.log(suuid);
+                    }
+                 });
+                });
+
+            this.downloadProgress = 0;
+            this.extractProgress = 0;
+            try{
+                 await Pro.deploy.downloadUpdate((progress) => {
+                      this.downloadProgress= progress
+                    console.log("in download.."+progress);
+                  })
+                  await Pro.deploy.extractUpdate((progress) => {
+                      this.extractProgress = progress;
+                    console.log("in extract ..."+progress);
+                  })
+                  await Pro.deploy.reloadApp();
+                }
+                catch(e){
+                    Pro.monitoring.exception(e);
+                }
+
             // const alert = this.alertCtrl.create({
             //     title: 'App Update!',
             //     subTitle: 'Please update your app to new version!',
