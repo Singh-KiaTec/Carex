@@ -21,13 +21,13 @@ export class ConfigurationService {
     public downloadProgress: any;
     public extractProgress: any;
     private updateTimer;
-    private  popover:any;
+    private popover: any;
 
 
     constructor(private appVersion: AppVersion,
         private storageService: StorageService, private market: Market, private platform: Platform,
         public popoverCtrl: PopoverController,
-         private baserestService: BaseRestService, public alertCtrl: AlertController) {
+        private baserestService: BaseRestService, public alertCtrl: AlertController) {
 
         // this.updateTimer = setInterval(() => {
         //     this.checkForIonicDeploy();
@@ -65,7 +65,7 @@ export class ConfigurationService {
     }
     async checkChannel() {
 
-     
+
 
         try {
             const res = await Pro.deploy.getCurrentVersion();
@@ -79,18 +79,18 @@ export class ConfigurationService {
         }
     }
     async checkForIonicDeploy() {
-               const config = {
-              'appId': '2564d9e8',
-              'channel': 'master'
-            }
-            await Pro.deploy.configure(config);
+        const config = {
+            'appId': '2564d9e8',
+            'channel': 'master'
+        }
+        await Pro.deploy.configure(config);
         const haveUpdate = await Pro.deploy.checkForUpdate()
         const info = await Pro.deploy.getConfiguration();
-console.log(info);
-console.log(haveUpdate);
+        console.log(info);
+        console.log(haveUpdate);
 
 
-        if (haveUpdate) { 
+        if (haveUpdate) {
             this.showpopOver();
             // const alert = this.alertCtrl.create({
             //     title: 'App Update!',
@@ -100,40 +100,40 @@ console.log(haveUpdate);
             //             text: 'Update',
             //             handler: data => {
             //                console.log("updateing");
-                          
+
             //             }
             //         }]
             // });
             // alert.present();
         }
-        else{}
+        else { }
     }
-  showpopOver(){
-      let data = this.downloadProgress
-    this.popover = this.popoverCtrl.create(PopoverIonicdeploy, { enableBackdropDismiss: false }, { enableBackdropDismiss: false });
-    this.popover.present();
+    showpopOver() {
+        let data = this.downloadProgress
+        this.popover = this.popoverCtrl.create(PopoverIonicdeploy, { enableBackdropDismiss: false }, { enableBackdropDismiss: false });
+        this.popover.present();
 
-  }
-  Downlaod(){
-    
-          this.downloadProgress = 0;
-    this.extractProgress = 0;
+    }
+    Downlaod() {
 
-     Pro.deploy.downloadUpdate((progress) => {
-        console.log(progress);
-        this.downloadProgress = progress;
-    })
-     Pro.deploy.extractUpdate((progress) => {
-        //console.log(progress);
-        this.extractProgress = progress;
-        //this.displayIonicdeployDialog();
+        this.downloadProgress = 0;
+        this.extractProgress = 0;
 
-    })
-    this.reloadApp();
-  }
-  reloadApp(){
-    Pro.deploy.reloadApp();
-  }
+        Pro.deploy.downloadUpdate((progress) => {
+            console.log(progress);
+            this.downloadProgress = progress;
+        })
+        Pro.deploy.extractUpdate((progress) => {
+            //console.log(progress);
+            this.extractProgress = progress;
+            //this.displayIonicdeployDialog();
+
+        })
+        this.reloadApp();
+    }
+    reloadApp() {
+        Pro.deploy.reloadApp();
+    }
     // displayIonicdeployDialog() {
     //     let popover = this.popoverCtrl.create(PopoverIonicdeploy, { enableBackdropDismiss: false }, { enableBackdropDismiss: false });
     //     popover.present();
