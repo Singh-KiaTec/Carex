@@ -29,7 +29,7 @@ export class PopoverIonicdeploy {
 
     }
 
-    async updateApp() {
+    updateApp() {
         // this.pro.deploy.redirect();
         this.Downlaod();
         // this.testDownload();
@@ -54,44 +54,36 @@ export class PopoverIonicdeploy {
 
     //     this.progressbar = false;
     // }
-    async   Downlaod() {
+    Downlaod() {
         this.progressbar = true;
         this.downloadProgress = 0;
         this.extractProgress = 0;
 
-    //     Pro.deploy.download().then(
-    //         (progress) => {
-    //             console.log("in download .." + progress);
-    //             this.downloadProgress = progress;
-    //             // this.reloadApp();
-    //         },
-    //         (error) => { console.log(error) }
+        Pro.deploy.download().then(
+            (progress) => {
+                console.log("in download .." + progress);
+                this.downloadProgress = progress;
+                // this.reloadApp();
+            },
+            (error) => { console.log(error) }
         
-    // )
+    )
         // Pro.deploy.extract((progress) => {
         //     console.log("in extract .." + progress);
         //     this.extractProgress = progress;
         //     //this.displayIonicdeployDialog();
 
         // })
-        // Pro.deploy.extract().then(
-        //     (progress) => {
-        //         console.log("in extract newwwwwww.." + progress);
-        //         this.extractProgress = progress;
-        //         //  this.reloadApp();
-        //     },
-        //     (error) => { console.log(error); }
+        Pro.deploy.extract().then(
+            (progress) => {
+                console.log("in extract newwwwwww.." + progress);
+                this.extractProgress = progress;
+                //  this.reloadApp();
+            },
+            (error) => { console.log(error); }
 
-        // )
-        await Pro.deploy.download((progress) => {
-            this.downloadProgress = progress;
-            console.log("in download .." + progress);
-          })
-          await Pro.deploy.extract((progress) => {
-            this.extractProgress = progress;
-            console.log("in extract newwwwwww.." + progress);
-          })
-          await Pro.deploy.redirect();
+        )
+         Pro.deploy.redirect();
 
         //     (error)=>{
         //         const alert = this.alertCtrl.create({
