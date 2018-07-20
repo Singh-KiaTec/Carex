@@ -93,37 +93,37 @@ export class ConfigurationService {
     deployApp(appInfo) {
         this.storageService.set('snapshot', appInfo);
         console.log(appInfo);
-        let update = this.compare(this.versionNumber, appInfo.appversion.version);
-        console.log(update);
-        if (update == -1) {
-            this.showAlert();
-        }
+        // let update = this.compare(this.versionNumber, appInfo.appversion.version);
+        // console.log(update);
+        // if (update == -1) {
+        //     this.showAlert();
+        // }
         //       if(this.versionNumber)
 
         //   }
     }
-    showAlert() {
-        const alert = this.alertCtrl.create({
-            title: 'App Update!',
-            subTitle: 'Please update your app to new version!',
-            buttons: [
-                {
-                    text: 'Update',
-                    handler: data => {
-                        this.openStore();
-                    }
-                }]
-        });
-        alert.present();
-    }
-    openStore() {
-        console.log("opening store");
-        if (this.platform.is('android')) {
-            this.market.open('com.carex.tryg.sundhed');
-        } else {
-            this.market.open('id1391413873');
-        }
-    }
+    // showAlert() {
+    //     const alert = this.alertCtrl.create({
+    //         title: 'App Update!',
+    //         subTitle: 'Please update your app to new version!',
+    //         buttons: [
+    //             {
+    //                 text: 'Update',
+    //                 handler: data => {
+    //                     this.openStore();
+    //                 }
+    //             }]
+    //     });
+    //     alert.present();
+    // }
+    // openStore() {
+    //     console.log("opening store");
+    //     if (this.platform.is('android')) {
+    //         this.market.open('com.carex.tryg.sundhed');
+    //     } else {
+    //         this.market.open('id1391413873');
+    //     }
+    // }
 
     // Return 1 if a > b
     // Return -1 if a < b
