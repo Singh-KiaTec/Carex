@@ -127,7 +127,7 @@
         <variable name="WARN_DEBUG" value="true" />
         <variable name="UPDATE_API" value="https://api.ionicjs.com" />
         <variable name="UPDATE_METHOD" value="background" />
-        <variable name="MAX_STORE" value="0" />
+        <variable name="MAX_STORE" value="2" />
         <variable name="MIN_BACKGROUND_DURATION" value="30" />
     </plugin>
     <engine name="ios" spec="4.5.4" />
