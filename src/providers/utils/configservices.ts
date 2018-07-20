@@ -124,27 +124,7 @@ export class ConfigurationService {
             this.market.open('id1391413873');
         }
     }
-    presentDeployConfirm(value) {
-        let alert = this.alertCtrl.create({
-            title: 'New update installed',
-            message: 'Do you want to reload the app to install the update?',
-            buttons: [
-                {
-                    text: 'Cancel',
-                    role: 'cancel',
-                    handler: () => {
-                    }
-                },
-                {
-                    text: 'Reload',
-                    handler: () => {
-                        // this.deploy.load();
-                    }
-                }
-            ]
-        });
-        alert.present();
-    }
+
     // Return 1 if a > b
     // Return -1 if a < b
     // Return 0 if a == b
