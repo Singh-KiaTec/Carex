@@ -9,7 +9,8 @@ import { ProgressBarModule } from "angular-progress-bar";
 declare var cordova: any;
 
 @Component({
-    templateUrl: 'ionicpopover.html'
+    templateUrl: 'ionicpopover.html',
+    providers: [ConfigurationService]
 })
 export class PopoverIonicdeploy {
 
@@ -20,11 +21,11 @@ export class PopoverIonicdeploy {
     private progressbar = false;
 
     constructor(
-        public params: NavParams,
-        public viewCtrl: ViewController,
-        private platform: Platform,
-        private alertCtrl: AlertController,
-        private confService: ConfigurationService
+        // public params: NavParams,
+        // public viewCtrl: ViewController,
+        // private platform: Platform,
+        // private alertCtrl: AlertController,
+        // private confService: ConfigurationService
     ) {
 
     }

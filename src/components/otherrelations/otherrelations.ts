@@ -5,7 +5,6 @@ import { NavController, NavParams } from 'ionic-angular';
 // import { termsconditions } from '../../models/data/termsandconditions';
 // import { HomePage } from '../../pages/home/home.page';
 import { BaseRestService } from '../../providers/restservice/base.rest.service';
-import { StorageService } from '../../providers/storageservice/storageservice';
 import { AuthService } from '../../providers/authenticationservice/auth.service';
 
 
@@ -18,15 +17,14 @@ export class OtherrelationsComponent {
     private heading;
     private paragraphs;
     // private termsdata: any = termsconditions;
-    private nb;
     private loading;
-    private termsread;
+
     private ismenupage;
     private otherRelations;
     private baseUrl;
 
 
-    constructor(private navCtrl: NavController, private navprams: NavParams, private baserestService: BaseRestService,private auth:AuthService, private storageService: StorageService) { }
+    constructor(private navCtrl: NavController, private navprams: NavParams, private baserestService: BaseRestService,private auth:AuthService) { }
 
     ngOnInit() {
         // Tracking

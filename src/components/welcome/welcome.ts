@@ -7,7 +7,7 @@ import { HomePage } from '../../pages/home/home.page';
 import { BaseRestService } from '../../providers/restservice/base.rest.service';
 import { Nav } from 'ionic-angular';
 import { StorageService } from '../../providers/storageservice/storageservice';
-import { AuthService } from '../../providers/authenticationservice/auth.service';
+// import { AuthService } from '../../providers/authenticationservice/auth.service';
 
 
 @Component({
@@ -25,11 +25,9 @@ export class WelcomeComponent {
     private paragraphs;
     private condition;
     private loading;
-    private welcomeread;
-    private user;
     private continue;
 
-    constructor(private baserestService: BaseRestService, private storageService: StorageService, private auth: AuthService) { }
+    constructor(private baserestService: BaseRestService, private storageService: StorageService) { }
 
     ngOnInit() {
         // Tracking
