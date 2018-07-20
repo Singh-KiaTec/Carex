@@ -69,15 +69,18 @@ export class ConfigurationService {
         //     'appId': '2564d9e8',
         //     'channel': 'master'
         // }
-        const update = await Pro.deploy.checkForUpdate();
-        if (update.available){
-          await Pro.deploy.downloadUpdate((progress) => {
-            console.log(progress);
+        const haveUpdate = await Pro.deploy.check()
+        if (haveUpdate){
+          this.downloadProgress = 0;
+          this.extractProgress = 0;
+      
+          await Pro.deploy.download((progress) => {
+            this.downloadProgress = progress;
           })
-          await Pro.deploy.extractUpdate((progress) => {
-            console.log(progress);
+          await Pro.deploy.extract((progress) => {
+            this.extractProgress = progress;
           })
-          await Pro.deploy.reloadApp();
+          await Pro.deploy.redirect();
         }
       }
       
