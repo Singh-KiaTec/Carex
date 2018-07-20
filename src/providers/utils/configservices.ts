@@ -5,8 +5,7 @@ import { PopoverController, AlertController, ToastController, Platform } from 'i
 import { StorageService } from '../storageservice/storageservice';
 import { BaseRestService } from '../../providers/restservice/base.rest.service';
 import { AppVersion } from '@ionic-native/app-version';
-import { Pro } from '@ionic/pro';
-import { Market } from '@ionic-native/market';
+import { Pro } from '@ionic/pro'
 import { PopoverIonicdeploy } from '../../components/ionicpopover/ionicpopover';
 
 const environment = "environment";
@@ -25,9 +24,9 @@ export class ConfigurationService {
 
 
     constructor(private appVersion: AppVersion,
-        private storageService: StorageService, private market: Market, private platform: Platform,
+        private storageService: StorageService,
         public popoverCtrl: PopoverController,
-        private baserestService: BaseRestService, public alertCtrl: AlertController) {
+        private baserestService: BaseRestService) {
 
         // this.updateTimer = setInterval(() => {
         //     this.checkForIonicDeploy();
@@ -70,7 +69,7 @@ export class ConfigurationService {
         //     'appId': '2564d9e8',
         //     'channel': 'master'
         // }
-        const update = await Pro.deploy.checkForUpdate()
+        const update = await Pro.deploy.checkForUpdate();
         if (update.available){
           await Pro.deploy.downloadUpdate((progress) => {
             console.log(progress);

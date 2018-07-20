@@ -89,7 +89,6 @@
       "cordova-plugin-statusbar": {},
       "cordova-plugin-app-version": {},
       "cordova-plugin-market": {},
-      "cordova-plugin-ionic-webview": {},
       "cordova-plugin-ionic": {
         "APP_ID": "2564d9e8",
         "CHANNEL_NAME": "master",

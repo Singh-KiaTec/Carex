@@ -9,25 +9,22 @@ import { ProgressBarModule } from "angular-progress-bar";
 declare var cordova: any;
 
 @Component({
-    templateUrl: 'ionicpopover.html',
-    providers: [ConfigurationService]
+    templateUrl: 'ionicpopover.html'
 })
 export class PopoverIonicdeploy {
 
-    public downloadProgress: any;
-    public extractProgress: any;
+    public downloadProgress: 0;
+    public extractProgress: 0;
     private updateTimer;
     private popover: any;
     private progressbar = false;
 
-    constructor(
-        // public params: NavParams,
+    constructor( ) {
+// public params: NavParams,
         // public viewCtrl: ViewController,
         // private platform: Platform,
         // private alertCtrl: AlertController,
         // private confService: ConfigurationService
-    ) {
-
     }
 
     // async updateApp() {
