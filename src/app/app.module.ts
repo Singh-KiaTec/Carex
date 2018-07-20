@@ -14,7 +14,7 @@ import { AppVersion } from '@ionic-native/app-version';
 import { Market } from '@ionic-native/market';
 import { Pro } from '@ionic/pro';
 import { Injectable, Injector } from '@angular/core';
-import {ProgressBarModule} from "angular-progress-bar";
+import { ProgressBarModule } from "angular-progress-bar";
 
 
 
@@ -78,7 +78,8 @@ import { DropDownPopOver } from '../components/dropdownpopover/dropdownpopover';
 
 
 Pro.init('2564d9e8', {
-  appVersion: '0.0.7'
+  appVersion: '0.0.8',
+  channel: 'master'
 
 });
 

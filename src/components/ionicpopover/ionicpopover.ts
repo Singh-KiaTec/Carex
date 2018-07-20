@@ -1,7 +1,6 @@
 import { Component } from '@angular/core';
 import { NavParams, ViewController, Platform, AlertController } from 'ionic-angular';
 import { ConfigurationService } from '../../providers/utils/configservices';
-import { Pro } from '@ionic/pro';
 import { ProgressBarModule } from "angular-progress-bar";
 
 

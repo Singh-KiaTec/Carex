@@ -121,16 +121,15 @@
     <plugin name="cordova-plugin-statusbar" spec="^2.4.2" />
     <plugin name="cordova-sqlite-storage" spec="^2.3.0" />
     <plugin name="cordova-plugin-market" spec="^1.2.0" />
-    <plugin name="cordova-plugin-ionic" spec="^5.0.0-rc.7">
-        <variable name="APP_ID" value="2564d9e8" />
-        <variable name="CHANNEL_NAME" value="master" />
-        <variable name="WARN_DEBUG" value="true" />
-        <variable name="UPDATE_API" value="https://api.ionicjs.com" />
-        <variable name="UPDATE_METHOD" value="background" />
-        <variable name="MAX_STORE" value="2" />
-        <variable name="MIN_BACKGROUND_DURATION" value="30" />
-    </plugin>
-    <engine name="ios" spec="4.5.4" />
     <plugin name="ionic-plugin-keyboard" spec="^2.2.1" />
     <plugin name="cordova-plugin-app-version" spec="^0.1.9" />
+    <engine name="ios" spec="4.5.4" />
+    <plugin name="cordova-plugin-ionic" spec="^4.1.7">
+        <variable name="APP_ID" value="2564d9e8" />
+        <variable name="CHANNEL_NAME" value="master" />
+        <variable name="UPDATE_METHOD" value="background" />
+        <variable name="MAX_STORE" value="2" />
+        <variable name="WARN_DEBUG" value="true" />
+        <variable name="UPDATE_API" value="https://api.ionicjs.com" />
+    </plugin>
 </widget>
