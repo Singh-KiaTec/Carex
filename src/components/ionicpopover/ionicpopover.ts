@@ -2,7 +2,7 @@ import { Component } from '@angular/core';
 import { NavParams, ViewController, Platform, AlertController } from 'ionic-angular';
 import { ConfigurationService } from '../../providers/utils/configservices';
 import { ProgressBarModule } from "angular-progress-bar";
-import {Pro} from '@Ionic/pro';
+import { Pro } from '@ionic/pro';
 
 
 declare var cordova: any;
