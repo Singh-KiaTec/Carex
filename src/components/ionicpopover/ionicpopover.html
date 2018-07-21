@@ -1,7 +1,11 @@
 <ion-content>
     <div class="popoverInnerDialog">
         <label padding  [ngClass]="(progressbar==true)? 'popoverInnerDialog--hide' : 'popoverInnerDialog--show'" >Please update your app to new version!</label>
+
         <label [ngClass]="(progressbar==false)? 'popoverInnerDialog--hide' : 'popoverInnerDialog--show'">Please wait while we update to new version!</label>
+
+        <label [ngClass]="(applyingflag==false)? 'popoverInnerDialog--hide' : 'popoverInnerDialog--show'">Please wait applying changes!</label>
+
         <button padding (click)="updateApp()" [ngClass]="(progressbar==true)? 'popoverInnerDialog--hide' : 'popoverInnerDialog--show'"  ion-button block>Update</button>
   
     </div>
