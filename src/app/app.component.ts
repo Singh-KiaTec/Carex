@@ -95,7 +95,7 @@ export class MyApp {
       // });
 
    //   this.checkForUpdates();
-     this.checkForIonicUpdates();
+   //  this.checkForIonicUpdates();
       // this.updateTimer = setInterval(() => {
       //   this.isReadyForUpdateCheck = true;
       // }, updateTimerInterval);

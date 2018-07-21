@@ -6,7 +6,7 @@ import { StorageService } from '../storageservice/storageservice';
 import { BaseRestService } from '../../providers/restservice/base.rest.service';
 import { AppVersion } from '@ionic-native/app-version';
 import { PopoverIonicdeploy } from '../../components/ionicpopover/ionicpopover';
-import {Pro} from '@ionic/pro';
+import { Pro } from '@ionic/pro';
 
 const environment = "environment";
 const updateInterval: number = 14400000;
@@ -34,25 +34,27 @@ export class ConfigurationService {
     }
 
     getAppVersionNumber() {
-        // let storedVersion:any = this.storageService.get("version");
-        // // console.log("storedversion: " + storedVersion);
-        // if (storedVersion) {
-        //     return storedVersion;
-        // } else {
-        let storedVersion = this.appVersion.getVersionNumber();
-        // this.appVersion.getVersionNumber().then((version) => {
-        //     this.versionNumber = version;
-        // })
-        this.storageService.set('version', storedVersion);
-        this.versionNumber = storedVersion;
-        console.log(this.versionNumber);
-        return this.versionNumber;
+        let storedVersion: any = this.storageService.get("version");
+        // console.log("storedversion: " + storedVersion);
+        if (storedVersion) {
+            return storedVersion;
+        } else {
+            let storedVersion = this.appVersion.getVersionNumber();
+            // this.appVersion.getVersionNumber().then((version) => {
+            //     this.versionNumber = version;
+            // })
+            this.storageService.set('version', storedVersion);
+            this.versionNumber = storedVersion;
+            console.log(this.versionNumber);
+            return this.versionNumber;
+        }
     }
 
     checkForceUpdate(version) {
         this.baserestService.getappVersion().then(
             (appInfo) => {
                 if (appInfo) {
+                    console.log(appInfo);
                     let appinfor: any = appInfo;
                     this.deployApp(appinfor);
                 }
@@ -69,26 +71,24 @@ export class ConfigurationService {
         //     'appId': '2564d9e8',
         //     'channel': 'master'
         // }
-        const haveUpdate = await Pro.deploy.check()
-        if (haveUpdate){
-          this.downloadProgress = 0;
-          this.extractProgress = 0;
-      
-          await Pro.deploy.download((progress) => {
-            this.downloadProgress = progress;
-          })
-          await Pro.deploy.extract((progress) => {
-            this.extractProgress = progress;
-          })
-          await Pro.deploy.redirect();
+        const update = await Pro.deploy.checkForUpdate()
+        if (update.available) {
+            console.log(update);
+            await Pro.deploy.downloadUpdate((progress) => {
+                console.log(progress);
+            })
+            await Pro.deploy.extractUpdate((progress) => {
+                console.log(progress);
+            })
+            await Pro.deploy.reloadApp();
         }
-      }
-      
+    }
+
 
     showpopOver() {
         let data = this.downloadProgress
-        this.popover = this.popoverCtrl.create(PopoverIonicdeploy, { enableBackdropDismiss: false }, { enableBackdropDismiss: false });
-        this.popover.present();
+        // this.popover = this.popoverCtrl.create(PopoverIonicdeploy, { enableBackdropDismiss: false }, { enableBackdropDismiss: false });
+        // this.popover.present();
 
     }
 
