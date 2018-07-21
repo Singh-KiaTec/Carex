@@ -2,7 +2,7 @@ import { Component } from '@angular/core';
 import { NavParams, ViewController, Platform, AlertController } from 'ionic-angular';
 import { ConfigurationService } from '../../providers/utils/configservices';
 import { ProgressBarModule } from "angular-progress-bar";
-
+import {Pro} from '@Ionic/pro';
 
 
 declare var cordova: any;
@@ -26,38 +26,20 @@ export class PopoverIonicdeploy {
         // private confService: ConfigurationService
     }
 
-    // async updateApp() {
-    //     // this.pro.deploy.redirect();
-    //     await Pro.deploy.getAvailableVersions().then((snapshots) => {
-    //         console.log('Snapshots', snapshots);
-    //         // snapshots will be an array of snapshot uuids
-    //          Pro.deploy.getCurrentVersion().then((x) => {
-    //           console.log('Current snapshot infos', x);
-    //           for (let suuid of snapshots) {
-    //               console.log(suuid);
-    //             }
-    //          });
-    //         });
-
-    //     this.progressbar = true;
-    //     this.downloadProgress = 0;
-    //     this.extractProgress = 0;
-    //     try{
-    //          await Pro.deploy.downloadUpdate((progress) => {
-    //               this.downloadProgress= progress
-    //             console.log("in download.."+progress);
-    //           })
-    //           await Pro.deploy.extractUpdate((progress) => {
-    //               this.extractProgress = progress;
-    //             console.log("in extract ..."+progress);
-    //           })
-    //           await Pro.deploy.reloadApp();
-    //         }
-    //         catch(e){
-    //             Pro.monitoring.exception(e);
-    //         }
-    //  }   
+    async updateApp() {
+        this.progressbar = true;
+        this.downloadProgress = 0;
+        this.extractProgress = 0;
+        await Pro.deploy.downloadUpdate((progress) => {
+            console.log(progress);
+        })
+        await Pro.deploy.extractUpdate((progress) => {
+            console.log(progress);
+        })
+        await Pro.deploy.reloadApp();
+     }   
              
+    
 
     dismiss() {
     }

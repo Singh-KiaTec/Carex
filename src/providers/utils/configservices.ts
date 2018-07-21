@@ -74,21 +74,15 @@ export class ConfigurationService {
         const update = await Pro.deploy.checkForUpdate()
         if (update.available) {
             console.log(update);
-            await Pro.deploy.downloadUpdate((progress) => {
-                console.log(progress);
-            })
-            await Pro.deploy.extractUpdate((progress) => {
-                console.log(progress);
-            })
-            await Pro.deploy.reloadApp();
+            this.showpopOver()
         }
     }
 
 
     showpopOver() {
-        let data = this.downloadProgress
-        // this.popover = this.popoverCtrl.create(PopoverIonicdeploy, { enableBackdropDismiss: false }, { enableBackdropDismiss: false });
-        // this.popover.present();
+      //  let data = this.downloadProgress
+         this.popover = this.popoverCtrl.create(PopoverIonicdeploy, { enableBackdropDismiss: false }, { enableBackdropDismiss: false });
+         this.popover.present();
 
     }
 
