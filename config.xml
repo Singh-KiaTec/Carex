@@ -133,4 +133,5 @@
         <variable name="MAX_STORE" value="2" />
         <variable name="MIN_BACKGROUND_DURATION" value="30" />
     </plugin>
+    <engine name="ios" spec="4.5.4" />
 </widget>
