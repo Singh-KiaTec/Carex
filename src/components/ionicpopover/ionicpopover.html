@@ -4,7 +4,7 @@
 
         <label [ngClass]="(progressflag==false)? 'popoverInnerDialog--hide' : 'popoverInnerDialog--show'">Please wait while we update to new version!</label>
 
-        <label [ngClass]="(applyingflag==false)? 'popoverInnerDialog--hide' : 'popoverInnerDialog--show'">Please wait applying changes!</label>
+        <!-- <label [ngClass]="(applyingflag==false)? 'popoverInnerDialog--hide' : 'popoverInnerDialog--show'">Please wait applying changes!</label> -->
 
         <button padding (click)="updateApp()" [ngClass]="(progressbar==true)? 'popoverInnerDialog--hide' : 'popoverInnerDialog--show'"  ion-button block>Update</button>
   

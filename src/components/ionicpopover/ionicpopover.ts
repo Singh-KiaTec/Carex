@@ -38,8 +38,8 @@ export class PopoverIonicdeploy {
             console.log(progress);
         })
         await Pro.deploy.extractUpdate((progress) => {
-            this.applyingflag = true;
-            this.progressflag = false;
+          //  this.applyingflag = true;
+           // this.progressflag = false;
           //  this.extractProgress =progress;
             this.downloadProgress =progress;
             console.log(progress);
