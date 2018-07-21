@@ -18,6 +18,7 @@ export class PopoverIonicdeploy {
     private popover: any;
     private progressbar = false;
     private applyingflag = false;
+    private progressflag = false;
 
     constructor( ) {
 // public params: NavParams,
@@ -29,6 +30,7 @@ export class PopoverIonicdeploy {
 
     async updateApp() {
         this.progressbar = true;
+        this.progressflag = true;
         this.downloadProgress = 0;
         this.extractProgress = 0;
         await Pro.deploy.downloadUpdate((progress) => {
@@ -37,6 +39,7 @@ export class PopoverIonicdeploy {
         })
         await Pro.deploy.extractUpdate((progress) => {
             this.applyingflag = true;
+            this.progressflag = false;
           //  this.extractProgress =progress;
             this.downloadProgress =progress;
             console.log(progress);

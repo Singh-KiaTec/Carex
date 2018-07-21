@@ -2,7 +2,7 @@
     <div class="popoverInnerDialog">
         <label padding  [ngClass]="(progressbar==true)? 'popoverInnerDialog--hide' : 'popoverInnerDialog--show'" >Please update your app to new version!</label>
 
-        <label [ngClass]="(progressbar==false)? 'popoverInnerDialog--hide' : 'popoverInnerDialog--show'">Please wait while we update to new version!</label>
+        <label [ngClass]="(progressflag==false)? 'popoverInnerDialog--hide' : 'popoverInnerDialog--show'">Please wait while we update to new version!</label>
 
         <label [ngClass]="(applyingflag==false)? 'popoverInnerDialog--hide' : 'popoverInnerDialog--show'">Please wait applying changes!</label>
 
