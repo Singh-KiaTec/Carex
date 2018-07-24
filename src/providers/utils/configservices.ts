@@ -6,7 +6,7 @@ import { StorageService } from '../storageservice/storageservice';
 import { BaseRestService } from '../../providers/restservice/base.rest.service';
 import { AppVersion } from '@ionic-native/app-version';
 import { PopoverIonicdeploy } from '../../components/ionicpopover/ionicpopover';
-import { Pro } from '@ionic/pro';
+//  import { Pro } from '@ionic/pro';
 
 const environment = "environment";
 const updateInterval: number = 14400000;
@@ -19,7 +19,7 @@ export class ConfigurationService {
     public isBeta;
     public downloadProgress: any;
     public extractProgress: any;
-    private updateTimer;
+    private updateTimer; 
     private popover: any;
 
 
@@ -66,16 +66,11 @@ export class ConfigurationService {
     }
 
     async checkForIonicDeploy() {
-        // try{
-        //      const config = {
-        //     'appId': '2564d9e8',
-        //     'channel': 'master'
+        // const update = await Pro.deploy.checkForUpdate()
+        // if (update.available) {
+        //     console.log(update);
+        //     this.showpopOver()
         // }
-        const update = await Pro.deploy.checkForUpdate()
-        if (update.available) {
-            console.log(update);
-            this.showpopOver()
-        }
     }
 
 

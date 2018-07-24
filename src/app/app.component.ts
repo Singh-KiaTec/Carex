@@ -13,7 +13,7 @@ import { data } from '../../src/models/data/data'
 // import { OneSignal } from '@ionic-native/onesignal';
 import { StorageService } from '../providers/storageservice/storageservice';
 import { BaseRestService } from '../providers/restservice/base.rest.service';
- import { Pro } from '@ionic/pro';
+//  import { Pro } from '@ionic/pro';
 // import { WelcomePage } from '../pages/welcome/welcome.page';
 import { Keyboard } from '@ionic-native/keyboard';
 import { ConfigurationService } from '../providers/utils/configservices';
