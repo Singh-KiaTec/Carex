@@ -14,7 +14,7 @@
   </ion-navbar>
 </ion-header>
 
-<ion-content #detailsContent  class="details">
+<ion-content #detailsContent class="details">
   <div class="detailspage" (swipe)="switchTab($event)">
     <ion-grid>
 
@@ -33,12 +33,17 @@
             <!-- <div class="fa {{item[4]}} fa-3x" text-center></div> -->
             <!-- <p id="{{i}}">{{item}}</p> -->
 
-            <button id="{{i}}" #navbuttons (click)="switchonTab(i)" ion-button>{{item}}</button>
+            <button id="{{i}}" #navbuttons (click)="switchonTab(i)" class="details__tabbutton" ion-button>{{item}}</button>
             <!-- <button id="{{i}}" *ngIf="i!=0" [style.background]='secondaryColor' (click)="switchonTab(i, $event)" ion-button>{{item}}</button> -->
 
           </ng-template>
-        </div>
-        <div padding class="details__content" *ngIf="tabstoDisplay && tabsContent">
+          <ul *ngIf="tabstoDisplay && tabstoDisplay.length > 1" class="details__pager">
+            <ng-template   ngFor let-item [ngForOf]="tabstoDisplay" let-i="index" [ngForTrackBy]="trackByFn">
+              <li id="{{i}}" #pager class="details__pagerlist"></li>
+            </ng-template>
+          </ul>
+         <div padding class="details__content" *ngIf="tabstoDisplay && tabsContent">
+          <div class="details__content-container">
           <ng-template ngFor let-content [ngForOf]="tabstoDisplay" let-c="index" [ngForTrackBy]="trackByFn">
 
             <div id="{{c}}" *ngIf="c==0" [ngClass]="(selectedContainer==0)? 'details__show': 'details__hide' ">
@@ -52,6 +57,7 @@
                 </div>
               </ng-template>
             </div>
+
 
             <div id="{{c}}" *ngIf="c!=0" [ngClass]="(selectedContainer==c)? 'details__show': 'details__hide' ">
               <!-- <ng-template ngFor let-textitem [ngForOf]="tabsContent" let-k="index" [ngForTrackBy]="trackByFn">
@@ -71,6 +77,10 @@
               </ng-template>
             </div>
           </ng-template>
+        </div> 
+        </div>
+       
+        
           <div float-right *ngIf="externallink && starttestLabel">
             <a (click)=openwindow($event) href="#">{{starttestLabel}}</a>
 
@@ -78,7 +88,8 @@
         </div>
       </ion-row>
 
-      <div padding *ngIf="dropdownList">
+      <div *ngIf="dropdownList">
+      <div padding>
         <ion-list>
           <ng-template ngFor let-dropdownitem [ngForOf]="dropdownList" let-c="index" [ngForTrackBy]="trackByFn">
             <ion-item>
@@ -113,7 +124,7 @@
             </ion-item>
           </ng-template>
         </ion-list>
-
+      </div>
       </div>
 
       <div padding *ngIf="showsearchbutton && totallist" class="details__countinfo">
@@ -146,24 +157,11 @@
 
       </div>
 
-
-      <!-- <ion-item class="item-input-padding size-16 select-css ion-select item-block item item-select" [class.item-ios]="currentPlatform == 'ios'"
-[class.item-md]="currentPlatform == 'android'">
-Helbredskategorier
-<select   *ngIf="searchData" class="ion-select size-16 select-bottom" name="estimate" >
-    <option value="Smerteproblem i kroppens øvre del(nakke, skulder, albue, hånd, mfl.)">Smerteproblem i kroppens øvre del(nakke, skulder, albue, hånd, mfl.)  </option>
-          <option value="Smerteproblem i kroppens nedre del(lænderyg, hofte, knæ, ankel, mfl.)">Smerteproblem i kroppens nedre del(lænderyg, hofte, knæ, ankel, mfl.)</option>
-</select>
-<ion-icon class="icon-dropdown"></ion-icon>
-</ion-item> -->
-
-
-
       <div *ngIf="!tabs">
 
         no data...
       </div>
-
+    
     </ion-grid>
   </div>
 </ion-content>

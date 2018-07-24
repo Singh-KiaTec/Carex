@@ -4,6 +4,8 @@
     line-height: 1.5em;
     .detailspage {
         height: 100%;
+        //box-shadow:  inset 0.5px 0.5px 95px -21px $color-highlight-gray;
+        background: $color-background-gray;
     }
     .toolbar-background-md {
         background: $color-menu-gray;
@@ -17,8 +19,21 @@
     // .scroll-content{
     //     background: $color-menu-gray;
     // }
+    &__content{
+        // box-shadow: 0.5px 0.5px 26px 0.5px $color-highlight-gray;
+        // margin-top: 2em;
+        //border: 1px solid rgb(166, 166, 166);
+        //  border: 1px solid  $color-background-gray;
+        width: 100%;
+    }
+    &__content-container{
+        margin-top: 3em;
+        margin-left: 1em;
+        margin-right: 1em;
+    }
+
     .item-inner {
-        border-bottom: 1px solid $primary-color-theme !important;
+       // border-bottom: 1px solid $primary-color-theme !important;
     }
     .toolbar,
     .bar-button-default-md {
@@ -32,7 +47,11 @@
     }
     &__container {
         width: 100%;
-        display: flex;
+        display: block;
+        background: $color-white;
+        margin-top: .4em;
+        border: 1px solid $border-shadow;
+        border-top: none;
         .button-default {
             font-size: 1.3rem; //  max-width: 31%;
             //  width: auto;
@@ -84,6 +103,54 @@
     &--movecontentTop {
         margin-top: -14.2em !important;
     }
+    &__tabbutton {
+        background-color: $color-highlight-gray !important;
+        width: 100%;
+        line-height: 2.8em;
+        height: 2.8em;
+        text-transform: inherit;
+        box-shadow: none;
+        margin-left: 0;
+        margin-right: 0;
+        margin-top: 0;
+
+        .button-inner {
+            justify-content: center;
+            text-overflow: ellipsis;
+            overflow-x: hidden;
+            white-space: nowrap;
+            display: block;
+            text-align: center;
+            font-size: 1.2em;
+        }
+    }
+    &__pager {
+        display: inline-block;
+    float: left;
+    width: 100%;
+    text-align: center;
+    height: 1em;
+    margin: 0;
+    padding: 0;
+    position: relative;
+    }
+    &__pagerlist {
+        list-style: none;
+        width: .7em;
+        display: inline-block;
+        border: 1px solid $primary-color-theme;
+        border-radius: 100%;
+        height: .7em;
+        margin: .2em;
+
+        &--active{
+            background: $primary-color-theme;
+        }
+        &--inactive{
+            background: $color-white;
+        }
+    }
+
 }
 
 .alert-ios .alert-wrapper,
