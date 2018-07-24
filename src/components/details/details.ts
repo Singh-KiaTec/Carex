@@ -1,6 +1,6 @@
 import { Component, ViewChild, ViewChildren } from '@angular/core';
 import { NavParams, Navbar, PopoverController, Platform } from 'ionic-angular';
-import { Button, NavController } from 'ionic-angular';
+import { Button, NavController, List } from 'ionic-angular';
 import { BaseRestService } from '../../providers/restservice/base.rest.service';
 //import { ViewChildren } from '@angular/core/src/metadata/di';
 import { AuthService } from '../../providers/authenticationservice/auth.service';
@@ -9,6 +9,7 @@ import { SearchDetailsPage } from '../../pages/searchdetails/searchdetails.page'
 import { InAppBrowser, InAppBrowserOptions } from '@ionic-native/in-app-browser';
 import { DropDownPopOver } from '../dropdownpopover/dropdownpopover';
 import { Keyboard } from '@ionic-native/keyboard';
+
 
 @Component({
   selector: 'details-viewer',
@@ -31,6 +32,7 @@ export class DetailsComponent {
   @ViewChild(Navbar) navbar: Navbar;
   @ViewChildren('navbuttons') navbuttons: Button;
   @ViewChild('detailsContent') detailsContent;
+  @ViewChildren('pager') pager: List;
   private tabs;
   private tabstoDisplay: any = [];
   private showsearchbutton = false;
@@ -111,14 +113,13 @@ export class DetailsComponent {
       if (currentitem.text) {
         tabsdata.push(currentitem.text);
       }
-
-
+  
     }
     this.tabsContent = tabsdata[0];
     this.tabsdata = tabsdata;
 
 
-    this.navbar.setElementStyle("background-color", this.primaryColor);
+  //  this.navbar.setElementStyle("background-color", this.primaryColor);
     this.secondaryColor = this.hex2rgb();
     // console.log(this.secondaryColor);
     // console.log(this.tabsContent);
@@ -210,14 +211,26 @@ export class DetailsComponent {
     this.tabsContent = this.tabsdata[id];
     console.log(this.selectedContainer);
     let defaulttab: any = this.navbuttons;
+    let pageritem:any = this.pager;
     if (defaulttab) {
       defaulttab.map((item, index) => {
         if (index == id) {
-          defaulttab._results[index].setElementStyle("background-color", this.primaryColor);
+          if((pageritem.length!=0 && pageritem._results[index].nativeElement.classList.contains("details__pagerlist--inactive")) || (pageritem.length!=0 && id==0)){
+             pageritem._results[index].nativeElement.className = "details__pagerlist  details__pagerlist--active";
+          }
+         defaulttab._results[index].setElementStyle("display", "block");
+
           return;
         }
         else {
-          defaulttab._results[index].setElementStyle("background-color", this.secondaryColor);
+         // let tabclass=defaulttab._results[index]._elementRef.nativeElement.className;
+          //tabclass + " details__hide";
+          //defaulttab._results[index]._elementRef.nativeElement.className = tabclass;
+          if(pageritem.length!=0  && !pageritem._results[index].nativeElement.classList.contains("details__pagerlist--inactive")){
+             pageritem._results[index].nativeElement.className  =  "details__pagerlist details__pagerlist--inactive";
+          }
+          
+          defaulttab._results[index].setElementStyle("display", "none");
         }
       });
     }
