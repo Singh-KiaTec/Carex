@@ -25,7 +25,7 @@
     <ion-item>
         <ion-icon item-left name="person"></ion-icon>
       <ion-label color="primary">{{profileContent.profile.name}}</ion-label>
-      <ion-input *ngIf="user"  disabled item-end value="{{username}}"></ion-input>
+      <ion-input *ngIf="user" disabled  class="profile__emailid-input" item-end value="{{name}}"></ion-input>
     </ion-item>
     <!-- <ion-item>
         <ion-icon item-left name="person"></ion-icon>
@@ -45,7 +45,7 @@
     <ion-item *ngIf="profileContent">
       <ion-icon item-left name="mail"></ion-icon>
       <ion-label color="primary">{{profileContent.profile.email}}</ion-label>
-      <ion-input item-right  disabled class="profile__emailid-input" value="{{email}}"></ion-input>
+      <ion-input item-right disabled   class="profile__emailid-input" value="{{email}}"></ion-input>
     </ion-item>
     
     <!-- <ion-item *ngIf="profileContent">

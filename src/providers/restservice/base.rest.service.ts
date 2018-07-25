@@ -1,11 +1,11 @@
 import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Headers, RequestOptions } from '@angular/http';
 import { App } from 'ionic-angular';
 // import { NotificationsPage } from '../../pages/notifications/notifications.page'
 import { LoginPage } from '../../pages/login/login.page';
 import { StorageService } from '../storageservice/storageservice';
-// import { Http } from '@angular/http';
+ import { Http } from '@angular/http';
 import 'rxjs/add/operator/map';
 import { Platform } from 'ionic-angular';
 import { AuthService } from '../authenticationservice/auth.service';
@@ -97,12 +97,12 @@ export class BaseRestService {
     }
     getTermsandconditionsData() {
         // this.getPlatform();
-        console.log(this.baseUrl);
+        console.log(this.prodUrl);
         return this.http.get(this.prodUrl + 'config/jsondata/termsandconditions.php').toPromise();
         //  return this.http.get('http://udv-admin.carex.dk/config/jsondata/termsandconditions.json', this.options).toPromise();
     }
     getCustomerData() {
-        console.log(this.baseUrl);
+        console.log(this.prodUrl);
         return this.http.get(this.prodUrl + 'config/jsondata/trygv2.php', this.options).toPromise();
     }
     getsmartSearchData() {

@@ -26,6 +26,7 @@ export class ProfileComponent {
     private profileContent:any;
     private loading:boolean;
 private username;
+private name;
 private email;
     
 
@@ -43,6 +44,7 @@ private email;
 
      this.username = this.user[2];
      this.email = this.user[1];
+     this.name = this.user[0];
 
         console.log(this.user);
         this.baserestService.getProfileContent().then(

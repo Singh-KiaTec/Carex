@@ -78,7 +78,7 @@ import { DropDownPopOver } from '../components/dropdownpopover/dropdownpopover';
 
 
 // Pro.init('2564d9e8', {
-//   appVersion: '0.0.9',
+//   appVersion: '0.1.0',
 //   channel: 'master'
 // });
 
