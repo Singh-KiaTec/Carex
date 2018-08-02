@@ -1,15 +1,20 @@
-@import '../../assets/sass/variables';
+@import "../../assets/sass/variables";
+
 .details {
     // background: $color-menu-gray !important;
     line-height: 1.5em;
+
     .detailspage {
         height: 100%;
+
         //box-shadow:  inset 0.5px 0.5px 95px -21px $color-highlight-gray;
         background: $color-background-gray;
     }
+
     .toolbar-background-md {
         background: $color-menu-gray;
     }
+
     .toolbar-title {
         color: $color-white;
     } // .item {
@@ -19,32 +24,38 @@
     // .scroll-content{
     //     background: $color-menu-gray;
     // }
-    &__content{
+    &__content {
         // box-shadow: 0.5px 0.5px 26px 0.5px $color-highlight-gray;
         // margin-top: 2em;
         //border: 1px solid rgb(166, 166, 166);
         //  border: 1px solid  $color-background-gray;
         width: 100%;
     }
-    &__content-container{
+
+    &__content-container {
         margin-top: 3em;
         margin-left: 1em;
         margin-right: 1em;
     }
 
     .item-inner {
-       // border-bottom: 1px solid $primary-color-theme !important;
+        // border-bottom: 1px solid $primary-color-theme !important;
+   
     }
+
     .toolbar,
     .bar-button-default-md {
         color: $color-text-gray !important;
     }
+
     .back-button {
         color: $color-white !important;
     }
+
     .input-has-focus {
         border-bottom-color: none;
     }
+
     &__container {
         width: 100%;
         display: block;
@@ -52,10 +63,12 @@
         margin-top: .4em;
         border: 1px solid $border-shadow;
         border-top: none;
+
         .button-default {
             font-size: 1.3rem; //  max-width: 31%;
             //  width: auto;
             flex-grow: 1;
+
             .button-inner {
                 justify-content: left;
                 text-overflow: ellipsis;
@@ -63,46 +76,55 @@
             }
         }
     }
+
     &__hide {
         display: none;
     }
+
     &__show {
         display: block;
     }
+
     &__searchbutton {
         background: $primary-color-theme;
         color: $color-white;
         width: 48%;
         border-color: $primary-color-theme;
     }
+
     &__resetbutton {
         color: $primary-color-theme;
-        ;
         border-color: $primary-color-theme;
         width: 48%;
     }
+
     &__searchlist {
         .item {
             background: $color-white;
             color: $color-menu-gray;
         }
     }
+
     &__searchdetailview {
         color: $primary-color-theme;
     }
+
     &__item {
         margin-top: 1.5em;
         margin-bottom: 1.5em;
     }
+
     &__countinfo {
         text-align: center;
         font-size: 1.3em;
         color: $color-primary-gray;
         margin-top: -1em;
     }
+
     &--movecontentTop {
         margin-top: -14.2em !important;
     }
+
     &__tabbutton {
         background-color: $color-highlight-gray !important;
         width: 100%;
@@ -124,16 +146,18 @@
             font-size: 1.2em;
         }
     }
+
     &__pager {
         display: inline-block;
-    float: left;
-    width: 100%;
-    text-align: center;
-    height: 1em;
-    margin: 0;
-    padding: 0;
-    position: relative;
+        float: left;
+        width: 100%;
+        text-align: center;
+        height: 1em;
+        margin: 0;
+        padding: 0;
+        position: relative;
     }
+
     &__pagerlist {
         list-style: none;
         width: .7em;
@@ -143,17 +167,18 @@
         height: .7em;
         margin: .2em;
 
-        &--active{
+        &--active {
             background: $primary-color-theme;
         }
-        &--inactive{
+
+        &--inactive {
             background: $color-white;
         }
     }
-    &__dropdownList{
-      margin-top: 1em;
-    }
 
+    &__dropdownList {
+        margin-top: 1em;
+    }
 }
 
 .alert-ios .alert-wrapper,

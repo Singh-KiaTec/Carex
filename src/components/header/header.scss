@@ -1,30 +1,29 @@
-@import  '../../assets/sass/variables';
-
+@import '../../assets/sass/variables';
 .header {
     background: $primary-color-theme !important;
-
-    .toolbar-background, .toolbar-background-ios{
+    .toolbar-background,
+    .toolbar-background-ios {
         background: inherit !important;
         height: 4em;
-      }
-      .bar-buttons,
-      .bar-button-default-ios{
-          color: $color-white;
-      }
-   .title{
-         //width: 80%;
+    }
+    .bar-buttons,
+    .bar-button-default-ios {
+        color: $color-white;
+    }
+    .title {
+        //width: 80%;
         margin-top: 0em;
     }
-    .title-md{
+    .title-md {
         //margin-left: -1.8em;
     }
-    .toolbar-title-md{
+    .toolbar-title-md {
         width: 85%;
     }
-    .toolbar-ios{
+    .toolbar-ios {
         padding-top: 0em;
     }
-    &.header-ios{
+    &.header-ios {
         height: 4.5em !important;
         padding-top: 0.5em !important;
     }
