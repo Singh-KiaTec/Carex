@@ -14,8 +14,8 @@ export class HomePage {
   public logourl: string;
   public currentpageIndex;
   public pagemenuButtons;
-  @ViewChild(Content) content: Content;
-@ViewChild(Navbar) navbar: Navbar;
+//   @ViewChild(Content) content: Content;
+// @ViewChild(Navbar) navbar: Navbar;
   constructor(public navCtrl: NavController, public navParams: NavParams) {
     // this.navdata = this.navParams.get('pageData');
     // this.currentpageIndex = this.navParams.get('itemIndex');
