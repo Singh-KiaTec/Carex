@@ -1,0 +1,53 @@
+@import "../../assets/sass/variables";
+
+.otp {
+    line-height: 1.5em;
+
+    &__form {
+        margin-top: 40%;
+    }
+
+    &__text-box {
+        border-bottom: 1px solid $color-secondary-gray;
+        margin-left: 1em;
+        margin-right: 1em;
+
+        input {
+            font-size: 2em;
+            text-align: center;
+            text-transform: password;
+            -webkit-text-security: disc;
+
+            border: none;
+            color: transparent;
+            display: inline-block;
+            font-size: 2em;
+            text-shadow: 0 0 0 $color-menu-gray;
+
+            &:focus{
+                outline: none;
+            }
+        }
+    
+    }
+
+    &__otplabel {
+        text-align: center;
+        border-top: none !important;
+
+        .item-inner {
+            border-bottom: none !important;
+        }
+    }
+
+    &__inputs {
+        text-align: center;
+        border-bottom: none !important;
+        box-shadow: none !important;
+
+        .item-inner {
+            border-bottom: none !important;
+        }
+    }
+    
+}

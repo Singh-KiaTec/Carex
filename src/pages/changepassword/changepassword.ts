@@ -2,15 +2,15 @@ import { Component } from '@angular/core';
 
 
 @Component({
-    templateUrl: 'termsconditions.page.html'
+    templateUrl: 'changepassword.page.html'
 })
-export class TermsconditionPage {
+export class ChangepasswordPage {
     constructor(
     ) { }
 
     ngOnInit() {
         // Tracking
-        console.log("in terms page");
-    }
 
+    }
+    
 }

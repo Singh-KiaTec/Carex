@@ -1,0 +1,41 @@
+<!-- <ion-header class="header">
+        <header-viewer></header-viewer>
+    </ion-header>  -->
+
+<form class="otp__form" [formGroup]="loginForm" (ngSubmit)="gotochangePasword()">
+    <div>
+        <ion-list>
+
+            <ion-item class="otp__otplabel">
+
+                <ion-label class="dark">OTP</ion-label>
+
+            </ion-item>
+
+            <ion-item class="otp__inputs">
+
+                <ion-input type="number" formControlName="otp1" #otp1 id="otp1" class="otp__text-box"  max="9"  (keyup)="next($event)" >
+                </ion-input>
+
+                <ion-input type="number" formControlName="otp2"  #otp2 id="otp2" class="otp__text-box"  max="9"  (keyup)="next($event)" >
+                </ion-input>
+
+                <ion-input type="number" formControlName="otp3"  #otp3 id="otp3" class="otp__text-box"  max="9"   (keyup)="next($event)" >
+                </ion-input>
+
+                <ion-input type="number" formControlName="otp4"  #otp4  id="otp4" class="otp__text-box"  max="9" (keyup)="next($event)"  >
+                </ion-input>
+                <!-- <ion-input type="password" formControlName="otp"></ion-input> -->
+            </ion-item>
+
+        </ion-list>
+        <div *ngIf="error">
+            <div class="login__error">Invalid OTP please try again..</div>
+
+        </div>
+    </div>
+
+    <!-- <button ion-button type="submit" [disabled]="!loginForm.valid" class="login__login-button">Submit</button> -->
+
+    <!-- <button ion-button type="button" color="secondary" (click)="forgetpassword($event)" class="login__forgetpwd">Annuller</button> -->
+</form>

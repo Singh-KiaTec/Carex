@@ -16,6 +16,7 @@ import { Environment } from '../../models/environment.model';
 import { AuthService } from '../../providers/authenticationservice/auth.service';
 // import { DomSanitizer } from '@angular/platform-browser';
 import { InAppBrowser } from '@ionic-native/in-app-browser';
+import { UsernamePage } from '../../pages/username/username';
 
 // import $ from "jquery";
 
@@ -150,7 +151,8 @@ export class LoginComponent {
 
         // console.log(event);
         // window.open("https://trygsundhed.carex.dk/simplesaml/module.php/core/forgotpw.php", "_blank");
-        this.iab.create('https://trygsundhed.carex.dk/simplesaml/module.php/core/forgotpw.php', "_system", "location=no,hardwareback=yes");
+       // this.iab.create('https://trygsundhed.carex.dk/simplesaml/module.php/core/forgotpw.php', "_system", "location=no,hardwareback=yes");
+        this.navCtrl.push(UsernamePage);
 
     }
 

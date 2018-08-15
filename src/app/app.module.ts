@@ -15,6 +15,7 @@ import { Market } from '@ionic-native/market';
 // import { Pro } from '@ionic/pro';
 import { Injectable, Injector } from '@angular/core';
 import { ProgressBarModule } from "angular-progress-bar";
+import { Vibration } from '@ionic-native/vibration';
 
 
 
@@ -34,6 +35,9 @@ import { TermsconditionPage } from '../pages/termsconditions/termsconditions.pag
 import { SearchDetailsPage } from '../pages/searchdetails/searchdetails.page';
 import { OtherRelationsPage } from '../pages/otherrelations/otherrelations.page';
 import { CustomanchorPage } from '../pages/customanchor/customanchor.page';
+import {ChangepasswordPage} from '../pages/changepassword/changepassword';
+import {OtpPage} from '../pages/otp/otp';
+import {UsernamePage} from '../pages/username/username';
 
 
 
@@ -54,6 +58,7 @@ import { WindowRef } from '../providers/windowservice/windowservice';
 import { AuthService } from '../providers/authenticationservice/auth.service';
 import { SafePipe } from '../providers/directory/safepipe';
 import { ConfigurationService } from '../providers/utils/configservices';
+import {PasswordValidation} from '../providers/validators/password-validator';
 
 
 
@@ -75,6 +80,9 @@ import { OtherrelationsComponent } from '../components/otherrelations/otherrelat
 import { CustomanchorComponent } from '../components/customanchor/customanchor';
 import { PopoverIonicdeploy } from '../components/ionicpopover/ionicpopover';
 import { DropDownPopOver } from '../components/dropdownpopover/dropdownpopover';
+import {changepasswordComponent} from '../components/changepassword/changepassword';
+import {UsernameComponent} from '../components/username/username';
+import {OtpComponent} from '../components/otp/otp';
 
 
 // Pro.init('2564d9e8', {
@@ -118,7 +126,10 @@ const pagesDeclaration = [
   SearchDetailsPage,
   TermsconditionPage,
   OtherRelationsPage,
-  CustomanchorPage
+  CustomanchorPage,
+  UsernamePage,
+  ChangepasswordPage,
+  OtpPage
 ];
 
 const componentDeclaration = [
@@ -138,7 +149,10 @@ const componentDeclaration = [
   OtherrelationsComponent,
   CustomanchorComponent,
   PopoverIonicdeploy,
-  DropDownPopOver
+  DropDownPopOver,
+  UsernameComponent,
+  OtpComponent,
+  changepasswordComponent
 
 ];
 
@@ -156,13 +170,13 @@ const componentDeclaration = [
       platforms: {
         ios: {
           backButtonText: 'Tilbage',
-          scrollAssist: true,
-          autoFocusAssist: true,
-          scrollPadding: true
+          // scrollAssist: true,
+          // autoFocusAssist: true,
+          // scrollPadding: true
         },
         android: {
-          scrollAssist: false,
-          autoFocusAssist: false
+          scrollAssist: true,
+          autoFocusAssist: true
         }
       }
     }),
@@ -189,6 +203,9 @@ const componentDeclaration = [
     TermsconditionPage,
     OtherRelationsPage,
     PopoverIonicdeploy,
+    UsernamePage,
+    ChangepasswordPage,
+    OtpPage,
     DropDownPopOver
 
   ],
@@ -205,6 +222,8 @@ const componentDeclaration = [
     AppVersion,
     HttpClientModule,
     WindowRef,
+    Vibration,
+    PasswordValidation,
     AuthService,
     InAppBrowser,
      { provide: ErrorHandler, useClass: IonicErrorHandler }

@@ -1,0 +1,25 @@
+ <!-- <ion-header class="header">
+        <header-viewer></header-viewer>
+    </ion-header>  -->
+
+<form [formGroup]="loginForm" class="username__form" (ngSubmit)="gotootp()">
+    <div>
+        <ion-list>
+
+            <ion-item>
+
+                <ion-label class="dark">Brugernavn</ion-label>
+                <ion-input type="text" formControlName="userid"></ion-input>
+            </ion-item>
+  <div *ngIf="error">
+            <div class="login__error">username not found.please try again.</div>
+
+        </div>
+        </ion-list>
+      
+    </div>
+
+    <button ion-button type="submit" [disabled]="!loginForm.valid" class="login__login-button">Fortsæt</button>
+
+    <!-- <button ion-button type="button" color="secondary" (click)="forgetpassword($event)" class="login__forgetpwd">Annuller</button> -->
+</form>

@@ -5,7 +5,7 @@ import { SplashScreen } from '@ionic-native/splash-screen';
 
 import { HomePage } from '../pages/home/home.page';
 // import { ListPage } from '../pages/list/list';
-import { data } from '../../src/models/data/data'
+import { data } from '../models/data/data'
 // import { Title } from '@angular/platform-browser/src/browser/title';
 // import { MenuPage } from '../pages/menu/menu.page';
 // import { NotificationsPage } from '../pages/notifications/notifications.page';

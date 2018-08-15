@@ -42,9 +42,9 @@ private email;
       this.user = this.navParam.get('userinfo');
 
 
-     this.username = this.user[2];
-     this.email = this.user[1];
-     this.name = this.user[0];
+     this.username = this.user.brugernavn;
+     this.email = this.user.email;
+     this.name = this.user.username;
 
         console.log(this.user);
         this.baserestService.getProfileContent().then(

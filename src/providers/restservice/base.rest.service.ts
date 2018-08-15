@@ -103,11 +103,11 @@ export class BaseRestService {
     }
     getCustomerData() {
         console.log(this.prodUrl);
-        return this.http.get(this.prodUrl + 'config/jsondata/trygv2.php', this.options).toPromise();
+        return this.http.get(this.prodUrl + 'config/jsondata/tryg__dev.php', this.options).toPromise();
     }
     getsmartSearchData() {
         //return this.http.get(this.prodUrl + 'config/jsondata/searchlist.php', this.options).toPromise();
-        return this.http.get(this.prodUrl + 'config/jsondata/smartsearchv2.php', this.options).toPromise();
+        return this.http.get(this.prodUrl + 'config/jsondata/smartsearch__dev.php', this.options).toPromise();
     }
     logout(url) {
         this.storageservice.clear();
@@ -144,5 +144,36 @@ export class BaseRestService {
     }
     getappVersion() {
         return this.http.get(this.prodUrl + 'config/jsondata/appversion.php', this.options).toPromise();
+    }
+    sendOtp(username){
+        this.formdata = new FormData();
+
+        this.formdata.append('action', 'getOTP');
+        this.formdata.append('username', username);
+
+        return this.http.post('https://udv-idp.carex.dk/login_services.php', this.formdata, this.options).toPromise();
+    }
+    verifyOtp(id, otp){
+        this.formdata = new FormData();
+
+        this.formdata.append('action', 'validateOTP');
+        this.formdata.append('id', id);
+        this.formdata.append('otp', otp);
+        return this.http.post('https://udv-idp.carex.dk/login_services.php', this.formdata, this.options).toPromise();
+    }
+    changePassword(id, password){
+        this.formdata = new FormData();
+
+        this.formdata.append('action', 'changePassword');
+        this.formdata.append('id', id);
+        this.formdata.append('password', password);
+        return this.http.post('https://udv-idp.carex.dk/login_services.php', this.formdata, this.options).toPromise();
+    }
+    loginUdv(id, password){
+        this.formdata = new FormData();
+        this.formdata.append('action', 'login');
+        this.formdata.append('id', id);
+        this.formdata.append('password', password);
+        return this.http.post('https://udv-idp.carex.dk/login_services.php', this.formdata, this.options).toPromise();
     }
 }

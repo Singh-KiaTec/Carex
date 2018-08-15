@@ -3,7 +3,7 @@ import { BehaviorSubject } from 'rxjs/BehaviorSubject';
 import { Observable } from 'rxjs/Observable';
 import { PopoverController, AlertController, ToastController, Platform } from 'ionic-angular';
 import { StorageService } from '../storageservice/storageservice';
-import { BaseRestService } from '../../providers/restservice/base.rest.service';
+import { BaseRestService } from '../restservice/base.rest.service';
 import { AppVersion } from '@ionic-native/app-version';
 import { PopoverIonicdeploy } from '../../components/ionicpopover/ionicpopover';
 //  import { Pro } from '@ionic/pro';
