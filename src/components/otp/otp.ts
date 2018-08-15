@@ -59,7 +59,7 @@ export class OtpComponent {
         if (this.loginForm.valid) {
             this.baserestService.verifyOtp(this.userdata.id, otp).then(
                 (success) => { this.success = success; this.setuserData(); },
-                error => { this.error = true; this.vibration.vibrate(1000); console.log(error) }
+                error => { this.error = true; this.vibration.vibrate(500); console.log(error) }
             )
         }
 
