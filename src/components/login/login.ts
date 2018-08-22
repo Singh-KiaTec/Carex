@@ -96,7 +96,6 @@ export class LoginComponent {
     }
 
     login() {
-        console.log(this.loginForm.value);
         // this.navCtrl.setRoot(HomePage);
         //  this.navCtrl.setRoot(NemidPage);
         // this.keyboard.close();

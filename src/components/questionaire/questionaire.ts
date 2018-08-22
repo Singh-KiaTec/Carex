@@ -1,9 +1,6 @@
 import { Component, Input, ViewChild, ViewChildren } from '@angular/core';
 import { FormGroup, FormBuilder, FormArray, FormControl } from '@angular/forms';
 import { Slides } from 'ionic-angular';
-import { Checkbox } from '../../../node_modules/ionic-angular/umd';
-import { checkAndUpdateElementDynamic } from '../../../node_modules/@angular/core/src/view/element';
-import { AsyncPipe } from '../../../node_modules/@angular/common';
 
 
 

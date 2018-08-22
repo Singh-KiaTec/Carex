@@ -42,6 +42,7 @@ import {UsernamePage} from '../pages/username/username';
 import {QuestionaireComponent} from '../components/questionaire/questionaire';
 import {ContactusComponent} from  '../components/contactus/contactus';
 import {JqxgridComponent} from  '../components/jqxgrid/jqxgrid';
+import {HeaderLogoComponent} from '../components/header-logo/header-logo';
 
 
 
@@ -148,6 +149,7 @@ const componentDeclaration = [
   NemidComponent,
   TermsconditionsComponent,
   HeaderComponent,
+  HeaderLogoComponent,
   SearchDetailsComponent,
   SafePipe,
   OtherrelationsComponent,
