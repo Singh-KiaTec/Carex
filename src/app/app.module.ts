@@ -16,7 +16,8 @@ import { Market } from '@ionic-native/market';
 import { Injectable, Injector } from '@angular/core';
 import { ProgressBarModule } from "angular-progress-bar";
 import { Vibration } from '@ionic-native/vibration';
-
+import { jqxGridComponent } from 'jqwidgets-scripts/jqwidgets-ts/angular_jqxgrid';
+// /Users/kiatec/Documents/Carex_App/carex/node_modules/jqwidgets-scripts/jqwidgets-ts/angular_jqxgrid.ts
 
 
 //ANGULAR
@@ -38,6 +39,9 @@ import { CustomanchorPage } from '../pages/customanchor/customanchor.page';
 import {ChangepasswordPage} from '../pages/changepassword/changepassword';
 import {OtpPage} from '../pages/otp/otp';
 import {UsernamePage} from '../pages/username/username';
+import {QuestionaireComponent} from '../components/questionaire/questionaire';
+import {ContactusComponent} from  '../components/contactus/contactus';
+import {JqxgridComponent} from  '../components/jqxgrid/jqxgrid';
 
 
 
@@ -152,12 +156,16 @@ const componentDeclaration = [
   DropDownPopOver,
   UsernameComponent,
   OtpComponent,
-  changepasswordComponent
+  changepasswordComponent,
+  QuestionaireComponent,
+  ContactusComponent,
+  JqxgridComponent
 
 ];
 
 @NgModule({
   declarations: [
+    jqxGridComponent,
     ...pagesDeclaration,
     ...componentDeclaration
   ],

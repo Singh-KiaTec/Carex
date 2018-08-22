@@ -176,4 +176,8 @@ export class BaseRestService {
         this.formdata.append('password', password);
         return this.http.post('https://udv-idp.carex.dk/login_services.php', this.formdata, this.options).toPromise();
     }
+    getQuestionary() {
+               return this.http.get(this.prodUrl + 'config/jsondata/question.php', this.options).toPromise();
+   
+             }
 }

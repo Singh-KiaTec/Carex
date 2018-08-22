@@ -1,0 +1,43 @@
+<div class="contactus" paddding>
+    <ion-list>
+        <ion-item>
+            <ion-label color="">Email</ion-label>
+            <ion-input placeholder="Text Input"></ion-input>
+        </ion-item>
+
+        <ion-item>
+            <ion-label color="">Phone Number</ion-label>
+            <ion-input type="tel" placeholder="Tel Input"></ion-input>
+        </ion-item>
+
+        <ion-item>
+            <ion-label color="">Overordnet årsag til henvendelse:</ion-label>
+            <ion-select>
+                <ion-option value="Pludselig overbelastning på arbejdet">Pludselig overbelastning på arbejdet</ion-option>
+                <ion-option value="Gradvis overbelastning på arbejdet">Gradvis overbelastning på arbejdet</ion-option>
+                <ion-option value="Ulykke/uheld på arbejdet">Ulykke/uheld på arbejdet</ion-option>
+                <ion-option value="Pludselig overbelastning i fritiden">Pludselig overbelastning i fritiden</ion-option>
+                <ion-option value="Gradvis overbelastning i fritiden">Gradvis overbelastning i fritiden</ion-option>
+                <ion-option value="Ulykke/uheld i fritiden">Ulykke/uheld i fritiden</ion-option>
+            </ion-select>
+        </ion-item>
+
+        <ion-item>
+            <ion-label color="">Passende tidspunkt:</ion-label>
+            <ion-select>
+                <ion-option value="8-11">8-11</ion-option>
+                <ion-option value="8-13">11-13</ion-option>
+                <ion-option value="8-16">13-16</ion-option>
+            </ion-select>
+        </ion-item>
+        <!-- <ion-item>
+          <ion-label color="stable" >Øvrige informationer til rådgivningslinjen</ion-label>
+      </ion-item> -->
+        <ion-item>
+            <ion-textarea placeholder="Øvrige informationer til rådgivningslinjen"></ion-textarea>
+        </ion-item>
+    </ion-list>
+
+    <button class="contactus__cancel" ion-button round>Annuller</button>
+    <button class="contactus__send" float-right ion-button round>Send</button>
+</div>

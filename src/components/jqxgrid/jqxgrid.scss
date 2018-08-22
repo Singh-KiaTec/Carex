@@ -1,0 +1,21 @@
+@import "../../assets/sass/variables";
+
+.jqxgridcomponent {}
+
+.jqx-item {
+    background: inherit;
+}
+
+.jqx-grid-content > div div[role='row']:nth-child(2n) {
+    background: $color-white;
+}
+
+.jqx-grid-content > div div[role='row']:nth-child(2n+1) {
+    background: $gray-table-highlight; // #57595D;
+    color: $color-white;
+}
+
+.jqx-widget-header {
+    background: $background-dark-gray;
+    color: $color-white;
+}

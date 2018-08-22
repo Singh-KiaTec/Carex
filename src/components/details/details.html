@@ -162,6 +162,29 @@
           no data...
         </div>
       
+
+
+
+
+
+
+
+     <!-- in questions -->
+        <div  *ngIf="allQuestion && hideQuestion==false">
+                    <questionaire-viewer [questions]="allQuestion"></questionaire-viewer>
+        </div>
+  
+  
+        <div *ngIf="hidecontactus==false">
+          <contactus-viewer></contactus-viewer>
+        </div>
+
+        <div *ngIf="hidegird==false">
+            <jqxgrid-viewer></jqxgrid-viewer>
+          </div>
+        
+  
+
       </ion-grid>
     </div>
   </ion-content>

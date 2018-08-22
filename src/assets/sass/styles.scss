@@ -1,5 +1,6 @@
 @import './variables';
 @import './util';
+@import './jqxbase.scss';
 @import '../../components/menu/menu.scss';
 @import '../../pages/home/home.page.scss';
 @import '../../components/profile/profile.scss';
@@ -14,3 +15,7 @@
 @import '../../components/searchdetails/searchdetails.scss';
 @import '../../components/otherrelations/otherrelations.scss';
 @import '../../components/ionicpopover/ionicpopover.scss';
+@import "../../components/questionaire/questionaire.scss";
+@import "../../components/contactus/contactus.scss";
+@import "../../components/jqxgrid/jqxgrid.scss";
+// @import "../../node_modules/jqwidgets-scripts/jqwidgets/styles/jqx.base.css";

@@ -1,0 +1,43 @@
+<div class="questionaire" paddding>
+    <ion-slides pager *ngIf="questionsForm">
+
+
+        <ng-template ngFor let-item [ngForOf]="questionsForm.get('items').controls" let-i="index" [ngForTrackBy]="trackByFn">
+            <ion-slide id="slide{{i}}">
+                <form class="" id="questionForm" #questionForm novalidate [formGroup]="questionsForm">
+                    <div id="slideitem{{i}}" class="details__questionitem">
+                        <div id="{{i}}">
+                            <p class="questionaire__question"> {{item.value.label}}</p>
+                            <ng-template ngFor let-dropdownitem [ngForOf]="item.value.checkboxlist" let-k="index" [ngForTrackBy]="trackByFn">
+                                <ion-item class="questionaire__answers">
+                                    <ion-label>{{dropdownitem.label}}</ion-label>
+                                    <!-- <ion-checkbox  [(ngModel)]="dropdownitem.checked" [ngModelOptions]="{standalone: true}" [checked]="dropdownitem.checked"
+                                        (ionChange)="updateQuestionaire(item, dropdownitem, $event)"></ion-checkbox> -->
+                                        <ion-checkbox #checkbox id="{{dropdownitem.label}}" checked="{{dropdownitem.checked}}"
+                                        (click)="updateQuestionaire(item, dropdownitem, $event)"  ></ion-checkbox> 
+                                </ion-item>
+                            </ng-template>
+                        </div>
+                    </div>
+                </form>
+            </ion-slide>
+        </ng-template>
+        <!-- <ng-template ngFor let-item [ngForOf]="questions" let-i="index" [ngForTrackBy]="trackByFn">
+            <ion-slide id="slide{{i}}">
+                <div id="slideitem{{i}}" class="details__questionitem">
+
+                    <div id="{{i}}">
+                        <span> {{item.label}}</span>
+                        <ng-template ngFor let-dropdownitem [ngForOf]="item.dropdownlist" let-i="index" [ngForTrackBy]="trackByFn">
+                            <ion-item >
+                                <ion-label>{{dropdownitem}}</ion-label>
+                                <ion-checkbox id="{{dropdownitem}}" name="{{dropdownitem}}"  (ionChange)="updateQuestionaire(item)"></ion-checkbox>
+                            </ion-item>
+                        </ng-template>
+                    </div>
+                </div>
+            </ion-slide>
+        </ng-template> -->
+
+    </ion-slides>
+</div>

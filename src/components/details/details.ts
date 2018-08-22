@@ -59,6 +59,12 @@ export class DetailsComponent {
   private allcatalogs: any;
   private movecontentTop = false;
   private movecontentTopEnable = 0;
+  private questionspage;
+  private allQuestion;
+  private myActiveSlide;
+  private hideQuestion = false;
+  private hidecontactus = false;
+  private hidegird = false;
 
   constructor(private navParam: NavParams,
     private iab: InAppBrowser,
@@ -113,13 +119,13 @@ export class DetailsComponent {
       if (currentitem.text) {
         tabsdata.push(currentitem.text);
       }
-  
+
     }
     this.tabsContent = tabsdata[0];
     this.tabsdata = tabsdata;
 
 
-  //  this.navbar.setElementStyle("background-color", this.primaryColor);
+    //  this.navbar.setElementStyle("background-color", this.primaryColor);
     this.secondaryColor = this.hex2rgb();
     // console.log(this.secondaryColor);
     // console.log(this.tabsContent);
@@ -151,312 +157,336 @@ export class DetailsComponent {
       console.log(this);
 
     }
-    //this.keyboard.disableScroll(true);
-  }
-
-  keyboardDisabled() {
-    if (this.platform.is('iphone')) {
-      console.log("in keyboard disable");
-      this.movecontentTop = false;
-      this.movecontentTopEnable = 0;
-      this.detailsContent._elementRef.nativeElement.className = "content content-ios details statusbar-padding";
+    if (this.pagetitle == "Stress og Trivsel") {
+      this.baserestService.getQuestionary().then(
+        questionspage => { this.questionspage = questionspage; this.setQuestionary(questionspage) },
+        error => console.log(error)
+      )
     }
+  //this.keyboard.disableScroll(true);
+}
+setQuestionary(data) {
+  this.myActiveSlide = 1;
+  this.hideQuestion = false;
+  console.log(data);
+  this.allQuestion = this.questionspage.dropdowns;
+}
+keyboardDisabled() {
+  if (this.platform.is('iphone')) {
+    console.log("in keyboard disable");
+    this.movecontentTop = false;
+    this.movecontentTopEnable = 0;
+    this.detailsContent._elementRef.nativeElement.className = "content content-ios details statusbar-padding";
   }
-  keyboardEnabled() {
-    this.movecontentTopEnable = this.movecontentTopEnable + 1;
-    if (this.platform.is('iphone') && (this.movecontentTopEnable == 1)) {
-      console.log("in keyboard enable");
-      this.movecontentTop = true;
-      this.detailsContent._elementRef.nativeElement.className = "content content-ios details details--movecontentTop statusbar-padding";
-    }
+}
+keyboardEnabled() {
+  this.movecontentTopEnable = this.movecontentTopEnable + 1;
+  if (this.platform.is('iphone') && (this.movecontentTopEnable == 1)) {
+    console.log("in keyboard enable");
+    this.movecontentTop = true;
+    this.detailsContent._elementRef.nativeElement.className = "content content-ios details details--movecontentTop statusbar-padding";
   }
-  setData() {
-    this.dropdownList = this.searchData.dropdowns;
-    this.searchedList = this.searchData.searchlist;
-    this.totallist = this.searchData.searchlist.length;
-    this.allsearchresultList = this.searchData.searchlist;
-    this.textfilteredList = this.searchData.searchlist;
-    this.textfieldList = this.searchData.text;
-    this.view = this.searchData.view;
-    this.searchlabel = this.searchData.search;
-    this.resetlabel = this.searchData.reset;
-    this.allcatalogs = this.searchData.allcatalogs;
-    console.log(this.searchData);
+}
+setData() {
+  this.dropdownList = this.searchData.dropdowns;
+  this.searchedList = this.searchData.searchlist;
+  this.totallist = this.searchData.searchlist.length;
+  this.allsearchresultList = this.searchData.searchlist;
+  this.textfilteredList = this.searchData.searchlist;
+  this.textfieldList = this.searchData.text;
+  this.view = this.searchData.view;
+  this.searchlabel = this.searchData.search;
+  this.resetlabel = this.searchData.reset;
+  this.allcatalogs = this.searchData.allcatalogs;
+  console.log(this.searchData);
+}
+ngAfterViewInit() {
+  if (this.navbuttons) {
+    console.log("in after view intiti");
+    this.switchonTab(0);
   }
-  ngAfterViewInit() {
-    if (this.navbuttons) {
-      console.log("in after view intiti");
+  else {
+    console.log("in esle  after view intiti");
+    setTimeout(() => {
       this.switchonTab(0);
-    }
-    else {
-      console.log("in esle  after view intiti");
-      setTimeout(() => {
-        this.switchonTab(0);
-      }, 10);
-    }
+    }, 10);
   }
+}
 
 
-  setSearchData() {
-    console.log(this.searchData);
-    this.dropdownList = this.searchData.dropdowns;
-    this.searchedList = this.searchData.searchlist;
-    this.totallist = this.searchedList.length ? this.searchedList.length : '0';
-    this.textfieldList = this.searchData.text;
+setSearchData() {
+  console.log(this.searchData);
+  this.dropdownList = this.searchData.dropdowns;
+  this.searchedList = this.searchData.searchlist;
+  this.totallist = this.searchedList.length ? this.searchedList.length : '0';
+  this.textfieldList = this.searchData.text;
+}
+
+
+switchonTab(id) {
+  this.selectedContainer = id;
+  this.tabsContent = this.tabsdata[id];
+  this.hidecontactus = true;
+  this.hidegird = true;
+
+  this.hideQuestion = true;
+  if (this.tabsContent == "Sæt venligst, ved hvert af de 5 udsagn, et kryds i det felt der kommer tættest på, hvordan du har følt dig i de sidste 2 uger. ") {
+    this.hideQuestion = false;
   }
-
-
-  switchonTab(id) {
-    this.selectedContainer = id;
-    this.tabsContent = this.tabsdata[id];
-    console.log(this.selectedContainer);
-    let defaulttab: any = this.navbuttons;
-    let pageritem:any = this.pager;
-    if (defaulttab) {
-      defaulttab.map((item, index) => {
-        if (index == id) {
-          if((pageritem.length!=0 && pageritem._results[index].nativeElement.classList.contains("details__pagerlist--inactive")) || (pageritem.length!=0 && id==0)){
-             pageritem._results[index].nativeElement.className = "details__pagerlist  details__pagerlist--active";
-          }
-         defaulttab._results[index].setElementStyle("display", "block");
-
-          return;
+  if (this.tabsContent == "Beredskab") {
+    this.hidecontactus = false;
+  }
+  if (this.tabsContent == "Historik") {
+    this.hidegird = false;
+  }
+  console.log(this.selectedContainer);
+  let defaulttab: any = this.navbuttons;
+  let pageritem: any = this.pager;
+  if (defaulttab) {
+    defaulttab.map((item, index) => {
+      if (index == id) {
+        if ((pageritem.length != 0 && pageritem._results[index].nativeElement.classList.contains("details__pagerlist--inactive")) || (pageritem.length != 0 && id == 0)) {
+          pageritem._results[index].nativeElement.className = "details__pagerlist  details__pagerlist--active";
         }
-        else {
-         // let tabclass=defaulttab._results[index]._elementRef.nativeElement.className;
-          //tabclass + " details__hide";
-          //defaulttab._results[index]._elementRef.nativeElement.className = tabclass;
-          if(pageritem.length!=0  && !pageritem._results[index].nativeElement.classList.contains("details__pagerlist--inactive")){
-             pageritem._results[index].nativeElement.className  =  "details__pagerlist details__pagerlist--inactive";
-          }
-          
-          defaulttab._results[index].setElementStyle("display", "none");
-        }
-      });
-    }
+        defaulttab._results[index].setElementStyle("display", "block");
 
-  }
-
-
-  hex2rgb() {
-    let opacity = 0.3;
-    let hex = this.selectedPage.main_color;
-    var h = hex.replace('#', '');
-    h = h.match(new RegExp('(.{' + h.length / 3 + '})', 'g'));
-    for (var i = 0; i < h.length; i++)
-      h[i] = parseInt(h[i].length == 1 ? h[i] + h[i] : h[i], 16);
-    if (typeof opacity != 'undefined') h.push(opacity);
-    return 'rgba(' + h.join(',') + ')';
-  }
-
-  switchTab(e) {
-    console.log(e.direction);
-    console.log("in switch tabd");
-    if (e.direction == 4) {
-      this.selectedContainer = +this.selectedContainer - 1;
-      if (this.selectedContainer < 0) {
-        this.selectedContainer = this.tabstoDisplay.length - 1;
-      }
-      this.switchonTab(this.selectedContainer);
-      console.log("backwaords");
-    }
-
-
-    if (e.direction == 2) {
-      this.selectedContainer = +this.selectedContainer + 1;
-      if (this.selectedContainer == this.tabstoDisplay.length) {
-        this.selectedContainer = 0;
-      }
-      this.switchonTab(this.selectedContainer);
-      console.log("in swipe forward");
-    }
-  }
-  search() {
-    this.showsearchList = true;
-    // this.searchedList = this.allsearchresultList;
-  }
-  reset(event) {
-    event.preventDefault();
-    this.searchedList = this.allsearchresultList;
-    this.totallist = this.allsearchresultList.length ? this.allsearchresultList.length : '0';
-    this.emnerModel = this.emnerModel ? null : this.emnerModel;
-    this.helbredskategorierModel = null;
-    this.showsearchList = false;
-    this.searchtext = this.searchtext ? null : this.searchtext;
-
-  }
-
-  openwindow(event) {
-    event.preventDefault();
-    // window.open(this.url,"_system");
-    this.iab.create(this.externallink, "_system", "location=yes,hardwareback=yes");
-  }
-  searchDetails(searchsltdItem) {
-    console.log(searchsltdItem);
-    this.navCtrl.push(SearchDetailsPage, { 'selectedItem': searchsltdItem })
-  }
-  partnersPage(event) {
-    console.log("partner");
-    event.preventDefault();
-  }
-  healthCategory(value, itemname) {
-    if (value.length > 0) {
-      this.searchdropdownValue = value;
-      this.searchdropdownValueArray = value;
-      this.dropdownName = itemname;
-
-      if (itemname == "Emner") {
-        this.emnerModel = this.searchdropdownValue;
-      }
-      if (itemname == "Helbredskategorier") {
-        this.helbredskategorierModel = this.searchdropdownValue;
-      }
-      this.getSearchedList();
-
-    }
-  }
-
-  getSearchedList() {
-    console.log(this.searchedList);
-    let filteredList: any = [];
-
-    if ((!this.helbredskategorierModel && !this.emnerModel && this.searchtext.length < 3) || ((this.helbredskategorierModel || this.emnerModel) && (this.searchtext && this.searchtext.length < 3))) {
-      if (this.searchedList.length == this.allsearchresultList.length || this.searchedList.length == 0) {
-        // this.searchedList = filteredList[0];
+        return;
       }
       else {
-        this.searchedList = this.allsearchresultList;
-        filteredList.push(this.searchedList.filter(this.filterSearch, this));
-        this.searchedList = filteredList[0];
+        // let tabclass=defaulttab._results[index]._elementRef.nativeElement.className;
+        //tabclass + " details__hide";
+        //defaulttab._results[index]._elementRef.nativeElement.className = tabclass;
+        if (pageritem.length != 0 && !pageritem._results[index].nativeElement.classList.contains("details__pagerlist--inactive")) {
+          pageritem._results[index].nativeElement.className = "details__pagerlist details__pagerlist--inactive";
+        }
+
+        defaulttab._results[index].setElementStyle("display", "none");
       }
+    });
+  }
+
+}
+
+
+hex2rgb() {
+  let opacity = 0.3;
+  let hex = this.selectedPage.main_color;
+  var h = hex.replace('#', '');
+  h = h.match(new RegExp('(.{' + h.length / 3 + '})', 'g'));
+  for (var i = 0; i < h.length; i++)
+    h[i] = parseInt(h[i].length == 1 ? h[i] + h[i] : h[i], 16);
+  if (typeof opacity != 'undefined') h.push(opacity);
+  return 'rgba(' + h.join(',') + ')';
+}
+
+switchTab(e) {
+  console.log(e.direction);
+  console.log("in switch tabd");
+  if (e.direction == 4) {
+    this.selectedContainer = +this.selectedContainer - 1;
+    if (this.selectedContainer < 0) {
+      this.selectedContainer = this.tabstoDisplay.length - 1;
+    }
+    this.switchonTab(this.selectedContainer);
+    console.log("backwaords");
+  }
+
+
+  if (e.direction == 2) {
+    this.selectedContainer = +this.selectedContainer + 1;
+    if (this.selectedContainer == this.tabstoDisplay.length) {
+      this.selectedContainer = 0;
+    }
+    this.switchonTab(this.selectedContainer);
+    console.log("in swipe forward");
+  }
+}
+search() {
+  this.showsearchList = true;
+  // this.searchedList = this.allsearchresultList;
+}
+reset(event) {
+  event.preventDefault();
+  this.searchedList = this.allsearchresultList;
+  this.totallist = this.allsearchresultList.length ? this.allsearchresultList.length : '0';
+  this.emnerModel = this.emnerModel ? null : this.emnerModel;
+  this.helbredskategorierModel = null;
+  this.showsearchList = false;
+  this.searchtext = this.searchtext ? null : this.searchtext;
+
+}
+
+openwindow(event) {
+  event.preventDefault();
+  // window.open(this.url,"_system");
+  this.iab.create(this.externallink, "_system", "location=yes,hardwareback=yes");
+}
+searchDetails(searchsltdItem) {
+  console.log(searchsltdItem);
+  this.navCtrl.push(SearchDetailsPage, { 'selectedItem': searchsltdItem })
+}
+partnersPage(event) {
+  console.log("partner");
+  event.preventDefault();
+}
+healthCategory(value, itemname) {
+  if (value.length > 0) {
+    this.searchdropdownValue = value;
+    this.searchdropdownValueArray = value;
+    this.dropdownName = itemname;
+
+    if (itemname == "Emner") {
+      this.emnerModel = this.searchdropdownValue;
+    }
+    if (itemname == "Helbredskategorier") {
+      this.helbredskategorierModel = this.searchdropdownValue;
+    }
+    this.getSearchedList();
+
+  }
+}
+
+getSearchedList() {
+  console.log(this.searchedList);
+  let filteredList: any = [];
+
+  if ((!this.helbredskategorierModel && !this.emnerModel && this.searchtext.length < 3) || ((this.helbredskategorierModel || this.emnerModel) && (this.searchtext && this.searchtext.length < 3))) {
+    if (this.searchedList.length == this.allsearchresultList.length || this.searchedList.length == 0) {
+      // this.searchedList = filteredList[0];
     }
     else {
       this.searchedList = this.allsearchresultList;
       filteredList.push(this.searchedList.filter(this.filterSearch, this));
-      if (this.searchedList.length == this.allsearchresultList.length || this.searchedList.length == 0) {
+      this.searchedList = filteredList[0];
+    }
+  }
+  else {
+    this.searchedList = this.allsearchresultList;
+    filteredList.push(this.searchedList.filter(this.filterSearch, this));
+    if (this.searchedList.length == this.allsearchresultList.length || this.searchedList.length == 0) {
+      this.searchedList = filteredList[0];
+    }
+    else {
+      if (filteredList) {
+        //this.searchedList = this.searchedList.concat(filteredList[0]);
         this.searchedList = filteredList[0];
       }
       else {
-        if (filteredList) {
-          //this.searchedList = this.searchedList.concat(filteredList[0]);
-          this.searchedList = filteredList[0];
-        }
-        else {
-          // this.searchedList = this.allsearchresultList;
-        }
+        // this.searchedList = this.allsearchresultList;
       }
     }
-
-    this.totallist = this.searchedList.length ? this.searchedList.length : '0';
-    this.showsearchList = false;
   }
-  filterSearch(item) {
-    let filteredvalue;
-    let tempval;
-    let textsearchedval;
-    if (this.emnerModel && !this.helbredskategorierModel && (!this.searchtext || this.searchtext.length < 3)) {
-      filteredvalue = item.emner.filter(x => x == this.emnerModel)[0];
-    }
-    if (this.helbredskategorierModel && !this.emnerModel && (!this.searchtext || this.searchtext.length < 3)) {
-      filteredvalue = item.helbredskategorier.filter(x => x == this.helbredskategorierModel)[0];
-    }
-    if ((this.helbredskategorierModel && this.emnerModel) && (!this.searchtext || this.searchtext.length < 3)) {
-      filteredvalue = item.emner.filter(x => x == this.emnerModel)[0];
-      tempval = item.helbredskategorier.filter(x => x == this.helbredskategorierModel)[0];
-    }
-    if (this.helbredskategorierModel && this.emnerModel && (this.searchtext && this.searchtext.length >= 3)) {
-      filteredvalue = item.emner.filter(x => x == this.emnerModel)[0];
-      tempval = item.helbredskategorier.filter(x => x == this.helbredskategorierModel)[0];
-      textsearchedval = item.tags.filter(x => x.indexOf(this.searchtext) !== -1)[0];
-    }
 
-
-    if (this.helbredskategorierModel && !this.emnerModel && (this.searchtext && this.searchtext.length >= 3)) {
-      tempval = item.helbredskategorier.filter(x => x == this.helbredskategorierModel)[0];
-      textsearchedval = item.tags.filter(x => x.indexOf(this.searchtext) !== -1)[0];
-    }
-    if (!this.helbredskategorierModel && this.emnerModel && (this.searchtext && this.searchtext.length >= 3)) {
-      filteredvalue = item.emner.filter(x => x == this.emnerModel)[0];
-      textsearchedval = item.tags.filter(x => x.indexOf(this.searchtext) !== -1)[0];
-    }
-    if ((!this.helbredskategorierModel || !this.emnerModel) && filteredvalue) {
-      return item;
-    }
-    if ((this.helbredskategorierModel && this.emnerModel) && (filteredvalue && tempval)) {
-      return item;
-    }
-    if (this.helbredskategorierModel && this.emnerModel && (this.searchtext && this.searchtext.length >= 3) && (filteredvalue && tempval && textsearchedval)) {
-      return item;
-    }
-
-    if (this.helbredskategorierModel && !this.emnerModel && (this.searchtext && this.searchtext.length >= 3) && (tempval && textsearchedval)) {
-      return item;
-    }
-    if (!this.helbredskategorierModel && this.emnerModel && (this.searchtext && this.searchtext.length >= 3) && (filteredvalue && textsearchedval)) {
-      return item;
-    }
-
-    else {
-      return null;
-    }
+  this.totallist = this.searchedList.length ? this.searchedList.length : '0';
+  this.showsearchList = false;
+}
+filterSearch(item) {
+  let filteredvalue;
+  let tempval;
+  let textsearchedval;
+  if (this.emnerModel && !this.helbredskategorierModel && (!this.searchtext || this.searchtext.length < 3)) {
+    filteredvalue = item.emner.filter(x => x == this.emnerModel)[0];
+  }
+  if (this.helbredskategorierModel && !this.emnerModel && (!this.searchtext || this.searchtext.length < 3)) {
+    filteredvalue = item.helbredskategorier.filter(x => x == this.helbredskategorierModel)[0];
+  }
+  if ((this.helbredskategorierModel && this.emnerModel) && (!this.searchtext || this.searchtext.length < 3)) {
+    filteredvalue = item.emner.filter(x => x == this.emnerModel)[0];
+    tempval = item.helbredskategorier.filter(x => x == this.helbredskategorierModel)[0];
+  }
+  if (this.helbredskategorierModel && this.emnerModel && (this.searchtext && this.searchtext.length >= 3)) {
+    filteredvalue = item.emner.filter(x => x == this.emnerModel)[0];
+    tempval = item.helbredskategorier.filter(x => x == this.helbredskategorierModel)[0];
+    textsearchedval = item.tags.filter(x => x.indexOf(this.searchtext) !== -1)[0];
   }
 
 
-  textFilter(event) {
-    // event.preventDefault();
-    this.movecontentTop = true;
-    this.showsearchList = false;
-    this.searchtext = event.value.toLowerCase();
-    if (this.searchtext.length >= 3) {
-      let filteredList: any = [];
-      filteredList.push(this.textfilteredList.filter(this.filtertextSearch, this));
-      this.searchedList = filteredList[0];
-      this.totallist = this.searchedList.length ? this.searchedList.length : '0';
-    }
-    else {
-      this.getSearchedList();
+  if (this.helbredskategorierModel && !this.emnerModel && (this.searchtext && this.searchtext.length >= 3)) {
+    tempval = item.helbredskategorier.filter(x => x == this.helbredskategorierModel)[0];
+    textsearchedval = item.tags.filter(x => x.indexOf(this.searchtext) !== -1)[0];
+  }
+  if (!this.helbredskategorierModel && this.emnerModel && (this.searchtext && this.searchtext.length >= 3)) {
+    filteredvalue = item.emner.filter(x => x == this.emnerModel)[0];
+    textsearchedval = item.tags.filter(x => x.indexOf(this.searchtext) !== -1)[0];
+  }
+  if ((!this.helbredskategorierModel || !this.emnerModel) && filteredvalue) {
+    return item;
+  }
+  if ((this.helbredskategorierModel && this.emnerModel) && (filteredvalue && tempval)) {
+    return item;
+  }
+  if (this.helbredskategorierModel && this.emnerModel && (this.searchtext && this.searchtext.length >= 3) && (filteredvalue && tempval && textsearchedval)) {
+    return item;
+  }
 
-    }
+  if (this.helbredskategorierModel && !this.emnerModel && (this.searchtext && this.searchtext.length >= 3) && (tempval && textsearchedval)) {
+    return item;
+  }
+  if (!this.helbredskategorierModel && this.emnerModel && (this.searchtext && this.searchtext.length >= 3) && (filteredvalue && textsearchedval)) {
+    return item;
+  }
+
+  else {
+    return null;
+  }
+}
+
+
+textFilter(event) {
+  // event.preventDefault();
+  this.movecontentTop = true;
+  this.showsearchList = false;
+  this.searchtext = event.value.toLowerCase();
+  if (this.searchtext.length >= 3) {
+    let filteredList: any = [];
+    filteredList.push(this.textfilteredList.filter(this.filtertextSearch, this));
+    this.searchedList = filteredList[0];
     this.totallist = this.searchedList.length ? this.searchedList.length : '0';
   }
+  else {
+    this.getSearchedList();
 
-  filtertextSearch(item) {
-    //  let filteredvalue;
-    let tempval;
-    let helbredskategoriervalue;
-    let emnervalue;
-    let textsearchedval;
+  }
+  this.totallist = this.searchedList.length ? this.searchedList.length : '0';
+}
 
-    textsearchedval = item.tags.filter(x => x.indexOf(this.searchtext) != -1)[0];
+filtertextSearch(item) {
+  //  let filteredvalue;
+  let tempval;
+  let helbredskategoriervalue;
+  let emnervalue;
+  let textsearchedval;
+
+  textsearchedval = item.tags.filter(x => x.indexOf(this.searchtext) != -1)[0];
 
 
 
-    if (this.emnerModel && !this.helbredskategorierModel) {
-      emnervalue = item.emner.filter(x => x == this.emnerModel)[0];
-    }
-    if (this.helbredskategorierModel && !this.emnerModel) {
-      helbredskategoriervalue = item.helbredskategorier.filter(x => x == this.helbredskategorierModel)[0];
-    }
-    if (this.helbredskategorierModel && this.emnerModel) {
-      emnervalue = item.emner.filter(x => x == this.emnerModel)[0];
-      helbredskategoriervalue = item.helbredskategorier.filter(x => x == this.helbredskategorierModel)[0];
-    }
-    if ((!this.helbredskategorierModel || !this.emnerModel) && textsearchedval) {
-      return item;
-    }
-
-    if (this.helbredskategorierModel && this.emnerModel && (textsearchedval && emnervalue && helbredskategoriervalue)) {
-      return item;
-    }
-    else {
-      return null;
-    }
+  if (this.emnerModel && !this.helbredskategorierModel) {
+    emnervalue = item.emner.filter(x => x == this.emnerModel)[0];
+  }
+  if (this.helbredskategorierModel && !this.emnerModel) {
+    helbredskategoriervalue = item.helbredskategorier.filter(x => x == this.helbredskategorierModel)[0];
+  }
+  if (this.helbredskategorierModel && this.emnerModel) {
+    emnervalue = item.emner.filter(x => x == this.emnerModel)[0];
+    helbredskategoriervalue = item.helbredskategorier.filter(x => x == this.helbredskategorierModel)[0];
+  }
+  if ((!this.helbredskategorierModel || !this.emnerModel) && textsearchedval) {
+    return item;
   }
 
-
-  opendropDown(event) {
-    event.preventDefault();
-    let popover = this.popoverCtrl.create(DropDownPopOver, { enableBackdropDismiss: false }, { enableBackdropDismiss: false });
-    popover.present();
+  if (this.helbredskategorierModel && this.emnerModel && (textsearchedval && emnervalue && helbredskategoriervalue)) {
+    return item;
   }
+  else {
+    return null;
+  }
+}
+
+
+opendropDown(event) {
+  event.preventDefault();
+  let popover = this.popoverCtrl.create(DropDownPopOver, { enableBackdropDismiss: false }, { enableBackdropDismiss: false });
+  popover.present();
+}
 }

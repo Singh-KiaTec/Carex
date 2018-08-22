@@ -16,6 +16,12 @@
   "include": [
     "src/**/*.ts"
   ],
+  "files": [
+    "node_modules/jqwidgets-scripts/jqwidgets-ts/angular_jqxgrid.ts"
+  ],
+  "styles":[
+    "/node_modules/jqwidgets-scripts/jqwidgets/styles/jqx.base.css"
+  ],
   "exclude": [
     "node_modules",
     "src/**/*.spec.ts",

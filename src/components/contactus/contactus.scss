@@ -1,0 +1,13 @@
+@import "../../assets/sass/variables";
+
+.contactus {
+    &__send {
+        background: $color-primary-gray;
+        color: $color-white;
+    }
+
+    &__cancel {
+        background: $color-secondary-gray;
+        color: $color-dark-black;
+    }
+}

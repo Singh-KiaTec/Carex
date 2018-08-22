@@ -1,0 +1,39 @@
+@import "../../assets/sass/variables";
+
+.questionaire {
+    .swiper-container-horizontal > .swiper-pagination-bullets {
+        bottom: 3em;
+    }
+
+    .swiper-slide {
+        height: 29em;
+    }
+
+    .swiper-wrapper {
+        margin-top: -102px;
+    }
+
+    textarea {
+        height: 10em;
+    }
+
+    &__question {
+        font-size: .8em;
+        font-weight: bold;
+        margin-bottom: 0em;
+        background: $color-primary-gray;
+        color: $color-white;
+        height: 3em;
+        border-radius: .3em;
+        line-height: 3em;
+    }
+
+    &__answers {
+        font-size: .8em;
+    }
+}
+
+.checkbox-ios .checkbox-checked {
+    border-color: $primary-color-theme;
+    background-color: $primary-color-theme;
+}

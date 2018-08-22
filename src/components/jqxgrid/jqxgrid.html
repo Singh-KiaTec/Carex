@@ -1,0 +1,6 @@
+<div class="jqxgridcomponent" *ngIf="dataAdapter" paddding>
+    <!-- //  In grid.. -->
+    <jqxGrid  [source]='dataAdapter' [autoheight]='true' [editable]='true' [sortable]='true' [columns]='columns'
+        [selectionmode]='"multiplecellsadvanced"' [sortable]="true" [filterable]='true' [localization]="localization"  [showfilterrow]= 'true'  #gridReference>
+    </jqxGrid>
+</div>
