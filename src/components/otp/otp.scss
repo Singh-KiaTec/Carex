@@ -3,6 +3,10 @@
 .otp {
     line-height: 1.5em;
 
+    .scroll-content{
+        overflow: hidden;
+    }
+
     &__form {
         margin-top: 40%;
     }

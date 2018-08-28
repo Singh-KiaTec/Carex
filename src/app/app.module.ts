@@ -185,8 +185,8 @@ const componentDeclaration = [
           // scrollPadding: true
         },
         android: {
-          scrollAssist: true,
-          autoFocusAssist: true
+          scrollAssist: false,
+          autoFocusAssist: false
         }
       }
     }),
