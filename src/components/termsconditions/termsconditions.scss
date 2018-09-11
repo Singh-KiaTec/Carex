@@ -16,6 +16,9 @@
     .item-icon {
         color: $color-highlight-green;
     }
+    &__checkboxitem{
+        border: none !important;
+    }
     .label {
         color: $primary-color-theme;
         font-weight: 500;
@@ -37,5 +40,16 @@
        color: $color-menu-gray;
        opacity: .5;
 
+   }
+   &__checkboxlabel{
+       color: $color-menu-gray !important;
+       white-space: normal;
+       display: inline-block;
+       margin-right: 0;
+       text-align: left;
+   }
+   &__heading{
+    padding-bottom: 0 !important;
+    text-align: center;
    }
 }

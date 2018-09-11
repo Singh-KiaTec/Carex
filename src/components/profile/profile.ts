@@ -11,6 +11,7 @@ import { AuthService } from '../../providers/authenticationservice/auth.service'
 // import {Cookie} from 'ng2-cookies';
 // import {CookieService} from 'ngx-cookie-service';
 import { LoginPage } from '../../pages/login/login.page';
+import { CPRPage } from '../../pages/cpr/cpr.page';
 
 declare var window: any;
 
@@ -85,6 +86,8 @@ export class ProfileComponent {
     }
     initializeApp() {
         this.storageService.clear();
+
+        //needds to revert
         this.navCtrl.setRoot(WelcomePage);
     }
 }

@@ -2,34 +2,36 @@
         <header-viewer></header-viewer>
     </ion-header>  -->
 
-<form class="otp__form" [formGroup]="loginForm" (ngSubmit)="gotochangePasword()">
+    <div *ngIf="otpcontent">
+        <p text-left>{{otpcontent.headng}}</p>
+    <form class="otp__form" [formGroup]="loginForm" (ngSubmit)="gotochangePasword()">
     <div>
         <ion-list>
 
             <ion-item class="otp__otplabel">
 
-                <ion-label class="dark">OTP</ion-label>
+                <ion-label class="dark">{{otpcontent.otplabel}}}</ion-label>
 
             </ion-item>
 
             <ion-item class="otp__inputs">
-                <ion-input type="number"  [(ngModel)]="otpval1" formControlName="otp1"  (click)="showKeyboard($event)"  #otp1 id="otp1" maxlength="1" class="otp__text-box"  max="9"  (keyup)="next($event)" >
+                <ion-input type="number"  [(ngModel)]="otpval1" formControlName="otp1"  (click)="showKeyboard($event)"  #otp1 id="otp1" maxlength="1" class="otp__text-box"  max="9"  (keyup)="next1($event)" >
                 </ion-input>
 
-                <ion-input type="number"   [(ngModel)]="otpval2" formControlName="otp2"  (click)="showKeyboard($event)" #otp2 id="otp2" maxlength="1" class="otp__text-box"  max="9"  (keyup)="next($event)" >
+                <ion-input type="number"   [(ngModel)]="otpval2" formControlName="otp2"  (click)="showKeyboard($event)" #otp2 id="otp2" maxlength="1" class="otp__text-box"  max="9"  (keyup)="next2($event)" >
                 </ion-input>
 
-                <ion-input type="number"  [(ngModel)]="otpval3" formControlName="otp3" (click)="showKeyboard($event)" #otp3 id="otp3" maxlength="1" class="otp__text-box"  max="9"   (keyup)="next($event)" >
+                <ion-input type="number"  [(ngModel)]="otpval3" formControlName="otp3" (click)="showKeyboard($event)" #otp3 id="otp3" maxlength="1" class="otp__text-box"  max="9"   (keyup)="next3($event)" >
                 </ion-input>
 
-                <ion-input type="number"  [(ngModel)]="otpval4" formControlName="otp4" (click)="showKeyboard($event)" #otp4  id="otp4" maxlength="1" class="otp__text-box"  max="9" (keyup)="next($event)"  >
+                <ion-input type="number"  [(ngModel)]="otpval4" formControlName="otp4" (click)="showKeyboard($event)" #otp4  id="otp4" maxlength="1" class="otp__text-box"  max="9" (keyup)="next4($event)"  >
                 </ion-input>
                 <!-- <ion-input type="password" formControlName="otp"></ion-input> -->
             </ion-item>
 
         </ion-list>
         <div *ngIf="error">
-            <div class="login__error">Invalid OTP please try again..</div>
+            <div class="login__error">{{otpcontent.errormessage}}</div>
 
         </div>
     </div>
@@ -37,4 +39,5 @@
     <!-- <button ion-button type="submit" [disabled]="!loginForm.valid" class="login__login-button">Submit</button> -->
 
     <!-- <button ion-button type="button" color="secondary" (click)="forgetpassword($event)" class="login__forgetpwd">Annuller</button> -->
-</form>
+</form>    
+    </div>

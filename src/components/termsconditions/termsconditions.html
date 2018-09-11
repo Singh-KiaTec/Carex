@@ -5,21 +5,43 @@
 
 
 <ion-content class="termsconditions">
-    <h1 *ngIf="termsdata" padding>{{heading}}</h1>
-    <div *ngIf="termsdata" padding>
+    <h1 *ngIf="termspagecontent" padding class="termsconditions__heading">{{termspagecontent.titel}}</h1>
+    <div *ngIf="termspagecontent" padding>
         <ng-template ngFor let-item [ngForOf]="paragraphs" let-i="index" [ngForTrackBy]="trackByFn">
-            <p text-left>
-                {{item}}
+            <p text-left [innerHTML]="item">
+                <!-- {{item}} -->
             </p>
         </ng-template>
 
+        <form [formGroup]="termsForm" (ngSubmit)="submitTerms()">
+            <div *ngIf="termsdata">
+                <ion-list>
+
+                    <ion-item class="termsconditions__checkboxitem">
+                        <ion-label class="termsconditions__checkboxlabel">{{checkboxcontent}}</ion-label>
+                        <ion-checkbox [(ngModel)]="acceptermmodel"  *ngIf="!ismenupage" formControlName="accepterm"></ion-checkbox> 
+                        <ion-checkbox [(ngModel)]="acceptermmodel"  *ngIf="ismenupage"  [disabled]="true" formControlName="accepterm"></ion-checkbox>
+                    </ion-item>
+
+                </ion-list>
+                <div *ngIf="error">
+                    <div class="login__error">{{errormsg}}</div>
+
+                </div>
+            </div>
 
 
-        <ng-container *ngIf="!ismenupage">
-            <button ion-button #login color="secondary" (click)="gotohomePage()" class="nemid__login-button">Fortsæt</button>
-        </ng-container>
+            <ng-container *ngIf="!ismenupage">
+                <button ion-button type="submit" [disabled]="!acceptermmodel" class="nemid__login-button">Fortsæt</button>
+
+                <div *ngIf="!saveerror">
+                    <div class="login__error">{{saveerrormessage}}</div>
+
+                </div>
+            </ng-container>
+        </form>
 
     </div>
 
-<div class="termsconditions__verison">Version: 0.1.6</div>
+    <div class="termsconditions__verison">Version: 1.0.0</div>
 </ion-content>

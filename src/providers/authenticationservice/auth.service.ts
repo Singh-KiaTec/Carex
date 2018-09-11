@@ -11,6 +11,7 @@ export class AuthService {
     private environmentUrl;
     private user;
     private homedata;
+    private usernemiddata;
 
     constructor(private app: App, private storageservice: StorageService) {
         //  this.navCtrl = app.getActiveNavs();
@@ -42,6 +43,12 @@ export class AuthService {
     getHomedata() {
         return this.homedata;
 
+    }
+    getUsernemiddata(){
+        return this.usernemiddata;
+    }
+    setUsernemiddata(usernemiddata){
+         this.usernemiddata = usernemiddata;
     }
 }
 

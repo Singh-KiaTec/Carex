@@ -1,0 +1,18 @@
+@import "../../assets/sass/variables";
+
+.cpr {
+    margin-top: 1em;
+    line-height: 1.5em;
+
+    &__login-button {
+        width: 100%;
+        background: $color-primary-gray !important;
+    }
+
+    &__error {
+        color: $color-error-red;
+        font-size: 1em;
+        text-align: center;
+        font-weight: bold;
+    }
+}

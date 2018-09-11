@@ -9,6 +9,7 @@ import { OtpPage } from '../../pages/otp/otp';
 import { LoginPage } from '../../pages/login/login.page';
 import { PasswordValidation } from '../../providers/validators/password-validator';
 import { HomePage } from '../../pages/home/home.page';
+import { NemidPage } from '../../pages/nemid/nemid.page';
 
 
 @Component({
@@ -23,6 +24,7 @@ export class changepasswordComponent {
     private password;
     private confirmPassword;
     private userdata;
+    private cp_content;
 
 
 
@@ -40,7 +42,14 @@ export class changepasswordComponent {
         // Tracking
         //this.environment = this.auth.getEnvironment();
         // this.getloginData();
+        this.baserestService.getchangepasswordData().then(
+            (cp_content)=>{this.cp_content = cp_content;},
+            (error)=>{console.log(error)}
+        )
         this.userdata = this.auth.getUserInfo();
+    }
+    setData(){
+        console.log(this.cp_content);
     }
     gotologin() {
         this.password = this.loginForm.value.password;
@@ -55,7 +64,8 @@ export class changepasswordComponent {
     setuserData() {
         // this.storageService.set("user", this.userdata);
         // this.auth.setUserinfo(this.userdata);
-        this.navCtrl.setRoot(HomePage);
+       // this.navCtrl.setRoot(HomePage);
+       this.navCtrl.setRoot(NemidPage);
     }
     resetForm(){
         this.loginForm.reset();

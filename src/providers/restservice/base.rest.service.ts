@@ -5,7 +5,7 @@ import { App } from 'ionic-angular';
 // import { NotificationsPage } from '../../pages/notifications/notifications.page'
 import { LoginPage } from '../../pages/login/login.page';
 import { StorageService } from '../storageservice/storageservice';
- import { Http } from '@angular/http';
+import { Http } from '@angular/http';
 import 'rxjs/add/operator/map';
 import { Platform } from 'ionic-angular';
 import { AuthService } from '../authenticationservice/auth.service';
@@ -95,15 +95,72 @@ export class BaseRestService {
         //return this.http.get(this.baseUrl + 'jsondata/welcome.json', this.options).toPromise();
         return this.http.get(this.prodUrl + 'config/jsondata/login.php').toPromise();
     }
-    getTermsandconditionsData() {
-        // this.getPlatform();
-        console.log(this.prodUrl);
-        return this.http.get(this.prodUrl + 'config/jsondata/termsandconditions.php').toPromise();
-        //  return this.http.get('http://udv-admin.carex.dk/config/jsondata/termsandconditions.json', this.options).toPromise();
+    getTermsandconditionsData(uuid) {
+        this.formdata = new FormData();
+
+        // action:samtykke_read
+        // autorisation:764be998-fa65-4c3d-86ef-40c4e2507742
+        // itsystem_uuid:48b00aae-5001-4b4f-9eea-b7bd61145686
+        // samtykkeprocestrin:GeneralAccept
+        // samtykkeorganisation:7fb031ae-0cb9-4a04-8407-1156d3d52108
+        // language:da
+        // skabelon:1
+
+
+        this.formdata.append('action', 'samtykke_read');
+        //this.formdata.append('listedefinition_uuid', 'e4388fbc-c139-4542-894e-b0d14f34db30');
+        this.formdata.append('autorisation', '764be998-fa65-4c3d-86ef-40c4e2507742');
+       // this.formdata.append('objekt_uuid', uuid);
+        //app uuid this might change for every app app_uuid
+        this.formdata.append('itsystem_uuid', '48b00aae-5001-4b4f-9eea-b7bd61145686');
+        this.formdata.append('samtykkeprocestrin', 'GeneralAccept');
+        this.formdata.append('samtykkeorganisation', '7fb031ae-0cb9-4a04-8407-1156d3d52108');
+        this.formdata.append('language', 'da');
+        this.formdata.append('skabelon', '1');
+
+        return this.http.post('https://qa-api.carex.dk/api/endpoints/api_services.php', this.formdata, this.options).toPromise();
+        //   return this.http.post(this.prodUrl + 'config/jsondata/termsandconditions.php', this.formdata, this.options).toPromise();
+
+    }
+
+    saveTermsandconditions(activestatus) {
+        this.formdata.append('action', 'samtykke_create');
+        this.formdata.append('listedefinition_uuid', 'e4388fbc-c139-4542-894e-b0d14f34db30');
+        this.formdata.append('autorisation', '764be998-fa65-4c3d-86ef-40c4e2507742');
+        this.formdata.append('itsystem_uuid','48b00aae-5001-4b4f-9eea-b7bd61145686');
+        this.formdata.append('samtykkeprocestrin', 'GeneralAccept');
+        this.formdata.append('samtykkeorganisation', '7fb031ae-0cb9-4a04-8407-1156d3d52108');
+        this.formdata.append('language', 'da');
+        this.formdata.append('response', activestatus);
+        return this.http.post('https://qa-api.carex.dk/api/endpoints/api_services.php', this.formdata, this.options).toPromise();
+    }
+    saveCPR(pid, cpr,activestatus,uuid){
+        this.formdata = new FormData();
+        this.formdata.append('action', 'samtykke_create_cpr');
+        //this.formdata.append('listedefinition_uuid', 'e4388fbc-c139-4542-894e-b0d14f34db30');
+        this.formdata.append('autorisation', uuid);
+        this.formdata.append('itsystem_uuid', '48b00aae-5001-4b4f-9eea-b7bd61145686'); // tryg app
+        this.formdata.append('samtykkeprocestrin', 'cpr');
+        this.formdata.append('nemidpid', pid);
+        this.formdata.append('cpr', cpr);
+        this.formdata.append('samtykkeorganisation', '7fb031ae-0cb9-4a04-8407-1156d3d52108');
+        this.formdata.append('language', 'da');
+        this.formdata.append('response', activestatus);
+        return this.http.post('https://qa-api.carex.dk/api/endpoints/api_services.php', this.formdata, this.options).toPromise();
+    }
+    checkactiveList(uuid){
+        this.formdata = new FormData();
+        this.formdata.append('action', 'samtykke_list_aktive');
+        this.formdata.append('autorisation', uuid);
+        this.formdata.append('objekt_uuid',uuid);
+        this.formdata.append('itsystem_uuid', '48b00aae-5001-4b4f-9eea-b7bd61145686'); // tryg app
+        this.formdata.append('samtykkeorganisation', '7fb031ae-0cb9-4a04-8407-1156d3d52108');
+        this.formdata.append('language', 'da');
+        return this.http.post('https://qa-api.carex.dk/api/endpoints/api_services.php', this.formdata, this.options).toPromise();
     }
     getCustomerData() {
         console.log(this.prodUrl);
-        return this.http.get(this.prodUrl + 'config/jsondata/tryg__dev.php', this.options).toPromise();
+        return this.http.get(this.prodUrl + 'config/jsondata/trygv3_qa.php', this.options).toPromise();
     }
     getsmartSearchData() {
         //return this.http.get(this.prodUrl + 'config/jsondata/searchlist.php', this.options).toPromise();
@@ -119,8 +176,9 @@ export class BaseRestService {
         this.formdata.append('action', 'login');
         this.formdata.append('username', username);
         this.formdata.append('password', password);
-
-        return this.http.post('https://api.carex.dk/api/endpoints/login.php', this.formdata, this.options).toPromise();
+       
+        return this.http.post('https://qa-api.carex.dk/api/endpoints/login_v2.php', this.formdata, this.options).toPromise();
+        //existing prod return this.http.post('https://api.carex.dk/api/endpoints/login.php', this.formdata, this.options).toPromise();
     }
     getEnvironment() {
         return this.http.get(this.prodUrl + 'config/jsondata/envi.php', this.options).toPromise();
@@ -145,39 +203,71 @@ export class BaseRestService {
     getappVersion() {
         return this.http.get(this.prodUrl + 'config/jsondata/appversion.php', this.options).toPromise();
     }
-    sendOtp(username){
+    sendOtp(username) {
         this.formdata = new FormData();
 
         this.formdata.append('action', 'getOTP');
         this.formdata.append('username', username);
 
-        return this.http.post('https://udv-idp.carex.dk/login_services.php', this.formdata, this.options).toPromise();
+        return this.http.post('https://udv-idp.carex.dk/endpoints/login_services.php', this.formdata, this.options).toPromise();
     }
-    verifyOtp(id, otp){
+    verifyOtp(id, otp) {
         this.formdata = new FormData();
 
         this.formdata.append('action', 'validateOTP');
         this.formdata.append('id', id);
         this.formdata.append('otp', otp);
-        return this.http.post('https://udv-idp.carex.dk/login_services.php', this.formdata, this.options).toPromise();
+        return this.http.post('https://udv-idp.carex.dk/endpoints/login_services.php', this.formdata, this.options).toPromise();
     }
-    changePassword(id, password){
+    validateCPR(pid, cpr) {
+        this.formdata = new FormData();
+
+        this.formdata.append('action', 'validatecpr');
+        this.formdata.append('pid', pid);
+        this.formdata.append('cprnumber', cpr);
+        return this.http.post('https://udv-admin.carex.dk/nemid/validatecpr.php', this.formdata, this.options).toPromise();
+    }
+    changePassword(id, password) {
         this.formdata = new FormData();
 
         this.formdata.append('action', 'changePassword');
         this.formdata.append('id', id);
         this.formdata.append('password', password);
-        return this.http.post('https://udv-idp.carex.dk/login_services.php', this.formdata, this.options).toPromise();
+        return this.http.post('https://udv-idp.carex.dk/endpoints/login_services.php', this.formdata, this.options).toPromise();
     }
-    loginUdv(id, password){
+    loginUdv(id, password) {
         this.formdata = new FormData();
         this.formdata.append('action', 'login');
         this.formdata.append('id', id);
         this.formdata.append('password', password);
-        return this.http.post('https://udv-idp.carex.dk/login_services.php', this.formdata, this.options).toPromise();
+        return this.http.post('https://udv-idp.carex.dk/endpoints/login_services.php', this.formdata, this.options).toPromise();
     }
     getQuestionary() {
-               return this.http.get(this.prodUrl + 'config/jsondata/question.php', this.options).toPromise();
-   
-             }
+        return this.http.get(this.prodUrl + 'config/jsondata/question.php', this.options).toPromise();
+
+    }
+    enterusertoreset() {
+        return this.http.get(this.prodUrl + 'config/jsondata/enterusertoreset.php', this.options).toPromise();
+    }
+    getIdverifyData() {
+        return this.http.get(this.prodUrl + 'config/jsondata/idverify.php', this.options).toPromise();
+    }
+    getCprData() {
+        return this.http.get(this.prodUrl + 'config/jsondata/cpr.php', this.options).toPromise();
+    }
+    getCprmismatchData() {
+        return this.http.get(this.prodUrl + 'config/jsondata/cprmismatch.php', this.options).toPromise();
+    }
+    getIdsaveData() {
+        return this.http.get(this.prodUrl + 'config/jsondata/idsave.php', this.options).toPromise();
+    }
+    getNemidData() {
+        return this.http.get(this.prodUrl + 'config/jsondata/nemid.php', this.options).toPromise();
+    }
+    getOtpData() {
+        return this.http.get(this.prodUrl + 'config/jsondata/enterotp.php', this.options).toPromise();
+    }
+    getchangepasswordData(){
+        return this.http.get(this.prodUrl + 'config/jsondata/changepassword.php', this.options).toPromise();
+    }
 }

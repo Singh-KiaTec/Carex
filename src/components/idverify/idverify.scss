@@ -1,0 +1,10 @@
+@import '../../assets/sass/variables';
+.idverify {
+    line-height: 1.5em;
+    
+    &__login-button {
+        width: 100%;
+        background: $color-primary-gray !important;
+    }
+
+}

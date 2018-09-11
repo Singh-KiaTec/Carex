@@ -5,7 +5,7 @@ import { Validators } from '@angular/forms';
 import { StorageService } from '../../providers/storageservice/storageservice';
 import { BaseRestService } from '../../providers/restservice/base.rest.service';
 import { AuthService } from '../../providers/authenticationservice/auth.service';
-import {OtpPage} from '../../pages/otp/otp';
+import { OtpPage } from '../../pages/otp/otp';
 
 
 @Component({
@@ -19,7 +19,8 @@ export class UsernameComponent {
     private success;
     private username;
     private userdata;
-    private error=false;
+    private error = false;
+    private usercontent;
 
 
     constructor(private fb: FormBuilder, private navCtrl: NavController,
@@ -33,16 +34,24 @@ export class UsernameComponent {
         // Tracking
         //this.environment = this.auth.getEnvironment();
         // this.getloginData();
+
+        this.baserestService.enterusertoreset().then(
+            (usercontent) => { this.usercontent = usercontent;this.setData(); },
+            error =>  {console.log(this.error)}
+        );
+    }
+    setData(){
+console.log(this.usercontent);
     }
     gotootp() {
         this.username = this.loginForm.value.userid;
         this.error = false;
         this.baserestService.sendOtp(this.username).then(
-            (userdata) => { this.userdata = userdata ; this.setuserData();},
-            error => { console.log(error); this.error=true;}
+            (userdata) => { this.userdata = userdata; this.setuserData(); },
+            error => { console.log(error); this.error = true; }
         )
     }
-    setuserData(){
+    setuserData() {
         this.storageService.set("user", this.userdata);
         this.auth.setUserinfo(this.userdata);
         this.navCtrl.push(OtpPage);

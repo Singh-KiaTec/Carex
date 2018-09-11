@@ -1,16 +1,18 @@
 <ion-header class="header">
-        <header-viewer></header-viewer>
-    </ion-header>
+            <headerlogo-viewer></headerlogo-viewer>
+</ion-header>
 
-      <ion-content class="nemid">
+<ion-content>
+<div  class="nemid">
 
-       <!-- <img  class="logo" [width]="" [height]="45" src="assets/imgs/unitlogos/CareX_hvid_gronlogo-66.png" /> -->
-       
-
-      <div text-center padding>
-            <img class="logo" class="nemid__iframe" src="assets/imgs/nemidd.JPG" />
-            <button ion-button  color="secondary" (click)="loginNemid()" class="nemid__login-button">Continue</button>
+      <div text-center *ngIf="heading" class="nemid__container" padding>
+            <h5>{{heading}}</h5>
+            <iframe scrolling="no" allowfullscreen="true" allowtransparency="true" style="width: 100%; height: 100%; margin: 0; padding: 0; border: none; background-color: transparent"
+                  src="https://udv-admin.carex.dk/nemid/nemidlogon.php">
+            </iframe>
       </div>
-    </ion-content>
-    
-    
+</div>
+      <!-- <img  class="logo" [width]="" [height]="45" src="assets/imgs/unitlogos/CareX_hvid_gronlogo-66.png" /> -->
+
+
+</ion-content>

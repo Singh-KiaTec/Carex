@@ -2,24 +2,27 @@
         <header-viewer></header-viewer>
     </ion-header>  -->
 
+    <div *ngIf="usercontent">
+        <p text-left>{{usercontent.heading}}</p>
 <form [formGroup]="loginForm" class="username__form" (ngSubmit)="gotootp()">
     <div>
         <ion-list>
 
             <ion-item>
 
-                <ion-label class="dark">Brugernavn</ion-label>
-                <ion-input type="text" formControlName="userid"></ion-input>
+                <ion-label class="dark">{{usercontent.username}}</ion-label>
+                <ion-input type="text" placeholder="{{usercontent.username}}" formControlName="userid"></ion-input>
             </ion-item>
   <div *ngIf="error">
-            <div class="login__error">username not found.please try again.</div>
+            <div class="login__error">{{usercontent.error}}</div>
 
         </div>
         </ion-list>
       
     </div>
 
-    <button ion-button type="submit" [disabled]="!loginForm.valid" class="login__login-button">Fortsæt</button>
+    <button ion-button type="submit" [disabled]="!loginForm.valid" class="login__login-button">{{usercontent.continue}}</button>
 
     <!-- <button ion-button type="button" color="secondary" (click)="forgetpassword($event)" class="login__forgetpwd">Annuller</button> -->
 </form>
+</div>

@@ -28,6 +28,7 @@ export class OtpComponent {
     @ViewChild("otp4") otp4_input;
     private userdata;
     private error = false;
+    private otpcontent;
 
 
     constructor(private fb: FormBuilder, private keyboard: Keyboard, private navCtrl: NavController,
@@ -42,22 +43,30 @@ export class OtpComponent {
     }
 
     ngOnInit() {
+       
+        this.baserestService.getOtpData().then(
+            (otpcontent)=>{this.otpcontent = otpcontent; this.setotpData()},
+            error=>{console.log(error)}
+        );
         this.userdata = this.auth.getUserInfo();
     }
-    ionViewDidEnter() {
+
+            ionViewDidEnter() {
         //Keyboard.onKeyboardShow().subscribe(()=>{this.valueforngif=false})
-        this.keyboard.onKeyboardHide().subscribe(() => { console.log("in viewdid enter to show keyboard");this.keyboard.show(); })
-        window.addEventListener('keyboardDidHide', () => {
-            // Describe your logic which will be run each time keyboard is closed.
-            console.log("in window listerner enter to show keyboard");this.keyboard.show(); 
-        });
-    }
-    ngAfterViewInit() {
-        setTimeout(() => {
-            this.otp1_input.setFocus();
-        }, 500);
+       
     }
 
+    setotpData(){
+        console.log(this.otpcontent);
+        setTimeout(() => {
+            this.otp1_input.setFocus();
+        }, 1000);
+ this.keyboard.onKeyboardHide().subscribe(() => { console.log("in viewdid enter to show keyboard"); this.keyboard.show(); })
+        window.addEventListener('keyboardDidHide', () => {
+            // Describe your logic which will be run each time keyboard is closed.
+            console.log("in window listerner enter to show keyboard"); this.keyboard.show();
+        });
+    }
     gotochangePasword() {
         this.otpval1 = this.loginForm.value.otp1;
         this.otpval2 = this.loginForm.value.otp2;
@@ -66,7 +75,7 @@ export class OtpComponent {
         let otp = '' + this.otpval1 + this.otpval2 + this.otpval3 + this.otpval4;
         if (this.loginForm.valid) {
             this.baserestService.verifyOtp(this.userdata.id, otp).then(
-                (success) => { this.success = success; this.setuserData(); },
+                (success) => {  this.error = false;this.success = success; this.setuserData(); },
                 error => {
                     this.error = true;
                     this.otp1_input.setFocus();
@@ -80,84 +89,102 @@ export class OtpComponent {
         }
 
     }
-    next(event) {
+    next1(event) {
         event.preventDefault();
         console.log(event);
-        if (event.key == 8 || event.keycode == 46 || event.key == "Backspace") {
-            this.removeFocus(event.currentTarget.id);
+        if (event.keycode == 46 || event.key == "Backspace") {
+            //this.removeFocus(event.currentTarget.id);
             this.error = true;
         }
         else {
-            this.setFocus(event.currentTarget.id);
+            this.otpval1 = event.key;
+            this.otp2_input.setFocus();
         }
 
     }
-    removeFocus(itemname) {
+    next2(event) {
+        event.preventDefault();
+        console.log(event);
+        if (event.keycode == 46 || event.key == "Backspace") {
+            this.otp1_input.setFocus();
+            this.error = true;
+        }
+        else {
+            this.otpval2 = event.key;
+            this.otp3_input.setFocus();
+        }
 
-        switch (itemname) {
-            case "otp4": {
-                this.otp3_input.setFocus();
-                break;
+    }
+    next3(event) {
+        event.preventDefault();
+        console.log(event);
+        if (event.keycode == 46 || event.key == "Backspace") {
+            this.otp2_input.setFocus();
+            this.error = true;
+        }
+        else {
+            this.otpval3 = event.key;
+            this.otp4_input.setFocus();
+        }
+
+    }
+    next4(event) {
+        event.preventDefault();
+        console.log(event);
+        if (event.keycode == 46 || event.key == "Backspace") {
+            this.otp3_input.setFocus();
+            this.error = true;
+        }
+        else {
+            this.otpval4 = event.key;
+            if(this.otpval1  && this.otpval2 && this.otpval3 && this.otpval4){
+                   this.gotochangePasword();
             }
-            case "otp3": {
-                this.otp2_input.setFocus();
-                break;
-            }
-            case "otp2": {
-                this.otp1_input.setFocus();
-                break;
-            }
-            case "otp1": {
-                //this.gotochangePasword();
-                break;
-            }
-            default: {
-                break;
-            }
+         
         }
 
     }
     openKeyboard() {
         this.keyboard.show();
     }
- 
-    setFocus(itemname) {
 
-        switch (itemname) {
-            case "otp1": {
-                if (this.otpval1.length > 1) {
-                    this.otpval1 = this.otpval1.substr(0, 1);
-                }
-                this.otp2_input.setFocus();
-                break;
-            }
-            case "otp2": {
-                if (this.otpval2.length > 1) {
-                    this.otpval2 = this.otpval2.substr(0, 1);
-                }
-                this.otp3_input.setFocus();
-                break;
-            }
-            case "otp3": {
-                if (this.otpval3.length > 1) {
-                    this.otpval3 = this.otpval3.substr(0, 1);
-                }
-                this.otp4_input.setFocus();
-                break;
-            }
-            case "otp4": {
-                if (this.otpval4.length > 1) {
-                    this.otpval4 = this.otpval4.substr(0, 1);
-                }
-                this.gotochangePasword();
-                break;
-            }
-            default: {
-                break;
-            }
-        }
+    // setFocus(itemname) {
 
-    }
+    //     switch (itemname) {
+    //         case "otp1": {
+    //             if (this.otpval1.length > 1) {
+    //                 this.otpval1 = this.otpval1.substr(0, 1);
+    //             }
+    //             this.otp2_input.setFocus();
+    //             break;
+    //         }
+    //         case "otp2": {
+    //             if (this.otpval2.length > 1) {
+    //                 this.otpval2 = this.otpval2.substr(0, 1);
+    //             }
+    //             this.otp3_input.setFocus();
+    //             break;
+    //         }
+    //         case "otp3": {
+    //             if (this.otpval3.length > 1) {
+    //                 this.otpval3 = this.otpval3.substr(0, 1);
+    //             }
+    //             this.otp4_input.setFocus();
+    //             break;
+    //         }
+    //         case "otp4": {
+    //             if (this.otpval4.length > 1) {
+    //                 this.otpval4 = this.otpval4.substr(0, 1);
+    //             }
+    //             this.gotochangePasword();
+    //             break;
+    //         }
+    //         default: {
+    //             break;
+    //         }
+    //     }
+
+    // }
     setuserData() {
         console.log(this.success);
         this.navCtrl.push(ChangepasswordPage);
@@ -170,29 +197,6 @@ export class OtpComponent {
         this.otpval2 = null; this.loginForm.value.otp2 = null;
         this.otpval3 = null; this.loginForm.value.otp3 = null;
         this.otpval4 = null; this.loginForm.value.otp4 = null;
-        
-        // let itemname = event.currentTarget.id;
 
-        // switch (itemname) {
-        //     case "otp1": {
-        //         this.otp1_input.setFocus();
-        //         break;
-        //     }
-        //     case "otp2": {
-        //         this.otp2_input.setFocus();
-        //         break;
-        //     }
-        //     case "otp3": {
-        //         this.otp3_input.setFocus();
-        //         break;
-        //     }
-        //     case "otp4": {
-        //         this.otp4_input.setFocus();
-        //         break;
-        //     }
-        //     default: {
-        //         break;
-        //     }
-        // }
     }
 }

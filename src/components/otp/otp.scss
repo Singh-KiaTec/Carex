@@ -12,21 +12,23 @@
     }
 
     &__text-box {
-        border-bottom: 1px solid $color-secondary-gray;
-        margin-left: 1em;
-        margin-right: 1em;
+        border: 1px solid $color-secondary-gray;
+        margin-left: .5em;
+        margin-right: .5em;
+        border-radius: .4em;
 
         input {
             font-size: 2em;
             text-align: center;
-            text-transform: password;
-            -webkit-text-security: disc;
+            margin-right: 0;
+            // text-transform: password;
+            // -webkit-text-security: disc;
 
             border: none;
-            color: transparent;
+            // color: transparent;
             display: inline-block;
             font-size: 2em;
-            text-shadow: 0 0 0 $color-menu-gray;
+            // text-shadow: 0 0 0 $color-menu-gray;
 
             &:focus{
                 outline: none;

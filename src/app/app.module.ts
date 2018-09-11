@@ -32,17 +32,22 @@ import { NotificationsPage } from '../pages/notifications/notifications.page';
 import { LoginPage } from '../pages/login/login.page';
 import { WelcomePage } from '../pages/welcome/welcome.page';
 import { NemidPage } from '../pages/nemid/nemid.page';
+import { CPRPage } from '../pages/cpr/cpr.page';
+import { CPRmismatchPage } from '../pages/cprmismatch/cprmismatch.page';
+import { CPRsavePage } from '../pages/cprsave/cprsave.page';
 import { TermsconditionPage } from '../pages/termsconditions/termsconditions.page';
 import { SearchDetailsPage } from '../pages/searchdetails/searchdetails.page';
 import { OtherRelationsPage } from '../pages/otherrelations/otherrelations.page';
 import { CustomanchorPage } from '../pages/customanchor/customanchor.page';
-import {ChangepasswordPage} from '../pages/changepassword/changepassword';
-import {OtpPage} from '../pages/otp/otp';
-import {UsernamePage} from '../pages/username/username';
-import {QuestionaireComponent} from '../components/questionaire/questionaire';
-import {ContactusComponent} from  '../components/contactus/contactus';
-import {JqxgridComponent} from  '../components/jqxgrid/jqxgrid';
-import {HeaderLogoComponent} from '../components/header-logo/header-logo';
+import { ChangepasswordPage } from '../pages/changepassword/changepassword';
+import { OtpPage } from '../pages/otp/otp';
+import { UsernamePage } from '../pages/username/username';
+import { QuestionaireComponent } from '../components/questionaire/questionaire';
+import { ContactusComponent } from '../components/contactus/contactus';
+import { JqxgridComponent } from '../components/jqxgrid/jqxgrid';
+import { HeaderLogoComponent } from '../components/header-logo/header-logo';
+import {IdverifyComponent} from '../components/idverify/idverify';
+import {IdverifyPage} from '../pages/idverify/idverify.page';
 
 
 
@@ -63,7 +68,7 @@ import { WindowRef } from '../providers/windowservice/windowservice';
 import { AuthService } from '../providers/authenticationservice/auth.service';
 import { SafePipe } from '../providers/directory/safepipe';
 import { ConfigurationService } from '../providers/utils/configservices';
-import {PasswordValidation} from '../providers/validators/password-validator';
+import { PasswordValidation } from '../providers/validators/password-validator';
 
 
 
@@ -85,9 +90,12 @@ import { OtherrelationsComponent } from '../components/otherrelations/otherrelat
 import { CustomanchorComponent } from '../components/customanchor/customanchor';
 import { PopoverIonicdeploy } from '../components/ionicpopover/ionicpopover';
 import { DropDownPopOver } from '../components/dropdownpopover/dropdownpopover';
-import {changepasswordComponent} from '../components/changepassword/changepassword';
-import {UsernameComponent} from '../components/username/username';
-import {OtpComponent} from '../components/otp/otp';
+import { changepasswordComponent } from '../components/changepassword/changepassword';
+import { UsernameComponent } from '../components/username/username';
+import { OtpComponent } from '../components/otp/otp';
+import { CprmismatchComponent } from '../components/cprmismatch/cprmismatch';
+import { CprsaveComponent } from '../components/cprsave/cprsave';
+import {CPRComponent} from '../components/cpr/cpr';
 
 
 // Pro.init('2564d9e8', {
@@ -134,7 +142,11 @@ const pagesDeclaration = [
   CustomanchorPage,
   UsernamePage,
   ChangepasswordPage,
-  OtpPage
+  OtpPage,
+  CPRPage,
+  CPRmismatchPage,
+  CPRsavePage,
+  IdverifyPage
 ];
 
 const componentDeclaration = [
@@ -161,7 +173,11 @@ const componentDeclaration = [
   changepasswordComponent,
   QuestionaireComponent,
   ContactusComponent,
-  JqxgridComponent
+  JqxgridComponent,
+  CprmismatchComponent,
+  CPRComponent,
+  CprsaveComponent,
+  IdverifyComponent
 
 ];
 
@@ -185,8 +201,9 @@ const componentDeclaration = [
           // scrollPadding: true
         },
         android: {
-          scrollAssist: false,
-          autoFocusAssist: false
+          scrollAssist: true,
+          autoFocusAssist: true,
+          scrollPadding: true
         }
       }
     }),
@@ -216,7 +233,11 @@ const componentDeclaration = [
     UsernamePage,
     ChangepasswordPage,
     OtpPage,
-    DropDownPopOver
+    DropDownPopOver,
+    CPRPage,
+    CPRsavePage,
+    IdverifyPage
+
 
   ],
   providers: [
@@ -236,7 +257,7 @@ const componentDeclaration = [
     PasswordValidation,
     AuthService,
     InAppBrowser,
-     { provide: ErrorHandler, useClass: IonicErrorHandler }
+    { provide: ErrorHandler, useClass: IonicErrorHandler }
     //[{ provide: ErrorHandler, useClass: MyErrorHandler }]
   ]
 })

@@ -17,6 +17,9 @@ import { AuthService } from '../../providers/authenticationservice/auth.service'
 // import { DomSanitizer } from '@angular/platform-browser';
 import { InAppBrowser } from '@ionic-native/in-app-browser';
 import { UsernamePage } from '../../pages/username/username';
+import { NemidPage } from '../../pages/nemid/nemid.page';
+import { CPRPage } from '../../pages/cpr/cpr.page';
+import { IdverifyPage } from '../../pages/idverify/idverify.page';
 
 // import $ from "jquery";
 
@@ -47,6 +50,7 @@ export class LoginComponent {
     private errormsg;
     private submit;
     private forgetpasswordlabel;
+    private cprsaved;
 
 
     constructor(private fb: FormBuilder, private navCtrl: NavController,
@@ -85,7 +89,22 @@ export class LoginComponent {
                     this.user = new User(loggedUser);
 
                     this.showlogin = false;
-                    this.navCtrl.setRoot(HomePage)
+                    //this.navCtrl.setRoot(HomePage);
+
+                    this.storageService.get('cprsave').then(
+                        cprsaved=>{
+                            this.cprsaved = cprsaved;
+
+                            if(cprsaved){
+                                this.navCtrl.setRoot(HomePage);
+                            }
+                            else{
+                                this.navCtrl.setRoot(NemidPage);
+                            }
+
+                        }
+                    );
+  
                 }
                 else {
                     this.showlogin = true;
@@ -148,10 +167,8 @@ export class LoginComponent {
     }
     forgetpassword(event) {
 
-        // console.log(event);
-        // window.open("https://trygsundhed.carex.dk/simplesaml/module.php/core/forgotpw.php", "_blank");
-       // this.iab.create('https://trygsundhed.carex.dk/simplesaml/module.php/core/forgotpw.php', "_system", "location=no,hardwareback=yes");
         this.navCtrl.push(UsernamePage);
+
 
     }
 
@@ -209,7 +226,9 @@ export class LoginComponent {
             this.user.status = data[4];
             this.auth.setUserinfo(data);
             this.storageService.set('user', data);
-            this.navCtrl.setRoot(TermsconditionPage);
+          
+          //  this.navCtrl.setRoot(TermsconditionPage);
+          this.navCtrl.push(IdverifyPage);
         }
     }
 

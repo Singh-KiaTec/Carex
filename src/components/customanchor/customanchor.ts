@@ -1,11 +1,11 @@
 import { Component, Input } from '@angular/core';
-// import { AuthService } from '../../providers/authenticationservice/auth.service';
 import { InAppBrowser } from '@ionic-native/in-app-browser';
-//import { NavController } from 'ionic-angular';
+import { AuthService } from '../../providers/authenticationservice/auth.service';
+import { AlertController } from 'ionic-angular';
 
 
 @Component({
-    selector:'customanchor-viewer',
+    selector: 'customanchor-viewer',
     templateUrl: 'customanchor.html'
 })
 export class CustomanchorComponent {
@@ -28,31 +28,74 @@ export class CustomanchorComponent {
     // };    
     private url;
     private urltext;
-    constructor(private iab: InAppBrowser) { }
+    private isdownload = false;
+    private isdelete = false;
+    private userdata;
+
+    constructor(private iab: InAppBrowser, private auth: AuthService, private alrtCtrl: AlertController) {
+        this.userdata = this.auth.getUserInfo();
+    }
 
 
-     @Input() content: string;
+    @Input() content: string;
     ngOnInit() {
         // Tracking
-       // this.baseUrl="http://udv-admin.carex.dk/config/assets/imgs/unitlogos/logos/"
-       //this.baseUrl = this.auth.getEnvironment();
-  console.log("in anchor");
- let hrefindex =  this.content.indexOf('=')+1;
- let hrefstringindex =  this.content.indexOf(">");
+        // this.baseUrl="http://udv-admin.carex.dk/config/assets/imgs/unitlogos/logos/"
+        //this.baseUrl = this.auth.getEnvironment();
 
-let textindex = this.content.indexOf('>')+1;
-let hreftextndex =  this.content.indexOf('</');
+        let hrefindex = this.content.indexOf('href=') + 5;
+        let hrefstringindex = this.content.indexOf(">");
 
- this.url = this.content.substring(hrefindex, hrefstringindex);
-this.url = this.url.replace(/'/g, '');
-this.url = this.url.toString();
- this.urltext = this.content.substring(textindex, hreftextndex);
+        let textindex = this.content.indexOf('>') + 1;
+        let hreftextndex = this.content.indexOf('</');
+
+
+
+        this.url = this.content.substring(hrefindex, hrefstringindex);
+        this.url = this.url.replace(/'/g, '');
+        this.url = this.url.toString();
+        this.urltext = this.content.substring(textindex, hreftextndex);
     }
-    openWindow(event){
-      event.preventDefault();
-        // window.open(this.url,"_system");
-      this.iab.create(this.url, "_system","location=yes,hardwareback=yes");
-      //  browser.show();
+    openWindow(event) {
+        event.preventDefault();
+        this.isdownload = this.content.indexOf('downloadreport') != -1 ? true : false;
+        this.isdelete = this.content.indexOf('delete') != -1 ? true : false
+        
+        let userid = this.userdata.id ? this.userdata.id : this.userdata[3];
+
+        if (this.isdelete) {
+            let deleteurl= this.url + 'userId=' + userid + '&delete=true';
+
+            let alert = this.alrtCtrl.create({
+                title: 'Slette Rappot',
+                message: 'Er du sikker på, at du vil slette',
+                buttons: [
+                    {
+                        text: 'Anuller',
+                        role: 'Anuller',
+                        handler: () => {
+                            console.log('Cancel clicked');
+                        }
+                    },
+                    {
+                        text: 'Ja',
+                        handler: () => {
+                            this.iab.create(deleteurl, "_system", "location=yes,hardwareback=yes");
+                        }
+                    }
+                ]
+            });
+            alert.present();
+        }
+        if (this.isdownload) {
+         let downlaodurl = this.url + 'userId=' + userid;
+            this.iab.create(downlaodurl, "_system", "location=yes,hardwareback=yes");
+        }
+         if (!this.isdelete && !this.isdownload) {
+            this.iab.create(this.url, "_system", "location=yes,hardwareback=yes");
+        }
+
+        //  browser.show();
     }
 }
 

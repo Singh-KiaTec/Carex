@@ -6,6 +6,7 @@ import { SettingsPage } from '../../pages/settings/settings.page';
 import { ProfilePage } from '../../pages/profile/profile.page';
 import { NotificationsPage } from '../../pages/notifications/notifications.page';
 import { WelcomePage } from '../../pages/welcome/welcome.page';
+import { NemidPage } from '../../pages/nemid/nemid.page';
 import { TermsconditionPage } from '../../pages/termsconditions/termsconditions.page';
 import { OtherRelationsPage } from '../../pages/otherrelations/otherrelations.page';
 // import { tryg } from '../../models/data/tryg';
@@ -28,6 +29,8 @@ export class MenuComponent {
   private environment;
   private userinfo;
   private appVersion;
+  private cprsaved;
+  private checklistdata;
 
   pages: Array<{ title: string, component: any }>;
   constructor(private baserestService: BaseRestService, private storageService: StorageService, private configurationService: ConfigurationService, private auth: AuthService) {
@@ -76,7 +79,25 @@ export class MenuComponent {
         if (userinfo) {
           this.auth.setUserinfo(userinfo);
           this.userinfo = userinfo;
-          this.rootPage = HomePage;
+
+         // this.rootPage = HomePage;
+          this.storageService.get('cprsave').then(
+            cprsaved=>{
+                this.cprsaved = cprsaved;
+
+                if(cprsaved){
+                  this.rootPage = HomePage;//  this.navCtrl.setRoot(HomePage);
+                }
+                else{
+                  this.rootPage = NemidPage;//   this.navCtrl.setRoot(NemidPage);
+                }
+
+            }
+        );
+        // this.baserestService.checkactiveList(this.userinfo.id).then(
+        //   checklistdata=>{this.checklistdata = checklistdata; this.decideflow(checklistdata)},
+        //   error =>{console.log(error)}
+        // );
           //this.nav.setRoot(HomePage);
         }
         else {
@@ -108,7 +129,10 @@ export class MenuComponent {
     }
     this.pages = pagesarray;
   }
+// decideflow(checklistdata){
 
+//   if(checklistdata.result.)
+// }
 
   openPage(page) {
     // Reset the content nav to have just this page

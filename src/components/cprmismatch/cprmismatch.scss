@@ -1,0 +1,7 @@
+@import '../../assets/sass/variables';
+.nemid {
+    &__login-button {
+        width: 100%;
+        background: $color-primary-gray !important;
+    }
+}
