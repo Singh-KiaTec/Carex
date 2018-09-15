@@ -7,6 +7,7 @@ import { CPRPage } from '../../pages/cpr/cpr.page';
 import { BaseRestService } from '../../providers/restservice/base.rest.service';
 import { AuthService } from '../../providers/authenticationservice/auth.service';
 import { Keyboard } from '@ionic-native/keyboard';
+import { StorageService } from '../../providers/storageservice/storageservice';
 
  window;
 
@@ -20,7 +21,7 @@ export class NemidComponent {
     private nemiddata;
     private heading;
 
-    constructor( private navCtrl: NavController, private baserestService: BaseRestService, private auth : AuthService) { }
+    constructor( private navCtrl: NavController,private  storage: StorageService, private baserestService: BaseRestService, private auth : AuthService) { }
 
     ngOnInit() {
         // Tracking
@@ -48,6 +49,7 @@ export class NemidComponent {
         if(e.data.AuthenticationInfo){
          this.usernemid = e.data;
          this.auth.setUsernemiddata(e.data.AuthenticationInfo);
+         this.storage.set('userpiddata',e.data.AuthenticationInfo);
          this.navCtrl.setRoot(CPRPage, { 'userpiddata': e.data.AuthenticationInfo });
         }
     }

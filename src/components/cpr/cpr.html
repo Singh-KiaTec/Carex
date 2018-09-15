@@ -7,7 +7,7 @@
       <!-- <img  class="logo" [width]="" [height]="45" src="assets/imgs/unitlogos/CareX_hvid_gronlogo-66.png" /> -->
 
 
-      <div *ngIf="cprdata"  text-center padding>
+      <div *ngIf="cprdata" text-center padding>
             <h5>{{heading}}</h5>
             <form [formGroup]="cprForm" (ngSubmit)="cprValidate()">
                   <div>
@@ -16,23 +16,24 @@
                               <ion-item>
 
                                     <ion-label class="dark">{{cprdata.cprlabel}}</ion-label>
-                                    <ion-input type="text" [(ngModel)]="cprnummnermodel" formControlName="cprnummner"></ion-input>
+                                    <ion-input type="tel" [(ngModel)]="cprnummnermodel" (change)="removeErrors($event)" formControlName="cprnummner"></ion-input>
                               </ion-item>
                               {{cprForm.controls.cprnummner.errors?.touched}}
-                              <div class="login__error alert alert-danger" *ngIf="cprForm.controls.cprnummner.errors?.cprValidator && (cprForm.controls.cprnummner.touched)" class="cpr__error">{{cprdata.cprvalidation}}</div>
+                              <div class="login__error alert alert-danger" *ngIf="cprForm.controls.cprnummner.errors?.cprValidator && (cprForm.controls.cprnummner.touched)"
+                                    class="cpr__error">{{cprdata.cprvalidation}}</div>
                               <div class="login__error alert alert-danger" *ngIf="!cprinvaliderror" class="cpr__error">{{cprdata.errormessage}}</div>
-                             <div *ngIf="!serviceerror" >
-  <div class="login__error alert alert-danger" [innerHTML]="serviceerrormessage" class="cpr__error">{{serviceerrormessage}}</div>
-                             </div>
+                              <div *ngIf="!serviceerror">
+                                    <div class="login__error alert alert-danger" [innerHTML]="serviceerrormessage" class="cpr__error">{{serviceerrormessage}}</div>
+                              </div>
 
                         </ion-list>
 
                         <ion-list>
 
-                              <ion-item >
+                              <ion-item>
 
                                     <ion-label class="dark">{{cprdata.savemycpr}} </ion-label>
-                                    <ion-checkbox (click)="yesagree($event)"  [(ngModel)]="yes" formControlName="yes"></ion-checkbox>
+                                    <ion-checkbox (click)="yesagree($event)" [(ngModel)]="yes" formControlName="yes"></ion-checkbox>
                               </ion-item>
                         </ion-list>
                         <div>
@@ -41,11 +42,11 @@
                         </div>
                   </div>
 
-
-
                   <button ion-button type="submit" [disabled]="cprForm.controls.cprnummner.errors?.cprValidator" class="login__login-button">{{continue}}</button>
+                  <div *ngIf="!serviceerror">
+                        <button ion-button type="button" color="secondary" (click)="gotoNemid()" class="login__forgetpwd">{{cprdata.gotonemid}}</button>
+                  </div>
 
-                  <button ion-button type="button" color="secondary" (click)="gotoNemid()" class="login__login-button">{{cprdata.gotonemid}}</button>
             </form>
       </div>
 </ion-content>

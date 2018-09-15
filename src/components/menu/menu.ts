@@ -14,6 +14,8 @@ import { BaseRestService } from '../../providers/restservice/base.rest.service';
 import { AuthService } from '../../providers/authenticationservice/auth.service';
 import { StorageService } from '../../providers/storageservice/storageservice';
 import { ConfigurationService } from '../../providers/utils/configservices';
+import { CPRPage } from '../../pages/cpr/cpr.page';
+import { IdverifyPage } from '../../pages/idverify/idverify.page';
 
 @Component({
   selector: 'menu-viewer',
@@ -30,26 +32,83 @@ export class MenuComponent {
   private userinfo;
   private appVersion;
   private cprsaved;
-  private checklistdata;
+  private userchecklistdata;
+
+  private testuser;
+  private testinguser;
 
   pages: Array<{ title: string, component: any }>;
   constructor(private baserestService: BaseRestService, private storageService: StorageService, private configurationService: ConfigurationService, private auth: AuthService) {
+    this.auth.userchecklistdata.subscribe(
+      (userchecklistdata) => {
+        {
+          this.userchecklistdata = userchecklistdata;
+        }
+      }
+    );
+    this.auth.user.subscribe(
+      (userinfo) => {
+        {
+          this.userinfo = userinfo;
+        }
+      }
+    );
+
+
   }
 
   ngOnInit() {
     console.log("in menu");
-    //this.menuLis;
+    let userdata:any='';
+    let userchecklistdata:any='';
 
-    // this.baserestService.getEnvironment().then(
-    //   envi => {
-    //     console.log(envi);
-    //     this.environment = envi; this.setenvi();
-    //   },
-    //   error => console.error(error)
+      this.storageService.checklistdata.then((checklistdata) => {
+        // guaranteed reliable
+        console.log(checklistdata);
+        userchecklistdata  = checklistdata;
+        this.auth.setuserchecklistData(checklistdata);
+        if(checklistdata){
+          if (!userchecklistdata.result){
+            this.nav.setRoot(WelcomePage);
+          }
+        if (userchecklistdata.result && userchecklistdata.result.cpr) {
+          //this.rootPage = HomePage;
+          this.nav.setRoot(HomePage);
+          //this.nav.setRoot('HomePage',{'homedata':this.menuList});
+        }
+        if (userchecklistdata.result && !userchecklistdata.result.cpr) {
+          this.nav.setRoot(CPRPage);
+          //setRoot(TabsPage, {userProfile: profile});
+        }
+        if (userchecklistdata.result && !userchecklistdata.result.nemid) {
+          this.nav.setRoot(IdverifyPage);
+          //setRoot(TabsPage, {userProfile: profile});
+        }
+        if (userchecklistdata.result && !userchecklistdata.result.nemid && !userchecklistdata.result.cpr) {
+          this.nav.setRoot(WelcomePage);
+        }
+    }
+    if(!checklistdata){
+        this.nav.setRoot(WelcomePage);
+    }
+        });
+      
 
-    // )
+      this.storageService.user.then((user) => {
+        // guaranteed reliable
+        userdata = user;
+        this.userinfo = user;
+        console.log(user);
+        this.auth.setUserinfo(user);
+      });
+    // else{
+    //   console.log("will hitting welocme ")
+    //   this.nav.setRoot(WelcomePage);
+    // }
+
+
     this.baserestService.getMenuItems().then(
-      menuItems => { this.menuItems = menuItems; this.setData(); this.loading = false },
+      menuItems => { this.menuItems = menuItems; this.loading = false },
       error => { this.loading = false }
     )
     this.baserestService.getCustomerData().then(
@@ -57,57 +116,78 @@ export class MenuComponent {
       error => { this.loading = false }
     )
 
-    // this.userinfo = this.auth.getUserInfo();
-    // console.log(this.userinfo);
+
+    // this.storageService.get('user').then(
+    //   userinfo => {
+    //     if (userinfo) {
+    //       this.auth.setUserinfo(userinfo);
+    //       let userinfodata: any = userinfo;
+    //       this.baserestService.checkactiveList(userinfodata.id).then(
+    //         checklistdata => { this.decideflow(checklistdata) },
+    //         error => { console.log(error) }
+    //       );
+    //     }
+    //   });
+
+
+
+    // if (this.userinfo && this.userinfo.id) {
+    //   if (this.userchecklistdata && this.userchecklistdata.result && this.userchecklistdata.result.cpr) {
+    //     //this.rootPage = HomePage;
+    //     this.nav.setRoot('HomePage', { 'homedata': this.menuList });
+    //   }
+    //   if (this.userchecklistdata && this.userchecklistdata.result && !this.userchecklistdata.result.cpr) {
+    //     this.nav.setRoot(CPRPage, { 'userpiddata': this.userchecklistdata.result });
+    //     //setRoot(TabsPage, {userProfile: profile});
+    //   }
+    //   if (this.userchecklistdata && this.userchecklistdata.result && !this.userchecklistdata.result.nemid) {
+    //     this.nav.setRoot(NemidPage);
+    //     //setRoot(TabsPage, {userProfile: profile});
+    //   }
+    //   else {
+    //     this.nav.setRoot(WelcomePage);
+    //   }
+
+      //    this.storageService.get('cprsave').then(
+      //      cprsaved=>{
+      //   console.log(cprsaved);
+      //          this.cprsaved = cprsaved;
+
+      //          if(this.cprsaved =='inaktiv'){
+      //          this.rootPage = CPRPage;//  this.navCtrl.setRoot(HomePage);
+      //          }
+      //          else{
+      //           this.rootPage = HomePage;//   this.navCtrl.setRoot(NemidPage);
+      //        }
+
+      //     }
+      // );
+      // this.baserestService.checkactiveList(this.userinfo.id).then(
+      //   checklistdata=>{this.checklistdata = checklistdata; this.decideflow(checklistdata)},
+      //   error =>{console.log(error)}
+      // );
+      //this.nav.setRoot(HomePage);
+   // }
+    // else {
 
     //   this.storageService.get('user').then(
     //     userinfo => {
-    //         if (userinfo) {
-    //             this.userinfo = userinfo;
-    //         }}
-    // );
+    //       if (userinfo) {
+    //         this.auth.setUserinfo(userinfo);
+    //         let userinfodata: any = userinfo;
+    //         this.baserestService.checkactiveList(userinfodata.id).then(
+    //           checklistdata => { this.decideflow(checklistdata) },
+    //           error => { console.log(error) }
+    //         );
+    //       }
+    //       else {
+    //         this.rootPage = WelcomePage;
+    //       }
+    //     },
+    //     error => { this.rootPage = WelcomePage; });
 
-    // this.configurationService.getAppVersionNumber().then(
-    //   (appVersion) => {
-    //     this.appVersion = appVersion
-    //   }
-    // );
-
-
-    this.storageService.get('user').then(
-      userinfo => {
-        if (userinfo) {
-          this.auth.setUserinfo(userinfo);
-          this.userinfo = userinfo;
-
-         // this.rootPage = HomePage;
-          this.storageService.get('cprsave').then(
-            cprsaved=>{
-                this.cprsaved = cprsaved;
-
-                if(cprsaved){
-                  this.rootPage = HomePage;//  this.navCtrl.setRoot(HomePage);
-                }
-                else{
-                  this.rootPage = NemidPage;//   this.navCtrl.setRoot(NemidPage);
-                }
-
-            }
-        );
-        // this.baserestService.checkactiveList(this.userinfo.id).then(
-        //   checklistdata=>{this.checklistdata = checklistdata; this.decideflow(checklistdata)},
-        //   error =>{console.log(error)}
-        // );
-          //this.nav.setRoot(HomePage);
-        }
-        else {
-          this.rootPage = WelcomePage;
-        }
-      },
-      error => { console.log(error) }
-    );
-
-
+    //   //  this.rootPage = WelcomePage;
+    // }
 
   }
   // // setenvi() {
@@ -129,10 +209,28 @@ export class MenuComponent {
     }
     this.pages = pagesarray;
   }
-// decideflow(checklistdata){
-
-//   if(checklistdata.result.)
-// }
+  decideflow(checklistdata) {
+    console.log(checklistdata);
+    if (checklistdata.result && checklistdata.result.cpr) {
+      //this.rootPage = HomePage;
+      this.nav.setRoot(HomePage);
+      //this.nav.setRoot('HomePage',{'homedata':this.menuList});
+    }
+    if (checklistdata.result && !checklistdata.result.cpr) {
+      this.nav.setRoot(CPRPage, { 'userpiddata': checklistdata.result });
+      //setRoot(TabsPage, {userProfile: profile});
+    }
+    if (checklistdata.result && !checklistdata.result.nemid) {
+      this.nav.setRoot(NemidPage);
+      //setRoot(TabsPage, {userProfile: profile});
+    }
+    if (checklistdata.result && !checklistdata.result.nemid && !checklistdata.result.cpr) {
+      this.nav.setRoot(WelcomePage);
+    }
+    else{
+      this.nav.setRoot(WelcomePage);
+    }
+  }
 
   openPage(page) {
     // Reset the content nav to have just this page

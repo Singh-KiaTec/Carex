@@ -51,6 +51,7 @@ export class LoginComponent {
     private submit;
     private forgetpasswordlabel;
     private cprsaved;
+    private checklistdata;
 
 
     constructor(private fb: FormBuilder, private navCtrl: NavController,
@@ -91,28 +92,31 @@ export class LoginComponent {
                     this.showlogin = false;
                     //this.navCtrl.setRoot(HomePage);
 
-                    this.storageService.get('cprsave').then(
-                        cprsaved=>{
-                            this.cprsaved = cprsaved;
 
-                            if(cprsaved){
-                                this.navCtrl.setRoot(HomePage);
-                            }
-                            else{
-                                this.navCtrl.setRoot(NemidPage);
-                            }
+                    // this.storageService.get('cprsave').then(
+                    //     cprsaved=>{
+                    //         this.cprsaved = cprsaved;
 
-                        }
-                    );
-  
+                    //         if(cprsaved){
+                    //             this.navCtrl.setRoot(HomePage);
+                    //         }
+                    //         else{
+                    //             this.navCtrl.setRoot(NemidPage);
+                    //         }
+
+                    //     }
+                    // );
+
                 }
                 else {
                     this.showlogin = true;
                 }
 
             }
-        )
+        );
+
     }
+
 
     login() {
         // this.navCtrl.setRoot(HomePage);
@@ -121,7 +125,7 @@ export class LoginComponent {
         this.baserestService.login(this.loginForm.value.userid, this.loginForm.value.password).then(
             userInfo => {
                 this.userInfo = userInfo;
-                this.loggedIn();
+                this.loggedIn(userInfo);
             },
             error => {
                 console.log("something went wrong")
@@ -152,16 +156,24 @@ export class LoginComponent {
         this.username = this.loginData.username;
     }
 
-    loggedIn() {
-        this.storageService.set('welcome', true);
+    loggedIn(userInfo) {
         if (this.userInfo) {
-            this.storageService.set('terms', false);
-            console.log(this.userInfo);
+            this.storageService.set('user', userInfo);
+            this.auth.setUserinfo(userInfo);
+            this.storageService.set('welcome', true);
             this.user = new User(this.userInfo);
+
+
+            this.baserestService.checkactiveList(userInfo.id).then(
+                checklistdata => { this.checklistdata = checklistdata; 
+                    this.storageService.set('checklistdata', checklistdata);
+                    this.auth.setuserchecklistData(checklistdata); 
+                    this.decideflow();
+                   },
+                error => { console.log(error); this.error = true; }
+            );
             // this.navCtrl.setRoot(TermsconditionPage);
-            this.receiveMessage(this.userInfo);
-        } else {
-            this.error = true;
+
         }
 
     }
@@ -175,60 +187,31 @@ export class LoginComponent {
     getEnvi() {
         // window.top.location.href = 'https://test-tryg.carex.dk/';
         this.loading.dismiss();
-        // this.iframeUrl = this.sanitizer.bypassSecurityTrustResourceUrl("https://trygsundhed.carex.dk");
-        // window.top.location.href = 'https://trygsundhed.carex.dk';
-        // console.log(this.iframeUrl);
 
-
-        //    const browser = this.iab.create('https://app-idp.carex.dk/');
-
-        // var ref = cordova.InAppBrowser.open('http://apache.org', '_blank', 'location=yes');
-        // browser.on('loadstop').subscribe(event => {
-        //     if (event) {
-        //         console.log(event);
-        //     }
-        // });
-
-        // browser.on("message").subscribe(data => {
-        //     if (data) {
-        //         console.log(data);
-        //         this.receiveMessage(data);
-        //         browser.close();
-        //     }
-        // });
     }
-    // onLoadFunc(myIframe) {
-    //     this.source = myIframe //.contentWindow.location.href;
-    //     console.log(this.source);
 
-    //     if (this.userinfo) {
-    //         var k = decodeURIComponent(this.userinfo);
-    //         var e = JSON.parse(k)
-    //         // this.navCtrl.setRoot(NemidPage);
-    //         //this.navCtrl.setRoot(NemidPage);
-
-    //         this.navCtrl.setRoot(TermsconditionPage);
-    //     }
-    // }
-    receiveMessage(data) {
-        console.log("in receive message")
-        // console.log(data.data);
-        this.auth.setUserinfo(data);
-        if (data) {
-            this.storageService.set('user', data);
-            this.user = new User(data);
-            console.log("gottt ssuer")
-            this.userinfo = data
-            console.log(this.userinfo);
-            this.user.id = data[3];
-            this.user.email = data[1];
-            this.user.username = data[0];
-            this.user.status = data[4];
-            this.auth.setUserinfo(data);
-            this.storageService.set('user', data);
-          
-          //  this.navCtrl.setRoot(TermsconditionPage);
-          this.navCtrl.push(IdverifyPage);
+    decideflow() {
+        //this.auth.setUserinfo(data);
+        //  this.navCtrl.setRoot(TermsconditionPage);
+    
+       if(this.checklistdata && this.checklistdata.result && this.checklistdata.result.GeneralAccept){
+                this.storageService.set('terms', this.checklistdata.result.GeneralAccept);
+       }
+   
+        if (!this.checklistdata.result) {
+            this.navCtrl.setRoot(IdverifyPage);
+        }
+        if (this.checklistdata && this.checklistdata.result && this.checklistdata.result.cpr) {
+            this.navCtrl.setRoot(HomePage);
+        }
+        if (this.checklistdata && this.checklistdata.result && !this.checklistdata.result.GeneralAccept) {
+            this.navCtrl.setRoot(TermsconditionPage);
+        }
+        if (this.checklistdata && this.checklistdata.result && !this.checklistdata.result.cpr) {
+            this.navCtrl.setRoot(CPRPage);
+        }
+        if (this.checklistdata && this.checklistdata.result && !this.checklistdata.result.GeneralAccept && !this.checklistdata.result.cpr && !this.checklistdata.result.nemid) {
+            this.navCtrl.push(IdverifyPage);
         }
     }
 

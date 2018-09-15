@@ -33,8 +33,6 @@ import { LoginPage } from '../pages/login/login.page';
 import { WelcomePage } from '../pages/welcome/welcome.page';
 import { NemidPage } from '../pages/nemid/nemid.page';
 import { CPRPage } from '../pages/cpr/cpr.page';
-import { CPRmismatchPage } from '../pages/cprmismatch/cprmismatch.page';
-import { CPRsavePage } from '../pages/cprsave/cprsave.page';
 import { TermsconditionPage } from '../pages/termsconditions/termsconditions.page';
 import { SearchDetailsPage } from '../pages/searchdetails/searchdetails.page';
 import { OtherRelationsPage } from '../pages/otherrelations/otherrelations.page';
@@ -93,8 +91,6 @@ import { DropDownPopOver } from '../components/dropdownpopover/dropdownpopover';
 import { changepasswordComponent } from '../components/changepassword/changepassword';
 import { UsernameComponent } from '../components/username/username';
 import { OtpComponent } from '../components/otp/otp';
-import { CprmismatchComponent } from '../components/cprmismatch/cprmismatch';
-import { CprsaveComponent } from '../components/cprsave/cprsave';
 import {CPRComponent} from '../components/cpr/cpr';
 
 
@@ -144,8 +140,6 @@ const pagesDeclaration = [
   ChangepasswordPage,
   OtpPage,
   CPRPage,
-  CPRmismatchPage,
-  CPRsavePage,
   IdverifyPage
 ];
 
@@ -174,9 +168,7 @@ const componentDeclaration = [
   QuestionaireComponent,
   ContactusComponent,
   JqxgridComponent,
-  CprmismatchComponent,
   CPRComponent,
-  CprsaveComponent,
   IdverifyComponent
 
 ];
@@ -235,7 +227,6 @@ const componentDeclaration = [
     OtpPage,
     DropDownPopOver,
     CPRPage,
-    CPRsavePage,
     IdverifyPage
 
 

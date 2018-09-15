@@ -3,10 +3,13 @@ import { Component, ViewChild } from '@angular/core';
 // import { welcome } from '../../models/data/welcome';
 import { LoginPage } from '../../pages/login/login.page';
 import { HomePage } from '../../pages/home/home.page';
+import { CPRPage } from '../../pages/cpr/cpr.page';
+import { NemidPage } from '../../pages/nemid/nemid.page';
 // import { HeaderComponent } from '../header/header';
 import { BaseRestService } from '../../providers/restservice/base.rest.service';
 import { Nav } from 'ionic-angular';
 import { StorageService } from '../../providers/storageservice/storageservice';
+import { AuthService } from '../../providers/authenticationservice/auth.service';
 // import { AuthService } from '../../providers/authenticationservice/auth.service';
 
 
@@ -26,11 +29,30 @@ export class WelcomeComponent {
     private condition;
     private loading;
     private continue;
+    private userchecklistdata;
+    private userinfo;
 
-    constructor(private baserestService: BaseRestService, private storageService: StorageService) { }
+    constructor(private baserestService: BaseRestService, private storageService: StorageService, private auth: AuthService) {
+        this.auth.userchecklistdata.subscribe(
+            (userchecklistdata) => {
+              {
+              this.userchecklistdata = userchecklistdata;
+              }
+            }
+          );
+          this.auth.user.subscribe(
+            (userinfo) => {
+              {
+              this.userinfo = userinfo;
+              }
+            }
+          );
+
+     }
 
     ngOnInit() {
         // Tracking
+        console.log("in welcome");
         this.loading = true;
         this.getWelcomeData();
     
@@ -51,6 +73,24 @@ export class WelcomeComponent {
         // if (!this.user) {
         //     this.baserestService.navigateTo(HomePage,this.user);
         // }
+
+
+        
+        // if (this.userinfo) {
+        //     if(this.userchecklistdata && this.userchecklistdata.result && this.userchecklistdata.result.cpr){
+              
+        //       this.nav.setRoot(HomePage);
+        //     }
+        //     if(this.userchecklistdata && this.userchecklistdata.result && !this.userchecklistdata.result.cpr){
+        //       this.nav.setRoot(CPRPage);
+        //       //setRoot(TabsPage, {userProfile: profile});
+        //     }
+        //     if(this.userchecklistdata && this.userchecklistdata.result && !this.userchecklistdata.result.nemid){
+        //       this.nav.setRoot(NemidPage);
+        //       //setRoot(TabsPage, {userProfile: profile});
+        //     }
+
+        // }  
     }
     getWelcomeData() {
         this.baserestService.getWelcomeData().then(

@@ -7,6 +7,7 @@ import { AuthService } from '../../providers/authenticationservice/auth.service'
 import { ChangepasswordPage } from '../../pages/changepassword/changepassword';
 import { Keyboard } from '@ionic-native/keyboard';
 import { Vibration } from '@ionic-native/vibration';
+import { Platform } from 'ionic-angular';
 
 
 @Component({
@@ -31,7 +32,7 @@ export class OtpComponent {
     private otpcontent;
 
 
-    constructor(private fb: FormBuilder, private keyboard: Keyboard, private navCtrl: NavController,
+    constructor(private fb: FormBuilder, private keyboard: Keyboard, private navCtrl: NavController, private platform: Platform,
         private auth: AuthService, private baserestService: BaseRestService, private vibration: Vibration) {
         this.loginForm = this.fb.group({
             otp1: ['', Validators.required],
@@ -40,28 +41,35 @@ export class OtpComponent {
             otp4: ['', Validators.required]
 
         });
+          this.auth.user.subscribe(
+            (userdata) => {
+              {
+                this.userdata = userdata;
+              }
+            }
+          );
     }
 
     ngOnInit() {
-       
+
         this.baserestService.getOtpData().then(
-            (otpcontent)=>{this.otpcontent = otpcontent; this.setotpData()},
-            error=>{console.log(error)}
+            (otpcontent) => { this.otpcontent = otpcontent; this.setotpData() },
+            error => { console.log(error) }
         );
-        this.userdata = this.auth.getUserInfo();
+       // this.userdata = this.auth.getUserInfo();
     }
 
-            ionViewDidEnter() {
+    ionViewDidEnter() {
         //Keyboard.onKeyboardShow().subscribe(()=>{this.valueforngif=false})
-       
+
     }
 
-    setotpData(){
+    setotpData() {
         console.log(this.otpcontent);
         setTimeout(() => {
             this.otp1_input.setFocus();
         }, 1000);
- this.keyboard.onKeyboardHide().subscribe(() => { console.log("in viewdid enter to show keyboard"); this.keyboard.show(); })
+        this.keyboard.onKeyboardHide().subscribe(() => { console.log("in viewdid enter to show keyboard"); this.keyboard.show(); })
         window.addEventListener('keyboardDidHide', () => {
             // Describe your logic which will be run each time keyboard is closed.
             console.log("in window listerner enter to show keyboard"); this.keyboard.show();
@@ -75,7 +83,7 @@ export class OtpComponent {
         let otp = '' + this.otpval1 + this.otpval2 + this.otpval3 + this.otpval4;
         if (this.loginForm.valid) {
             this.baserestService.verifyOtp(this.userdata.id, otp).then(
-                (success) => {  this.error = false;this.success = success; this.setuserData(); },
+                (success) => { this.error = false; this.success = success; this.setuserData(); },
                 error => {
                     this.error = true;
                     this.otp1_input.setFocus();
@@ -97,7 +105,13 @@ export class OtpComponent {
             this.error = true;
         }
         else {
-            this.otpval1 = event.key;
+            if (this.platform.is('android')) {
+                this.otpval1 = event.target.value;
+            }
+            else {
+                this.otpval1 = event.key;
+            }
+
             this.otp2_input.setFocus();
         }
 
@@ -110,7 +124,12 @@ export class OtpComponent {
             this.error = true;
         }
         else {
-            this.otpval2 = event.key;
+            if (this.platform.is('android')) {
+                this.otpval2 = event.target.value;
+            }
+            else {
+                this.otpval2 = event.key;
+            }
             this.otp3_input.setFocus();
         }
 
@@ -123,7 +142,13 @@ export class OtpComponent {
             this.error = true;
         }
         else {
-            this.otpval3 = event.key;
+            if (this.platform.is('android')) {
+                this.otpval3 = event.target.value;
+            }
+            else {
+                this.otpval3 = event.key;
+            }
+
             this.otp4_input.setFocus();
         }
 
@@ -136,11 +161,16 @@ export class OtpComponent {
             this.error = true;
         }
         else {
-            this.otpval4 = event.key;
-            if(this.otpval1  && this.otpval2 && this.otpval3 && this.otpval4){
-                   this.gotochangePasword();
+            if (this.platform.is('android')) {
+                this.otpval4 = event.target.value;
             }
-         
+            else {
+                this.otpval4 = event.key;
+            }
+            if (this.otpval1 && this.otpval2 && this.otpval3 && this.otpval4) {
+                this.gotochangePasword();
+            }
+
         }
 
     }

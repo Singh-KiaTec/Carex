@@ -31,9 +31,16 @@ export class CustomanchorComponent {
     private isdownload = false;
     private isdelete = false;
     private userdata;
+    private isvitaltest = false;
 
     constructor(private iab: InAppBrowser, private auth: AuthService, private alrtCtrl: AlertController) {
-        this.userdata = this.auth.getUserInfo();
+        this.auth.user.subscribe(
+            (userdata) => {
+              {
+              this.userdata = userdata;
+              }
+            }
+          );
     }
 
 
@@ -48,8 +55,12 @@ export class CustomanchorComponent {
 
         let textindex = this.content.indexOf('>') + 1;
         let hreftextndex = this.content.indexOf('</');
-
-
+if(!this.userdata){
+        if (!this.userdata) {
+            this.userdata = this.auth.getUserInfo();
+          }
+}
+    
 
         this.url = this.content.substring(hrefindex, hrefstringindex);
         this.url = this.url.replace(/'/g, '');
@@ -59,20 +70,21 @@ export class CustomanchorComponent {
     openWindow(event) {
         event.preventDefault();
         this.isdownload = this.content.indexOf('downloadreport') != -1 ? true : false;
-        this.isdelete = this.content.indexOf('delete') != -1 ? true : false
-        
+        this.isdelete = this.content.indexOf('delete') != -1 ? true : false;
+        this.isvitaltest = this.content.indexOf('vitaltest') != -1 ? true : false;
+
         let userid = this.userdata.id ? this.userdata.id : this.userdata[3];
 
         if (this.isdelete) {
-            let deleteurl= this.url + 'userId=' + userid + '&delete=true';
+            let deleteurl = this.url + 'userId=' + userid + '&delete=true';
 
             let alert = this.alrtCtrl.create({
-                title: 'Slette Rappot',
-                message: 'Er du sikker på, at du vil slette',
+                title: 'Slet rapport',
+                message: 'Er du sikker på, at du vil slette?',
                 buttons: [
                     {
-                        text: 'Anuller',
-                        role: 'Anuller',
+                        text: 'Annuller',
+                        role: 'Annuller',
                         handler: () => {
                             console.log('Cancel clicked');
                         }
@@ -88,10 +100,14 @@ export class CustomanchorComponent {
             alert.present();
         }
         if (this.isdownload) {
-         let downlaodurl = this.url + 'userId=' + userid;
+            let downlaodurl = this.url + 'userId=' + userid;
             this.iab.create(downlaodurl, "_system", "location=yes,hardwareback=yes");
         }
-         if (!this.isdelete && !this.isdownload) {
+        if (this.isvitaltest) {
+            let vitalurl = this.url + userid;
+            this.iab.create(vitalurl, "_system", "location=yes,hardwareback=no");
+        }
+        if (!this.isdelete && !this.isdownload && !this.isvitaltest) {
             this.iab.create(this.url, "_system", "location=yes,hardwareback=yes");
         }
 

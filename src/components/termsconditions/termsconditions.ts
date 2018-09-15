@@ -39,7 +39,13 @@ export class TermsconditionsComponent {
         this.termsForm = this.fb.group({
             accepterm: ['', Validators.required]
         });
-       this.userdata =  this.auth.getUserInfo();
+        this.auth.user.subscribe(
+            (userdata) => {
+              {
+              this.userdata = userdata;
+              }
+            }
+          );
     }
 
     ngOnInit() {
@@ -79,7 +85,7 @@ export class TermsconditionsComponent {
   
         let activestatus = this.termsForm.value.accepterm==true? 'aktiv':'inaktiv';
       this.storageService.set('terms', true);
-        this.baserestService.saveTermsandconditions(activestatus).then(
+        this.baserestService.saveTermsandconditions(activestatus,this.userdata.id).then(
             termsconditions => { this.termsdata = termsconditions; this.navCtrl.setRoot(HomePage); this.loading = false },
             error => { this.saveerror = false;
                 this.saveerrormessage= error.error? error.error:error;

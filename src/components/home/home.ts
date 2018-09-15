@@ -37,10 +37,19 @@ export class HomeComponent {
   constructor(public navCtrl: NavController, public auth: AuthService, private storageService: StorageService, public navParams: NavParams, private baserestService: BaseRestService) {
     //    this.content.setElementStyle("background-color",this.pagedata.main_color);
     //    this.navbar.setElementStyle("background-color",this.pagedata.main_color);
+    this.auth.user.subscribe(
+      (userinfo) => {
+        {
+        this.userinfo = userinfo;
+        }
+      }
+    );
 
   }
   ngOnInit(): void {
+    console.log("in home");
     this.navdata = this.navParams.get('pageData');
+    this.homedata = this.navParams.get('homedata');
     this.currentpageIndex = this.navParams.get('itemIndex');
 
 
@@ -53,15 +62,19 @@ export class HomeComponent {
       )
     }
     // console.log(this.userinfo);
+    if(!this.userinfo){
+          this.userinfo = this.navParams.get('userinfo');
+    }
 
-    this.storageService.get('user').then(
-      userinfo => {
-        if (userinfo) {
-          this.userinfo = userinfo;
-        }
-      },
-      error => { console.log(error) }
-    );
+
+    // this.storageService.get('user').then(
+    //   userinfo => {
+    //     if (userinfo) {
+    //       this.userinfo = userinfo;
+    //     }
+    //   },
+    //   error => { console.log(error) }
+    // );
 
 
   }

@@ -1,6 +1,8 @@
 import { Injectable } from '@angular/core';
 import { Nav, App } from 'ionic-angular';
 import { StorageService } from '../storageservice/storageservice';
+import { Observable } from 'rxjs';
+import { BehaviorSubject } from 'rxjs/BehaviorSubject';
 
 
 @Injectable()
@@ -9,9 +11,11 @@ export class AuthService {
     private navCtrl: Nav;
     private nav: any;
     private environmentUrl;
-    private user;
     private homedata;
     private usernemiddata;
+
+    public userchecklistdata = new BehaviorSubject<any>([]);
+    public user = new BehaviorSubject<any>([]); //new Subject<string>(); 
 
     constructor(private app: App, private storageservice: StorageService) {
         //  this.navCtrl = app.getActiveNavs();
@@ -30,8 +34,8 @@ export class AuthService {
         return this.environmentUrl;
 
     }
-    setUserinfo(user) {
-        this.user = user;
+    setUserinfo(value:any) {
+        this.user.next(value);
     }
     getUserInfo() {
         return this.user;
@@ -50,5 +54,13 @@ export class AuthService {
     setUsernemiddata(usernemiddata){
          this.usernemiddata = usernemiddata;
     }
+    getuserchecklistData(){
+        return this.userchecklistdata;
+    }
+    setuserchecklistData(value:any){
+        this.userchecklistdata.next(value); 
+        // this.userchecklistdata = userchecklistdata;
+    }
+    
 }
 

@@ -34,13 +34,22 @@ export class ProfileComponent {
     constructor(private baserestService: BaseRestService,
         private navCtrl: NavController,
         private navParam: NavParams,
-        private auth: AuthService, private storageService: StorageService) { }
+        private auth: AuthService, private storageService: StorageService) { 
+            this.auth.user.subscribe(
+                (user) => {
+                  {
+                  this.user = user;
+                  }
+                }
+              );
+
+        }
 
     ngOnInit() {
         // Tracking
         this.loggedUrl = this.auth.getEnvironment();
         //  this.user = this.auth.getUserInfo();
-        this.user = this.navParam.get('userinfo');
+      //  this.user = this.navParam.get('userinfo');
 
         if (this.user.brugernavn) {
             this.username = this.user.brugernavn;

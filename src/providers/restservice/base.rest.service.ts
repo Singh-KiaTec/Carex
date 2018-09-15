@@ -109,10 +109,10 @@ export class BaseRestService {
 
         this.formdata.append('action', 'samtykke_read');
         //this.formdata.append('listedefinition_uuid', 'e4388fbc-c139-4542-894e-b0d14f34db30');
-        this.formdata.append('autorisation', '764be998-fa65-4c3d-86ef-40c4e2507742');
+        this.formdata.append('autorisation', uuid);
        // this.formdata.append('objekt_uuid', uuid);
         //app uuid this might change for every app app_uuid
-        this.formdata.append('itsystem_uuid', '48b00aae-5001-4b4f-9eea-b7bd61145686');
+        this.formdata.append('itsystem_uuid', 'ae9055e5-210e-4a0b-9d39-b334c12cf744');
         this.formdata.append('samtykkeprocestrin', 'GeneralAccept');
         this.formdata.append('samtykkeorganisation', '7fb031ae-0cb9-4a04-8407-1156d3d52108');
         this.formdata.append('language', 'da');
@@ -123,11 +123,11 @@ export class BaseRestService {
 
     }
 
-    saveTermsandconditions(activestatus) {
+    saveTermsandconditions(activestatus, uuid) {
         this.formdata.append('action', 'samtykke_create');
         this.formdata.append('listedefinition_uuid', 'e4388fbc-c139-4542-894e-b0d14f34db30');
-        this.formdata.append('autorisation', '764be998-fa65-4c3d-86ef-40c4e2507742');
-        this.formdata.append('itsystem_uuid','48b00aae-5001-4b4f-9eea-b7bd61145686');
+        this.formdata.append('autorisation', uuid);
+        this.formdata.append('itsystem_uuid','ae9055e5-210e-4a0b-9d39-b334c12cf744');
         this.formdata.append('samtykkeprocestrin', 'GeneralAccept');
         this.formdata.append('samtykkeorganisation', '7fb031ae-0cb9-4a04-8407-1156d3d52108');
         this.formdata.append('language', 'da');
@@ -139,7 +139,7 @@ export class BaseRestService {
         this.formdata.append('action', 'samtykke_create_cpr');
         //this.formdata.append('listedefinition_uuid', 'e4388fbc-c139-4542-894e-b0d14f34db30');
         this.formdata.append('autorisation', uuid);
-        this.formdata.append('itsystem_uuid', '48b00aae-5001-4b4f-9eea-b7bd61145686'); // tryg app
+        this.formdata.append('itsystem_uuid', 'ae9055e5-210e-4a0b-9d39-b334c12cf744'); // tryg app
         this.formdata.append('samtykkeprocestrin', 'cpr');
         this.formdata.append('nemidpid', pid);
         this.formdata.append('cpr', cpr);
@@ -152,8 +152,8 @@ export class BaseRestService {
         this.formdata = new FormData();
         this.formdata.append('action', 'samtykke_list_aktive');
         this.formdata.append('autorisation', uuid);
-        this.formdata.append('objekt_uuid',uuid);
-        this.formdata.append('itsystem_uuid', '48b00aae-5001-4b4f-9eea-b7bd61145686'); // tryg app
+       // this.formdata.append('objekt_uuid',uuid);
+        this.formdata.append('itsystem_uuid', 'ae9055e5-210e-4a0b-9d39-b334c12cf744'); // tryg app
         this.formdata.append('samtykkeorganisation', '7fb031ae-0cb9-4a04-8407-1156d3d52108');
         this.formdata.append('language', 'da');
         return this.http.post('https://qa-api.carex.dk/api/endpoints/api_services.php', this.formdata, this.options).toPromise();
@@ -254,9 +254,6 @@ export class BaseRestService {
     }
     getCprData() {
         return this.http.get(this.prodUrl + 'config/jsondata/cpr.php', this.options).toPromise();
-    }
-    getCprmismatchData() {
-        return this.http.get(this.prodUrl + 'config/jsondata/cprmismatch.php', this.options).toPromise();
     }
     getIdsaveData() {
         return this.http.get(this.prodUrl + 'config/jsondata/idsave.php', this.options).toPromise();

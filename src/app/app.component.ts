@@ -17,7 +17,9 @@ import { BaseRestService } from '../providers/restservice/base.rest.service';
 // import { WelcomePage } from '../pages/welcome/welcome.page';
 import { Keyboard } from '@ionic-native/keyboard';
 import { ConfigurationService } from '../providers/utils/configservices';
+import { AuthService } from '../providers/authenticationservice/auth.service';
 //declare var cordova: any;
+import { CPRPage } from '../pages/cpr/cpr.page';
 const updateTimerInterval: number = 14400000;
 
 
@@ -42,6 +44,7 @@ export class MyApp {
   constructor(public platform: Platform, public statusBar: StatusBar, public keyboard: Keyboard, public splashScreen: SplashScreen,
     // private oneSignal: OneSignal ,
     public configurationService: ConfigurationService,
+    public auth: AuthService,
     public baserestService: BaseRestService, public storageService: StorageService) {
     this.initializeApp();
 
@@ -56,9 +59,9 @@ export class MyApp {
       this.statusBar.styleLightContent();
       this.statusBar.overlaysWebView(false);
       this.statusBar.backgroundColorByHexString('#dc0000');
-       this.splashScreen.hide();
+   
       this.keyboard.disableScroll(true);
-     
+
       this.keyboard.hideKeyboardAccessoryBar(false);
       //this.oneSignal.startInit("86c266d2-3554-4095-97c5-6efc0ac1e91a", "599014675139");
 
@@ -94,38 +97,67 @@ export class MyApp {
       //   this.nav.push(NotificationsPage, { "resultData": resultData });
       // });
 
-   //   this.checkForUpdates();
-    // this.checkForIonicUpdates();
+      //   this.checkForUpdates();
+      // this.checkForIonicUpdates();
       // this.updateTimer = setInterval(() => {
       //   this.isReadyForUpdateCheck = true;
       // }, updateTimerInterval);
+
+      this.splashScreen.hide();
+
+      // this.storageService.get('user').then(
+      //   userinfo => {
+      //     if (userinfo) {
+      //       this.auth.setUserinfo(userinfo);
+      //       let userinfodata: any = userinfo;
+      //       this.baserestService.checkactiveList(userinfodata.id).then(
+      //         checklistdata => { this.decideflow(checklistdata) },
+      //         error => { console.log(error) }
+      //       );
+      //     }
+      //   });
     });
 
 
 
     this.platform.resume.subscribe(
       () => {
-       // this.checkForUpdates();
-       //if (this.isReadyForUpdateCheck) {
-       //  this.checkForIonicUpdates();
+        // this.checkForUpdates();
+        //if (this.isReadyForUpdateCheck) {
+        //  this.checkForIonicUpdates();
         // this.isReadyForUpdateCheck = false;
         //}
       }
     );
 
   }
-  checkForIonicUpdates() {
-    this.configurationService.checkForIonicDeploy();
-  }
-  checkForUpdates() {
-    this.configurationService.getAppVersionNumber().then(
-      (data) => {
-        console.log(data);
-        this.configurationService.checkForceUpdate(data);
-      }
-    );
 
+  decideflow(checklistdata) {
+    this.auth.setuserchecklistData(checklistdata);
+    console.log(checklistdata);
+    if (checklistdata.result && checklistdata.result.cpr) {
+      this.rootPage = HomePage;
+     // this.nav.setRoot('HomePage');
+    }
+    else {
+     this.rootPage = CPRPage;
+      //this.nav.setRoot('CPRPage');
+     //this.nav.setRoot(CPRPage, { 'userpiddata': checklistdata.result });
+      //setRoot(TabsPage, {userProfile: profile});
+    }
   }
+  // checkForIonicUpdates() {
+  //   this.configurationService.checkForIonicDeploy();
+  // }
+  // checkForUpdates() {
+  //   this.configurationService.getAppVersionNumber().then(
+  //     (data) => {
+  //       console.log(data);
+  //       this.configurationService.checkForceUpdate(data);
+  //     }
+  //   );
+
+  // }
 
   notificationOpenedCallback(resultData) {
     console.log(resultData);

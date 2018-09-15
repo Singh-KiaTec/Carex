@@ -9,7 +9,18 @@ export class StorageService {
         'body': 'All your notificatiions'
     }];
 
+    user: Promise<string>;
+    checklistdata: Promise<string>;
+
     constructor(public storage: Storage) {
+        console.log('storage  Initialisation Started...');
+    this.storage.ready().then(() => {
+      console.log('Storage Driver: ' +this.storage.driver);
+    });
+    this.user = storage.ready()
+    .then(() => storage.get('user'));
+    this.checklistdata = storage.ready()
+    .then(() => storage.get('checklistdata'));
 
     }
     set(name, value):any {

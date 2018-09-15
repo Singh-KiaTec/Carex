@@ -74,7 +74,14 @@ export class DetailsComponent {
 
     this.selectedMenuItem = this.navParam.get('selectedItem');
     this.selectedPage = this.navParam.get('selectedPage');
-    this.user = this.navParam.get('userinfo');
+    //this.user = this.navParam.get('userinfo');
+    this.auth.user.subscribe(
+      (user) => {
+        {
+        this.user = user;
+        }
+      }
+    );
     this.primaryColor = this.selectedPage.main_color;
     this.pagetitle = this.selectedMenuItem[1];
     this.tabs = this.selectedMenuItem[8];
@@ -152,7 +159,7 @@ export class DetailsComponent {
       // this.externallink = tru
       // "starttest":"Start test",
       // "starttestLink": "https://app-vital.life-partners.com/#/cx/",
-      this.externallink = this.tabs[107].starttestLink + this.user[3];
+      this.externallink = this.tabs[107].starttestLink;
       this.starttestLabel = this.tabs[107].starttest;
       console.log(this);
 

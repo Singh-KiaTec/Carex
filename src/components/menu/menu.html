@@ -1,5 +1,5 @@
 <div class="menu">
-  <ion-menu [content]="content">
+  <ion-menu [content]="content" swipeEnabled="false">
     <ion-header class="menu__header">
       <ion-toolbar class="menu">
         <ion-title *ngIf="menuItems">
@@ -44,4 +44,4 @@
   </ion-menu>
 </div>
 <!-- Disable swipe-to-go-back because it's poor UX to combine STGB with side menus -->
-<ion-nav [root]="rootPage" #content swipeBackEnabled="false"></ion-nav>
+<ion-nav [root]="rootPage" #content swipeEnabled="false" swipeBackEnabled="false"></ion-nav>
