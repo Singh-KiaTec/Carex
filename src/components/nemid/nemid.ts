@@ -20,6 +20,7 @@ export class NemidComponent {
     private usernemid;
     private nemiddata;
     private heading;
+    private iframenemidUrl;
 
     constructor( private navCtrl: NavController,private  storage: StorageService, private baserestService: BaseRestService, private auth : AuthService) { }
 
@@ -41,6 +42,7 @@ export class NemidComponent {
     }
   setData(){
  this.heading = this.nemiddata.heading;
+ this.iframenemidUrl = this.iframenemidUrl;
   }
 
     @HostListener('window:message', ['$event'])

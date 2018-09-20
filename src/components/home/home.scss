@@ -1,45 +1,62 @@
-@import '../../assets/sass/variables';
-.home{
-    line-height: 1.5em;
+@import "../../assets/sass/variables";
 
-    .imgcontainer {
-        margin-left: 5em;
+.home {
+  line-height: 1.5em;
+  background-color: $primary-color-theme;
+
+  &__headertitle {
+    .toolbar-title-md {
+      width: 100% !important;
     }
-    &__item {
-        text-align: center;
-        color: $color-white;
-        padding: .2em; //border: .5px solid rgba(255, 255, 255, 0.47);
-        // border-right: .5px solid  rgba(255, 255, 255, 0.47); 
-        // border-left: .5px solid  rgba(255, 255, 255, 0.47); 
-        // border-top: .5px solid  rgba(255, 255, 255, 0.47); 
+  }
+
+  .imgcontainer {
+    margin-left: 5em;
+  }
+
+  &__item {
+    text-align: center;
+    color: $color-white;
+    padding: .2em; //border: .5px solid rgba(255, 255, 255, 0.47);
+    // border-right: .5px solid  rgba(255, 255, 255, 0.47); 
+    // border-left: .5px solid  rgba(255, 255, 255, 0.47); 
+    // border-top: .5px solid  rgba(255, 255, 255, 0.47);
+
+  }
+
+  &__item-container {
+    border: .5px solid rgba(255, 255, 255, 0.47);
+    border-radius: .5em;
+    height: 6em;
+    text-align: center;
+    vertical-align: middle;
+  }
+
+  .toolbar-background,
+  .toolbar-background-ios {
+    background: inherit !important;
+  }
+
+  ion-img {
+    img {
+      // height: 100%;
+
     }
-    &__item-container {
-        border: .5px solid rgba(255, 255, 255, 0.47);
-        border-radius: .5em;
-        height: 6em;
-        text-align: center;
-        vertical-align: middle;
-    }
-    .toolbar-background,
-    .toolbar-background-ios {
-        background: inherit !important;
-    }
-    ion-img {
-        img {
-            // height: 100%;
-        }
-    }
-    &__bg-img{
-        width: 100%;
-        height: 15em;
-    }
-    &__notifications{
-        color: $color-white;
-    }
-//     &.content-ios {
-//         margin-top: 1.5em;
-//         .scroll-content {
-//             margin-top: 3em !important;
-//         }
-// }
+  }
+
+  &__bg-img {
+    width: 100%;
+    height: 15em;
+  }
+
+  &__notifications {
+    color: $color-white;
+  }
+
+  //     &.content-ios {
+  //         margin-top: 1.5em;
+  //         .scroll-content {
+  //             margin-top: 3em !important;
+  //         }
+  // }
 }

@@ -1,5 +1,5 @@
 @import '../../assets/sass/variables';
-.header {
+.headerlogo {
     background: $primary-color-theme !important;
     .toolbar-background,
     .toolbar-background-ios {
@@ -18,7 +18,7 @@
         //margin-left: -1.8em;
     }
     .toolbar-title-md {
-      //  width: 85%;
+        width: 100%;
     }
     .toolbar-ios {
         padding-top: 0em;

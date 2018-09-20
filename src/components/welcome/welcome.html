@@ -1,10 +1,15 @@
-<ion-header class="header">
+<ion-header class="headerlogo">
     <headerlogo-viewer></headerlogo-viewer>
 </ion-header>
 
-<ion-content padding class="welcome">
+    <div *ngIf="isLoading" class="spinner">
+        <ion-spinner *ngIf="isLoading"></ion-spinner>
+    </div>
 
-    <h4>{{heading}}</h4>
+<ion-content  padding class="welcome">
+
+    <div *ngIf="welcomedata" >
+    <h4  *ngIf="heading">{{heading}}</h4>
 
     <ng-template ngFor let-item [ngForOf]="paragraphs" let-i="index" [ngForTrackBy]="trackByFn">
         <p text-left>
@@ -13,10 +18,13 @@
     </ng-template>
 
 
-    <span class="welcome__condition">{{condition}}</span>
 
-        <!-- <input type="button" (click)="gotoLogin()" value="Fortsæt til login"/> -->
-        <button class="welcome__gotologin" ion-button (click)="gotoLogin()"  float-right color="secondary">{{continue}}</button>
+    <span *ngIf="condition" class="welcome__condition">{{condition}}</span>
+
+    <!-- <input type="button" (click)="gotoLogin()" value="Fortsæt til login"/> -->
+    <button class="welcome__gotologin" ion-button (click)="gotoLogin()" float-right color="secondary">{{continue}}</button>
+
+</div>
 </ion-content>
 <!-- 
 <ion-nav [root]="rootPage" #content swipeBackEnabled="false"></ion-nav> -->

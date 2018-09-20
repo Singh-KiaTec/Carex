@@ -1,6 +1,8 @@
 @import "../../assets/sass/variables";
 
 .nemid {
+    overflow: scroll;
+    height: 60em;
 
     &__login-button {
         width: 100%;

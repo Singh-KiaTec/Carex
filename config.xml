@@ -1,5 +1,5 @@
 <?xml version='1.0' encoding='utf-8'?>
-<widget id="com.carex.tryg.sundhed" version="1.0.10" xmlns="http://www.w3.org/ns/widgets" xmlns:cdv="http://cordova.apache.org/ns/1.0">
+<widget id="com.carex.tryg" version="1.0.18" xmlns="http://www.w3.org/ns/widgets" xmlns:cdv="http://cordova.apache.org/ns/1.0">
     <name>Tryg Sundhed</name>
     <description>A complete overview of your health insurance.</description>
     <author email="appsupport@kiatec.dk" href="https://kiatec.dk/">KIAtec Aps</author>

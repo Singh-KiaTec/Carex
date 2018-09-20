@@ -31,13 +31,15 @@ export class TermsconditionsComponent {
     private termspagecontent;
     private checkboxcontent;
     private acceptermmodel=true;
-    private saveerror=true;
+    private saveerror;
     private saveerrormessage='';
+    private termssubmitdata;
+    private  isLoading;
 
 
     constructor(private navCtrl: NavController, private auth: AuthService, private navprams: NavParams, private baserestService: BaseRestService, private fb: FormBuilder, private storageService: StorageService) { 
         this.termsForm = this.fb.group({
-            accepterm: ['', Validators.required]
+            accepterm: [,Validators.required]
         });
         this.auth.user.subscribe(
             (userdata) => {
@@ -51,13 +53,24 @@ export class TermsconditionsComponent {
     ngOnInit() {
         // Tracking
         console.log("in Teerms");
+
+        this.isLoading = true;
         this.ismenupage = this.navprams.get('menupage');
         this.baserestService.getTermsandconditionsData(this.userdata.id).then(
-            termsconditions => { this.termsdata = termsconditions;  this.setData(); this.loading = false },
-            error => { this.loading = false }
+            termsconditions => { this.isLoading = false; this.termsdata = termsconditions;  this.setData(); this.loading = false },
+            error => { this.isLoading = false }
         );
      //   this.toogleView()
 
+    }
+    ngAfterViewInit(){
+        if(this.ismenupage){
+
+                this.termsForm.controls['accepterm'].disable();
+                  // this.termsForm.controls.accepterm.disabled= true;
+                  
+         
+        }
     }
     // toogleView(){
     //             this.storageService.get('cpr').then(
@@ -82,12 +95,14 @@ export class TermsconditionsComponent {
       //  this.nb = this.termsdata.terms.NB;
     }
     submitTerms() {
-  
+        this.isLoading = true;
+        this.saveerror = false;
         let activestatus = this.termsForm.value.accepterm==true? 'aktiv':'inaktiv';
       this.storageService.set('terms', true);
         this.baserestService.saveTermsandconditions(activestatus,this.userdata.id).then(
-            termsconditions => { this.termsdata = termsconditions; this.navCtrl.setRoot(HomePage); this.loading = false },
-            error => { this.saveerror = false;
+            termssubmitdata => { this.termssubmitdata = termssubmitdata; this.navCtrl.setRoot(HomePage); this.isLoading = false },
+            error => { this.saveerror = true;
+                this.isLoading = false;
                 this.saveerrormessage= error.error? error.error:error;
              }
         );

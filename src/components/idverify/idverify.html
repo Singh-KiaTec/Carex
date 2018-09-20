@@ -1,19 +1,23 @@
-<ion-header class="header">
+<ion-header class="headerlogo">
     <headerlogo-viewer></headerlogo-viewer>
 </ion-header>
 
 <ion-content class="idverify">
-    
-    <div *ngIf="heading" padding>
-        <h4>{{heading}}</h4>
-
-        <ng-template ngFor let-item [ngForOf]="paragraphs" let-i="index" [ngForTrackBy]="trackByFn">
-            <p text-left>
-                {{item}}
-            </p>
-        </ng-template>
-        <button class="welcome__gotologin" ion-button (click)="gotoNemid()" float-right color="secondary">{{continue}}</button>
+    <div *ngIf="isLoading" class="spinner">
+        <ion-spinner *ngIf="isLoading"></ion-spinner>
     </div>
+    
+    <div *ngIf="verifydata">
+        <div *ngIf="heading" padding>
+            <h4>{{heading}}</h4>
 
+            <ng-template ngFor let-item [ngForOf]="paragraphs" let-i="index" [ngForTrackBy]="trackByFn">
+                <p text-left>
+                    {{item}}
+                </p>
+            </ng-template>
+            <button class="welcome__gotologin" ion-button (click)="gotoNemid()" float-right color="secondary">{{continue}}</button>
+        </div>
+    </div>
 
 </ion-content>

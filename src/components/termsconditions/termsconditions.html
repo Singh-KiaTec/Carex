@@ -1,12 +1,18 @@
-<ion-header class="termsconditions">
+<ion-header [ngClass]="(!ismenupage)? 'headerlogo': 'header' ">
     <!-- <header-viewer></header-viewer> -->
     <headerlogo-viewer></headerlogo-viewer>
 </ion-header>
 
 
 <ion-content class="termsconditions">
-    <h1 *ngIf="termspagecontent" padding class="termsconditions__heading">{{termspagecontent.titel}}</h1>
-    <div *ngIf="termspagecontent" padding>
+
+        <div *ngIf="isLoading" class="spinner">
+                <ion-spinner *ngIf="isLoading"></ion-spinner>
+          </div>
+
+
+    <h1 *ngIf="heading" padding class="termsconditions__heading">{{heading}}</h1>
+    <div *ngIf="paragraphs" padding>
         <ng-template ngFor let-item [ngForOf]="paragraphs" let-i="index" [ngForTrackBy]="trackByFn">
             <p text-left [innerHTML]="item">
                 <!-- {{item}} -->
@@ -18,30 +24,25 @@
                 <ion-list>
 
                     <ion-item class="termsconditions__checkboxitem">
-                        <ion-label class="termsconditions__checkboxlabel">{{checkboxcontent}}</ion-label>
-                        <ion-checkbox [(ngModel)]="acceptermmodel"  *ngIf="!ismenupage" formControlName="accepterm"></ion-checkbox> 
-                        <ion-checkbox [(ngModel)]="acceptermmodel"  *ngIf="ismenupage"  [disabled]="true" formControlName="accepterm"></ion-checkbox>
+                        <ion-label class="termsconditions__checkboxlabel" *ngIf="checkboxcontent">{{checkboxcontent}}</ion-label>
+                        <!-- <ion-checkbox [(ngModel)]="acceptermmodel"  *ngIf="!ismenupage" formControlName="accepterm"></ion-checkbox>  -->
+                        <ion-checkbox [(ngModel)]="acceptermmodel" formControlName="accepterm"></ion-checkbox>
                     </ion-item>
-
                 </ion-list>
-                <div *ngIf="error">
-                    <div class="login__error">{{errormsg}}</div>
+                <div *ngIf="saveerror">
+                    <div class="login__error">{{saveerrormessage}}</div>
 
                 </div>
             </div>
 
 
             <ng-container *ngIf="!ismenupage">
-                <button ion-button type="submit" [disabled]="!acceptermmodel" class="nemid__login-button">Fortsæt</button>
+                <button ion-button type="submit" [disabled]="!acceptermmodel" class="termsconditions__login-button">Fortsæt</button>
 
-                <div *ngIf="!saveerror">
-                    <div class="login__error">{{saveerrormessage}}</div>
-
-                </div>
             </ng-container>
         </form>
 
     </div>
 
-    <div class="termsconditions__verison">Version: 1.0.10</div>
+    <div class="termsconditions__verison">Version: 1.0.18</div>
 </ion-content>

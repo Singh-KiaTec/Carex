@@ -1,24 +1,26 @@
 import { Component } from '@angular/core';
 import { NavController } from 'ionic-angular';
-import {  NemidPage } from '../../pages/nemid/nemid.page';
+import { NemidPage } from '../../pages/nemid/nemid.page';
 import { HeaderComponent } from '../header/header';
 import { TermsconditionPage } from '../../pages/termsconditions/termsconditions.page';
 import { BaseRestService } from '../../providers/restservice/base.rest.service';
 
 @Component({
-    selector:'idverify-viewer',
+    selector: 'idverify-viewer',
     templateUrl: 'idverify.html'
 })
 export class IdverifyComponent {
- 
+
     private heading;
     private paragraphs;
     private continue;
     private verifydata;
-    constructor( private navCtrl: NavController, private baserestService: BaseRestService) { }
+    private isLoading;
+    constructor(private navCtrl: NavController, private baserestService: BaseRestService) { }
 
-    
+
     ngOnInit() {
+        this.isLoading = true;
         this.getverifyData();
     }
     getverifyData() {
@@ -26,31 +28,27 @@ export class IdverifyComponent {
             verifydata => {
                 console.log(verifydata);
                 this.verifydata = verifydata;
+                this.isLoading = false;
                 this.setData();
             },
-            error => { console.log("error"); }
+            error => {
+            this.isLoading = false;
+                console.log("error");
+            }
         );
 
     }
     setData() {
-        console.log(this.verifydata);
         this.heading = this.verifydata.heading;
         this.paragraphs = this.verifydata.paragraphs;
         this.continue = this.verifydata.continue;
     }
     gotoNemid() {
         console.log("go to login");
-        // this.nav.pop();
-        //this.nav.setRoot(LoginPage);
-       // this.storageService.set('welcome', true);
-       // this.baserestService.navigateTo(LoginPage, null);
-       
-       // this needs to uncommneted for actual flow
         this.navCtrl.setRoot(NemidPage);
-       // this.navCtrl.push(TermsconditionPage);
     }
 
-    
+
 }
 
 

@@ -6,4 +6,14 @@
     &__form{
         margin-top: 2em;
     }
+
+    .item-md{
+        padding-left: 0;
+    }
+    .list-ios > .item-block:first-child{
+        border-top: 0;
+    }
+    .item-ios{
+        padding-left: 0;
+    }
 }

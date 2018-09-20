@@ -1,17 +1,20 @@
 <!-- <ion-header class="header">
         <header-viewer></header-viewer>
     </ion-header> -->
+    <div *ngIf="isLoading" class="spinner">
+        <ion-spinner *ngIf="isLoading"></ion-spinner>
+    </div>
 <div *ngIf="loginData" class="login">
     <p text-center class="login__heading">{{loginData.heading}}</p>
     <form [formGroup]="loginForm" (ngSubmit)="login()">
         <div *ngIf="loginData">
             <ion-list>
                 <ion-item>
-                    <ion-label class="dark">{{username}} </ion-label>
+                    <ion-label class="login__label">{{username}} </ion-label>
                     <ion-input type="text" placeholder="{{username}}" formControlName="userid"></ion-input>
                 </ion-item>
                 <ion-item>
-                    <ion-label class="dark">{{password}} </ion-label>
+                    <ion-label class="login__label">{{password}} </ion-label>
                     <ion-input type="password" placeholder="{{password}}" class="form-control" formControlName="password"></ion-input>
                 </ion-item>
             </ion-list>

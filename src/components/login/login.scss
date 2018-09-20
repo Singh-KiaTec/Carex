@@ -5,14 +5,17 @@
     
     &__login-button {
         width: 100%;
-        background: $color-primary-gray;
-        color: $color-white;
+        background: $color-primary-gray !important;
+        color: $color-white !important;
         
+    }
+    &__label{
+        color: $label-color-black !important;
     }
     &__forgetpwd{
         width: 100%;
-        background: $color-secondary-gray;
-        color: $color-dark-black;
+        background: $color-secondary-gray !important;
+        color: $color-dark-black !important;
     }
 
     &__iframe {
@@ -34,5 +37,34 @@
     &__heading{
         padding-bottom: 1em;
     }
+    .item-md{
+        padding-left: 0;
+    }
+    .list-ios > .item-block:first-child{
+        border-top: 0;
+    }
+    .item-ios{
+        padding-left: 0;
+    }
+    .item-md.item-input.item-input-has-focus .item-inner, .item-md.item-input.input-has-focus .item-inner{
+        box-shadow: none !important;
+        border-bottom-color: none !important;
+    }
+    .item-md.item-input.ng-valid.item-input-has-value:not(.input-has-focus):not(.item-input-has-focus) .item-inner, .item-md.item-input.ng-valid.input-has-value:not(.input-has-focus):not(.item-input-has-focus) .item-inner{
+        box-shadow: none !important;
+        border-bottom-color: none !important;
+    }
+    .list-md .item-input.item-input-has-focus:last-child, .list-md .item-input.input-has-focus:last-child{
+        box-shadow: none !important;
+        border-bottom-color: none !important;
+        
+    }
+    .item-input .label-md, .item-select .label-md, .item-datetime .label-md{
+        border-bottom-color: rgb(166,166,166) !important;
+    }
+    .item-md.item-block .item-inner{
+        border-bottom-color: 1px solid $listitem-color-gray !important;
+    }
+    
 
 }

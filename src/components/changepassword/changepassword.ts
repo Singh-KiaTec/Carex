@@ -13,6 +13,7 @@ import { NemidPage } from '../../pages/nemid/nemid.page';
 import { CPRPage } from '../../pages/cpr/cpr.page';
 import { ToastController } from 'ionic-angular';
 import { IdverifyPage } from '../../pages/idverify/idverify.page';
+import { LoadingController } from 'ionic-angular';
 
 
 @Component({
@@ -29,10 +30,12 @@ export class changepasswordComponent {
     private userinfo;
     private cp_content;
     private userchecklistdata;
+    private loader:any;
 
 
 
     constructor(private fb: FormBuilder, private navCtrl: NavController,private toastCtrl: ToastController,
+        public loadingCtrl: LoadingController,
         private auth: AuthService, private baserestService: BaseRestService, private storageService: StorageService) {
         this.loginForm = this.fb.group({
             password: ['', Validators.required],
@@ -78,31 +81,38 @@ export class changepasswordComponent {
             (success) => { this.success = success; this.checkactivestatus(); },
             error => console.log(error)
         )
-
-
     }
+
     checkactivestatus() {
+        this.loader = this.loadingCtrl.create({
+            content: "vent venligst..."
+          });
+          this.loader.present();
 
-             this.decideflow(this.userchecklistdata);
-
+            // this.decideflow(this.userchecklistdata);
+  this.baserestService.checkactiveList(this.userinfo.id).then(
+        checklistdata=>{
+            this.storageService.set('checklistdata', checklistdata);
+            this.auth.setuserchecklistData(checklistdata); 
+            this.decideflow(checklistdata);
+           },
+        error =>{console.log(error); 
+        }
+      );
+      
+      this.loader.dismiss();
     }
     // this.storageService.set("user", this.userdata);
     // this.auth.setUserinfo(this.userdata);
     // this.navCtrl.setRoot(HomePage);
     decideflow(checklistdata) {
-        let toast = this.toastCtrl.create({
-            message: this.cp_content.successmessage,
-            duration: 3000,
-            position: 'top'
-          });
-          toast.onDidDismiss(() => {
-            console.log('Dismissed toast');
-          });
-          toast.present();
-
-
         console.log(checklistdata);
+
+
         if (!checklistdata) {
+            this.navCtrl.setRoot(IdverifyPage);
+        }
+        if (checklistdata && !checklistdata.result) {
             this.navCtrl.setRoot(IdverifyPage);
         }
         if (checklistdata && checklistdata.result && checklistdata.result.cpr) {
@@ -112,6 +122,7 @@ export class changepasswordComponent {
         if (checklistdata && checklistdata.result && checklistdata.result.nemid &&  !checklistdata.result.cpr) {
             this.navCtrl.setRoot(CPRPage);
         }
+    
         // else {
         //     this.navCtrl.setRoot(CPRPage);
         //    // this.rootPage = CPRPage;

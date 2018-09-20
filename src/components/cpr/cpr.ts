@@ -1,5 +1,5 @@
 import { Component, ViewChild } from '@angular/core';
-import { NavController, NavParams } from 'ionic-angular';
+import { NavController, NavParams, Content } from 'ionic-angular';
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { Validators } from '@angular/forms';
 import { NemidPage } from '../../pages/nemid/nemid.page';
@@ -9,10 +9,11 @@ import { PasswordValidation } from '../../providers/validators/password-validato
 import { BaseRestService } from '../../providers/restservice/base.rest.service';
 import { AuthService } from '../../providers/authenticationservice/auth.service';
 import { StorageService } from '../../providers/storageservice/storageservice';
-import {HomePage} from '../../pages/home/home.page';
-import {IdverifyPage} from '../../pages/idverify/idverify.page';
-import {CPRPage} from '../../pages/cpr/cpr.page';
+import { HomePage } from '../../pages/home/home.page';
+import { IdverifyPage } from '../../pages/idverify/idverify.page';
+import { CPRPage } from '../../pages/cpr/cpr.page';
 import { LoadingController } from 'ionic-angular';
+import { Keyboard } from '@ionic-native/keyboard';
 
 
 @Component({
@@ -23,71 +24,78 @@ export class CPRComponent {
 
 
     private cprForm: FormGroup;
-    private cprdata;
-    private heading;
-    private cprlabel;
-    private paragraphs;
-    private continue;
+    private cprcontentdata: any;
     private cprnummnermodel;
     private iscprvalid;
-    private cprinvaliderror = true;
+    private cprinvaliderror;
     private userpiddata;
-    private yes = false;
+    private yesmmodel = true;
     private no = false;
     private cprsaved;
     private userdata;
     private gotonemid;
-    private serviceerror=true;
+    private serviceerror;
     //private 
-    private serviceerrormessage='';
+    private serviceerrormessage = '';
     private termsaccepted;
     private activestatus;
     private userchecklistdata;
-    private userpid='';
+    private userpid = '';
+    private loader: any;
+    private isLoading;
+
+
+    private heading;
+    private cprlabel;
+    private paragraphs;
+    private continue;
+    private cprvalidation;
+    private errormessage;
+    private savemycpr;
+
+
+
 
     // @ViewChild('yes') agree;
-    // @ViewChild('no') dontagree;
+    // @ViewChild(Content) content: Content;
 
-    constructor(private navCtrl: NavController,
-        public loadingCtrl: LoadingController,private storageService: StorageService, private navParam: NavParams, private fb: FormBuilder,private storageservice:StorageService, private auth: AuthService, private baserestService: BaseRestService) {
+    constructor(private navCtrl: NavController, private keyboard: Keyboard, private storageService: StorageService, private navParam: NavParams, private fb: FormBuilder, private storageservice: StorageService, private auth: AuthService, private baserestService: BaseRestService) {
         this.cprForm = this.fb.group({
             cprnummner: ['', Validators.required],
-            yes: ['', Validators.required],
-            no: ['']
+            yes: ['', Validators.required]
         }, {
                 validator: PasswordValidation.cprValidator // your validation method
             });
-            this.auth.userchecklistdata.subscribe(
-                (userchecklistdata) => {
-                  {
-                  this.userchecklistdata = userchecklistdata;
-                  }
+        this.auth.userchecklistdata.subscribe(
+            (userchecklistdata) => {
+                {
+                    this.userchecklistdata = userchecklistdata;
                 }
-              );
-              this.auth.user.subscribe(
-                (userdata) => {
-                  {
+            }
+        );
+        this.auth.user.subscribe(
+            (userdata) => {
+                {
                     this.userdata = userdata;
-                  }
                 }
-              );
+            }
+        );
     }
 
-
-
     ngOnInit() {
+        this.isLoading = true;
         this.getcprData();
-       //this.userdata= this.auth.getUserInfo();
-       this.userpiddata = this.navParam.get('userpiddata');
-    //    if(!this.userpiddata){
-    //      this.storageService.get('userpiddata').then(
-    //         userpiddata=>{
-    //             this.userpiddata = userpiddata;
-    //         }
-    //     );
-    //     }
-    console.log(this.userchecklistdata);
-           console.log(this.userpiddata);
+        //this.userdata= this.auth.getUserInfo();
+        this.userpiddata = this.navParam.get('userpiddata');
+        //    if(!this.userpiddata){
+        //      this.storageService.get('userpiddata').then(
+        //         userpiddata=>{
+        //             this.userpiddata = userpiddata;
+        //         }
+        //     );
+        //     }
+        console.log(this.userchecklistdata);
+        console.log(this.userpiddata);
 
         // this.storageService.get('terms').then(
         //     termsaccepted=>{
@@ -99,21 +107,33 @@ export class CPRComponent {
         //     }
         // );
     }
+
+    ionViewDidEnter() {
+        console.log("in enter");
+        // this.navCtrl.setRoot(this.navCtrl.getActive().component);
+    }
     getcprData() {
         this.baserestService.getCprData().then(
             cprdata => {
-                this.cprdata = cprdata;
-                this.setData();
+                this.cprcontentdata = cprdata;
+                this.isLoading = false;
+                this.setData(cprdata);
             },
-            error => { console.log("error"); }
+            error => { this.isLoading = false; console.log("error"); }
         );
 
     }
-    setData() {
-        this.heading = this.cprdata.heading;
-        this.paragraphs = this.cprdata.paragraphs;
-        this.continue = this.cprdata.continue;
-        this.gotonemid = this.cprdata.gotonemid;
+    setData(cprdata) {
+        this.heading = cprdata.heading;
+        this.paragraphs = cprdata.paragraphs;
+        this.continue = cprdata.continue;
+        this.gotonemid = cprdata.gotonemid;
+        this.cprvalidation = cprdata.cprvalidation;
+        this.errormessage = cprdata.errormessage;
+        this.savemycpr = cprdata.savemycpr;
+        this.cprlabel = cprdata.cprlabel;
+        this.cprForm.value.yes = true;
+        // this.content.resize();
     }
 
     cprValidate() {
@@ -126,79 +146,100 @@ export class CPRComponent {
         // if(!userpid){
         //   userpid =  this.userchecklistdata.result.nemid; //  this.userpiddata.Pid? this.userpiddata.Pid : t
         // }
-        this.userpid =  this.userchecklistdata.result.nemid; 
+
+        //this.userpid =  this.userchecklistdata.result.nemid; 
+
+        // if(this.keyboard.close()){
+        //     this.keyboard.close();
+        // }
+
+        if (this.userchecklistdata && this.userchecklistdata.result && this.userchecklistdata.result.nemid) {
+            this.userpid = this.userchecklistdata.result.nemid;
+        }
+        if (this.userpiddata && this.userpiddata.Pid) {
+            this.userpid = this.userpiddata.Pid;
+        }
+        this.isLoading = true;
         this.baserestService.validateCPR(this.userpid, this.cprnummnermodel).then(
             iscprvalid => {
                 this.iscprvalid = iscprvalid;
-                this.navigate(iscprvalid);
+                console.log(iscprvalid);
+                if (iscprvalid == null) {
+                    // this.serviceerror = true;            
+                    this.isLoading = false;
+                    this.serviceerror = true;
+                    this.cprinvaliderror = true;
+                    
+
+                }
+                else {
+                    this.isLoading = false;
+                    this.serviceerror = false;
+                    this.cprinvaliderror = false;
+                    console.log(this.isLoading);
+                    console.log(iscprvalid);
+                    this.saveCPR();
+                }
             },
-            error => { console.log("error"); }
+            error => {
+                console.log("error");
+                this.isLoading = false;
+                this.serviceerror = false;
+                this.cprinvaliderror = false;
+                this.serviceerrormessage = error.error ? error.error : error.statusText;
+            }
         );
     }
+    // updateCucumber(){
+    //     console.log(this.cprForm.value.no)
+    // }
     gotoNemid() {
         this.navCtrl.setRoot(NemidPage);
     }
-    noagree(event) {
-        event.preventDefault();
-        console.log(this)
-        this.no = true;
-        this.yes = false;
-    }
-    yesagree(event) {
-        event.preventDefault();
-        console.log(this)
-        // this.yes = true;
-        // this.no = false;
-        this.yes = this.yes==true? false: true;
 
-    }
-    navigate(iscprvalid) {
-        if (iscprvalid == 1) {
-            this.saveCPR();
-        }
-        else {
-            this.serviceerror = false ;
-            this.cprinvaliderror = false;
-        }
-    }
-    removeErrors(event) {
-        event.preventDefault();
-        this.serviceerror = true;
-        this.cprinvaliderror = true ;
+    removeErrors() {
+        this.serviceerror = false;
+        this.cprinvaliderror = false;
+        // this.serviceerrormessage =null;
     }
     saveCPR() {
-        this.serviceerror = true;
-        this.cprinvaliderror = true ;
-        const loader = this.loadingCtrl.create({
-            content: "vent venligst...",
-            duration: 3000
-          });
-          loader.present();
-   this.activestatus = this.cprForm.value.yes ==true? 'aktiv':'inaktiv';
-   // this.userpid = (this.userpiddata && this.userpiddata.nemid) ? this.userpiddata.nemid : this.userpiddata.Pid;
-   console.log(this.activestatus);
-   console.log(this.yes);
-            this.baserestService.saveCPR(this.userpid, this.cprnummnermodel,this.activestatus ,this.userdata.id).then(
-                cprsaved => { cprsaved = this.cprsaved; this.savecprnavi(); },
-                error => { console.log(error); this.serviceerror = false;
-                    this.serviceerrormessage = error.error? error.error: error;
-                }
-            )
+
+        this.activestatus = this.cprForm.value.yes == true ? 'aktiv' : 'inaktiv';
+        // this.userpid = (this.userpiddata && this.userpiddata.nemid) ? this.userpiddata.nemid : this.userpiddata.Pid;
+        console.log(this.activestatus);
+        console.log(this.yesmmodel);
+        this.isLoading = true;
+        this.baserestService.saveCPR(this.userpid, this.cprnummnermodel, this.activestatus, this.userdata.id).then(
+            cprsaved => {
+                cprsaved = this.cprsaved; this.savecprnavi();
+            },
+            error => {
+                this.isLoading = false;
+                this.serviceerror = false;
+                this.cprinvaliderror = false;
+                console.log(error);
+                this.serviceerrormessage = error.error ? error.error : error;
+            }
+        )
     }
-    savecprnavi(){
-        this.serviceerror = true;
-         this.storageservice.set('cprsave',this.activestatus);
+    savecprnavi() {
+        this.storageservice.set('cprsave', this.activestatus);
 
-   this.baserestService.checkactiveList(this.userdata.id).then(
-        checklistdata=>{
-            this.storageService.set('checklistdata', checklistdata);
-            this.auth.setuserchecklistData(checklistdata); 
-            this.decideflow(checklistdata);
-           },
-        error =>{console.log(error);  this.serviceerror = false;}
-      );
+        this.baserestService.checkactiveList(this.userdata.id).then(
+            checklistdata => {
+                this.storageService.set('checklistdata', checklistdata);
+                this.auth.setuserchecklistData(checklistdata);
+                this.decideflow(checklistdata);
+            },
+            error => {
+                this.isLoading = false;
+                console.log(error);
+                this.serviceerror = true;
+                this.serviceerrormessage = error.error ? error.error : error;
+            }
+        );
 
-
+        //this.loader.dismiss();
 
         //  if(this.userpiddata && !this.userpiddata.GeneralAccept){
         //     this.navCtrl.push(TermsconditionPage);
@@ -212,25 +253,25 @@ export class CPRComponent {
         // } 
 
     }
-    decideflow(checklistdata){
-        this.serviceerror = true;
-        if (!checklistdata.result) {
+    decideflow(checklistdata) {
+        this.isLoading = false;
+        if (!checklistdata && !checklistdata.result) {
             this.navCtrl.setRoot(IdverifyPage);
         }
         if (checklistdata && checklistdata.result && checklistdata.result.cpr) {
             this.navCtrl.setRoot(HomePage);
         }
-        if (checklistdata && checklistdata.result && checklistdata.result.GeneralAccept  && !checklistdata.result.cpr) {
-            this.navCtrl.setRoot(HomePage);
-        }
+        // if (checklistdata && checklistdata.result && checklistdata.result.GeneralAccept && !checklistdata.result.cpr) {
+        //     this.navCtrl.setRoot(HomePage);
+        // }
         if (checklistdata && checklistdata.result && !checklistdata.result.GeneralAccept) {
             this.navCtrl.setRoot(TermsconditionPage);
         }
-        if (checklistdata && checklistdata.result && !checklistdata.result.GeneralAccept && !checklistdata.result.cpr && !checklistdata.result.nemid) {
+        if (checklistdata && checklistdata.result && (!checklistdata.result.GeneralAccept && !checklistdata.result.cpr && !checklistdata.result.nemid)) {
             this.navCtrl.push(IdverifyPage);
         }
     }
-   
+
 }
 
 

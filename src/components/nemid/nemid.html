@@ -1,13 +1,13 @@
-<ion-header class="header">
+<ion-header class="headerlogo">
             <headerlogo-viewer></headerlogo-viewer>
 </ion-header>
 
 <ion-content>
 <div  class="nemid">
 
-      <div text-center *ngIf="heading" class="nemid__container" padding>
-            <h5>{{heading}}</h5>
-            <iframe scrolling="no" allowfullscreen="true" allowtransparency="true" style="width: 100%; height: 100%; margin: 0; padding: 0; border: none; background-color: transparent"
+      <div text-center class="nemid__container" padding>
+            <h5 *ngIf="heading">{{heading}}</h5>
+            <iframe  scrolling="no" allowfullscreen="true" allowtransparency="true" style="width: 100%; height: 100%; margin: 0; padding: 0; border: none; background-color: transparent"
                   src="https://udv-admin.carex.dk/nemid/nemidlogon.php">
             </iframe>
       </div>

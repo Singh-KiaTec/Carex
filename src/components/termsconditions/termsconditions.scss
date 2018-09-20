@@ -19,6 +19,11 @@
     &__checkboxitem{
         border: none !important;
     }
+    &__login-button {
+        width: 100%;
+        background: $color-primary-gray !important;
+        color: $color-white !important;
+    }
     .label {
         color: $primary-color-theme;
         font-weight: 500;

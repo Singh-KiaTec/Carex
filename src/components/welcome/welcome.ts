@@ -7,7 +7,7 @@ import { CPRPage } from '../../pages/cpr/cpr.page';
 import { NemidPage } from '../../pages/nemid/nemid.page';
 // import { HeaderComponent } from '../header/header';
 import { BaseRestService } from '../../providers/restservice/base.rest.service';
-import { Nav } from 'ionic-angular';
+import { Nav, LoadingController } from 'ionic-angular';
 import { StorageService } from '../../providers/storageservice/storageservice';
 import { AuthService } from '../../providers/authenticationservice/auth.service';
 // import { AuthService } from '../../providers/authenticationservice/auth.service';
@@ -27,12 +27,12 @@ export class WelcomeComponent {
     private heading: any;
     private paragraphs;
     private condition;
-    private loading;
+    private isLoading=false;
     private continue;
     private userchecklistdata;
     private userinfo;
 
-    constructor(private baserestService: BaseRestService, private storageService: StorageService, private auth: AuthService) {
+    constructor(private baserestService: BaseRestService, public loadingCtrl: LoadingController, private storageService: StorageService, private auth: AuthService) {
         this.auth.userchecklistdata.subscribe(
             (userchecklistdata) => {
               {
@@ -53,9 +53,18 @@ export class WelcomeComponent {
     ngOnInit() {
         // Tracking
         console.log("in welcome");
-        this.loading = true;
-        this.getWelcomeData();
+        this.isLoading = true;
     
+    //     let loading = this.loadingCtrl.create({
+    //         content: 'loading...',
+    //         duration: 10000
+    //     });
+    //   loading.present();
+    //     loading.onDidDismiss(() => {
+    //       console.log('Dismissed loading');
+    //     });
+      
+        this.getWelcomeData();
            // this.user = this.auth.getUserInfo();
         // this.storageService.get('welcome').then(
         //     welcome => {
@@ -92,13 +101,16 @@ export class WelcomeComponent {
 
         // }  
     }
+    updateCucumber(){
+        console.log(this);
+    }
     getWelcomeData() {
         this.baserestService.getWelcomeData().then(
             welcomeData => {
             this.welcomedata = welcomeData;
-                this.setData(); this.loading = false
+                this.setData(); this.isLoading = false
             },
-            error => { console.log("error"); this.loading = false }
+            error => { console.log("error"); this.isLoading = false }
         );
 
     }

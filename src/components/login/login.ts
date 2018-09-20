@@ -40,7 +40,7 @@ export class LoginComponent {
     private envi: Environment;
     private iframeUrl;
     private loggedUser;
-    private loading;
+    private isLoading;
     private userInfo;
     private error = false;
     private showlogin = false;
@@ -65,6 +65,7 @@ export class LoginComponent {
     ngOnInit() {
         // Tracking
         //this.environment = this.auth.getEnvironment();
+        this.isLoading=true;
         this.getloginData();
         //this.userinfo = this.cookieService.get('userdata');
 
@@ -89,7 +90,7 @@ export class LoginComponent {
                 if (loggedUser) {
                     this.user = new User(loggedUser);
 
-                    this.showlogin = false;
+                    //this.showlogin = false;
                     //this.navCtrl.setRoot(HomePage);
 
 
@@ -107,10 +108,10 @@ export class LoginComponent {
                     //     }
                     // );
 
-                }
-                else {
-                    this.showlogin = true;
-                }
+                // }
+                // else {
+                //     this.showlogin = true;
+                 }
 
             }
         );
@@ -122,14 +123,17 @@ export class LoginComponent {
         // this.navCtrl.setRoot(HomePage);
         //  this.navCtrl.setRoot(NemidPage);
         // this.keyboard.close();
+        this.isLoading =true;
         this.baserestService.login(this.loginForm.value.userid, this.loginForm.value.password).then(
             userInfo => {
+                this.isLoading=false
                 this.userInfo = userInfo;
                 this.loggedIn(userInfo);
             },
             error => {
                 console.log("something went wrong")
                 this.error = true;
+                this.isLoading =false;
             }
 
         );
@@ -142,9 +146,9 @@ export class LoginComponent {
             loginData => {
                 this.loginData = loginData;
                 this.setData();
-                this.loading = false
+                this.isLoading = false
             },
-            error => { console.log("error"); this.loading = false }
+            error => { console.log("error"); this.isLoading = false }
         );
 
     }
@@ -163,14 +167,15 @@ export class LoginComponent {
             this.storageService.set('welcome', true);
             this.user = new User(this.userInfo);
 
-
+          this.isLoading =true;
             this.baserestService.checkactiveList(userInfo.id).then(
                 checklistdata => { this.checklistdata = checklistdata; 
+                    this.isLoading  = false;
                     this.storageService.set('checklistdata', checklistdata);
                     this.auth.setuserchecklistData(checklistdata); 
                     this.decideflow();
                    },
-                error => { console.log(error); this.error = true; }
+                error => { console.log(error);  this.isLoading  = false; this.error = true; }
             );
             // this.navCtrl.setRoot(TermsconditionPage);
 
@@ -186,7 +191,7 @@ export class LoginComponent {
 
     getEnvi() {
         // window.top.location.href = 'https://test-tryg.carex.dk/';
-        this.loading.dismiss();
+       // this.loading.dismiss();
 
     }
 

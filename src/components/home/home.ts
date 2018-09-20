@@ -90,7 +90,7 @@ export class HomeComponent {
   // }
   ngAfterViewInit() {
 
-    this.content.setElementStyle("background-color", "#D00000");
+    //this.content.setElementStyle("background-color", "#D00000");
     // // this.navbar.setElementStyle("background-color",this.pagedata.main_color);
     // console.log("in home pge")
 
