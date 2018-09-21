@@ -69,11 +69,12 @@ export class OtpComponent {
         setTimeout(() => {
             this.otp1_input.setFocus();
         }, 1000);
-        this.keyboard.onKeyboardHide().subscribe(() => { console.log("in viewdid enter to show keyboard"); this.keyboard.show(); })
-        window.addEventListener('keyboardDidHide', () => {
-            // Describe your logic which will be run each time keyboard is closed.
-            console.log("in window listerner enter to show keyboard"); this.keyboard.show();
-        });
+        // this.keyboard.onKeyboardHide().subscribe(() => { console.log("in viewdid enter to show keyboard"); this.keyboard.show(); })
+        // window.addEventListener('keyboardDidHide', () => {
+        //     // Describe your logic which will be run each time keyboard is closed.
+        //     console.log("in window listerner enter to show keyboard"); 
+        //     this.keyboard.show();
+        // });
     }
     gotochangePasword() {
         this.otpval1 = this.loginForm.value.otp1;
@@ -174,9 +175,9 @@ export class OtpComponent {
         }
 
     }
-    openKeyboard() {
-        this.keyboard.show();
-    }
+    // openKeyboard() {
+    //     this.keyboard.show();
+    // }
 
     // setFocus(itemname) {
 

@@ -1,60 +1,71 @@
+@import "../../assets/sass/variables";
 
-@import '../../assets/sass/variables';
-
-.termsconditions{
+.termsconditions {
     line-height: 1.5em;
+
     .toolbar,
     .toolbar-title,
     .bar-button-default-md {
         color: $color-white !important;
         background-color: $primary-color-theme;
     }
+
     .back-button {
         color: $color-white !important;
         background-color: $primary-color-theme;
     }
+
     .item-icon {
         color: $color-highlight-green;
     }
-    &__checkboxitem{
+
+    &__checkboxitem {
         border: none !important;
     }
+
     &__login-button {
         width: 100%;
         background: $color-primary-gray !important;
         color: $color-white !important;
     }
+
     .label {
         color: $primary-color-theme;
         font-weight: 500;
     }
+
     .toggle-ios.toggle-checked .toggle-icon {
         background-color: $primary-color-theme;
     }
-    .toggle-md.toggle-inner{
+
+    .toggle-md.toggle-inner {
         background-color: $primary-color-theme;
     }
-    .toggle-md .toggle-icon{
+
+    .toggle-md .toggle-icon {
         background-color: rgba(51, 76, 85, 0.3);
     }
-    .toggle-md.toggle-checked .toggle-inner{
-        background-color: $primary-color-theme;
-   }
-   &__verison{
-       text-align: center;
-       color: $color-menu-gray;
-       opacity: .5;
 
-   }
-   &__checkboxlabel{
-       color: $color-menu-gray !important;
-       white-space: normal;
-       display: inline-block;
-       margin-right: 0;
-       text-align: left;
-   }
-   &__heading{
-    padding-bottom: 0 !important;
-    text-align: center;
-   }
+    .toggle-md.toggle-checked .toggle-inner {
+        background-color: $primary-color-theme;
+    }
+
+    &__verison {
+        text-align: center;
+        color: $color-menu-gray;
+        opacity: .5;
+    }
+
+    &__checkboxlabel {
+        color: $color-menu-gray !important;
+        white-space: normal;
+        display: inline-block;
+        margin-right: 0;
+        text-align: left;
+    }
+
+    &__heading {
+        padding-bottom: 0 !important;
+        text-align: center;
+    }
 }

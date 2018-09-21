@@ -9,18 +9,17 @@
       </div>
 
 
-      <div text-center padding>
-            <h5 *ngIf="heading">{{heading}}</h5>
+      <div *ngIf="cprdata" text-center padding>
+            <h5 >{{cprdata.heading}}</h5>
             <form [formGroup]="cprForm" (ngSubmit)="cprValidate()">
-                  <div *ngIf="cprcontentdata">
                         <ion-list>
 
                               <ion-item>
-                                    <ion-label class="cpr__label" *ngIf="cprlabel">{{cprlabel}}</ion-label>
-                                    <ion-input type="tel" [(ngModel)]="cprnummnermodel" (keyup)="removeErrors()" placeholder="{{cprlabel}}" formControlName="cprnummner"></ion-input>
+                                    <ion-label class="cpr__label" >{{cprdata.cprlabel}}</ion-label>
+                                    <ion-input type="tel" [(ngModel)]="cprnummnermodel" (keyup)="removeErrors()" placeholder="{{cprdata.cprlabel}}" formControlName="cprnummner"></ion-input>
                               </ion-item>
-                              <p class="login__error alert alert-danger" *ngIf="cprForm.controls.cprnummner.errors?.cprValidator && (cprForm.controls.cprnummner.dirty || cprForm.controls.cprnummner.touched)" class="cpr__error">{{cprvalidation}}</p>
-                              <p class="login__error alert alert-danger" *ngIf="cprinvaliderror" class="cpr__error">{{errormessage}}</p>
+                              <p class="login__error alert alert-danger" *ngIf="cprForm.controls.cprnummner.errors?.cprValidator && (cprForm.controls.cprnummner.dirty || cprForm.controls.cprnummner.touched)" class="cpr__error">{{cprdata.cprvalidation}}</p>
+                              <p class="login__error alert alert-danger" *ngIf="cprinvaliderror" class="cpr__error">{{cprdata.errormessage}}</p>
                               <div *ngIf="serviceerror && serviceerrormessage">
                                     <p class="login__error alert alert-danger" class="cpr__error">{{serviceerrormessage}}</p>
                               </div>
@@ -28,24 +27,15 @@
                         </ion-list>
                         <ion-list class="cpr__savemycpr">
 
-                              <!-- <ion-item>
-
-                                    <ion-label class="dark" *ngIf="savemycpr">{{savemycpr}} </ion-label>
-                                    <ion-checkbox (ionChange)="yesagree()"  formControlName="yes"></ion-checkbox>
-                              </ion-item> -->
-
                               <ion-item>
-                                    <ion-label class="dark" *ngIf="savemycpr">{{savemycpr}} </ion-label>
+                                    <ion-label class="dark" >{{cprdata.savemycpr}} </ion-label>
                                     <ion-checkbox [(ngModel)]="yesmmodel" formControlName="yes"></ion-checkbox>
                               </ion-item>
 
                         </ion-list>
-
-                  </div>
-
-                  <button ion-button type="submit" [disabled]="cprForm.controls.cprnummner.errors?.cprValidator" class="login__login-button">{{continue}}</button>
+                  <button ion-button type="submit" [disabled]="cprForm.controls.cprnummner.errors?.cprValidator" class="login__login-button">{{cprdata.continue}}</button>
                   <div *ngIf="serviceerror">
-                        <button ion-button type="button" color="secondary" (click)="gotoNemid()" class="login__forgetpwd">{{gotonemid}}</button>
+                        <button ion-button type="button" color="secondary" (click)="gotoNemid()" class="login__forgetpwd">{{cprdata.gotonemid}}</button>
                   </div>
 
             </form>

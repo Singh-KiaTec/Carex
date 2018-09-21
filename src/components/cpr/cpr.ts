@@ -13,7 +13,7 @@ import { HomePage } from '../../pages/home/home.page';
 import { IdverifyPage } from '../../pages/idverify/idverify.page';
 import { CPRPage } from '../../pages/cpr/cpr.page';
 import { LoadingController } from 'ionic-angular';
-import { Keyboard } from '@ionic-native/keyboard';
+import { Cpr } from '../../models/cpr.model';
 
 
 @Component({
@@ -43,15 +43,7 @@ export class CPRComponent {
     private userpid = '';
     private loader: any;
     private isLoading;
-
-
-    private heading;
-    private cprlabel;
-    private paragraphs;
-    private continue;
-    private cprvalidation;
-    private errormessage;
-    private savemycpr;
+    private cprdata: Cpr;
 
 
 
@@ -59,7 +51,7 @@ export class CPRComponent {
     // @ViewChild('yes') agree;
     // @ViewChild(Content) content: Content;
 
-    constructor(private navCtrl: NavController, private keyboard: Keyboard, private storageService: StorageService, private navParam: NavParams, private fb: FormBuilder, private storageservice: StorageService, private auth: AuthService, private baserestService: BaseRestService) {
+    constructor(private navCtrl: NavController, private storageService: StorageService, private navParam: NavParams, private fb: FormBuilder, private storageservice: StorageService, private auth: AuthService, private baserestService: BaseRestService) {
         this.cprForm = this.fb.group({
             cprnummner: ['', Validators.required],
             yes: ['', Validators.required]
@@ -116,7 +108,6 @@ export class CPRComponent {
         this.baserestService.getCprData().then(
             cprdata => {
                 this.cprcontentdata = cprdata;
-                this.isLoading = false;
                 this.setData(cprdata);
             },
             error => { this.isLoading = false; console.log("error"); }
@@ -124,16 +115,9 @@ export class CPRComponent {
 
     }
     setData(cprdata) {
-        this.heading = cprdata.heading;
-        this.paragraphs = cprdata.paragraphs;
-        this.continue = cprdata.continue;
-        this.gotonemid = cprdata.gotonemid;
-        this.cprvalidation = cprdata.cprvalidation;
-        this.errormessage = cprdata.errormessage;
-        this.savemycpr = cprdata.savemycpr;
-        this.cprlabel = cprdata.cprlabel;
+        this.cprdata = new Cpr(cprdata);
+        this.isLoading = false;
         this.cprForm.value.yes = true;
-        // this.content.resize();
     }
 
     cprValidate() {
@@ -173,7 +157,6 @@ export class CPRComponent {
 
                 }
                 else {
-                    this.isLoading = false;
                     this.serviceerror = false;
                     this.cprinvaliderror = false;
                     console.log(this.isLoading);
@@ -211,7 +194,7 @@ export class CPRComponent {
         this.isLoading = true;
         this.baserestService.saveCPR(this.userpid, this.cprnummnermodel, this.activestatus, this.userdata.id).then(
             cprsaved => {
-                cprsaved = this.cprsaved; this.savecprnavi();
+                cprsaved = this.cprsaved;  this.isLoading = false; this.savecprnavi();
             },
             error => {
                 this.isLoading = false;
@@ -254,20 +237,21 @@ export class CPRComponent {
 
     }
     decideflow(checklistdata) {
-        this.isLoading = false;
+       
+        console.log(checklistdata);
         if (!checklistdata && !checklistdata.result) {
             this.navCtrl.setRoot(IdverifyPage);
         }
-        if (checklistdata && checklistdata.result && checklistdata.result.cpr) {
+        if (checklistdata && checklistdata.result && checklistdata.result.cpr!=null) {
             this.navCtrl.setRoot(HomePage);
         }
-        // if (checklistdata && checklistdata.result && checklistdata.result.GeneralAccept && !checklistdata.result.cpr) {
-        //     this.navCtrl.setRoot(HomePage);
-        // }
-        if (checklistdata && checklistdata.result && !checklistdata.result.GeneralAccept) {
-            this.navCtrl.setRoot(TermsconditionPage);
+        if (checklistdata && checklistdata.result && checklistdata.result.GeneralAccept && !checklistdata.result.cpr) {
+            this.navCtrl.setRoot(HomePage);
         }
-        if (checklistdata && checklistdata.result && (!checklistdata.result.GeneralAccept && !checklistdata.result.cpr && !checklistdata.result.nemid)) {
+        if (checklistdata && checklistdata.result && !checklistdata.result.GeneralAccept) {
+            this.navCtrl.setRoot(TermsconditionPage,{ 'menupage': false });
+        }
+        if ((checklistdata && checklistdata.result) && (!checklistdata.result.GeneralAccept && !checklistdata.result.cpr && !checklistdata.result.nemid)) {
             this.navCtrl.push(IdverifyPage);
         }
     }

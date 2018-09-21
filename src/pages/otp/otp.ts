@@ -12,9 +12,9 @@ export class OtpPage {
         // Tracking
 
     }
-    openKeyboard(event) {
-        event.preventDefault();
-        event.stopPropagation();
-        this.keyboard.show();
-    }
+    // openKeyboard(event) {
+    //     event.preventDefault();
+    //     event.stopPropagation();
+    //     this.keyboard.show();
+    // }
 }

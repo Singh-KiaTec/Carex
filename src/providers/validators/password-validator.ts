@@ -4,11 +4,36 @@ export class PasswordValidation {
     static MatchPassword(AC: AbstractControl) {
         let password = AC.get('password').value; // to get value in input tag
         let confirmPassword = AC.get('confirmPassword').value; // to get value in input tag
+
+        let hasNumber = new RegExp(/\d/);
+        let hasUpper = new RegExp(/[A-Z]/);
+        let hasLower = new RegExp(/[a-z]/);
+        // console.log('Num, Upp, Low', hasNumber, hasUpper, hasLower);
+        const valid = hasNumber && hasUpper && hasLower;
+
         if (password != confirmPassword) {
-            AC.get('confirmPassword').setErrors({ MatchPassword: true })
-        } else {
-            return null
+            AC.get('confirmPassword').setErrors({ MatchPassword: true });
         }
+
+        if (hasNumber.test(password) == false) {
+            AC.get('password').setErrors({ Numbers: true });
+        }
+        if (hasLower.test(password) == false) {
+            AC.get('password').setErrors({ Lower: true });
+        }
+        if (hasUpper.test(password) == false) {
+            AC.get('password').setErrors({ Upper: true });
+        }
+        if (password && password.length < 8) {
+            AC.get('password').setErrors({ long: true });
+        }
+
+
+
+        if (hasNumber.test(password) && hasUpper.test(password) && hasLower.test(password) && (password.length >= 8) && (password == confirmPassword)) {
+            return false;
+        }
+
     }
     static cprValidator(AC: AbstractControl) {
         let cprnummner = AC.get('cprnummner').value; // to get value in input tag

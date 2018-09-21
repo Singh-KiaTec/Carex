@@ -97,16 +97,6 @@ export class BaseRestService {
     }
     getTermsandconditionsData(uuid) {
         this.formdata = new FormData();
-
-        // action:samtykke_read
-        // autorisation:764be998-fa65-4c3d-86ef-40c4e2507742
-        // itsystem_uuid:48b00aae-5001-4b4f-9eea-b7bd61145686
-        // samtykkeprocestrin:GeneralAccept
-        // samtykkeorganisation:7fb031ae-0cb9-4a04-8407-1156d3d52108
-        // language:da
-        // skabelon:1
-
-
         this.formdata.append('action', 'samtykke_read');
         //this.formdata.append('listedefinition_uuid', 'e4388fbc-c139-4542-894e-b0d14f34db30');
         this.formdata.append('autorisation', uuid);

@@ -41,7 +41,9 @@ export class changepasswordComponent {
             password: ['', Validators.required],
             confirmPassword: ['', Validators.required]
         }, {
-                validator: PasswordValidation.MatchPassword // your validation method
+                validator: PasswordValidation.MatchPassword
+
+             // your validation method
             });
 
             this.auth.userchecklistdata.subscribe(
@@ -121,6 +123,9 @@ export class changepasswordComponent {
         }
         if (checklistdata && checklistdata.result && checklistdata.result.nemid &&  !checklistdata.result.cpr) {
             this.navCtrl.setRoot(CPRPage);
+        }
+        if (checklistdata && checklistdata.result && !checklistdata.result.GeneralAccept && !checklistdata.result.cpr && !checklistdata.result.nemid) {
+            this.navCtrl.push(IdverifyPage);
         }
     
         // else {
