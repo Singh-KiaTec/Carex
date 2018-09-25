@@ -1,4 +1,4 @@
-import { Component, ViewChild } from '@angular/core';
+import { Component, ViewChild ,ChangeDetectorRef} from '@angular/core';
 import { NavController, NavParams, Content } from 'ionic-angular';
 // import { TermsconditionPage } from '../../pages/termsconditions/termsconditions.page';
 // import { HeaderComponent } from '../header/header';
@@ -41,7 +41,7 @@ export class TermsconditionsComponent {
     @ViewChild(Content) content: Content;
 
 
-    constructor(private navCtrl: NavController, private auth: AuthService, private navprams: NavParams, private baserestService: BaseRestService, private fb: FormBuilder, private storageService: StorageService) {
+    constructor(private navCtrl: NavController,private ref: ChangeDetectorRef, private auth: AuthService, private navprams: NavParams, private baserestService: BaseRestService, private fb: FormBuilder, private storageService: StorageService) {
         this.termsForm = this.fb.group({
             accepterm: ['', Validators.required]
         });
@@ -80,6 +80,7 @@ export class TermsconditionsComponent {
         console.log(this.termsdata);
         this.termsmodel = new Termsconditions(termsdata.result);
         this.isLoading = false;
+        this.ref.detectChanges(); 
  }
     submitTerms() {
         this.isLoading = true;

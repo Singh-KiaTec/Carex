@@ -109,8 +109,6 @@ export class changepasswordComponent {
     // this.navCtrl.setRoot(HomePage);
     decideflow(checklistdata) {
         console.log(checklistdata);
-
-
         if (!checklistdata) {
             this.navCtrl.setRoot(IdverifyPage);
         }

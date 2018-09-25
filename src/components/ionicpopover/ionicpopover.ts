@@ -5,8 +5,6 @@ import { ProgressBarModule } from "angular-progress-bar";
 // import { Pro } from '@ionic/pro';
 
 
-declare var cordova: any;
-
 @Component({
     templateUrl: 'ionicpopover.html'
 })

@@ -2,7 +2,7 @@
       <headerlogo-viewer></headerlogo-viewer>
 </ion-header>
 
-<ion-content #content class="cpr">
+<ion-content class="cpr">
 
       <div *ngIf="isLoading" class="spinner">
             <ion-spinner *ngIf="isLoading"></ion-spinner>
@@ -10,34 +10,35 @@
 
 
       <div *ngIf="cprdata" text-center padding>
-            <h5 >{{cprdata.heading}}</h5>
+            <h5>{{cprdata.heading}}</h5>
             <form [formGroup]="cprForm" (ngSubmit)="cprValidate()">
-                        <ion-list>
+                  <ion-list>
+                        <ion-item>
+                              <ion-label class="cpr__label">{{cprdata.cprlabel}}</ion-label>
+                              <ion-input type="tel" autocomplete="on" (keyup)="removeErrors()" placeholder="{{cprdata.cprlabel}}"
+                                    formControlName="cprnummner"></ion-input>
+                        </ion-item>
+                        <p class="login__error alert alert-danger" *ngIf="cprForm.controls.cprnummner.errors?.cprValidator && (cprForm.controls.cprnummner.dirty || cprForm.controls.cprnummner.touched)"
+                              class="cpr__error">{{cprdata.cprvalidation}}</p>
+                        <p class="login__error alert alert-danger" *ngIf="cprinvaliderror" class="cpr__error">{{cprdata.errormessage}}</p>
+                        <div *ngIf="serviceerror && serviceerrormessage">
+                              <p class="login__error alert alert-danger" class="cpr__error">{{serviceerrormessage}}</p>
+                        </div>
 
-                              <ion-item>
-                                    <ion-label class="cpr__label" >{{cprdata.cprlabel}}</ion-label>
-                                    <ion-input type="tel" [(ngModel)]="cprnummnermodel" (keyup)="removeErrors()" placeholder="{{cprdata.cprlabel}}" formControlName="cprnummner"></ion-input>
-                              </ion-item>
-                              <p class="login__error alert alert-danger" *ngIf="cprForm.controls.cprnummner.errors?.cprValidator && (cprForm.controls.cprnummner.dirty || cprForm.controls.cprnummner.touched)" class="cpr__error">{{cprdata.cprvalidation}}</p>
-                              <p class="login__error alert alert-danger" *ngIf="cprinvaliderror" class="cpr__error">{{cprdata.errormessage}}</p>
-                              <div *ngIf="serviceerror && serviceerrormessage">
-                                    <p class="login__error alert alert-danger" class="cpr__error">{{serviceerrormessage}}</p>
-                              </div>
+                  </ion-list>
+                  <ion-list class="cpr__savemycpr">
 
-                        </ion-list>
-                        <ion-list class="cpr__savemycpr">
+                        <ion-item>
+                              <ion-label class="cpr__label">{{cprdata.savemycpr}} </ion-label>
+                              <ion-checkbox [(ngModel)]="yesmmodel" formControlName="yes"></ion-checkbox>
+                        </ion-item>
 
-                              <ion-item>
-                                    <ion-label class="dark" >{{cprdata.savemycpr}} </ion-label>
-                                    <ion-checkbox [(ngModel)]="yesmmodel" formControlName="yes"></ion-checkbox>
-                              </ion-item>
-
-                        </ion-list>
-                  <button ion-button type="submit" [disabled]="cprForm.controls.cprnummner.errors?.cprValidator" class="login__login-button">{{cprdata.continue}}</button>
+                  </ion-list>
+                  <button ion-button type="submit" [disabled]="cprForm.controls.cprnummner.errors && cprForm.controls.cprnummner.errors.cprValidator"
+                        class="login__login-button">{{cprdata.continue}}</button>
                   <div *ngIf="serviceerror">
                         <button ion-button type="button" color="secondary" (click)="gotoNemid()" class="login__forgetpwd">{{cprdata.gotonemid}}</button>
                   </div>
-
             </form>
       </div>
 

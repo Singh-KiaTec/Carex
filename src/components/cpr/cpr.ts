@@ -1,4 +1,4 @@
-import { Component, ViewChild } from '@angular/core';
+import { Component, ViewChild,ChangeDetectorRef } from '@angular/core';
 import { NavController, NavParams, Content } from 'ionic-angular';
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { Validators } from '@angular/forms';
@@ -25,7 +25,7 @@ export class CPRComponent {
 
     private cprForm: FormGroup;
     private cprcontentdata: any;
-    private cprnummnermodel;
+    // private cprnummnermodel;
     private iscprvalid;
     private cprinvaliderror;
     private userpiddata;
@@ -51,7 +51,9 @@ export class CPRComponent {
     // @ViewChild('yes') agree;
     // @ViewChild(Content) content: Content;
 
-    constructor(private navCtrl: NavController, private storageService: StorageService, private navParam: NavParams, private fb: FormBuilder, private storageservice: StorageService, private auth: AuthService, private baserestService: BaseRestService) {
+    constructor(private navCtrl: NavController, 
+        private ref: ChangeDetectorRef,
+            private storageService: StorageService, private navParam: NavParams, private fb: FormBuilder, private storageservice: StorageService, private auth: AuthService, private baserestService: BaseRestService) {
         this.cprForm = this.fb.group({
             cprnummner: ['', Validators.required],
             yes: ['', Validators.required]
@@ -110,33 +112,18 @@ export class CPRComponent {
                 this.cprcontentdata = cprdata;
                 this.setData(cprdata);
             },
-            error => { this.isLoading = false; console.log("error"); }
+            error => {console.log("error"); this.isLoading = false;  }
         );
 
     }
     setData(cprdata) {
         this.cprdata = new Cpr(cprdata);
+        this.cprForm.value.yes = true; 
         this.isLoading = false;
-        this.cprForm.value.yes = true;
+        this.ref.detectChanges(); 
     }
 
     cprValidate() {
-        //if cpr is invalid push to mismatch page
-        // console.log(this.userpiddata);
-        // let userpid;
-        // if(this.userpiddata && this.userpiddata.nemid){
-        //     userpid = this.userpiddata.nemid;
-        // }
-        // if(!userpid){
-        //   userpid =  this.userchecklistdata.result.nemid; //  this.userpiddata.Pid? this.userpiddata.Pid : t
-        // }
-
-        //this.userpid =  this.userchecklistdata.result.nemid; 
-
-        // if(this.keyboard.close()){
-        //     this.keyboard.close();
-        // }
-
         if (this.userchecklistdata && this.userchecklistdata.result && this.userchecklistdata.result.nemid) {
             this.userpid = this.userchecklistdata.result.nemid;
         }
@@ -144,7 +131,9 @@ export class CPRComponent {
             this.userpid = this.userpiddata.Pid;
         }
         this.isLoading = true;
-        this.baserestService.validateCPR(this.userpid, this.cprnummnermodel).then(
+        let cprvalue = this.cprForm.value.cprnummner;
+        console.log(cprvalue);
+        this.baserestService.validateCPR(this.userpid, cprvalue).then(
             iscprvalid => {
                 this.iscprvalid = iscprvalid;
                 console.log(iscprvalid);
@@ -161,7 +150,7 @@ export class CPRComponent {
                     this.cprinvaliderror = false;
                     console.log(this.isLoading);
                     console.log(iscprvalid);
-                    this.saveCPR();
+                    this.saveCPR(cprvalue);
                 }
             },
             error => {
@@ -185,14 +174,16 @@ export class CPRComponent {
         this.cprinvaliderror = false;
         // this.serviceerrormessage =null;
     }
-    saveCPR() {
+    saveCPR(cprvalue) {
 
         this.activestatus = this.cprForm.value.yes == true ? 'aktiv' : 'inaktiv';
         // this.userpid = (this.userpiddata && this.userpiddata.nemid) ? this.userpiddata.nemid : this.userpiddata.Pid;
         console.log(this.activestatus);
         console.log(this.yesmmodel);
         this.isLoading = true;
-        this.baserestService.saveCPR(this.userpid, this.cprnummnermodel, this.activestatus, this.userdata.id).then(
+        // let cprvalue = this.cprForm.value.cprnummner;
+        console.log(cprvalue);
+        this.baserestService.saveCPR(this.userpid, cprvalue, this.activestatus, this.userdata.id).then(
             cprsaved => {
                 cprsaved = this.cprsaved;  this.isLoading = false; this.savecprnavi();
             },
@@ -237,7 +228,7 @@ export class CPRComponent {
 
     }
     decideflow(checklistdata) {
-       
+       this.isLoading=false;
         console.log(checklistdata);
         if (!checklistdata && !checklistdata.result) {
             this.navCtrl.setRoot(IdverifyPage);

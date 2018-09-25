@@ -15,16 +15,16 @@
             </ion-item>
 
             <ion-item class="otp__inputs">
-                <ion-input type="number"  [(ngModel)]="otpval1" formControlName="otp1"  (click)="showKeyboard($event)"  #otp1 id="otp1" maxlength="1" class="otp__text-box"  max="9"  (keyup)="next1($event)" >
+                <ion-input type="number"  [(ngModel)]="otpval1" formControlName="otp1"  (click)="showKeyboard()"  #otp1 id="otp1" maxlength="1" class="otp__text-box"  max="9"  (keyup)="next1($event)" >
                 </ion-input>
 
-                <ion-input type="number"   [(ngModel)]="otpval2" formControlName="otp2"  (click)="showKeyboard($event)" #otp2 id="otp2" maxlength="1" class="otp__text-box"  max="9"  (keyup)="next2($event)" >
+                <ion-input type="number"   [(ngModel)]="otpval2" formControlName="otp2"  (click)="showKeyboard()" #otp2 id="otp2" maxlength="1" class="otp__text-box"  max="9"  (keyup)="next2($event)" >
                 </ion-input>
 
-                <ion-input type="number"  [(ngModel)]="otpval3" formControlName="otp3" (click)="showKeyboard($event)" #otp3 id="otp3" maxlength="1" class="otp__text-box"  max="9"   (keyup)="next3($event)" >
+                <ion-input type="number"  [(ngModel)]="otpval3" formControlName="otp3" (click)="showKeyboard()" #otp3 id="otp3" maxlength="1" class="otp__text-box"  max="9"   (keyup)="next3($event)" >
                 </ion-input>
 
-                <ion-input type="number"  [(ngModel)]="otpval4" formControlName="otp4" (click)="showKeyboard($event)" #otp4  id="otp4" maxlength="1" class="otp__text-box"  max="9" (keyup)="next4($event)"  >
+                <ion-input type="number"  [(ngModel)]="otpval4" formControlName="otp4" (click)="showKeyboard()" #otp4  id="otp4" maxlength="1" class="otp__text-box"  max="9" (keyup)="next4($event)"  >
                 </ion-input>
                 <!-- <ion-input type="password" formControlName="otp"></ion-input> -->
             </ion-item>

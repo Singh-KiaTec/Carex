@@ -13,8 +13,6 @@ import { AuthService } from '../../providers/authenticationservice/auth.service'
 import { LoginPage } from '../../pages/login/login.page';
 import { CPRPage } from '../../pages/cpr/cpr.page';
 
-declare var window: any;
-
 @Component({
     selector: 'profile-viewer',
     templateUrl: 'profile.html'

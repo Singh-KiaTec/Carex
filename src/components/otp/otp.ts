@@ -99,7 +99,6 @@ export class OtpComponent {
 
     }
     next1(event) {
-        event.preventDefault();
         console.log(event);
         if (event.keycode == 46 || event.key == "Backspace") {
             //this.removeFocus(event.currentTarget.id);
@@ -118,7 +117,6 @@ export class OtpComponent {
 
     }
     next2(event) {
-        event.preventDefault();
         console.log(event);
         if (event.keycode == 46 || event.key == "Backspace") {
             this.otp1_input.setFocus();
@@ -136,7 +134,6 @@ export class OtpComponent {
 
     }
     next3(event) {
-        event.preventDefault();
         console.log(event);
         if (event.keycode == 46 || event.key == "Backspace") {
             this.otp2_input.setFocus();
@@ -155,7 +152,6 @@ export class OtpComponent {
 
     }
     next4(event) {
-        event.preventDefault();
         console.log(event);
         if (event.keycode == 46 || event.key == "Backspace") {
             this.otp3_input.setFocus();
@@ -222,7 +218,6 @@ export class OtpComponent {
     }
 
     showKeyboard(event) {
-        event.preventDefault();
         this.otp1_input.setFocus();
         this.otpval1 = null; this.loginForm.value.otp1 = null;
         this.otpval2 = null; this.loginForm.value.otp2 = null;

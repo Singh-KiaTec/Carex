@@ -332,10 +332,7 @@ searchDetails(searchsltdItem) {
   console.log(searchsltdItem);
   this.navCtrl.push(SearchDetailsPage, { 'selectedItem': searchsltdItem })
 }
-partnersPage(event) {
-  console.log("partner");
-  event.preventDefault();
-}
+
 healthCategory(value, itemname) {
   if (value.length > 0) {
     this.searchdropdownValue = value;

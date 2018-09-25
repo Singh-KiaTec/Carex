@@ -21,7 +21,6 @@ import { NemidPage } from '../../pages/nemid/nemid.page';
 import { CPRPage } from '../../pages/cpr/cpr.page';
 import { IdverifyPage } from '../../pages/idverify/idverify.page';
 
-// import $ from "jquery";
 
 
 @Component({

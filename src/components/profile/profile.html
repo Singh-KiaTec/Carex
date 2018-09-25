@@ -8,7 +8,6 @@
       <!-- {{pagedata.organisation}} -->
       {{profileContent.profile.heading}}
       <div>
-        <!-- <img  class="logo" [width]="" [height]="45" src="assets/imgs/unitlogos/CareX_hvid_gronlogo-66.png" /> -->
       </div>
     </ion-title>
   </ion-navbar>
@@ -27,37 +26,11 @@
       <ion-label color="primary">{{profileContent.profile.name}}</ion-label>
       <ion-input *ngIf="user" disabled  class="profile__emailid-input" item-end value="{{name}}"></ion-input>
     </ion-item>
-    <!-- <ion-item>
-        <ion-icon item-left name="person"></ion-icon>
-      <ion-label color="primary">Last Name </ion-label>
-      <ion-input disabled item-right value="{{user.username}}"></ion-input>
-    </ion-item> -->
-    <!-- <ion-item *ngIf="profileContent">
-        <ion-icon item-left name="locate"></ion-icon>
-      <ion-label color="primary">{{profileContent.profile.address}}</ion-label>
-      <ion-input item-right  disabled value="Herlev 2600"></ion-input>
-    </ion-item>
-    <ion-item>
-        <ion-icon item-left name="calendar"></ion-icon>
-      <ion-label color="primary">{{profileContent.profile.dateofbirth}}</ion-label>
-      <ion-input item-right disabled value={{profileContent.profile.notavailable}}></ion-input>
-    </ion-item> -->
     <ion-item *ngIf="profileContent">
       <ion-icon item-left name="mail"></ion-icon>
       <ion-label color="primary">{{profileContent.profile.email}}</ion-label>
       <ion-input item-right disabled   class="profile__emailid-input" value="{{email}}"></ion-input>
     </ion-item>
-    
-    <!-- <ion-item *ngIf="profileContent">
-        <ion-icon item-left name="call"></ion-icon>
-      <ion-label color="primary">{{profileContent.profile.mobile}}</ion-label>
-      <ion-input item-right disabled value={{profileContent.profile.notavailable}}></ion-input>
-    </ion-item> -->
-    <!-- <ion-item>
-        <ion-icon item-left name="quote"></ion-icon>
-      <ion-label color="primary">Language</ion-label>
-      <ion-input item-right disabled value="Danish"></ion-input>
-    </ion-item> -->
     <div padding *ngIf="profileContent">
         <button (click)="logout()" ion-button class="logout">{{profileContent.profile.logout}}</button>
     </div>

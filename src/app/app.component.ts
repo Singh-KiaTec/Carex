@@ -18,7 +18,6 @@ import { BaseRestService } from '../providers/restservice/base.rest.service';
 import { Keyboard } from '@ionic-native/keyboard';
 import { ConfigurationService } from '../providers/utils/configservices';
 import { AuthService } from '../providers/authenticationservice/auth.service';
-//declare var cordova: any;
 import { CPRPage } from '../pages/cpr/cpr.page';
 const updateTimerInterval: number = 14400000;
 
@@ -132,20 +131,20 @@ export class MyApp {
 
   }
 
-  decideflow(checklistdata) {
-    this.auth.setuserchecklistData(checklistdata);
-    console.log(checklistdata);
-    if (checklistdata.result && checklistdata.result.cpr) {
-      this.rootPage = HomePage;
-     // this.nav.setRoot('HomePage');
-    }
-    else {
-     this.rootPage = CPRPage;
-      //this.nav.setRoot('CPRPage');
-     //this.nav.setRoot(CPRPage, { 'userpiddata': checklistdata.result });
-      //setRoot(TabsPage, {userProfile: profile});
-    }
-  }
+  // decideflow(checklistdata) {
+  //   this.auth.setuserchecklistData(checklistdata);
+  //   console.log(checklistdata);
+  //   if (checklistdata.result && checklistdata.result.cpr) {
+  //     this.rootPage = HomePage;
+  //    // this.nav.setRoot('HomePage');
+  //   }
+  //   else {
+  //    this.rootPage = CPRPage;
+  //     //this.nav.setRoot('CPRPage');
+  //    //this.nav.setRoot(CPRPage, { 'userpiddata': checklistdata.result });
+  //     //setRoot(TabsPage, {userProfile: profile});
+  //   }
+  // }
   // checkForIonicUpdates() {
   //   this.configurationService.checkForIonicDeploy();
   // }
