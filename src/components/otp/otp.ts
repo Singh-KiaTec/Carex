@@ -65,7 +65,6 @@ export class OtpComponent {
     }
 
     setotpData() {
-        console.log(this.otpcontent);
         setTimeout(() => {
             this.otp1_input.setFocus();
         }, 1000);
@@ -99,10 +98,10 @@ export class OtpComponent {
 
     }
     next1(event) {
-        console.log(event);
+        this.error = false;
         if (event.keycode == 46 || event.key == "Backspace") {
             //this.removeFocus(event.currentTarget.id);
-            this.error = true;
+            this.otpval1 = null; this.loginForm.value.otp1 = null;
         }
         else {
             if (this.platform.is('android')) {
@@ -117,10 +116,10 @@ export class OtpComponent {
 
     }
     next2(event) {
-        console.log(event);
+        this.error = false;
         if (event.keycode == 46 || event.key == "Backspace") {
+            this.otpval1 = null; this.loginForm.value.otp1 = null;
             this.otp1_input.setFocus();
-            this.error = true;
         }
         else {
             if (this.platform.is('android')) {
@@ -134,10 +133,10 @@ export class OtpComponent {
 
     }
     next3(event) {
-        console.log(event);
+        this.error = false;
         if (event.keycode == 46 || event.key == "Backspace") {
+            this.otpval2 = null; this.loginForm.value.otp2 = null;
             this.otp2_input.setFocus();
-            this.error = true;
         }
         else {
             if (this.platform.is('android')) {
@@ -152,10 +151,10 @@ export class OtpComponent {
 
     }
     next4(event) {
-        console.log(event);
+        this.error = false;
         if (event.keycode == 46 || event.key == "Backspace") {
+            this.otpval3 = null; this.loginForm.value.otp3 = null;
             this.otp3_input.setFocus();
-            this.error = true;
         }
         else {
             if (this.platform.is('android')) {
@@ -171,47 +170,6 @@ export class OtpComponent {
         }
 
     }
-    // openKeyboard() {
-    //     this.keyboard.show();
-    // }
-
-    // setFocus(itemname) {
-
-    //     switch (itemname) {
-    //         case "otp1": {
-    //             if (this.otpval1.length > 1) {
-    //                 this.otpval1 = this.otpval1.substr(0, 1);
-    //             }
-    //             this.otp2_input.setFocus();
-    //             break;
-    //         }
-    //         case "otp2": {
-    //             if (this.otpval2.length > 1) {
-    //                 this.otpval2 = this.otpval2.substr(0, 1);
-    //             }
-    //             this.otp3_input.setFocus();
-    //             break;
-    //         }
-    //         case "otp3": {
-    //             if (this.otpval3.length > 1) {
-    //                 this.otpval3 = this.otpval3.substr(0, 1);
-    //             }
-    //             this.otp4_input.setFocus();
-    //             break;
-    //         }
-    //         case "otp4": {
-    //             if (this.otpval4.length > 1) {
-    //                 this.otpval4 = this.otpval4.substr(0, 1);
-    //             }
-    //             this.gotochangePasword();
-    //             break;
-    //         }
-    //         default: {
-    //             break;
-    //         }
-    //     }
-
-    // }
     setuserData() {
         console.log(this.success);
         this.navCtrl.push(ChangepasswordPage);

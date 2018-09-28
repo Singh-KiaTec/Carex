@@ -34,6 +34,12 @@
 
 
 <ion-content #content class="home">
+
+    <div *ngIf="isLoading" class="spinner">
+        <ion-spinner *ngIf="isLoading"></ion-spinner>
+  </div>
+
+
   <div (swipe)="swipeEvent($event)">
     <div *ngIf="pagedata">
       <img class="home__bg-image" src="http://trygsundhed.carex.dk/config/assets/imgs/unitlogos/logos/{{pagedata.bg_image}}" />

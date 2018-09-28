@@ -167,7 +167,7 @@ export class BaseRestService {
         // exisitng test in udv tesflight web usign this this.formdata.append('username', username);
         this.formdata.append('id', username);
         this.formdata.append('password', password);
-        return this.http.post('https://idp.carex.dk/endpoints/login_services.php', this.formdata, this.options).toPromise();
+        return this.http.post('https://qa-idp.carex.dk/endpoints/login_services.php', this.formdata, this.options).toPromise();
        
          // exisitng test in udv tesflight web usign  return this.http.post('https://qa-api.carex.dk/api/endpoints/login_v2.php', this.formdata, this.options).toPromise();
         //existing prod return this.http.post('https://api.carex.dk/api/endpoints/login.php', this.formdata, this.options).toPromise();
@@ -201,8 +201,7 @@ export class BaseRestService {
 
         this.formdata.append('action', 'getOTP');
         this.formdata.append('username', username);
-
-        return this.http.post('https://idp.carex.dk/endpoints/login_services.php', this.formdata, this.options).toPromise();
+        return this.http.post('https://qa-idp.carex.dk/endpoints/login_services.php', this.formdata, this.options).toPromise();
     }
     verifyOtp(id, otp) {
         this.formdata = new FormData();
@@ -210,7 +209,7 @@ export class BaseRestService {
         this.formdata.append('action', 'validateOTP');
         this.formdata.append('id', id);
         this.formdata.append('otp', otp);
-        return this.http.post('https://idp.carex.dk/endpoints/login_services.php', this.formdata, this.options).toPromise();
+        return this.http.post('https://qa-idp.carex.dk/endpoints/login_services.php', this.formdata, this.options).toPromise();
     }
     validateCPR(pid, cpr) {
         this.formdata = new FormData();
@@ -226,14 +225,14 @@ export class BaseRestService {
         this.formdata.append('action', 'changePassword');
         this.formdata.append('id', id);
         this.formdata.append('password', password);
-        return this.http.post('https://idp.carex.dk/endpoints/login_services.php', this.formdata, this.options).toPromise();
+        return this.http.post('https://qa-idp.carex.dk/endpoints/login_services.php', this.formdata, this.options).toPromise();
     }
     loginUdv(id, password) {
         this.formdata = new FormData();
         this.formdata.append('action', 'login');
         this.formdata.append('id', id);
         this.formdata.append('password', password);
-        return this.http.post('https://udv-idp.carex.dk/endpoints/login_services.php', this.formdata, this.options).toPromise();
+        return this.http.post('https://qa-idp.carex.dk/endpoints/login_services.php', this.formdata, this.options).toPromise();
     }
     getQuestionary() {
         return this.http.get(this.prodUrl + 'config/jsondata/question.php', this.options).toPromise();
