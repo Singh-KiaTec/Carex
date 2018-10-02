@@ -18,6 +18,7 @@ import { BaseRestService } from '../providers/restservice/base.rest.service';
 import { Keyboard } from '@ionic-native/keyboard';
 import { ConfigurationService } from '../providers/utils/configservices';
 import { AuthService } from '../providers/authenticationservice/auth.service';
+import {GoogleAnalyticsService} from '../providers/analyticsservice/googleanalytics.service';
 import { CPRPage } from '../pages/cpr/cpr.page';
 const updateTimerInterval: number = 14400000;
 
@@ -44,6 +45,7 @@ export class MyApp {
     // private oneSignal: OneSignal ,
     public configurationService: ConfigurationService,
     public auth: AuthService,
+    public gas: GoogleAnalyticsService,
     public baserestService: BaseRestService, public storageService: StorageService) {
     this.initializeApp();
 
@@ -115,6 +117,13 @@ export class MyApp {
       //       );
       //     }
       //   });
+      if(this.platform.is('ios')){
+      this.gas.startTrackerWithId('UA-126668359-1',30)
+      }
+      if(this.platform.is('android')){
+        this.gas.startTrackerWithId('UA-126635169-1',30);
+      }
+
     });
 
 

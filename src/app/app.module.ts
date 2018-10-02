@@ -18,6 +18,7 @@ import { ProgressBarModule } from "angular-progress-bar";
 import { Vibration } from '@ionic-native/vibration';
 import { jqxGridComponent } from 'jqwidgets-scripts/jqwidgets-ts/angular_jqxgrid';
 // /Users/kiatec/Documents/Carex_App/carex/node_modules/jqwidgets-scripts/jqwidgets-ts/angular_jqxgrid.ts
+import { GoogleAnalytics } from '@ionic-native/google-analytics';
 
 
 //ANGULAR
@@ -67,6 +68,7 @@ import { AuthService } from '../providers/authenticationservice/auth.service';
 import { SafePipe } from '../providers/directory/safepipe';
 import { ConfigurationService } from '../providers/utils/configservices';
 import { PasswordValidation } from '../providers/validators/password-validator';
+import {GoogleAnalyticsService} from '../providers/analyticsservice/googleanalytics.service';
 
 
 
@@ -241,11 +243,13 @@ const componentDeclaration = [
     HttpClient,
     Keyboard,
     Market,
+    GoogleAnalytics,
     AppVersion,
     HttpClientModule,
     WindowRef,
     Vibration,
     PasswordValidation,
+    GoogleAnalyticsService,
     AuthService,
     InAppBrowser,
     { provide: ErrorHandler, useClass: IonicErrorHandler }

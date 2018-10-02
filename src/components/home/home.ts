@@ -8,6 +8,7 @@ import { AuthService } from '../../providers/authenticationservice/auth.service'
 import { pageData } from '../../models/pagedata';
 import { NotificationsPage } from '../../pages/notifications/notifications.page';
 import { StorageService } from '../../providers/storageservice/storageservice';
+import {GoogleAnalyticsService} from '../../providers/analyticsservice/googleanalytics.service';
 
 
 
@@ -35,7 +36,7 @@ export class HomeComponent {
 
   @ViewChild(Content) content: Content;
   @ViewChild(Navbar) navbar: Navbar;
-  constructor(public navCtrl: NavController,private ref: ChangeDetectorRef, public auth: AuthService, private storageService: StorageService, public navParams: NavParams, private baserestService: BaseRestService) {
+  constructor(public navCtrl: NavController,private gas: GoogleAnalyticsService, private ref: ChangeDetectorRef, public auth: AuthService, private storageService: StorageService, public navParams: NavParams, private baserestService: BaseRestService) {
     this.auth.user.subscribe(
       (userinfo) => {
         {
@@ -43,6 +44,7 @@ export class HomeComponent {
         }
       }
     );
+    this.gas.trackView('Home Page');
 
   }
   ngOnInit(): void {
