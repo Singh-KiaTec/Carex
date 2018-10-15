@@ -44,7 +44,8 @@ export class HomeComponent {
         }
       }
     );
-    this.gas.trackView('Home Page');
+   // this.gas.trackView('Home Page');
+    this.gas.trackPage('Home Page');
 
   }
   ngOnInit(): void {

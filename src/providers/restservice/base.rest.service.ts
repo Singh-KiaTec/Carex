@@ -20,7 +20,7 @@ export class BaseRestService {
     private headers;
     private options;
     //private platform: Platform;
-    private baseUrl = '/';//"http://udv-admin.carex.dk/config/jsondata/";
+    private baseUrl = "http://udv-admin.carex.dk/config/jsondata/";//'/';
     private udvenvi = " https://udv-tryg.carex.dk";
     private prodUrl = "http://trygsundhed.carex.dk/";
     private formdata;

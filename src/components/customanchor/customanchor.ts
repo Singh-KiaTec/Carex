@@ -2,6 +2,7 @@ import { Component, Input } from '@angular/core';
 import { InAppBrowser } from '@ionic-native/in-app-browser';
 import { AuthService } from '../../providers/authenticationservice/auth.service';
 import { AlertController } from 'ionic-angular';
+import {GoogleAnalyticsService} from '../../providers/analyticsservice/googleanalytics.service';
 
 
 @Component({
@@ -33,7 +34,7 @@ export class CustomanchorComponent {
     private userdata;
     private isvitaltest = false;
 
-    constructor(private iab: InAppBrowser, private auth: AuthService, private alrtCtrl: AlertController) {
+    constructor(private iab: InAppBrowser, private auth: AuthService, private alrtCtrl: AlertController, private gas: GoogleAnalyticsService,) {
         this.auth.user.subscribe(
             (userdata) => {
               {
@@ -92,6 +93,12 @@ if(!this.userdata){
                     {
                         text: 'Ja',
                         handler: () => {
+                            this.gas.pushEvent({
+                                userid: userid ? userid : 0,
+                                action:'report delete'
+                            });
+                           // this.gas.trackEvent("Report","delete","delete report",userid);
+                           this.gas.trackEvent('Vitaldelete', 'report delete', 'vital report delete', 0);
                             this.iab.create(deleteurl, "_system", "location=yes,hardwareback=yes");
                         }
                     }
@@ -101,13 +108,28 @@ if(!this.userdata){
         }
         if (this.isdownload) {
             let downlaodurl = this.url + 'userId=' + userid;
+            this.gas.pushEvent({
+                userid: userid ? userid : 0,
+                action:'report download'
+            });
+            this.gas.trackEvent('Vitaldownload', 'report download', 'vital report download', 0);
             this.iab.create(downlaodurl, "_system", "location=yes,hardwareback=yes");
         }
         if (this.isvitaltest) {
             let vitalurl = this.url + userid;
+            this.gas.pushEvent({
+                userid: userid ? userid : 0,
+                action:'report test'
+            });
+            this.gas.trackEvent(' Vitaltest', 'report test', 'vital report test', 0);
             this.iab.create(vitalurl, "_system", "location=yes,hardwareback=no");
         }
         if (!this.isdelete && !this.isdownload && !this.isvitaltest) {
+            this.gas.pushEvent({
+                userid: userid ? userid : 0,
+                action:'external link'
+            });
+            this.gas.trackEvent('External link', 'external  link click', 'external click view', 0);
             this.iab.create(this.url, "_system", "location=yes,hardwareback=yes");
         }
 

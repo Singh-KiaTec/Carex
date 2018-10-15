@@ -118,10 +118,10 @@ export class MyApp {
       //     }
       //   });
       if(this.platform.is('ios')){
-      this.gas.startTrackerWithId('UA-126668359-1',30)
+      this.gas.init('UA-126668359-1');
       }
-      if(this.platform.is('android')){
-        this.gas.startTrackerWithId('UA-126635169-1',30);
+      else if(this.platform.is('android')){
+        this.gas.init('GTM-WDWJ8RL');
       }
 
     });

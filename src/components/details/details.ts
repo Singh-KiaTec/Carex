@@ -11,6 +11,7 @@ import { DropDownPopOver } from '../dropdownpopover/dropdownpopover';
 import { Keyboard } from '@ionic-native/keyboard';
 
 
+
 @Component({
   selector: 'details-viewer',
   templateUrl: 'details.html'
@@ -170,7 +171,6 @@ export class DetailsComponent {
         error => console.log(error)
       )
     }
-  //this.keyboard.disableScroll(true);
 }
 setQuestionary(data) {
   this.myActiveSlide = 1;
