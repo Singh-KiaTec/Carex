@@ -9,6 +9,8 @@ import { SearchDetailsPage } from '../../pages/searchdetails/searchdetails.page'
 import { InAppBrowser, InAppBrowserOptions } from '@ionic-native/in-app-browser';
 import { DropDownPopOver } from '../dropdownpopover/dropdownpopover';
 import { Keyboard } from '@ionic-native/keyboard';
+import {GoogleAnalyticsService} from '../../providers/analyticsservice/googleanalytics.service';
+
 
 
 
@@ -71,7 +73,7 @@ export class DetailsComponent {
     private iab: InAppBrowser,
     private popoverCtrl: PopoverController,
     private platform: Platform,
-    private keyboard: Keyboard, private auth: AuthService, private navCtrl: NavController, private baserestService: BaseRestService) {
+    private keyboard: Keyboard, private auth: AuthService, private gas: GoogleAnalyticsService,  private navCtrl: NavController, private baserestService: BaseRestService) {
 
     this.selectedMenuItem = this.navParam.get('selectedItem');
     this.selectedPage = this.navParam.get('selectedPage');
@@ -171,6 +173,8 @@ export class DetailsComponent {
         error => console.log(error)
       )
     }
+
+    this.gas.trackPage('/details');
 }
 setQuestionary(data) {
   this.myActiveSlide = 1;

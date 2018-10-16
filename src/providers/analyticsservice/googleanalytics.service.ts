@@ -7,16 +7,16 @@ import { Platform } from 'ionic-angular';
 
 declare var cordova: any;
 
-// declare class GoogleTagManager {
-//     init(success: any, error: any, id: string, period: number);
-//     trackPage(success: any, error: any, pageURL: string);
-//     trackEvent(success: any, error: any, category: string, eventAction: string, eventLabel: string, eventValue: number);
-//     pushEvent(success: any, fail: any, eventData: any);
-// }
+declare class GoogleTagManager {
+    init(success: any, error: any, id: string, period: number);
+    trackPage(success: any, error: any, pageURL: string);
+    trackEvent(success: any, error: any, category: string, eventAction: string, eventLabel: string, eventValue: number);
+    pushEvent(success: any, fail: any, eventData: any);
+}
 
 @Injectable()
 export class GoogleAnalyticsService {
-    private gtm: any;
+    private gtm: GoogleTagManager;
     private isInitialized: boolean = false;
 
     public initialized$: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(false);
